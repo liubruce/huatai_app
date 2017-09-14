@@ -1,43 +1,34 @@
 import React from 'react'
 import './index.less'
-import {
-  Container,
-  Group,
-  Button,
-  Slider,
-} from 'amazeui-touch';
+import {Slider} from 'amazeui-touch';
+// import $ from 'jquery'
 class Index extends React.Component {
   constructor(args) {
     super();
     this.state = {}
   }
+  componentDidMount() {
 
+  }
 	render() {
+
 		return (
         <div className="warpper">
 
-          <div className="am-slider am-slider-default" id="your-slider">
-            <ul className="am-slides">
-              <li><image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
-              <li><image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-              <li><image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
-            </ul>
-          </div>
-
-{/*          <Slider controls={false} >
+          <Slider controls={false} >
             <Slider.Item>
-              <img alt='test'
-                src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
+              <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
             </Slider.Item>
-            <Slider.Item><img alt='test'
-              src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></Slider.Item>
             <Slider.Item>
-              <img alt='test'
-                src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></Slider.Item>
+               <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" />
+            </Slider.Item>
             <Slider.Item>
-              <img alt='test'
-                src="http://s.amazeui.org/media/i/demos/bing-4.jpg" /></Slider.Item>
-          </Slider>*/}
+              <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" />
+            </Slider.Item>
+            <Slider.Item>
+              <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-4.jpg" />
+            </Slider.Item>
+          </Slider>
 
           <div className="am-panel panel-in">
             <ul className="am-avg-sm-4 clearFix">
