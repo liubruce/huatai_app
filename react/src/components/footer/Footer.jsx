@@ -16,6 +16,9 @@ class Footer extends React.Component {
   componentWillMount() {
     this.checkUrl(this.props.pathname);
   }
+  componentWillReceiveProps(nextProps) {
+    this.checkUrl(nextProps.pathname);
+  }
   checkUrl(pathname) {
     let tab = 1;
     if (pathname.indexOf('/Course') !== -1) {

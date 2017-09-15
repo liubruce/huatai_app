@@ -1,23 +1,139 @@
 /*user*/
-.user-header{position: relative;padding: 0 20px;background-color:#005496;color: #FFFFFF}
-.user-header .tx-name{padding: 14px 0}
-.user-header .tx-name img{float: left;width: 60px;height: 60px;}
-.user-header .tx-name>p{padding-left: 70px;line-height: 30px}
-.user-header .sign{position: absolute;right: 0;top: 20px;width: 46px;height: 30px;background-color: #FFFFFF;color: #005496;-webkit-border-top-left-radius: 15px;-webkit-border-bottom-left-radius: 15px;border-top-left-radius: 15px;border-bottom-left-radius: 15px;text-align: center;}
-.user-header>p{font-size: 1.3rem;padding-bottom: 14px}
-.list-in{margin-top: 10px}
-.list-in li{height: 49px;border: none;overflow: hidden;}
-.list-in li:after{position: absolute;bottom: 1px;left: 50px;content:"";display:block;width: 100%;height:1px;background-color: rgba(44,144,254,.1);line-height:0;}
-.list-in li a{padding: 0 16px 0 50px;line-height: 49px}
-.list-in li a .fa{font-size: 2.4rem;color: rgba(0,84,150,.3);margin-top: 10px}
-.list-in li a .icon{display: block;position: absolute;top: 0;left: 0;width: 48px;height: 48px}
-.list-in li a .icon-my-card{background: url(../../style/images/icon-my-card.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-my-fxq{background: url(../../style/images/icon-my-fxq.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-task{background: url(../../style/images/icon-task.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-scj{background: url(../../style/images/icon-scj.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-dt{background: url(../../style/images/icon-dt.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-books{background: url(../../style/images/icon-books.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-jfshop{background: url(../../style/images/icon-jfshop.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-jfdetils{background: url(../../style/images/icon-jfdetils.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-stroy{background: url(../../style/images/icon-stroy.png) no-repeat center;background-size: 40%}
-.list-in li a .icon-set-up{background: url(../../style/images/icon-set-up.png) no-repeat center;background-size: 40%}
+
+.user-header {
+    position: relative;
+    padding: 0 20px;
+    background-color: #005496;
+    color: #FFFFFF;
+    a{
+    	cursor: pointer;
+    }
+}
+
+.user-header .tx-name {
+    padding: 14px 0
+}
+
+.user-header .tx-name img {
+    float: left;
+    width: 60px;
+    height: 60px;
+}
+
+.user-header .tx-name>p {
+    padding-left: 70px;
+    line-height: 30px
+}
+
+.user-header .sign {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 46px;
+    height: 30px;
+    background-color: #FFFFFF;
+    color: #005496;
+    -webkit-border-top-left-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+}
+
+.user-header>p {
+    font-size: 1.3rem;
+    padding-bottom: 14px
+}
+
+.list-in {
+    margin-top: 10px
+}
+
+.list-in li {
+    height: 49px;
+    border: none;
+    overflow: hidden;
+}
+
+.list-in li:after {
+    position: absolute;
+    bottom: 1px;
+    left: 50px;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(44, 144, 254, .1);
+    line-height: 0;
+}
+
+.list-in li a {
+    padding: 0 16px 0 50px;
+    line-height: 49px;
+    color:#515151;
+}
+
+.list-in li a .fa {
+    font-size: 2.4rem;
+    color: rgba(0, 84, 150, .3);
+    margin-top: 10px
+}
+
+.list-in li a .icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px
+}
+
+.list-in li a .icon-my-card {
+    background: url(../../style/images/icon-my-card.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-my-fxq {
+    background: url(../../style/images/icon-my-fxq.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-task {
+    background: url(../../style/images/icon-task.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-scj {
+    background: url(../../style/images/icon-scj.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-dt {
+    background: url(../../style/images/icon-dt.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-books {
+    background: url(../../style/images/icon-books.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-jfshop {
+    background: url(../../style/images/icon-jfshop.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-jfdetils {
+    background: url(../../style/images/icon-jfdetils.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-stroy {
+    background: url(../../style/images/icon-stroy.png) no-repeat center;
+    background-size: 40%
+}
+
+.list-in li a .icon-set-up {
+    background: url(../../style/images/icon-set-up.png) no-repeat center;
+    background-size: 40%
+}

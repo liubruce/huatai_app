@@ -49,7 +49,7 @@ class Index extends React.Component {
               <li>
                 <div className="am-gallery-item">
                   <a href>
-                    <image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
+                    <img alt='img not found' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
                     <h3 className="am-gallery-title">课程名称</h3>
                     <div className="am-gallery-desc"><i className="fa fa-heart-o" />13,888</div>
                   </a>
@@ -58,7 +58,7 @@ class Index extends React.Component {
               <li>
                 <div className="am-gallery-item">
                   <a href>
-                    <image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" />
+                    <img alt='img not found' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" />
                     <h3 className="am-gallery-title">课程名称</h3>
                     <div className="am-gallery-desc"><i className="fa fa-heart-o" />13,888</div>
                   </a>
@@ -67,7 +67,7 @@ class Index extends React.Component {
               <li>
                 <div className="am-gallery-item">
                   <a href>
-                    <image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" />
+                    <img alt='img not found' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" />
                     <h3 className="am-gallery-title">课程名称</h3>
                     <div className="am-gallery-desc"><i className="fa fa-heart-o" />13,888</div>
                   </a>
@@ -76,7 +76,7 @@ class Index extends React.Component {
               <li>
                 <div className="am-gallery-item">
                   <a href>
-                    <image alt='image not found' src="http://s.amazeui.org/media/i/demos/bing-4.jpg" />
+                    <img alt='img not found' src="http://s.amazeui.org/media/i/demos/bing-4.jpg" />
                     <h3 className="am-gallery-title">课程名称</h3>
                     <div className="am-gallery-desc"><i className="fa fa-heart-o" />13,888</div>
                   </a>
@@ -93,7 +93,7 @@ class Index extends React.Component {
             </div>
             <div className="am-panel-bd">
               <div className="pepole-info">
-                <image alt='image not found' src="images/portrait.png" />
+                <img alt='img not found' src={require('../../style/images/portrait.png')} />
                 <p className="info"><span>用户B</span>xxxxxxx分公司</p>
                 <p className="time">2016.06.15</p>
               </div>
@@ -111,7 +111,7 @@ class Index extends React.Component {
             </div>
             <div className="am-panel-bd">
               <div className="pepole-info">
-                <image alt='image not found' src="images/portrait.png" />
+                <img alt='img not found' src={require('../../style/images/portrait.png')} />
                 <p className="info"><span>用户B</span>xxxxxxx分公司</p>
                 <p className="time">2016.06.15</p>
               </div>

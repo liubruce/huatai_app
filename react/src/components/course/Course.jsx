@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './course.less'
 class Course extends React.Component {
 	constructor(args) {
 		super()

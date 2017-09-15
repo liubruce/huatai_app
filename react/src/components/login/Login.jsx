@@ -1,6 +1,7 @@
 import React from 'react'
 import './login.less'
 import * as api from '../../config/api'
+import { message } from 'antd';
 import {browserHistory} from 'react-router';
 class Login extends React.Component {
 	constructor(args) {
@@ -8,8 +9,13 @@ class Login extends React.Component {
 	}
   login(){
     api.login().then((data)=>{
-      localStorage.setItem("user", JSON.stringify(data));
-      browserHistory.push("/");
+      if (data.result === 'RC100') {
+        localStorage.setItem("user", JSON.stringify(data));
+        browserHistory.push("/");
+      }else{
+        message.error(data.errMsg, 3);
+        localStorage.removeItem('user');
+      }
     })
   }
 	render() {
@@ -25,7 +31,7 @@ class Login extends React.Component {
             <label className="am-checkbox am-warning">
               <input type="checkbox" defaultChecked="checked" defaultValue data-am-ucheck />记住密码
             </label>
-            <a href="back_psw" className="floatR">找回密码</a>
+            <a className="floatR">找回密码</a>
           </div>
           <a className="btn-login" onClick={()=>this.login()} >登 录</a>
         </div>

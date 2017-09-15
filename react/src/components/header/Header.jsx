@@ -14,6 +14,14 @@ class Header extends React.Component {
             <input type="text" placeholder="搜索" />
           </div>
         </header>
+                     /*<header className="header header-1">
+               <Link to='/' className="logo" />
+               <div className="search">
+                 <i className="fa fa-search" />
+                 <input type="text" placeholder="搜索" />
+               </div>
+               <div className="header-right"><a href="#doc-oc-demo1" data-am-offcanvas><i className="fa fa-bars fa-lg" /></a></div>
+             </header>*/
 			)
 	}
 }

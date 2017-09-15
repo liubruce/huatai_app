@@ -1,6 +1,9 @@
 import React,{Component} from 'react'
 import Header from './header/Header.jsx'
 import Footer from './footer/Footer.jsx'
+import * as tool from '../config/tools'
+import {browserHistory} from 'react-router'
+import './app.less'
 class App extends Component {
 	constructor(args) {
 		super()
@@ -8,7 +11,12 @@ class App extends Component {
 			showHeader:false
 		}
 	}
-
+	componentWillMount() {
+		if (tool.user === null) {
+			browserHistory.push('/Login');
+			return;
+		}
+	}
 	render() {
 		return (
 			<div className='app'>
