@@ -24,7 +24,7 @@ class Course extends React.Component {
                   <div className="am-tabs-bd">
                     <div data-tab-panel-0 className="am-tab-panel am-active tab">
                       <div className="am-panel cur-list">
-                        <a href="wk-details.html">
+                        <a>
                           <img alt='test' src={require('../../style/images/test.png')} />
                           <div className="right">
                             <p className="time">2017.06.15  17:21</p>
