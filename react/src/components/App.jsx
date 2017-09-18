@@ -12,6 +12,8 @@ class App extends Component {
 		}
 	}
 	componentWillMount() {
+		// alert(tool.user.userCode)
+
 		if (tool.user === null) {
 			browserHistory.push('/Login');
 			return;

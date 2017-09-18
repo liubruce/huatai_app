@@ -1,6 +1,7 @@
 import {is} from 'immutable';
-// import * as api from './api'
+import * as api from './api'
 import {browserHistory} from 'react-router';
+import {message} from 'antd'
 
 export const utils = {
 	test() {
@@ -8,25 +9,37 @@ export const utils = {
 	}
 }
 
-export let user = JSON.parse(localStorage.getItem('user'));
+export let user = JSON.parse(window.localStorage.getItem('user'));
 
 export const save_user = () =>{
-	user = JSON.parse(localStorage.getItem('user'));
+	user = JSON.parse(window.localStorage.getItem('user'));
 }
 
 export const exit = () => {
 	browserHistory.push('/Login');
-	localStorage.removeItem('user');
+	window.localStorage.removeItem('user');
+	api.loginOut().then((data) => {
+		if (data.result === 'RC100') {
+
+		} else {
+			message.error(data.errMsg, 3);
+		}
+	}, (res) => {
+
+	})
 }
+
 
 export const behavior = (body, operationType, behaviorDataType) => {
 	return Object.assign(body, {
 		operationTypes: operationType,
 		behaviorDataType: behaviorDataType,
-		// ldToken: user.ldToken,
-		// userCode: user.userCode,
-		ldToken:'1505391994225ABCDEFG15241',
-		userCode:'10015968',
+		ldToken: user.ldToken,
+		userCode: user.userCode,
+		phone: user.phone,
+		// ldToken:'1505458087651ABCDEFG37052',
+		// userCode:'20004574',
+		// phone:'13920004574',
 		deviceId: '',
 		netType: '',
 		operationLocation: '',
@@ -50,13 +63,15 @@ export const url_parameter = (data) => {
 			toString += key + "=" + data[key] + "&";
 		}
 	}
-	return toString.replace(/$/, "");
+	toString = "?" + toString;
+	return toString;
+	// return toString.replace(/$/, "");
 }
 export const url_format =(url, operationType, behaviorDataType)=>{
-	return url + '?' + url_parameter(behavior({},operationType, behaviorDataType));
+	return url  + url_parameter(behavior({},operationType, behaviorDataType));
 }
 
-
+// exit();
 export const getAnswer = (num) => {
 	let answer = []
 	switch (num) {
@@ -199,35 +214,6 @@ export const loading = (_this, flag) => {
 	})
 }
 
-export const Main = {
-		/**
-		 * 本地数据存储或读取
-		 * 
-		 * @param {any} key
-		 * @param {any} value
-		 * @returns
-		 */
-		localItem(key, value) {
-			if (arguments.length === 1) {
-				return localStorage.getItem(key) && localStorage.getItem(key) !== 'null' ? localStorage.getItem(key) : null;
-			} else {
-				return localStorage.setItem(key, value);
-			}
-		},
-		/**
-		 * 删除本地数据
-		 * 
-		 * @param {any} k
-		 * @returns
-		 */
-		removeLocalItem(key) {
-			if (arguments.length === 1) {
-				return localStorage.removeItem(key);
-			} else {
-				return localStorage.clear();
-			}
-		}
-	}
 	/**
 	 * 代码优化
 	 * by QianLi

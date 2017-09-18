@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router'
-import Personal from '../components/personal/Personal'
+import Personal from '../components/personal/Personal.jsx'
 import Menu from '../components/personal/Menu.jsx'
 import Set from '../components/personal/set/Set.jsx'
 

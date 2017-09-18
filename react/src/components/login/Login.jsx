@@ -3,39 +3,67 @@ import './login.less'
 import * as api from '../../config/api'
 import { message } from 'antd';
 import {browserHistory} from 'react-router';
+import * as tool from '../../config/tools'
 class Login extends React.Component {
 	constructor(args) {
 		super()
 	}
-  login(){
-    api.login().then((data)=>{
-      if (data.result === 'RC100') {
-        localStorage.setItem("user", JSON.stringify(data));
-        browserHistory.push("/");
-      }else{
-        message.error(data.errMsg, 3);
-        localStorage.removeItem('user');
+  login(e) {
+    e.preventDefault();
+    let username = this.refs.username.value;
+    let password = this.refs.password.value;
+    api.login(username, password).then((_data) => {
+      if (_data.result === 'RC100') {
+        let user = {};
+        user.ldToken = _data.ldToken;
+        user.userCode = _data.userCode;
+        user.phone = username;
+
+        window.localStorage.setItem("user", JSON.stringify(user));
+        tool.save_user();
+
+        api.getMenu().then((data) => {
+          data.phone = username
+          if (data.result === 'RC100') {
+            window.localStorage.setItem("user", JSON.stringify(data));
+            tool.save_user();
+            browserHistory.push("/");
+          } else {
+            message.error(data.errMsg, 3);
+            window.localStorage.removeItem('user');
+          }
+        }, (res) => {
+          tool.reject(res);
+        })
+
+
+      } else {
+        message.error(_data.errMsg, 3);
       }
+
+    }, (res) => {
+      tool.reject(res);
     })
+
   }
 	render() {
 		return (
-	   <div className="container">
+	   <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" className="am-form-field am-radius" placeholder="工号/手机号" /></p>
-          <p><input type="password" className="am-form-field am-radius" placeholder="密码" /></p>
+          <p><input type="text" className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="password" className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
           <div className="am-g">
             <label className="am-checkbox am-warning">
               <input type="checkbox" defaultChecked="checked" defaultValue data-am-ucheck />记住密码
             </label>
             <a className="floatR">找回密码</a>
           </div>
-          <a className="btn-login" onClick={()=>this.login()} >登 录</a>
+          <button className="btn-login" type='submit' >登 录</button>
         </div>
-      </div>
+      </form>
 
 		)
 	}
