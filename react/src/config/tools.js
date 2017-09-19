@@ -1,7 +1,7 @@
 import {is} from 'immutable';
 import * as api from './api'
 import {browserHistory} from 'react-router';
-import {message} from 'antd'
+import { message } from 'antd';
 
 export const utils = {
 	test() {
@@ -25,10 +25,25 @@ export const exit = () => {
 			message.error(data.errMsg, 3);
 		}
 	}, (res) => {
-
 	})
 }
 
+// function execSQL(sql, value, success, error) {
+//     var db = window.SQLitePlugin.sqlitePlugin.openDatabase({name: 'HuaTai.db', location: 'default'});
+//     var sqlValue = [];
+//     if (value != "") {
+//         sqlValue = value;
+//     }
+//     db.transaction(function (tx) {
+//         tx.executeSql(sql, sqlValue, function (tx, rs) {
+//             success(rs.rows);
+//             // alert('execSQL: ' + JSON.stringify(rs.rows));
+//         }, function (tx, err) {
+//             error(err.message);
+//             // alert('execSQL: ' + err.message);
+//         });
+//     });
+// }
 
 export const behavior = (body, operationType, behaviorDataType) => {
 	return Object.assign(body, {
@@ -158,9 +173,9 @@ export const formatTimestamp = (timestamp,type) => {
 
 export const reject = (res) => {
 	if (res.status === 499) {
-		// message.error('请求超时', 3);
+		message.error('请求超时', 3);
 	} else {
-		// message.error('请求失败', 3);
+		message.error('请求失败', 3);
 	}
 }
 export const courseTypeList = ['销售类', '管理类', '科学类'];

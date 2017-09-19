@@ -5,15 +5,6 @@ class Title extends React.Component {
 	constructor(args) {
 		super()
 	}
-	componentWillMount() {
-		let menuItems = [];
-		let data = tool.user.menu[0].nodeResult;
-		for (let x of data) {
-			if (x.parentNodeCode !== '0') {
-				menuItems.push(x);
-			}
-		}
-	}
 	render(){
 		return(
 		     <header className="header">

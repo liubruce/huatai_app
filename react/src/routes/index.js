@@ -1,8 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute,browserHistory,Redirect} from 'react-router'
-import {Provider} from 'react-redux'
-import store from '../redux/Store/Store'
+import { Router, Route, IndexRoute,hashHistory,Redirect} from 'react-router'
 import App from '../components/App.jsx'
 import NotFoundPage from '../components/notfound/NotFoundPage.jsx'
 import Index from '../components/index/Index.jsx'
@@ -15,8 +13,7 @@ import personalRoutes from './personal'
 // import 'amazeui-touch/dist/amazeui.touch.min.css';
 
 render(
-	<Provider store={store}>
-       <Router history={browserHistory}>
+       <Router history={hashHistory}>
          <Route path='/Login' component={Login} />
          <Route path='/' component={App}>
 
@@ -29,8 +26,7 @@ render(
          </Route>
          <Route path='/404' component={NotFoundPage} />
          <Redirect from='*' to='/404' />
-       </Router>
-    </Provider>,
+       </Router>,
 	document.getElementById('root')
 );
 
