@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.less'
 import {Slider} from 'amazeui-touch';
+import {Link} from 'react-router'
 // import $ from 'jquery'
 class Index extends React.Component {
   constructor(args) {
@@ -42,7 +43,7 @@ class Index extends React.Component {
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">热播课程</h2>
               <nav className="am-titlebar-nav">
-                <a href="wk.html#more" className>更多课程</a>
+                <Link to='/Course' className>更多课程</Link>
               </nav>
             </div>
             <ul className="am-gallery am-avg-sm-2 am-gallery-default">
@@ -88,7 +89,7 @@ class Index extends React.Component {
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">蜂行圈</h2>
               <nav className="am-titlebar-nav">
-                <a href="fxq.html#more" className>更多内容</a>
+                <Link to='/Article' className>更多内容</Link>
               </nav>
             </div>
             <div className="am-panel-bd">

@@ -11,6 +11,7 @@ class Personal extends Component {
 
   render() {
     return (
+
       <div className='app'>
 
           {this.props.location.pathname !== '/Personal' ?<Title pathname={this.props.location.pathname} />:null}
