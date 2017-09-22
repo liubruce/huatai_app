@@ -17,7 +17,7 @@
 
     npm run build
 
-**Run in device**
+**Run on device**
 ----------
 
     cordova build
