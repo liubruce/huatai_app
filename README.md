@@ -4,8 +4,9 @@
 ----------
 
     React  + React-Router + Webpack + Amaze/Antd + Cordova
-    
+
 **Running locally in development mode**
+----------
 
     cd react
     npm install
