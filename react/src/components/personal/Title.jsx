@@ -1,6 +1,6 @@
 import React from 'react'
 import {browserHistory} from 'react-router'
-import * as tool from '../../config/tools'
+// import * as tool from '../../config/tools'
 class Title extends React.Component {
 	constructor(args) {
 		super()

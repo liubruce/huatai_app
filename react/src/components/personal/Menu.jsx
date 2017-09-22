@@ -8,18 +8,21 @@ class Menu extends React.Component {
 			menuItems: []
 		}
 	}
-	componentWillMount() {
-		// let menuItems = [];
-		// let data = tool.user.menu[0].nodeResult;
-		// for (let x of data) {
-		// 	if (x.parentNodeCode !== '0') {
-		// 		menuItems.push(x);
-		// 	}
-		// }
-		// this.setState({
-		// 	menuItems
-		// })
-	}
+  componentWillMount() {
+    if (tool.user === null || tool.user.menu.length === 0) {
+      return;
+    }
+    let menuItems = [];
+    let data = tool.user.menu[0].nodeResult;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].parentNodeCode !== '0') {
+        menuItems.push(data[i]);
+      }
+    }
+    this.setState({
+      menuItems
+    })
+  }
 	render(){
 		return(
 
@@ -44,6 +47,10 @@ class Menu extends React.Component {
           <li>
             <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
           </li>
+          <li>
+            <a onClick={()=>tool.refreshToken()} >REFRESH TOKEN</a>
+          </li>
+          
 {/*          <li>
             <a href="user_card.html"><i className="icon icon-my-card" />我的名片<i className="fa fa-angle-right floatR" /></a>
           </li>

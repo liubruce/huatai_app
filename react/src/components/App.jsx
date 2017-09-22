@@ -2,35 +2,54 @@ import React,{Component} from 'react'
 import Header from './header/Header.jsx'
 import Footer from './footer/Footer.jsx'
 import * as tool from '../config/tools'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
+import {Spin} from 'antd'
 import './app.less'
 class App extends Component {
 	constructor(args) {
 		super()
 		this.state = {
-			showHeader:false
+			showHeader:false,
+			loading:false
 		}
 	}
 	componentWillMount() {
-		if (tool.user === null) {
-			// browserHistory.push('/Login');
+		this.setState({loading:true});
+		setTimeout(()=>{
+			this.setState({loading:false});
+		},3000)
+		if (tool.user === null && tool.isPc) {
+			hashHistory.push('/Login');
 			return;
+		}
+		if (!tool.isPc) {
+			this.setState({
+				loading: true
+			})
+			tool.info().then((data) => {
+				this.setState({
+					loading: false
+				})
+			}, () => {
+				this.setState({
+					loading: false
+				})
+			})
 		}
 	}
 	render() {
 		return (
-			<div className='app'>
-
-			    {this.props.location.pathname.indexOf('/Personal') === -1 ?<Header />:null}
-
-			    <div>
-			       {this.props.children}
+			
+			   <div className='app' style={{marginTop:this.state.loading?'50%':'0',marginLeft:this.state.loading?'45%':'0'}} >
+			     {!this.state.loading?
+			        <div>
+			            {this.props.location.pathname.indexOf('/Personal') === -1 ?<Header />:null}
+			            {this.props.children}
+			            <Footer pathname={this.props.location.pathname} />
+			         </div>
+			         : <Spin tip="加载中..." />}
 			    </div>
-
-			    <Footer pathname={this.props.location.pathname} />
-
-			</div>
-
+		
 		)
 	}
 

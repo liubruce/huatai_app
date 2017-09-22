@@ -2,7 +2,7 @@ import React from 'react'
 import './login.less'
 import * as api from '../../config/api'
 import { message } from 'antd';
-import {browserHistory} from 'react-router';
+import {hashHistory} from 'react-router';
 import * as tool from '../../config/tools'
 class Login extends React.Component {
 	constructor(args) {
@@ -18,29 +18,27 @@ class Login extends React.Component {
         user.ldToken = _data.ldToken;
         user.userCode = _data.userCode;
         user.phone = username;
+        user.deadTime = _data.deadTime;
 
         window.localStorage.setItem("user", JSON.stringify(user));
         tool.save_user();
-
         api.getMenu().then((data) => {
-          data.phone = username
+          data.menu = data.menu
           if (data.result === 'RC100') {
             window.localStorage.setItem("user", JSON.stringify(data));
             tool.save_user();
-            browserHistory.push("/");
+            hashHistory.push("/");
           } else {
             message.error(data.errMsg, 3);
-            window.localStorage.removeItem('user');
+            window.localStorage.setItem("user", null);
+            tool.save_user();
           }
         }, (res) => {
           tool.reject(res);
         })
-
-
       } else {
         message.error(_data.errMsg, 3);
       }
-
     }, (res) => {
       tool.reject(res);
     })
