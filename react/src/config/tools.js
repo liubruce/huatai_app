@@ -9,20 +9,12 @@ import {
 	message
 } from 'antd';
 
-export const isPc = document.URL.indexOf(":8889") !== -1;
-// export const isPc = false;
-export let utils = {
-	test() {
-		console.log('test ok')
-	}
-}
 export const sino_cordova_checkApp = () => {
 	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 	// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
 	// IOS UA为 SINO_IOS_APP/1.0
 	var reData = {};
 	var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
-	// alert(JSON.stringify(match))
 	if (match) {
 		reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
 		reData.version = match[2];
@@ -32,6 +24,21 @@ export const sino_cordova_checkApp = () => {
 	}
 	return reData;
 }
+
+// export const isPc = document.URL.indexOf(":8889") !== -1;
+export const isPc = sino_cordova_checkApp().device === 'Browser';
+
+export let utils = {
+	test() {
+		console.log('test ok')
+	}
+}
+
+export const log = (text) => {
+	console.log('----------------------' + text);
+	// alert(text);
+}
+
 export let back_url;
 export let exit_url;
 
@@ -78,10 +85,6 @@ export const getUserCode = () => {
 	return url.slice(index + 9, index + 17)
 }
 
-export const log = (text) => {
-	console.log('----------------------' + text);
-	// alert(text);
-}
 export const execSQL = (sql, value) => {
 	log(sql);
 	return new Promise((resolve, reject) => {
@@ -154,7 +157,7 @@ export const info = () => {
 			})
 		}, (err) => {
 			_reject();
-			log('******************error***((((((******' + err)
+			log('******sql error**** :' + err)
 		})
 	});
 }
@@ -172,7 +175,7 @@ export const refreshToken = () => {
 			execSQL(sql).then((result) => {
 				console.log('-----update ok------' + JSON.stringify(result))
 			}, (reject) => {
-				log('**********error*********' + reject);
+				log('******sql error**** :' + reject);
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -202,6 +205,7 @@ export const behavior = (body, operationType, behaviorDataType) => {
 		operationLocation: '',
 	})
 }
+
 export const url_parameter = (data) => {
 
 	var toString = "";
@@ -221,7 +225,6 @@ export const url_parameter = (data) => {
 export const url_format = (url, operationType, behaviorDataType) => {
 	return url + url_parameter(behavior({}, operationType, behaviorDataType));
 }
-
 
 export const getAnswer = (num) => {
 	let answer = []

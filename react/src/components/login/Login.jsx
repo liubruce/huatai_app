@@ -19,18 +19,17 @@ class Login extends React.Component {
         user.userCode = _data.userCode;
         user.phone = username;
         user.deadTime = _data.deadTime;
-
-        window.localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user));
         tool.save_user();
         api.getMenu().then((data) => {
           data.menu = data.menu
           if (data.result === 'RC100') {
-            window.localStorage.setItem("user", JSON.stringify(data));
+            localStorage.setItem("user", JSON.stringify(data));
             tool.save_user();
             hashHistory.push("/");
           } else {
             message.error(data.errMsg, 3);
-            window.localStorage.setItem("user", null);
+            localStorage.setItem("user", null);
             tool.save_user();
           }
         }, (res) => {

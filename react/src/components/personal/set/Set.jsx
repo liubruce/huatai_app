@@ -11,9 +11,7 @@ class Set extends React.Component {
 	constructor(args) {
 		super()
 	}
-
   back() {
-    // alert(tool.back_url)
     if (!tool.isPc) {
       window.open(tool.back_url)
     }
@@ -24,7 +22,6 @@ class Set extends React.Component {
       title: '确定退出登录吗?',
       content: '',
       onOk() {
-        // alert(tool.back_url)
         if (!tool.isPc) {
           window.open(tool.exit_url)
         }

@@ -20,8 +20,7 @@ import personalRoutes from './personal'
 
 import * as tool from '../config/tools'
 
-
-function startApp() {
+const start_render = () => {
     render(
         <Router history={hashHistory}>
          <Route path='/Login' component={Login} />
@@ -41,29 +40,24 @@ function startApp() {
     );
 }
 
-
-if (tool.sino_cordova_checkApp().device === 'Browser') {
-    console.log('-----Run on PC------')
-    startApp();
+if (tool.isPc) {
+    // console.log('-----Run on PC------')
+    start_render();
 } else {
     // alert('---------addEventListener---------')
     document.addEventListener('deviceready', () => {
         if (tool.sino_cordova_checkApp().device === 'IOS') {
             let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
             let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
-            tool.setUrl(back_url,exit_url);
+            tool.setUrl(back_url, exit_url);
         } else {
             let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
             let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
-            tool.setUrl(back_url,exit_url);
+            tool.setUrl(back_url, exit_url);
         }
         // alert('------------deviceready-------------')
-        // tool.info()
-        startApp();
-        
+        start_render();
     }, false);
 }
-
-// startApp();
 
 

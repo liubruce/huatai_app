@@ -14,10 +14,6 @@ class App extends Component {
 		}
 	}
 	componentWillMount() {
-		this.setState({loading:true});
-		setTimeout(()=>{
-			this.setState({loading:false});
-		},3000)
 		if (tool.user === null && tool.isPc) {
 			hashHistory.push('/Login');
 			return;
@@ -35,6 +31,15 @@ class App extends Component {
 					loading: false
 				})
 			})
+		} else {
+			this.setState({
+				loading: true
+			});
+			setTimeout(() => {
+				this.setState({
+					loading: false
+				});
+			}, 500)
 		}
 	}
 	render() {
