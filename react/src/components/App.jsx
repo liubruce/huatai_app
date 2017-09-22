@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import Header from './header/Header.jsx'
 import Footer from './footer/Footer.jsx'
 import * as tool from '../config/tools'
-import {hashHistory} from 'react-router'
+// import {hashHistory} from 'react-router'
 import {Spin} from 'antd'
 import './app.less'
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
 	}
 	componentWillMount() {
 		if (tool.user === null && tool.isPc) {
-			hashHistory.push('/Login');
+			// hashHistory.push('/Login');
 			return;
 		}
 		if (!tool.isPc) {
