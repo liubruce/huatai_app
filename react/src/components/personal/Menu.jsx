@@ -9,16 +9,16 @@ class Menu extends React.Component {
 		}
 	}
 	componentWillMount() {
-		let menuItems = [];
-		let data = tool.user.menu[0].nodeResult;
-		for (let x of data) {
-			if (x.parentNodeCode !== '0') {
-				menuItems.push(x);
-			}
-		}
-		this.setState({
-			menuItems
-		})
+		// let menuItems = [];
+		// let data = tool.user.menu[0].nodeResult;
+		// for (let x of data) {
+		// 	if (x.parentNodeCode !== '0') {
+		// 		menuItems.push(x);
+		// 	}
+		// }
+		// this.setState({
+		// 	menuItems
+		// })
 	}
 	render(){
 		return(
@@ -38,7 +38,7 @@ class Menu extends React.Component {
             console.log(item)
             return(
                  <li key={index} >
-                   <Link to={item.runscript} ><i className="icon icon-my-card" />{item.nodeName}<i className="fa fa-angle-right floatR" /></Link>
+                   <Link to={item.runscript} ><i className={item.nodeClass} />{item.nodeName}<i className="fa fa-angle-right floatR" /></Link>
                  </li>
               )
           })}
