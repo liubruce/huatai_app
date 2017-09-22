@@ -12,7 +12,7 @@ class TestCenter extends React.Component{
 
 	render(){
 		return(
-			
+			<div>11111</div>
 
 
 		)

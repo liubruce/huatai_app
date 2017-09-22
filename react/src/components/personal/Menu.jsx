@@ -84,27 +84,3 @@ class Menu extends React.Component {
 	}
 }
 export default Menu;
-
- if(this.state.result===true){
-             body.studyIntegral = this.refs['studyIntegral'].value;//学习积分
-             formData.append('studyIntegral', body.studyIntegral);
-		     if(this.state.visible===true){
-                    let num = 0;
-	            	let jobLevel = '';
-					$('.check-box').find("input[type='checkbox']:checked").each((index, el) => {
-						// formData.append('jobLevel', el.value);
-						jobLevel += `${el.value},`;
-						num++;
-					})
-					if (num === 0 && body.elecReqCourse === 1) {
-						message.error('请选择必修职级', 3);
-						return;
-					}else{
-						jobLevel = jobLevel.slice(0, jobLevel.length-1);
-						formData.append('jobLevel', jobLevel);
-					}
-		  }
-	    }else{
-		      body.checkReason = this.refs['checkReason'].value;
-		      formData.append('checkReason', body.checkReason);
-		}
