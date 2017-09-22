@@ -2,7 +2,10 @@ import React from 'react'
 import './course.less'
 class Course extends React.Component {
 	constructor(args) {
-		super()
+		super();
+    this.state={
+      activeIndex:1
+    }
 	}
 
 	render(){
@@ -11,13 +14,13 @@ class Course extends React.Component {
              <div className="warpper">
                 <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                   <ul className="am-tabs-nav am-cf nav">
-                    <li className="am-active">
+                    <li className={this.state.activeIndex===1?'am-active':''} onClick={()=>{this.setState({activeIndex:1})}}>
                       <a>精品课程</a>
                     </li>
-                    <li className>
+                    <li className={this.state.activeIndex===2?'am-active':''} onClick={()=>{this.setState({activeIndex:2})}}>
                       <a>热播课程</a>
                     </li>
-                    <li className>
+                    <li className={this.state.activeIndex===3?'am-active':''} onClick={()=>{this.setState({activeIndex:3})}}>
                       <a>必修课程</a>
                     </li>
                   </ul>
