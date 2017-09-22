@@ -60,3 +60,26 @@ export const loginOut = () => {
     });
   });
 }
+
+
+/*
+  我的名片
+*/
+
+export const userCard = (userCode) => {
+  let body = {}
+  body.userCode = userCode
+  body = tool.behavior(body, 'getone', 'menu');
+  return new Promise((resolve,reject) => {
+    sfetch.get({
+      url : api_Ip+'/appuseranalysis/getone',
+      body: body
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      }else {
+        reject(data)
+      }
+    });
+  });
+}

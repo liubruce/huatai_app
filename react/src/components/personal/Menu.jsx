@@ -35,6 +35,7 @@ class Menu extends React.Component {
         </div>
         <ul className="am-list am-list-border list-in">
           {this.state.menuItems.map((item,index)=>{
+            console.log(item)
             return(
                  <li key={index} >
                    <Link to={item.runscript} ><i className="icon icon-my-card" />{item.nodeName}<i className="fa fa-angle-right floatR" /></Link>

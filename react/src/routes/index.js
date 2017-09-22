@@ -27,8 +27,8 @@ render(
              {personalRoutes}
 
          </Route>
-         <Route path='/404' component={NotFoundPage} />
-         <Redirect from='*' to='/404' />
+       {/*<Route path='/404' component={NotFoundPage} />
+         <Redirect from='*' to='/404' />*/}
        </Router>
     </Provider>,
 	document.getElementById('root')
