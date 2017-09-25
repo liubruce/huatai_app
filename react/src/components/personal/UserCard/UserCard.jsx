@@ -39,13 +39,13 @@ class UserCard extends React.Component{
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
 					<ul className="am-tabs-nav am-cf nav">
 						<li className={this.state.tab === 0 ?"am-active":''} >
-							<a href="#" onClick={()=>this.changeTab(0)}>个人名称</a>
+							<a  onClick={()=>this.changeTab(0)}>个人名称</a>
 						</li>
 						<li className={this.state.tab === 1 ?"am-active":''}>
-							<a href="#" onClick={()=>this.changeTab(1)}>成长经历</a>
+							<a  onClick={()=>this.changeTab(1)}>成长经历</a>
 						</li>
 						<li className={this.state.tab === 2 ?"am-active":''}>
-							<a href="#" onClick={()=>this.changeTab(2)}>荣誉证书</a>
+							<a  onClick={()=>this.changeTab(2)}>荣誉证书</a>
 						</li>
 					</ul>
 

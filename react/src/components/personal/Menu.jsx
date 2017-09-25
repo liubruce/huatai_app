@@ -34,43 +34,43 @@ class Menu extends React.Component {
           <p>一个最好的方式是去了解同行业内其他人是怎么写个人简介的。比如，你将要为自己的主页写一段职业个人简介。</p>
         </div>
         <ul className="am-list am-list-border list-in">
-          {this.state.menuItems.map((item,index)=>{
+          {/*{this.state.menuItems.map((item,index)=>{
             console.log(item)
             return(
                  <li key={index} >
                    <Link to={item.runscript} ><i className={item.nodeClass} />{item.nodeName}<i className="fa fa-angle-right floatR" /></Link>
                  </li>
               )
-          })}
+          })}*/}
           <li>
             <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
           </li>
-{/*          <li>
-            <a href="user_card.html"><i className="icon icon-my-card" />我的名片<i className="fa fa-angle-right floatR" /></a>
+          <li>
+            <Link to='/App/PersonalCenter'><i className="icon icon-my-card" />我的名片<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
-            <a href="my_fxq.html"><i className="icon icon-my-fxq" />我的蜂行圈<i className="fa fa-angle-right floatR" /></a>
+            <Link to='/App/MyArticle'><i className="icon icon-my-fxq" />我的蜂行圈<i className="fa fa-angle-right floatR" /></Link>
+          </li>
+         <li>
+            <Link to='/App/NewsCenter'><i className="icon icon-task" />任务中心<span className="am-badge am-badge-danger am-round">6</span><i className="fa fa-angle-right floatR" /></Link>
+          </li>
+           <li>
+            <Link to='/App/Collector'><i className="icon icon-scj" />收藏夹<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
-            <a href="task.html"><i className="icon icon-task" />任务中心<span className="am-badge am-badge-danger am-round">6</span><i className="fa fa-angle-right floatR" /></a>
+            <Link href="App/Dynamic"><i className="icon icon-dt" />动态<i className="fa fa-angle-right floatR" /></Link>
+          </li>
+      {/*    <li>
+            <Link href="library.html"><i className="icon icon-books" />图书馆<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
-            <a href="my_scj.html"><i className="icon icon-scj" />收藏夹<i className="fa fa-angle-right floatR" /></a>
+            <Link href="jf_shop.html"><i className="icon icon-jfshop" />积分商城<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
-            <a href="my_dt.html"><i className="icon icon-dt" />动态<i className="fa fa-angle-right floatR" /></a>
+            <Link href="jf_details.html"><i className="icon icon-jfdetils" />积分详情<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
-            <a href="library.html"><i className="icon icon-books" />图书馆<i className="fa fa-angle-right floatR" /></a>
-          </li>
-          <li>
-            <a href="jf_shop.html"><i className="icon icon-jfshop" />积分商城<i className="fa fa-angle-right floatR" /></a>
-          </li>
-          <li>
-            <a href="jf_details.html"><i className="icon icon-jfdetils" />积分详情<i className="fa fa-angle-right floatR" /></a>
-          </li>
-          <li>
-            <a><i className="icon icon-stroy" />故事线<i className="fa fa-angle-right floatR" /></a>
+            <Link><i className="icon icon-stroy" />故事线<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
             <Link to='/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
