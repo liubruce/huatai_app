@@ -13,10 +13,10 @@ const personalRoutes = (
            	<IndexRoute component={Menu}/>
             <Route path='Set' component={Set}/>
             <Route path='/App/PersonalCenter' component={UserCard}/>
-            <Route path='/App/MyArticle' component={MyArticle}/>
+            <Route path='/App/PersonalCenter/MyArticle' component={MyArticle}/>
             <Route path='/App/NewsCenter' component={TestCenter}/>
-            <Route path='/App/Collector' component={Collector}/>
-            <Route path='/App/Dynamic' component={Dynamic}/>
+            <Route path='/App/PersonalCenter/Collector' component={Collector}/>
+            <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
     </Route>
 
 );

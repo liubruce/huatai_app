@@ -1,23 +1,63 @@
-import {is} from 'immutable';
+import {
+	is
+} from 'immutable';
 import * as api from './api'
-import {browserHistory} from 'react-router';
-import { message } from 'antd';
+import {
+	hashHistory
+} from 'react-router';
+import {
+	message
+} from 'antd';
 
-export const utils = {
+export const sino_cordova_checkApp = () => {
+	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
+	// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
+	// IOS UA为 SINO_IOS_APP/1.0
+	var reData = {};
+	var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
+	if (match) {
+		reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
+		reData.version = match[2];
+	} else {
+		reData.device = 'Browser';
+		reData.version = '0'
+	}
+	return reData;
+}
+
+// export const isPc = document.URL.indexOf(":8889") !== -1;
+export const isPc = sino_cordova_checkApp().device === 'Browser';
+
+export let utils = {
 	test() {
 		console.log('test ok')
 	}
 }
 
-export let user = JSON.parse(window.localStorage.getItem('user'));
+export const log = (text) => {
+	console.log('----------------------' + text);
+	// alert(text);
+}
 
-export const save_user = () =>{
-	user = JSON.parse(window.localStorage.getItem('user'));
+export let back_url;
+export let exit_url;
+
+export const setUrl = (a, b) => {
+	back_url = a;
+	exit_url = b;
+}
+
+export let user = JSON.parse(localStorage.getItem('user'));
+
+export const save_user = () => {
+	user = JSON.parse(localStorage.getItem('user'));
 }
 
 export const exit = () => {
-	browserHistory.push('/Login');
-	window.localStorage.removeItem('user');
+	if (isPc) {
+		hashHistory.push('/Login');
+	}
+	localStorage.removeItem('user');
 	api.loginOut().then((data) => {
 		if (data.result === 'RC100') {
 
@@ -25,25 +65,132 @@ export const exit = () => {
 			message.error(data.errMsg, 3);
 		}
 	}, (res) => {
+		reject(res);
 	})
 }
+export const back = () => {
+	api.goback().then((data) => {
+		if (data.result === 'RC100') {
 
-// function execSQL(sql, value, success, error) {
-//     var db = window.SQLitePlugin.sqlitePlugin.openDatabase({name: 'HuaTai.db', location: 'default'});
-//     var sqlValue = [];
-//     if (value != "") {
-//         sqlValue = value;
-//     }
-//     db.transaction(function (tx) {
-//         tx.executeSql(sql, sqlValue, function (tx, rs) {
-//             success(rs.rows);
-//             // alert('execSQL: ' + JSON.stringify(rs.rows));
-//         }, function (tx, err) {
-//             error(err.message);
-//             // alert('execSQL: ' + err.message);
-//         });
-//     });
-// }
+		} else {
+			message.error(data.errMsg, 3);
+		}
+	}, (res) => {
+		reject(res);
+	})
+}
+export const getUserCode = () => {
+	let url = document.URL;
+	let index = url.indexOf('userCode=');
+	return url.slice(index + 9, index + 17)
+}
+
+export const execSQL = (sql, value) => {
+	log(sql);
+	return new Promise((resolve, reject) => {
+		var db = window.SQLitePlugin.sqlitePlugin.openDatabase({
+			name: 'HuaTai.db',
+			location: 'default'
+		});
+		var sqlValue = [];
+		if (value !== "") {
+			sqlValue = value;
+		}
+		db.transaction(function(tx) {
+			tx.executeSql(sql, sqlValue, function(tx, rs) {
+				resolve({
+					tx,
+					rs
+				})
+			}, function(tx, err) {
+				reject(err.message)
+			});
+		});
+	});
+}
+
+export const info = () => {
+	return new Promise((_resolve, _reject) => {
+		localStorage.setItem("device", sino_cordova_checkApp().device);
+		log("-------------device-------------" + localStorage.getItem('device'))
+		let userCode = getUserCode();
+		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
+		localStorage.setItem("user", JSON.stringify({
+			userCode: userCode
+		}));
+		save_user();
+		execSQL(sql).then((result) => {
+			let item = result.rs.rows.item(0)
+			let _user = {};
+			_user.deadTime = item.DEADTIME;
+			_user.ldToken = item.LDTOKEN;
+			_user.phone = item.MOBILE;
+			_user.userCode = userCode;
+
+			localStorage.setItem("user", JSON.stringify(_user));
+			save_user();
+			alert(JSON.stringify(user))
+			api.getMenu().then((data) => {
+				if (data.result === 'RC100') {
+					_resolve();
+					message.success('菜单获取成功', 3);
+					_user.menu = data.menu;
+					localStorage.setItem("user", JSON.stringify(_user));
+					save_user();
+					log(JSON.stringify(user))
+				} else {
+					_reject();
+					_user.menu = [];
+					localStorage.setItem("user", JSON.stringify(_user));
+					save_user();
+					message.error(data.errMsg, 3);
+					setTimeout(() => {
+						window.location.href = exit_url;
+					}, 2000)
+				}
+			}, (res) => {
+				_reject();
+				_user.menu = [];
+				localStorage.setItem("user", JSON.stringify(_user));
+				save_user();
+				reject(res);
+			})
+		}, (err) => {
+			_reject();
+			log('******sql error**** :' + err)
+		})
+	});
+}
+
+export const refreshToken = () => {
+	api.refreshTken().then((data) => {
+		if (data.result === 'RC100') {
+			let _user = user;
+			_user.deadTime = data.deadTime;
+			_user.ldToken = data.ldToken;
+			localStorage.removeItem('user');
+			localStorage.setItem("user", JSON.stringify(_user));
+			save_user();
+			let sql = `UPDATE LSUSER  SET DEADTIME='${data.deadTime}',LDTOKEN='${data.ldToken}' WHERE USERCODE='${user.userCode}'`;
+			execSQL(sql).then((result) => {
+				console.log('-----update ok------' + JSON.stringify(result))
+			}, (reject) => {
+				log('******sql error**** :' + reject);
+			})
+		} else {
+			message.error(data.errMsg, 3);
+		}
+	}, (res) => {
+		reject(res);
+	})
+}
+export const checkldToken = () => {
+	let now_timestamp = Date.parse(new Date());
+	let min = (user.deadTime - now_timestamp) / (60 * 1000);
+	if (min < 10) {
+		refreshToken();
+	}
+}
 
 export const behavior = (body, operationType, behaviorDataType) => {
 	return Object.assign(body, {
@@ -52,20 +199,13 @@ export const behavior = (body, operationType, behaviorDataType) => {
 		ldToken: user.ldToken,
 		userCode: user.userCode,
 		phone: user.phone,
-		// ldToken:'1505458087651ABCDEFG37052',
-		// userCode:'20004574',
-		// phone:'13920004574',
+		deadTime: user.deadTime,
 		deviceId: '',
 		netType: '',
 		operationLocation: '',
 	})
 }
-export const replaceURLToLink = (text) => {
-	var regexp = /((http|ftp|https|file):[^'"\s]+)/ig;
-	text = text.replace(regexp, "<a href='$1'>$1</a>");
 
-	return text;
-};
 export const url_parameter = (data) => {
 
 	var toString = "";
@@ -82,11 +222,10 @@ export const url_parameter = (data) => {
 	return toString;
 	// return toString.replace(/$/, "");
 }
-export const url_format =(url, operationType, behaviorDataType)=>{
-	return url  + url_parameter(behavior({},operationType, behaviorDataType));
+export const url_format = (url, operationType, behaviorDataType) => {
+	return url + url_parameter(behavior({}, operationType, behaviorDataType));
 }
 
-// exit();
 export const getAnswer = (num) => {
 	let answer = []
 	switch (num) {
@@ -103,31 +242,31 @@ export const getAnswer = (num) => {
 			answer = [3];
 			break;
 		case 3:
-			answer = [0,1];
+			answer = [0, 1];
 			break;
 		case 5:
-			answer = [0,2];
+			answer = [0, 2];
 			break;
 		case 9:
-			answer = [0,3];
+			answer = [0, 3];
 			break;
 		case 6:
-			answer = [1,2];
+			answer = [1, 2];
 			break;
 		case 10:
-			answer = [1,3];
+			answer = [1, 3];
 			break;
 		case 7:
-			answer = [2,3];
+			answer = [2, 3];
 			break;
 		case 11:
-			answer = [0,1,2];
+			answer = [0, 1, 2];
 			break;
 		case 14:
-			answer = [1,2,3];
+			answer = [1, 2, 3];
 			break;
 		case 15:
-			answer = [1,2,3,4];
+			answer = [1, 2, 3, 4];
 			break;
 		default:
 			break;
@@ -135,9 +274,9 @@ export const getAnswer = (num) => {
 	return answer;
 }
 
-	/*
-	get Object to map
-	 */
+/*
+get Object to map
+ */
 export const getObject = (num) => {
 	let obj = [];
 	for (let i = 0; i < num; i++) {
@@ -149,7 +288,7 @@ export const getObject = (num) => {
 /*
 format timestamp
  */
-export const formatTimestamp = (timestamp,type) => {
+export const formatTimestamp = (timestamp, type) => {
 	let now = new Date(timestamp);
 	let year = now.getFullYear();
 	let month = now.getMonth() + 1;
@@ -162,10 +301,10 @@ export const formatTimestamp = (timestamp,type) => {
 	hour = hour < 10 ? "0" + hour : hour;
 	minute = minute < 10 ? "0" + minute : minute;
 	second = second < 10 ? "0" + second : second;
-	if(type === 'y-m-d'){
+	if (type === 'y-m-d') {
 		return year + "-" + month + "-" + day;
 	}
-	if(type === 'y-m-d h-m'){
+	if (type === 'y-m-d h-m') {
 		return year + "-" + month + "-" + day + " " + hour + ":" + minute;
 	}
 	return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
@@ -178,8 +317,6 @@ export const reject = (res) => {
 		message.error('请求失败', 3);
 	}
 }
-export const courseTypeList = ['销售类', '管理类', '科学类'];
-export const courseChannel = ['渠道111', '渠道222', '渠道333'];
 
 /*
 get today date
@@ -196,29 +333,6 @@ export const getToday = () => {
 	return today;
 }
 
-/*
-get local IP
- */
-export const getIp = () => {
-
-	// return new Promise((resolve, reject) => {
-	//    $.ajax({
-	//         url: 'https://api.ipify.org',
-	//         type: 'GET',
-	//    })
-	//    .done(function(data) {
-	//         console.log("success",data);
-	//    })
-	//    .fail(function() {
-	//         console.log("error");
-	//    })
-	//    .always(function() {
-	//         // console.log("complete");
-	//    });
-
-	// });
-
-}
 
 /*
 show loading
@@ -229,11 +343,11 @@ export const loading = (_this, flag) => {
 	})
 }
 
-	/**
-	 * 代码优化
-	 * by QianLi
-	 * 2017-8-24
-	 */
+/**
+ * 代码优化
+ * by QianLi
+ * 2017-8-24
+ */
 export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps = {}, thisState = {}) => {
 	if (Object.keys(thisProps).length !== Object.keys(nextProps).length) {
 		return true;

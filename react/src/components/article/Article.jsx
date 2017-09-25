@@ -15,7 +15,7 @@ class Article extends React.Component {
             <div className="cont">
               <p className="info"><span>用户B</span>xxxxxxx分公司</p>
               <p className="time">2016.06.15</p>
-              <a href="fxq-details.html">
+              <a>
                 <article className="am-article">
                   <div className="am-article-hd">
                     <h1 className="am-article-title"><div className="jc-icon" />如何用保险保障自己的一生？</h1>

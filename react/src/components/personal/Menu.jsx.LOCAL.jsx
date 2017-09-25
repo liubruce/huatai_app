@@ -8,67 +8,21 @@ class Menu extends React.Component {
 			menuItems: []
 		}
 	}
-  test() {
-    let menuItems = [{
-      "nodeName": "我的名片",
-      "runscript": "/App/PersonalCenter",
-      "nodeClass": "icon icon-my-card",
-    }, {
-      "nodeName": "我的蜂行圈",
-      "runscript": "/App/PersonalCenter/MyArticle",
-      "nodeClass": "icon icon-my-fxq",
-    }, {
-      "nodeName": "任务中心",
-      "runscript": "/App/NewsCenter",
-      "nodeClass": "icon icon-task",
-    }, {
-      "nodeName": "动态",
-      "runscript": "/App/PersonalCenter/Dynamic",
-      "nodeClass": "icon icon-dt",
-    }, {
-      "nodeName": "收藏夹",
-      "runscript": "/App/PersonalCenter/Collector",
-      "nodeClass": "icon icon-scj",
-    }, {
-      "nodeName": "图书馆",
-      "runscript": "/App/PersonalCenter/Library",
-      "nodeClass": "icon icon-books",
-    }, {
-      "nodeName": "积分商城",
-      "runscript": "/App/PersonalCenter/PointShop",
-      "nodeClass": "icon icon-jfshop",
-    }, {
-      "nodeName": "积分详情",
-      "runscript": "/App/PersonalCenter/PointDetail",
-      "nodeClass": "icon icon-jfdetils",
-    }, {
-      "nodeName": "故事线",
-      "runscript": "/App/StoryLine",
-      "nodeClass": "icon icon-stroy",
-    }];
-    this.setState({
-      menuItems
-    });
-  }
-  componentWillMount() {
-    // if (tool.user === null || tool.user.menu.length === 0) {
-    //   return;
-    // }
-    // let menuItems = [];
-    // let data = tool.user.menu[0].nodeResult;
-    // for (let i = 0; i < data.length; i++) {
-    //   if (data[i].parentNodeCode !== '0') {
-    //     menuItems.push(data[i]);
-    //   }
-    // }
-    // this.setState({
-    //   menuItems
-    // })
-
-    this.test();
-  }
+	componentWillMount() {
+		// let menuItems = [];
+		// let data = tool.user.menu[0].nodeResult;
+		// for (let x of data) {
+		// 	if (x.parentNodeCode !== '0') {
+		// 		menuItems.push(x);
+		// 	}
+		// }
+		// this.setState({
+		// 	menuItems
+		// })
+	}
 	render(){
 		return(
+
      <div className="container">
         <div className="user-header">
           <div className="tx-name">
@@ -80,15 +34,15 @@ class Menu extends React.Component {
           <p>一个最好的方式是去了解同行业内其他人是怎么写个人简介的。比如，你将要为自己的主页写一段职业个人简介。</p>
         </div>
         <ul className="am-list am-list-border list-in">
-        {
-        this.state.menuItems.map((item,index)=>{
-              return(
+          {/*{this.state.menuItems.map((item,index)=>{
+            console.log(item)
+            return(
                  <li key={index} >
                    <Link to={item.runscript} ><i className={item.nodeClass} />{item.nodeName}<i className="fa fa-angle-right floatR" /></Link>
                  </li>
               )
-        })}
-      {/*    <li>
+          })}*/}
+          <li>
             <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
@@ -106,7 +60,7 @@ class Menu extends React.Component {
           <li>
             <Link href="App/Dynamic"><i className="icon icon-dt" />动态<i className="fa fa-angle-right floatR" /></Link>
           </li>
-          <li>
+      {/*    <li>
             <Link href="library.html"><i className="icon icon-books" />图书馆<i className="fa fa-angle-right floatR" /></Link>
           </li>
           <li>
@@ -117,17 +71,15 @@ class Menu extends React.Component {
           </li>
           <li>
             <Link><i className="icon icon-stroy" />故事线<i className="fa fa-angle-right floatR" /></Link>
-          <li>
-            <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
           </li>
-
-          {!tool.isPc?
           <li>
-            <a onClick={()=>tool.refreshToken()} >REFRESH TOKEN</a>
-          </li>
-          :null}*/}
+            <Link to='/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
+          </li>*/}
         </ul>
       </div>
+
+
+
 			)
 	}
 }

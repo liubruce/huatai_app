@@ -38,6 +38,8 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 const resolveWWW = path.resolve(__dirname, '../../www');
+// const resolveWWW = path.resolve(__dirname, '../../platforms/android/assets/www');
+// const resolveWWW = path.resolve(__dirname, '../../platforms/ios/www');
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),

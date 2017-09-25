@@ -5,6 +5,45 @@ import {
   api_Ip
 } from './serverIp'
 
+/*
+refreshldToken
+ */
+export const refreshTken = () => {
+  let body = {};
+  body.requestFlag = 'app';
+  body = tool.behavior(body, '', '');
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: api_Ip + '/refreshldToken/getnewldToken',
+      body: body,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
+back /goback/updateEndtime
+ */
+export const goback = () => {
+  let body = {};
+  body = tool.behavior(body, '', '');
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: api_Ip + '/appgoback/appupdateEndtime',
+      body: body,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
 
 export const login = (phone, password) => {
     let body = {};
@@ -31,7 +70,8 @@ export const getMenu = () => {
     url = tool.url_format(url, 'login', 'button');
     return new Promise((resolve, reject) => {
       sfetch.get({
-        url: url
+        url: url,
+        timeout:8000
       }).then((data) => {
         if (data.ok) {
           resolve(data.json)
@@ -46,7 +86,7 @@ export const getMenu = () => {
   注销
    */
 export const loginOut = () => {
-  let url = `${api_Ip}/home/logout`;
+  let url = `${api_Ip}/apphome/applogout`;
   url = tool.url_format(url, 'logout', 'button');
   return new Promise((resolve, reject) => {
     sfetch.get({
