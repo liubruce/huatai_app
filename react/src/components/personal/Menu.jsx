@@ -88,44 +88,14 @@ class Menu extends React.Component {
                  </li>
               )
         })}
-      {/*    <li>
-            <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link to='/App/PersonalCenter'><i className="icon icon-my-card" />我的名片<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link to='/App/MyArticle'><i className="icon icon-my-fxq" />我的蜂行圈<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-         <li>
-            <Link to='/App/NewsCenter'><i className="icon icon-task" />任务中心<span className="am-badge am-badge-danger am-round">6</span><i className="fa fa-angle-right floatR" /></Link>
-          </li>
-           <li>
-            <Link to='/App/Collector'><i className="icon icon-scj" />收藏夹<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link href="App/Dynamic"><i className="icon icon-dt" />动态<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link href="library.html"><i className="icon icon-books" />图书馆<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link href="jf_shop.html"><i className="icon icon-jfshop" />积分商城<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link href="jf_details.html"><i className="icon icon-jfdetils" />积分详情<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-          <li>
-            <Link><i className="icon icon-stroy" />故事线<i className="fa fa-angle-right floatR" /></Link>
-          <li>
-            <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR" /></Link>
-          </li>
-
+        <li>
+            <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR"/></Link>
+        </li>
           {!tool.isPc?
           <li>
             <a onClick={()=>tool.refreshToken()} >REFRESH TOKEN</a>
           </li>
-          :null}*/}
+          :null}
         </ul>
       </div>
 			)
