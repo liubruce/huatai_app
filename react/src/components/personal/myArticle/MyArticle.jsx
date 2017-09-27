@@ -9,7 +9,6 @@ class UserCard extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
-			// userCard:[],
 			 tab:1,
 		}
 	}
@@ -18,22 +17,9 @@ class UserCard extends React.Component{
 			tab: tab
 		})
 	}
-	// show(){
-	// 	api.userCard().then((data)=>{
-	// 		if (data.result === 'RC100') {
-	// 			this.setState({
-	// 				userCard:data.obj.data
-	// 			})
-	// 		}else{
-	// 			message.error(data.errMsg, 3);
-	// 		}
-	// 	})
-	// }
 	componentWillMount() {
-		//this.show()
 	}
 	render(){
-		//console.log(this.state.tab === 0)
 		return(
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
