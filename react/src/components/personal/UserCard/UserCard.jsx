@@ -33,7 +33,6 @@ class UserCard extends React.Component{
 		this.show()
 	}
 	render(){
-		console.log(this.state.tab === 0)
 		return(
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
