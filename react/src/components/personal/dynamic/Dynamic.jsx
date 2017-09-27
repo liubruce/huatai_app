@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import './dynamic.less'
-class courseDy extends React.Component{
+class CourseDy extends React.Component{
     constructor(args){
 		super()
 	}
@@ -10,7 +10,7 @@ class courseDy extends React.Component{
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
                         <div className="am-panel cur-list">
 							<a>
-								<img src="images/test.png"/>
+								<img src={require('../../../style/images/test.png')}/>
 								<div className="right">
 									<p className="time">2017.06.15  17:21</p>
 									<h2>课程名称</h2>
@@ -30,7 +30,7 @@ class EssayDy extends React.Component{
         return(
            <div data-tab-panel-1 className="am-tab-panel tab">
 						<div className="am-panel article-list">
-							<img src="images/portrait.png"/>
+							<img src={require('../../../style/images/portrait.png')}/>
 							<div className="cont">
 								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
 								<p className="time">2016.06.15</p>
@@ -68,7 +68,7 @@ class Dynamic extends React.Component{
                         </li>
 				   </ul>
                    <div className="am-tabs-bd">
-					 <courseDy/>
+					 <CourseDy/>
                    </div>
                </div>
 			</div>

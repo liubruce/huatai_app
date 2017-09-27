@@ -16,7 +16,7 @@ class PointDetail extends React.Component{
 						<div className="user-jf-details">
 							<p>15060分</p>
 							<div className="progress">
-								<div className="progress-bar" style="width: 30%"></div>
+								<div className="progress-bar" style={{width:'30%'}}></div>
 							</div>
 							<ul className="am-avg-sm-4 am-text-center">
 								<li>高手</li>
@@ -27,7 +27,7 @@ class PointDetail extends React.Component{
 						</div>
 					</div>
 					<div className="am-panel">
-						<div className="am-alert am-alert-danger" id="my-alert" style="display: none">
+						<div className="am-alert am-alert-danger" id="my-alert" style={{display:'none'}}>
 							<p>开始日期应小于结束日期！</p>
 						</div>
 						<div className="datepicker">
