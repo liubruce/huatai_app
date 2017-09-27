@@ -7,7 +7,7 @@ import UserCard from '../components/personal/userCard/UserCard.jsx'
 import TestCenter from '../components/personal/testCenter/TestCenter.jsx'
 import MyArticle from '../components/personal/myArticle/MyArticle.jsx'
 import Collector from '../components/personal/collector/Collector.jsx'
-import Dynamic from '../components/personal/dynamic/Dynamic.jsx'
+
 const personalRoutes = (
           <Route path='Personal' component={Personal}>
            	<IndexRoute component={Menu}/>
@@ -16,7 +16,7 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter/MyArticle' component={MyArticle}/>
             <Route path='/App/NewsCenter' component={TestCenter}/>
             <Route path='/App/PersonalCenter/Collector' component={Collector}/>
-            <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
+
     </Route>
 
 );
