@@ -1,22 +1,29 @@
 import React from 'react'
-import {Link} from 'react-router'
 import './library.less'
 class Library extends React.Component{
 	constructor(args){
-		super()
+		super();
+		this.state={
+            tab:1
+        }
 	}
+	changeTab(tab){
+        this.setState({
+        tab
+    })
+    }
 	render(){
 		return(
 			<div className="warpper">
 		           <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                       <ul className="am-tabs-nav am-cf nav">
-                        <li className="am-active">
+                        <li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)}>
                             <a>我的书架</a>
                         </li>
-                        <li className="">
+                        <li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
                             <a>图书馆</a>
                         </li>
-                        <li className="">
+                        <li className={this.state.tab===3?'am-active':null} onClick={()=>this.changeTab(3)}>
                             <a>资料库</a>
                         </li>
 				       </ul>

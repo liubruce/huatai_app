@@ -10,12 +10,12 @@ class UserCard extends React.Component{
 		super()
 		this.state={
 			// userCard:[],
-			// tab:0,
+			 tab:1,
 		}
 	}
 	changeTab(tab) {
 		this.setState({
-			//tab: tab
+			tab: tab
 		})
 	}
 	// show(){
@@ -38,13 +38,13 @@ class UserCard extends React.Component{
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
-					<li className="am-active">
+					<li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)}>
 						<a >已发布</a>
 					</li>
-					<li className="">
+					<li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
 						<a >审核中</a>
 					</li>
-					<li className="">
+					<li className={this.state.tab===3?'am-active':null} onClick={()=>this.changeTab(3)}>
 						<a >未通过</a>
 					</li>
 				</ul>

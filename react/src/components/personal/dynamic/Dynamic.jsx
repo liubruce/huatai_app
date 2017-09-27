@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router'
 import './dynamic.less'
 class CourseDy extends React.Component{
     constructor(args){
@@ -53,17 +52,25 @@ class EssayDy extends React.Component{
 }
 class Dynamic extends React.Component{
 	constructor(args){
-		super()
+		super();
+		this.state={
+            tab:1
+        }
 	}
+	changeTab(tab){
+        this.setState({
+           tab
+        })
+    }
 	render(){
 		return(
 			<div className="warpper">
 		       <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                    <ul className="am-tabs-nav am-cf nav">
-                        <li className="am-active">
+                        <li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)}>
                             <a>课程动态</a>
                         </li>
-                        <li className="">
+                        <li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
                             <a>蜂行圈动态</a>
                         </li>
 				   </ul>
