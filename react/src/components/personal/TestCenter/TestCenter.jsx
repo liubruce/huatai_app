@@ -6,6 +6,7 @@ class TestCenter extends React.Component{
 		super()
 		this.state = {
            tab:1,
+		   testList:[]
 		}
 	}
 	changeTab(tab) {
@@ -30,6 +31,9 @@ class TestCenter extends React.Component{
 				</ul>
 				<div className="am-tabs-bd">
 					<div data-tab-panel-0 className="am-tab-panel am-active tab">
+                        {
+							
+						}
 						 <div className="am-panel msg-list">
 							<div className="read-sta"><i className="fa fa-envelope"></i></div>
 							<div className="msg-cont">
@@ -39,6 +43,7 @@ class TestCenter extends React.Component{
 								<p className="time">2017.06.12  14:50</p>
 							</div>
 						</div>
+
 					</div>
 				</div>
 				</div>

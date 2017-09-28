@@ -76,8 +76,9 @@ class Collector extends React.Component{
                         </li>
 				    </ul>
                     <div className="am-tabs-bd">
-                        <CourseCol/>
-                        {/*<EssayCol/>*/}
+                        {
+                            this.state.tab===1?<CourseCol/>:<EssayCol/>
+                        }
                     </div>
 				</div>
 			</div>
