@@ -60,7 +60,7 @@ class Index extends React.Component {
             <ul className="am-avg-sm-4 clearFix">
               <li className="li-1"><a> </a></li>
               <li className="li-2"><Link to='/Course'></Link></li>
-              <li className="li-3"><a> </a></li>
+              <li className="li-3"><Link to='/App/StoryLine'> </Link></li>
               <li className="li-4"><Link to='/Personal' > </Link></li>
             </ul>
           </div>

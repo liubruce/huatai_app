@@ -11,7 +11,7 @@ import Dynamic from '../components/personal/dynamic/Dynamic.jsx'
 import Library from '../components/personal/library/Library.jsx'
 import PointShop from '../components/personal/pointShop/PointShop.jsx'
 import PointDetail from '../components/personal/pointDetail/PointDetail.jsx'
-import StoryLine from '../components/storyLine/StoryLine.jsx'
+import StoryLine from '../components/personal/storyLine/StoryLine.jsx'
 const personalRoutes = (
           <Route path='Personal' component={Personal}>
            	<IndexRoute component={Menu}/>
