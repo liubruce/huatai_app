@@ -23,13 +23,13 @@ class Article extends React.Component {
       this.setState({
         articleList: this.state.articleList.concat(this.state.articleList)
       })
-    }, 2000)
+    }, 500)
   }
   componentDidMount() {
     let method = () => {
       this.add();
     }
-    $(window).on('scroll.myScroll', function() {
+    $(window).on('scroll.article', function() {
       var scrollTop = $(this).scrollTop();　　
       var scrollHeight = $(document).height();　　
       var windowHeight = $(this).height();　　
@@ -39,7 +39,7 @@ class Article extends React.Component {
     });
   }
   componentWillUnmount() {
-    $(window).off('.myScroll');
+    $(window).off('.article');
   }
 	render(){
 		return(

@@ -9,7 +9,7 @@ class Title extends React.Component {
 		return(
 		     <header className="header">
 		     	<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-		     	<h1>设置</h1>
+		     	<h1>我的</h1>
 		     </header>
 			)
 	}
