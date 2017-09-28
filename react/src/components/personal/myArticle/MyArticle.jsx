@@ -2,6 +2,7 @@ import React from 'react'
 import  './myArticle.less'
 import { message } from 'antd';
 import * as tools from '../../../config/tools' 
+import {Link} from 'react-router'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -35,7 +36,8 @@ class UserCard extends React.Component{
                    <div className="am-tabs-bd">    
                        <div className="am-panel">
 							<div className="am-panel-bd">
-								<a>
+								<Link to='/App/
+								/ArticleDetail'>
 									<article className="am-article">
 									  	<div className="am-article-hd">
 									   		<h1 className="am-article-title">如何用保险保障自己的一生？</h1>
@@ -49,7 +51,7 @@ class UserCard extends React.Component{
 											</ul>
 									  	</div>
 									</article>
-								</a>
+								</Link>
 								<p className="like">2017.06.18  15:50</p>
 							</div>
                             </div>

@@ -12,15 +12,21 @@ import Library from '../components/personal/library/Library.jsx'
 import PointShop from '../components/personal/pointShop/PointShop.jsx'
 import PointDetail from '../components/personal/pointDetail/PointDetail.jsx'
 import StoryLine from '../components/storyLine/StoryLine.jsx'
+import ArticleDetail from '../components/articleDetail/ArticleDetail.jsx'
+import CourseDetail from '../components/courseDetail/CourseDetail.jsx'
+import AnswerOnline from '../components/courseDetail/answerOnline/AnswerOnline.jsx'
 const personalRoutes = (
           <Route path='Personal' component={Personal}>
            	<IndexRoute component={Menu}/>
             <Route path='Set' component={Set}/>
             <Route path='/App/PersonalCenter' component={UserCard}/>
             <Route path='/App/PersonalCenter/MyArticle' component={MyArticle}/>
+            <Route path='/App/PersonalCenter/ArticleDetail' component={ArticleDetail}/>
             <Route path='/App/NewsCenter' component={TestCenter}/>
             <Route path='/App/PersonalCenter/Collector' component={Collector}/>
             <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
+            <Route path='/App/Course/CourseDetail' component={CourseDetail}/>
+            <Route path='/App/Course/AnswerOnline' component={AnswerOnline}/>
             <Route path='/App/PersonalCenter/Library' component={Library}/>
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>

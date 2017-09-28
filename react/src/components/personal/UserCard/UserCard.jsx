@@ -20,6 +20,7 @@ class UserCard extends React.Component{
 	show(){
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
+
 				this.setState({
 					userCard:data.obj.data
 				})

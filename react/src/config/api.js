@@ -141,3 +141,24 @@ export const userCard = (userCode) => {
     });
   });
 }
+
+/*
+  我的蜂行圈
+*/
+
+export const essayList = (bM={}) => {
+  let body = tool.behavior(bM,'myessaylists','menu');
+  return new Promise((resolve,reject)=>{
+    sfetch.get({
+        url:api_Ip + '/appessaycenter/myessaylists',
+        body: body
+    }).then((data) => {
+        if(data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+    })
+  })
+
+}
