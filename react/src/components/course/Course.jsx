@@ -1,10 +1,13 @@
 import React from 'react'
 import './course.less'
+import * as tool from '../../config/tools'
+
 class Course extends React.Component {
 	constructor(args) {
 		super()
     this.state = {
-      tab : 1
+      tab : 1,
+      courseList:tool.getObject(4)
     }
 	}
   changeTab(tab){
@@ -28,33 +31,26 @@ class Course extends React.Component {
                       <a>必修课程</a>
                     </li>
                   </ul>
-                  <div className="am-tabs-bd">
-                    <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                      <div className="am-panel cur-list">
-                        <a>
-                          <img alt='test' src={require('../../style/images/test.png')} />
-                          <div className="right">
-                            <p className="time">2017.06.15  17:21</p>
-                            <h2>课程名称</h2>
-                            <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* 侧边栏内容 */}
-                <div id="doc-oc-demo1" className="am-offcanvas">
-                  <div className="am-offcanvas-bar">
-                    <div className="am-offcanvas-content">
-                      <p>
-                        我不愿让你一个人 <br />
-                        承受这世界的残忍 <br />
-                        我不愿眼泪陪你到 永恒
-                      </p>
-                      <a className="close"><i className="fa fa-compress" /></a>
-                    </div>
-                  </div>
+
+                  {this.state.courseList.map((item,index)=>{
+                    return(
+                         <div className="am-tabs-bd" key={index} >
+                           <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                             <div className="am-panel cur-list">
+                               <a>
+                                 <img alt='test' src={require('../../style/images/test.png')} />
+                                 <div className="right">
+                                   <p className="time">2017.06.15  17:21</p>
+                                   <h2>课程名称</h2>
+                                   <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
+                                 </div>
+                               </a>
+                             </div>
+                           </div>
+                         </div>
+                      )
+                  })}
+
                 </div>
               </div>
 
