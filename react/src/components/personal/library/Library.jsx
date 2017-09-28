@@ -1,6 +1,75 @@
 import React from 'react'
 import './library.less'
 import * as tools from '../../../config/tools' 
+class Bookshelf extends React.Component{
+	constructor(args){
+		super();
+	}
+	render(){
+		return(
+           <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                            <div className="am-panel goods-list">
+							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
+							<div className="goods-info">
+								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
+								<p>出版社: 南海出版公司</p>
+								<p>原作名: Cien años de soledad</p>
+								<p>译者:  范晔</p>
+								<p>出版年: 2011/6</p>
+								<p>页数: 360</p>
+								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">下载</button>
+							</div>
+						    </div>
+            </div>
+		)
+	}
+}
+class MyLibrary extends React.Component{
+	constructor(args){
+		super();
+	}
+	render(){
+		return(
+           <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                            <div className="am-panel goods-list">
+							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
+							<div className="goods-info">
+								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
+								<p>出版社: 南海出版公司</p>
+								<p>原作名: Cien años de soledad</p>
+								<p>译者:  范晔</p>
+								<p>出版年: 2011/6</p>
+								<p>页数: 360</p>
+								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+							</div>
+						    </div>
+            </div>
+		)
+	}
+}
+class Database extends React.Component{
+	constructor(args){
+		super();
+	}
+	render(){
+		return(
+           <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                            <div className="am-panel goods-list">
+							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
+							<div className="goods-info">
+								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
+								<p>出版社: 南海出版公司</p>
+								<p>原作名: Cien años de soledad</p>
+								<p>译者:  范晔</p>
+								<p>出版年: 2011/6</p>
+								<p>页数: 360</p>
+								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+							</div>
+						    </div>
+            </div>
+		)
+	}
+}
 class Library extends React.Component{
 	constructor(args){
 		super();
@@ -29,20 +98,9 @@ class Library extends React.Component{
                         </li>
 				       </ul>
                        <div className="am-tabs-bd">
-				         	<div data-tab-panel-0 className="am-tab-panel am-active tab">
-                            <div className="am-panel goods-list">
-							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
-							<div className="goods-info">
-								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
-								<p>出版社: 南海出版公司</p>
-								<p>原作名: Cien años de soledad</p>
-								<p>译者:  范晔</p>
-								<p>出版年: 2011/6</p>
-								<p>页数: 360</p>
-								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">下载</button>
-							</div>
-						    </div>
-                            </div>
+						   {
+							   this.state.tab===1?<Bookshelf />:this.state.tab===2?<MyLibrary/>:<Database/>
+						   }
                         </div> 
                    </div>
 			</div>
