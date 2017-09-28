@@ -1,30 +1,45 @@
 import React from 'react'
 import './article.less'
 import * as tool from '../../config/tools'
+import { message,Spin } from 'antd';
 import $ from 'jquery'
 class Article extends React.Component {
 	constructor(args) {
 		super()
     this.state = {
-      articleList:tool.getObject(4)
+      articleList:tool.getObject(4),
+      loading:true
     }
 	}
-  add(){
-    console.log(this.state.articleList.length)
+  add() {
+    if (this.state.articleList.length > 10) {
+      message.error('没有数据了', 3);
+      this.setState({
+        loading: false
+      })
+      return;
+    }
+    setTimeout(() => {
+      this.setState({
+        articleList: this.state.articleList.concat(this.state.articleList)
+      })
+    }, 2000)
   }
   componentDidMount() {
-    let method = () =>{
+    let method = () => {
       this.add();
     }
-    $(window).scroll(function() {　　
+    $(window).on('scroll.myScroll', function() {
       var scrollTop = $(this).scrollTop();　　
       var scrollHeight = $(document).height();　　
       var windowHeight = $(this).height();　　
       if (scrollTop + windowHeight === scrollHeight) {　　
         method();　
-        console.log("you are in the bottom");　　
       }
     });
+  }
+  componentWillUnmount() {
+    $(window).off('.myScroll');
   }
 	render(){
 		return(
@@ -59,6 +74,8 @@ class Article extends React.Component {
               </div>
             )
         })}
+
+        <div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>
 
         </div>
       </div>
