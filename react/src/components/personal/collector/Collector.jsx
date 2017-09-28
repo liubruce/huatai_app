@@ -1,14 +1,21 @@
 import React from 'react'
 import {Link} from 'react-router'
 import './collector.less'
+import * as tools from '../../../config/tools' 
 class CourseCol extends React.Component{
     constructor(args){
 		super()
+        this.state={
+            colCourseList:tools.getObject(10),
+        }
 	}
     render(){
         return(
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                            <div className="am-panel cur-list">
+                {
+                    this.state.colCourseList.map((item,index)=>{
+                        return(
+                           <div key={index} className="am-panel cur-list">
                                 <Link>
                                     <img src={require("../../../style/images/test.png")}/>
                                     <div className="right">
@@ -18,18 +25,26 @@ class CourseCol extends React.Component{
                                     </div>
                                 </Link>
 						   </div>
+                        )
+                    })
+                }
              </div>
         )
     }
 }
 class EssayCol extends React.Component{
     constructor(args){
-		super()
+		super();
+        this.state={
+            ColEssayList:tools.getObject(10)
+        }
 	}
     render(){
         return(
             <div data-tab-panel-1 className="am-tab-panel tab">
-                <div className="am-panel article-list">
+                {
+                    this.state.ColEssayList.map((item,index)=>{
+                        <div key={index} className="am-panel article-list">
 							<img src={require("../../../style/images/test.png")}/>
 							<div className="cont">
 								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
@@ -47,7 +62,9 @@ class EssayCol extends React.Component{
 								<p className="like"><span><i className="fa fa-heart"></i>12331</span><span><i className="fa fa-thumbs-up"></i>12331</span></p>
 							</div>
 						</div>
-                </div>
+                    })
+                }
+            </div>
         )
     }
 }

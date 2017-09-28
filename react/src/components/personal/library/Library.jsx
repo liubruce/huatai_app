@@ -1,5 +1,6 @@
 import React from 'react'
 import './library.less'
+import * as tools from '../../../config/tools' 
 class Library extends React.Component{
 	constructor(args){
 		super();

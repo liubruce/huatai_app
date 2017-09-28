@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router'
 import './testCenter.less'
+import * as tools from '../../../config/tools' 
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
 		this.state = {
            tab:1,
-		   testList:[]
+		   testList:tools.getObject(10),
 		}
 	}
 	changeTab(tab) {
@@ -32,18 +33,20 @@ class TestCenter extends React.Component{
 				<div className="am-tabs-bd">
 					<div data-tab-panel-0 className="am-tab-panel am-active tab">
                         {
-							
+							this.state.testList.map((item,index)=>{
+								return(
+                                      <div key={index} className="am-panel msg-list">
+										<div className="read-sta"><i className="fa fa-envelope"></i></div>
+										<div className="msg-cont">
+											<p className="msg-title">华泰蜂行智能学习平台上线通知</p>
+											<p className="msg-info">华泰蜂行智能学习平台与 2017年XX月XX日，XX时XX分XX秒正式上线。请点击如下连接下载安装。</p>
+											<a>www.xxx.com/fengxing/#</a>
+											<p className="time">2017.06.12  14:50</p>
+										</div>
+						             </div>
+								)
+							})
 						}
-						 <div className="am-panel msg-list">
-							<div className="read-sta"><i className="fa fa-envelope"></i></div>
-							<div className="msg-cont">
-								<p className="msg-title">华泰蜂行智能学习平台上线通知</p>
-								<p className="msg-info">华泰蜂行智能学习平台与 2017年XX月XX日，XX时XX分XX秒正式上线。请点击如下连接下载安装。</p>
-								<a>www.xxx.com/fengxing/#</a>
-								<p className="time">2017.06.12  14:50</p>
-							</div>
-						</div>
-
 					</div>
 				</div>
 				</div>

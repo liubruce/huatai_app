@@ -1,5 +1,6 @@
 import React from 'react'
 import './dynamic.less'
+import * as tools from '../../../config/tools' 
 class CourseDy extends React.Component{
     constructor(args){
 		super()

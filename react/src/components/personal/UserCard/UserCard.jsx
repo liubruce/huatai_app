@@ -4,7 +4,6 @@ import { message } from 'antd';
 import * as tools from '../../../config/tools'
 import * as api from '../../../config/api'
 
-
 class UserCard extends React.Component{
 	constructor(args) {
 		super()

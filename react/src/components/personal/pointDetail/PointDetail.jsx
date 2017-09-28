@@ -1,5 +1,6 @@
 import React from 'react'
 import './pointDetail.less'
+import * as tools from '../../../config/tools' 
 class PointDetail extends React.Component{
 	constructor(args){
 		super()

@@ -1,10 +1,7 @@
 import React from 'react'
 import  './myArticle.less'
 import { message } from 'antd';
-import * as tools from '../../../config/tools'
-import * as api from '../../../config/api'
-
-
+import * as tools from '../../../config/tools' 
 class UserCard extends React.Component{
 	constructor(args) {
 		super()

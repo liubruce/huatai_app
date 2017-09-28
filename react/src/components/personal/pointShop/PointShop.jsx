@@ -1,5 +1,6 @@
 import React from 'react'
 import './pointShop.less'
+import * as tools from '../../../config/tools' 
 class PointShop extends React.Component{
 	constructor(args){
 		super()
