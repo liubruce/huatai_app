@@ -9,25 +9,25 @@ import {
 refreshldToken
  */
 export const refreshTken = () => {
-  let body = {};
-  body.requestFlag = 'app';
-  body = tool.behavior(body, '', '');
-  return new Promise((resolve, reject) => {
-    sfetch.get({
-      url: api_Ip + '/refreshldToken/getnewldToken',
-      body: body,
-    }).then((data) => {
-      if (data.ok) {
-        resolve(data.json)
-      } else {
-        reject(data)
-      }
+    let body = {};
+    body.requestFlag = 'app';
+    body = tool.behavior(body, '', '');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: api_Ip + '/refreshldToken/getnewldToken',
+        body: body,
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
     });
-  });
-}
-/*
-back /goback/updateEndtime
- */
+  }
+  /*
+  back /goback/updateEndtime
+   */
 export const goback = () => {
   let body = {};
   body = tool.behavior(body, '', '');
@@ -62,16 +62,16 @@ export const login = (phone, password) => {
       });
     });
   }
-/*
-login
- */
+  /*
+  login
+   */
 export const getMenu = () => {
     let url = `${api_Ip}/applogin/appdologin`;
     url = tool.url_format(url, 'login', 'button');
     return new Promise((resolve, reject) => {
       sfetch.get({
         url: url,
-        timeout:8000
+        timeout: 8000
       }).then((data) => {
         if (data.ok) {
           resolve(data.json)
@@ -80,6 +80,24 @@ export const getMenu = () => {
         }
       });
 
+    });
+  }
+  /*
+注销
+ */
+export const pc_loginOut = () => {
+    let url = `${api_Ip}/home/logout`;
+    url = tool.url_format(url, 'logout', 'button');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
     });
   }
   /*
@@ -110,14 +128,14 @@ export const userCard = (userCode) => {
   let body = {}
   body.userCode = userCode
   body = tool.behavior(body, 'getone', 'menu');
-  return new Promise((resolve,reject) => {
+  return new Promise((resolve, reject) => {
     sfetch.get({
-      url : api_Ip+'/appuseranalysis/getone',
+      url: api_Ip + '/appuseranalysis/getone',
       body: body
     }).then((data) => {
       if (data.ok) {
         resolve(data.json)
-      }else {
+      } else {
         reject(data)
       }
     });
