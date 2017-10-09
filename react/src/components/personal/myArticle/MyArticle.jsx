@@ -36,8 +36,7 @@ class UserCard extends React.Component{
                    <div className="am-tabs-bd">    
                        <div className="am-panel">
 							<div className="am-panel-bd">
-								<Link to='/App/
-								/ArticleDetail'>
+								<Link to='App/PersonalCenter/ArticleDetail'>
 									<article className="am-article">
 									  	<div className="am-article-hd">
 									   		<h1 className="am-article-title">如何用保险保障自己的一生？</h1>

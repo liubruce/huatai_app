@@ -35,7 +35,7 @@ class EssayDy extends React.Component{
 							<div className="cont">
 								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
 								<p className="time">2016.06.15</p>
-								<a href="fxq-details.html">
+								<Link to='App/PersonalCenter/ArticleDetail'>
 									<article className="am-article">
 									  	<div className="am-article-hd">
 									   		<h1 className="am-article-title"><div className="jc-icon"></div>如何用保险保障自己的一生？</h1>
@@ -44,7 +44,7 @@ class EssayDy extends React.Component{
 									    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
 									  	</div>
 									</article>
-								</a>
+								</Link>
 								<p className="like"><span><i className="fa fa-heart-o"></i>12331</span><span><i className="fa fa-thumbs-o-up"></i>12331</span></p>
 							</div>
 						</div>

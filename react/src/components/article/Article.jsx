@@ -3,6 +3,7 @@ import './article.less'
 import * as tool from '../../config/tools'
 import { message,Spin } from 'antd';
 import $ from 'jquery'
+import {Link} from 'react-router'
 class Article extends React.Component {
 	constructor(args) {
 		super()
@@ -54,7 +55,7 @@ class Article extends React.Component {
                 <div className="cont">
                   <p className="info"><span>用户B</span>xxxxxxx分公司</p>
                   <p className="time">2016.06.15</p>
-                  <a>
+                  <Link to='App/PersonalCenter/ArticleDetail'>
                     <article className="am-article">
                       <div className="am-article-hd">
                         <h1 className="am-article-title"><div className="jc-icon" />如何用保险保障自己的一生？</h1>
@@ -68,7 +69,7 @@ class Article extends React.Component {
                         </ul>
                       </div>
                     </article>
-                  </a>
+                  </Link>
                   <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
                 </div>
               </div>
