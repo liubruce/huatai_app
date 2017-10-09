@@ -104,23 +104,23 @@ export const pc_loginOut = () => {
   注销
    */
 export const loginOut = () => {
-  let url = `${api_Ip}/apphome/applogout`;
-  url = tool.url_format(url, 'logout', 'button');
-  return new Promise((resolve, reject) => {
-    sfetch.get({
-      url: url,
-    }).then((data) => {
-      if (data.ok) {
-        resolve(data.json)
-      } else {
-        reject(data)
-      }
+    let url = `${api_Ip}/apphome/applogout`;
+    url = tool.url_format(url, 'logout', 'button');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
     });
-  });
-}
-/*
-index
- */
+  }
+  /*
+  index
+   */
 export const homeIndex = () => {
     let url = `${api_Ip}/apphome/index`;
     url = tool.url_format(url, 'appMainPage', 'menu');
@@ -137,9 +137,9 @@ export const homeIndex = () => {
       });
     });
   }
-/*
-myhome /appuseranalysis/myhome
- */
+  /*
+  myhome /appuseranalysis/myhome
+   */
 export const myhome = () => {
     let url = `${api_Ip}/appuseranalysis/myhome`;
     url = tool.url_format(url, 'myhome', 'menu');
@@ -156,26 +156,65 @@ export const myhome = () => {
       });
     });
   }
-/*
-article 
- */
+  /*
+  article 
+   */
 export const essaylist = () => {
-    let url = `${api_Ip}/appessaycenter/essaylist`;
-    url = tool.url_format(url, 'essaylist', 'menu');
-    return new Promise((resolve, reject) => {
-      sfetch.get({
-        url: url,
-        timeout: 8000
-      }).then((data) => {
-        if (data.ok) {
-          resolve(data.json)
-        } else {
-          reject(data)
-        }
-      });
+  let url = `${api_Ip}/appessaycenter/essaylist`;
+  url = tool.url_format(url, 'essaylist', 'menu');
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
     });
-  }
+  });
+}
+/*
+/apptop/studenttop
+ */
+export const studenttop = (body) => {
+  let url = `${api_Ip}/apptop/studenttop`;
+  url = tool.url_format(url, 'studenttop', 'menu',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
+coursetop
+ */
+export const coursetop = (body) => {
+  let url = `${api_Ip}/apptop/coursetop`;
+  url = tool.url_format(url, 'coursetop', 'menu',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
 
+//------------------------------------------------------
 
 /*
   我的名片
@@ -203,18 +242,18 @@ export const userCard = (userCode) => {
   我的蜂行圈
 */
 
-export const essayList = (bM={}) => {
-  let body = tool.behavior(bM,'myessaylists','menu');
-  return new Promise((resolve,reject)=>{
+export const essayList = (bM = {}) => {
+  let body = tool.behavior(bM, 'myessaylists', 'menu');
+  return new Promise((resolve, reject) => {
     sfetch.get({
-        url:api_Ip + '/appessaycenter/myessaylists',
-        body: body
+      url: api_Ip + '/appessaycenter/myessaylists',
+      body: body
     }).then((data) => {
-        if(data.ok) {
-          resolve(data.json)
-        } else {
-          reject(data)
-        }
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
     })
   })
 
