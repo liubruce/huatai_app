@@ -115,14 +115,14 @@ class Index extends React.Component {
               return(
                   <div key={index} className="am-panel-bd">
                    <div className="pepole-info">
-                     <img onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
+                     <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
                      <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
                      <p className="time">{tool.formatTimestamp(item.createTime)}</p>
                    </div>
                    <a>
                      <article className="am-article">
                        <div className="am-article-hd">
-                         <h1 className="am-article-title">{item.essayTitle}</h1>
+                         <h1 className="am-article-title">{item.goodEssay === '1'?<div className="jc-icon" />:null}{item.essayTitle}</h1>
                        </div>
                        <div className="am-article-bd">
                          <p className="am-article-lead">{item.essayNote}</p>

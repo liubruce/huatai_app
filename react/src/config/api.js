@@ -137,7 +137,25 @@ export const homeIndex = () => {
       });
     });
   }
-
+/*
+article 
+ */
+export const essaylist = () => {
+    let url = `${api_Ip}/appessaycenter/essaylist`;
+    url = tool.url_format(url, 'essaylist', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+        timeout: 8000
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
 
 
 /*

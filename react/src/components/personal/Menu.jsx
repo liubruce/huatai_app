@@ -72,7 +72,7 @@ class Menu extends React.Component {
      <div className="container">
         <div className="user-header">
           <div className="tx-name">
-            <img alt='test' src={require('../../style/images/portrait.png')} />
+            <img className='head_img' alt='test' src={require('../../style/images/portrait.png')} />
             <p className="name">毛*平</p>
             <p className="rank-txt">盟主</p>
           </div>

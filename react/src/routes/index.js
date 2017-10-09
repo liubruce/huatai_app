@@ -15,8 +15,8 @@ import Index from '../components/index/Index.jsx'
 import Course from '../components/course/Course.jsx'
 import Article from '../components/article/Article.jsx'
 import Login from '../components/login/Login.jsx'
-import personalRoutes from './personal'
 
+import personalRoutes from './personal'
 import * as tool from '../config/tools'
 
 const start_render = () => {
