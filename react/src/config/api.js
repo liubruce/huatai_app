@@ -2,7 +2,7 @@
 import sfetch from 'sfetch'
 import * as tool from './tools';
 import {
-  api_Ip
+  api_Ip,lesson_api_IP
 } from './serverIp'
 
 /*
@@ -200,6 +200,25 @@ coursetop
 export const coursetop = (body) => {
   let url = `${api_Ip}/apptop/coursetop`;
   url = tool.url_format(url, 'coursetop', 'menu',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
+/appELearning/appCourse/appStudentSelectCoursePager
+ */
+export const appStudentSelectCoursePager = () => {
+  let url = `${lesson_api_IP}/appELearning/appCourse/appStudentSelectCoursePager`;
+  url = tool.url_format(url, 'mainPage', 'menu');
   return new Promise((resolve, reject) => {
     sfetch.get({
       url: url,

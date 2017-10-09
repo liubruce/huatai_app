@@ -44,7 +44,8 @@ class Article extends React.Component {
   // componentWillUnmount() {
   //   $(window).off('.article');
   // }
-  componentWillMount() {
+  show(){
+    tool.loading(this, true);
     api.essaylist().then((data)=>{
       if (data.result === 'RC100') {
         this.setState({
@@ -53,16 +54,21 @@ class Article extends React.Component {
       } else {
         message.error(data.errMsg, 3);
       }
+      tool.loading(this, false);
     }, (res) => {
+      tool.loading(this, false);
       tool.reject(res);
     })
+  }
+  componentWillMount() {
+    this.show();
   }
 	render(){
 		return(
 
      <div className="warpper">
+     <Spin spinning={this.state.loading} tip="加载列表中...">
         <div className="am-panel">
-
         {this.state.essayList.map((item,index)=>{
           return(
               <div className="article-list" key={index} >
@@ -98,6 +104,7 @@ class Article extends React.Component {
         {/*<div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>*/}
 
         </div>
+        </Spin>
       </div>
 
 
