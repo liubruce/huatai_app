@@ -75,10 +75,10 @@ class Index extends React.Component {
 
           <div className="am-panel panel-in">
             <ul className="am-avg-sm-4 clearFix">
-              <li className="li-1"><a> </a></li>
-              <li className="li-2"><Link to='/Course'></Link></li>
+              <li className="li-1"><Link to='/StudentTop'></Link></li>
+              <li className="li-2"><Link to='/CourseTop'></Link></li>
               <li className="li-3"><Link to='/App/StoryLine'> </Link></li>
-              <li className="li-4"><Link to='/Personal' > </Link></li>
+              <li className="li-4"><Link to='/App/PersonalCenter' > </Link></li>
             </ul>
           </div>
           <div className="am-panel">

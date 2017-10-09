@@ -1,10 +1,10 @@
 import React from 'react'
 import './article.less'
-import * as tool from '../../config/tools'
 import { message,Spin } from 'antd';
 import $ from 'jquery'
 import {Link} from 'react-router'
 import * as api from '../../config/api'
+import * as tool from '../../config/tools'
 import {getFile_IP } from '../../config/serverIp'
 class Article extends React.Component {
 	constructor(args) {
@@ -82,7 +82,7 @@ class Article extends React.Component {
                         <ul className="am-avg-sm-3 am-thumbnails">
                         {item.essayPhotos.map((img,index)=>{
                           return(
-                             <li><img alt='test' src={getFile_IP + '/downfile/' + img.essayPhotoPath} /></li>
+                             <li key={index} ><img alt='test' src={getFile_IP + '/downfile/' + img.essayPhotoPath} /></li>
                             )
                         })}
                         </ul>
