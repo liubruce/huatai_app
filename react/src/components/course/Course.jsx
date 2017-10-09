@@ -1,7 +1,7 @@
 import React from 'react'
 import './course.less'
 import * as tool from '../../config/tools'
-
+import {Link} from 'react-router'
 class Course extends React.Component {
 	constructor(args) {
 		super()
@@ -37,14 +37,14 @@ class Course extends React.Component {
                          <div className="am-tabs-bd" key={index} >
                            <div data-tab-panel-0 className="am-tab-panel am-active tab">
                              <div className="am-panel cur-list">
-                               <a>
+                               <Link to='App/Course/CourseDetail'>
                                  <img alt='test' src={require('../../style/images/test.png')} />
                                  <div className="right">
                                    <p className="time">2017.06.15  17:21</p>
                                    <h2>课程名称</h2>
                                    <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
                                  </div>
-                               </a>
+                               </Link>
                              </div>
                            </div>
                          </div>
