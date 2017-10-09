@@ -45,7 +45,7 @@ class EssayCol extends React.Component{
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
-                           <div key={index} className="am-panel cur-list">
+                           <div key={index} className="am-panel article-list">
                                 <img src={require("../../../style/images/test.png")}/>
 							<div className="cont">
 								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
