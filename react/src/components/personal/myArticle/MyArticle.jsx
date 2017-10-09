@@ -1,7 +1,8 @@
 import React from 'react'
 import  './myArticle.less'
-import { message } from 'antd';
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 import {Link} from 'react-router'
 class UserCard extends React.Component{
 	constructor(args) {
@@ -16,6 +17,18 @@ class UserCard extends React.Component{
 		})
 	}
 	componentWillMount() {
+		api.essayList().then((data) => {
+		if (data.result === 'RC100') {
+			this.setState({
+			courseList: data.goodCourseList,
+			articleList: data.goodEssayList
+			})
+		} else {
+			message.error(data.errMsg, 3);
+		}
+		}, (res) => {
+		tool.reject(res);
+		})
 	}
 	render(){
 		return(

@@ -1,14 +1,29 @@
 import React from 'react'
 import {Link} from 'react-router'
 import './collector.less'
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 class CourseCol extends React.Component{
     constructor(args){
 		super()
         this.state={
-            colCourseList:tools.getObject(10),
+            colCourseList:tool.getObject(10),
         }
 	}
+
+    componentWillMount() {
+    api.couCollection().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
     render(){
         return(
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -36,9 +51,21 @@ class EssayCol extends React.Component{
     constructor(args){
 		super()
         this.state={
-            colCourseList:tools.getObject(10),
+            colCourseList:tool.getObject(10),
         }
 	}
+    componentWillMount() {
+    api.morecolEssay().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
     render(){
         return(
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -74,7 +101,7 @@ class EssayCol1 extends React.Component{
     constructor(args){
 		super();
         this.state={
-            ColEssayList:tools.getObject(10)
+            ColEssayList:tool.getObject(10)
         }
 	}
     render(){

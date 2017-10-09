@@ -1,15 +1,44 @@
 import React from 'react'
 import {Link} from 'react-router'
 import './testCenter.less'
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
 		this.state = {
            tab:1,
-		   testList:tools.getObject(10),
+		   testList:tool.getObject(10),
 		}
 	}
+	unreadInformationlist(){
+		api.unreadInformationlist().then((data) => {
+		if (data.result === 'RC100') {
+			this.setState({
+			})
+		} else {
+			message.error(data.errMsg, 3);
+		}
+		}, (res) => {
+		tool.reject(res);
+		})
+	}
+	readInformationlist(){
+		api.readInformationlist().then((data) => {
+		if (data.result === 'RC100') {
+			this.setState({
+			})
+		} else {
+			message.error(data.errMsg, 3);
+		}
+		}, (res) => {
+		tool.reject(res);
+		})
+	}
+	componentWillMount() {
+       this.unreadInformationlist();
+    }
 	changeTab(tab) {
 		this.setState({
 			tab: tab
@@ -24,9 +53,6 @@ class TestCenter extends React.Component{
 						<a >新任务</a>
 					</li>
 					<li className={this.state.tab === 2 ?"am-active":''} onClick={()=>this.changeTab(2)}>
-						<a >进行中</a>
-					</li>
-					<li className={this.state.tab === 3 ?"am-active":''} onClick={()=>this.changeTab(3)}>
 						<a >已完成</a>
 					</li>
 				</ul>

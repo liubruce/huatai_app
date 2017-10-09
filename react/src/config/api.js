@@ -182,3 +182,177 @@ export const essayList = (bM={}) => {
   })
 
 }
+/**
+ * /appcoursemanagement/moreclick课程动态
+*/
+export const courseClick = (bM={}) => {
+    let body = tool.behavior(bM, 'moreclick', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appcoursemanagement/moreclick`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appessaycenter/moreessay锋行圈动态
+  */
+  export const moreEssay = (bM={}) => {
+    let body = tool.behavior(bM, 'moreessay', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appessaycenter/moreessay`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /essaycenter/morecolessay锋行圈收藏
+  */
+   export const morecolEssay = (bM={}) => {
+    let body = tool.behavior(bM, 'morecolessay', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/essaycenter/morecolessay`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appcoursemanagement/collection课程收藏
+  */
+   export const couCollection = (bM={}) => {
+    let body = tool.behavior(bM, 'collection', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appcoursemanagement/collection`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appmessagecenter/unreadinformationlist未读消息
+  */
+  export const unreadInformationlist = (bM={}) => {
+   let body = tool.behavior(bM, 'unreadInformation', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appmessagecenter/unreadinformationlist`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appmessagecenter/readinformationlist已读消息
+  */
+  export const readInformationlist = (bM={}) => {
+    let body = tool.behavior(bM, 'readInformation', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appmessagecenter/readinformationlist`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appbookmanagerment/mylist我的书架
+  */
+  export const myList = (bM={}) => {
+    let body = tool.behavior(bM, 'myBookshelf', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appbookmanagerment/mylist`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appbookmanagerment/list图书馆（资料库）
+  */
+   export const myBookList = (bM={}) => {
+    let body = tool.behavior(bM, 'Library', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appbookmanagerment/list`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appintegralmall/list积分商城
+  */
+  export const pointShopList = (bM={}) => {
+    let body = tool.behavior(bM, 'IntegralMall', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appintegralmall/list`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * 积分详情
+  */

@@ -1,10 +1,42 @@
 import React from 'react'
 import './pointDetail.less'
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
+import $ from 'jquery'
+import DatePicker from 'react-mobile-datepicker';
 class PointDetail extends React.Component{
 	constructor(args){
-		super()
+		super();
+		this.state = {
+		time: new Date(),
+ 		isOpen: false,
+	    }
 	}
+    componentWillMount() {
+    api.homeIndex().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
+	handleClick = () => {
+		this.setState({ isOpen: true });
+	}
+
+	handleCancel = () => {
+		this.setState({ isOpen: false });
+	}
+
+	handleSelect = (time) => {
+		this.setState({ time, isOpen: false });
+	}
+
 	render(){
 		return(
 				<div className="warpper">
@@ -31,7 +63,19 @@ class PointDetail extends React.Component{
 							<p>开始日期应小于结束日期！</p>
 						</div>
 						<div className="datepicker">
-							<label type="button" className="am-margin-right">开始日期</label><span id="my-startDate">年-月-日</span>
+							{/*<label type="button" className="am-margin-right">开始日期</label><span id="my-startDate">年-月-日</span>*/}
+							<a
+					className="select-btn"
+					onClick={this.handleClick}>
+					select time
+				</a>
+
+							<DatePicker
+				        	value={this.state.time}
+				         	isOpen={this.state.isOpen}
+			        		onSelect={this.handleSelect}
+				        	onCancel={this.handleCancel} />
+
 						</div>
 						<div className="datepicker">
 							<label type="button" className="am-margin-right">结束日期</label><span id="my-endDate">年-月-日</span>

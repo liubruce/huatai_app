@@ -1,13 +1,27 @@
 import React from 'react'
 import './pointShop.less'
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 class PointShop extends React.Component{
 	constructor(args){
 		super();
 		this.state={
-			pointShopList:tools.getObject(10)
+			pointShopList:tool.getObject(10)
 		}
 	}
+	componentWillMount() {
+    api.pointShopList().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
 			<div className="warpper">

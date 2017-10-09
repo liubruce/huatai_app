@@ -1,10 +1,24 @@
 import React from 'react'
 import './library.less'
-import * as tools from '../../../config/tools' 
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 class Bookshelf extends React.Component{
 	constructor(args){
 		super();
 	}
+	componentWillMount() {
+    api.myList().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -28,6 +42,18 @@ class MyLibrary extends React.Component{
 	constructor(args){
 		super();
 	}
+	componentWillMount() {
+    api.myBookList().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -51,6 +77,18 @@ class Database extends React.Component{
 	constructor(args){
 		super();
 	}
+	componentWillMount() {
+    api.myBookList().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
