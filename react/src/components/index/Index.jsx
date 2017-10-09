@@ -3,6 +3,9 @@ import './index.less'
 import Slider from 'react-slick';
 import {Link} from 'react-router'
 import * as tool from '../../config/tools'
+import * as api from '../../config/api'
+import {message} from 'antd'
+import {getFile_IP } from '../../config/serverIp'
 
 function SampleNextArrow(props) {
   const {onClick} = props
@@ -30,9 +33,23 @@ class Index extends React.Component {
   constructor(args) {
     super();
     this.state = {
-      courseList: tool.getObject(4),
-      articleList: tool.getObject(2)
+      courseList: tool.getObject(0),
+      articleList: tool.getObject(0)
     }
+  }
+  componentWillMount() {
+    api.homeIndex().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+          courseList: data.goodCourseList,
+          articleList: data.goodEssayList
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
   }
 	render() {
     const settings = {
@@ -98,27 +115,26 @@ class Index extends React.Component {
               return(
                   <div key={index} className="am-panel-bd">
                    <div className="pepole-info">
-                     <img alt='img not found' src={require('../../style/images/portrait.png')} />
-                     <p className="info"><span>用户B</span>xxxxxxx分公司</p>
-                     <p className="time">2016.06.15</p>
+                     <img onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
+                     <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
+                     <p className="time">{tool.formatTimestamp(item.createTime)}</p>
                    </div>
                    <a>
                      <article className="am-article">
                        <div className="am-article-hd">
-                         <h1 className="am-article-title">如何用保险保障自己的一生？</h1>
+                         <h1 className="am-article-title">{item.essayTitle}</h1>
                        </div>
                        <div className="am-article-bd">
-                         <p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
+                         <p className="am-article-lead">{item.essayNote}</p>
                        </div>
                      </article>
                    </a>
-                   <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
+                   <p className="like"><span><i className="fa fa-heart-o" />{item.sumCollection}</span><span><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
                  </div>
                 )
             })}
           </div>
         </div>
-
 		)
 	}
 }

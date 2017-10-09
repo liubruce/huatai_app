@@ -118,6 +118,26 @@ export const loginOut = () => {
     });
   });
 }
+/*
+index
+ */
+export const homeIndex = () => {
+    let url = `${api_Ip}/apphome/index`;
+    url = tool.url_format(url, 'myhome', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+        timeout: 8000
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+
 
 
 /*

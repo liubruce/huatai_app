@@ -318,6 +318,12 @@ export const reject = (res) => {
 	}
 }
 
+export const headImageError = (e) => {
+	e.target.src = require('../style/images/portrait.png');
+}
+export const courseChannel = ['内勤', '个险', '团险', '', '银保', '续期'];
+
+
 /*
 get today date
  */

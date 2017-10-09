@@ -1,5 +1,5 @@
-// export const ip = 'http://192.168.5.2';
-// export const api_Ip = `${ip}:8082`;
-// export const lesson_api_IP = `${ip}:8081`;
-
 export const api_Ip = `http://123.127.120.126:31003/api/interworking`;
+export const lesson_api_IP = `http://123.127.120.126:31003/api/lesson`;
+export const getFile_IP = 'http://123.127.120.126:31003';
+export const upload_IP = 'http://123.127.120.126:31003/api/zuul/lesson';
+export const upload_interwork_IP = 'http://123.127.120.126:31003/api/zuul/interworking';
