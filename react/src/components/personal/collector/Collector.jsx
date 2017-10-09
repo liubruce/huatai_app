@@ -16,6 +16,7 @@ class CourseCol extends React.Component{
     api.couCollection().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+            colCourseList:data.myCourseList?data.myCourseList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -34,9 +35,9 @@ class CourseCol extends React.Component{
                                 <Link to='App/Course/CourseDetail'>
                                     <img src={require("../../../style/images/test.png")}/>
                                     <div className="right">
-                                        <p className="time">2017.06.15  17:21</p>
-                                        <h2>课程名称</h2>
-                                        <p className="like"><span><i className="fa fa-heart"></i>12331</span><span><i className="fa fa-thumbs-up"></i>12331</span></p>
+                                        <p className="time">{tool.formatTimestamp(item.recordTime)}</p>
+                                        <h2>{item.courseName}</h2>
+                                        <p className="like"><span><i className="fa fa-heart"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-up"></i>{item.sumCollection}</span></p>
                                     </div>
                                 </Link>
 						   </div>
@@ -58,6 +59,7 @@ class EssayCol extends React.Component{
     api.morecolEssay().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+            colCourseList:data.myEssayColList?data.myEssayColList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -73,63 +75,29 @@ class EssayCol extends React.Component{
                     this.state.colCourseList.map((item,index)=>{
                         return(
                            <div key={index} className="am-panel article-list">
-                                <img src={require("../../../style/images/test.png")}/>
+                                <img src={require("../../../style/images/test.png")}
+                               /// src={item.headPath}
+                                />
 							<div className="cont">
-								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
-								<p className="time">2016.06.15</p>
+								<p className="info"><span>{item.userRealName}</span></p>
+								<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 								<Link to='App/PersonalCenter/ArticleDetail'>
 									<article className="am-article">
 									  	<div className="am-article-hd">
-									   		<h1 className="am-article-title"><div className="jc-icon"></div>如何用保险保障自己的一生？</h1>
+									   		<h1 className="am-article-title"><div className="jc-icon"></div>{item.essayTitle}</h1>
 									  	</div>
 									  	<div className="am-article-bd">
-									    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
+									    	<p className="am-article-lead">{item.essayNote}</p>
 									  	</div>
 									</article>
 								</Link>
-								<p className="like"><span><i className="fa fa-heart"></i>12331</span><span><i className="fa fa-thumbs-up"></i>12331</span></p>
+								<p className="like"><span><i className="fa fa-heart"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-up"></i>{item.sumCollection}</span></p>
 							</div>
 						   </div>
                         )
                     })
                 }
              </div>
-        )
-    }
-}
-class EssayCol1 extends React.Component{
-    constructor(args){
-		super();
-        this.state={
-            ColEssayList:tool.getObject(10)
-        }
-	}
-    render(){
-        return(
-            <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                {
-                    this.state.ColEssayList.map((item,index)=>{
-                        <div key={index} className="am-panel article-list">
-							<img src={require("../../../style/images/test.png")}/>
-							<div className="cont">
-								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
-								<p className="time">2016.06.15</p>
-								<a>
-									<article className="am-article">
-									  	<div className="am-article-hd">
-									   		<h1 className="am-article-title"><div className="jc-icon"></div>如何用保险保障自己的一生？</h1>
-									  	</div>
-									  	<div className="am-article-bd">
-									    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-									  	</div>
-									</article>
-								</a>
-								<p className="like"><span><i className="fa fa-heart"></i>12331</span><span><i className="fa fa-thumbs-up"></i>12331</span></p>
-							</div>
-						</div>
-                    })
-                }
-            </div>
         )
     }
 }

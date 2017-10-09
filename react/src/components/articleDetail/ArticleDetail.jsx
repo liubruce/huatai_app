@@ -1,8 +1,8 @@
 import React from 'react'
 import  './ArticleDetail.less'
-import { message } from 'antd';
-import * as tools from '../../config/tools' 
-
+import * as tool from '../../config/tools'
+import * as api from '../../config/api'
+import {message} from 'antd'
 
 class ArticleDetail extends React.Component{
 	constructor(args){
@@ -10,6 +10,18 @@ class ArticleDetail extends React.Component{
 		this.state={
 		}
 	}
+	 componentWillMount() {
+    api.selectEssay().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
 			<div className="warpper">

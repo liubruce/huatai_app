@@ -6,11 +6,15 @@ import {message} from 'antd'
 class Bookshelf extends React.Component{
 	constructor(args){
 		super();
+		this.state={
+       bookList:[]
+		}
 	}
 	componentWillMount() {
     api.myList().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+					bookList:data.bookList?data.bookList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -22,18 +26,27 @@ class Bookshelf extends React.Component{
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                            <div className="am-panel goods-list">
-							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
-							<div className="goods-info">
-								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
-								<p>出版社: 南海出版公司</p>
-								<p>原作名: Cien años de soledad</p>
-								<p>译者:  范晔</p>
-								<p>出版年: 2011/6</p>
-								<p>页数: 360</p>
-								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">下载</button>
-							</div>
-						    </div>
+							 {
+								 this.state.bookList.map((item,index)=>{
+									 return(
+										 <div key={index} className="am-panel goods-list">
+                     <div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}
+										 src={item.bookPath}
+										 /></div>
+											<div className="goods-info">
+												<p>图书名：{item.bookName}</p>
+												<p>作者：{item.author}</p>
+												<p>出版社: {item.press}</p>
+												<p>原作名: {item.originalAuthor}</p>
+												<p>译者:  {item.translator}</p>
+												<p>出版年: {item.publishYear}</p>
+												<p>页数: {item.pages}</p>
+												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">下载</button>
+											</div>
+											</div>
+									 )
+								 })
+							 }
             </div>
 		)
 	}
@@ -41,11 +54,15 @@ class Bookshelf extends React.Component{
 class MyLibrary extends React.Component{
 	constructor(args){
 		super();
+		this.state={
+			myLibrary:[]
+		}
 	}
 	componentWillMount() {
     api.myBookList().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+					myLibrary:data.bookList?data.bookList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -57,18 +74,27 @@ class MyLibrary extends React.Component{
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                            <div className="am-panel goods-list">
-							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
-							<div className="goods-info">
-								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
-								<p>出版社: 南海出版公司</p>
-								<p>原作名: Cien años de soledad</p>
-								<p>译者:  范晔</p>
-								<p>出版年: 2011/6</p>
-								<p>页数: 360</p>
-								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
-							</div>
-						    </div>
+             {
+								 this.state.myLibrary.map((item,index)=>{
+									 return(
+										 <div key={index} className="am-panel goods-list">
+                     <div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}
+										 src={item.bookPath}
+										 /></div>
+											<div className="goods-info">
+												<p>图书名：{item.bookName}</p>
+												<p>作者：{item.author}</p>
+												<p>出版社: {item.press}</p>
+												<p>原作名: {item.originalAuthor}</p>
+												<p>译者:  {item.translator}</p>
+												<p>出版年: {item.publishYear}</p>
+												<p>页数: {item.pages}</p>
+												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+											</div>
+											</div>
+									 )
+								 })
+							 }
             </div>
 		)
 	}
@@ -76,11 +102,15 @@ class MyLibrary extends React.Component{
 class Database extends React.Component{
 	constructor(args){
 		super();
+		this.state={
+			dataBase:[]
+		}
 	}
 	componentWillMount() {
     api.myBookList().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+					dataBase:data.dataBase?data.bookList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -92,18 +122,27 @@ class Database extends React.Component{
 	render(){
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                            <div className="am-panel goods-list">
-							<div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}/></div>
-							<div className="goods-info">
-								<p>作者：[哥伦比亚] 加西亚·马尔克斯</p>
-								<p>出版社: 南海出版公司</p>
-								<p>原作名: Cien años de soledad</p>
-								<p>译者:  范晔</p>
-								<p>出版年: 2011/6</p>
-								<p>页数: 360</p>
-								<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
-							</div>
-						    </div>
+              {
+								 this.state.dataBase.map((item,index)=>{
+									 return(
+										 <div key={index} className="am-panel goods-list">
+                     <div className="goods-img"><img alt='test' src={require('../../../style/images/test.png')}
+										 src={item.bookPath}
+										 /></div>
+											<div className="goods-info">
+												<p>图书名：{item.bookName}</p>
+												<p>作者：{item.author}</p>
+												<p>出版社: {item.press}</p>
+												<p>原作名: {item.originalAuthor}</p>
+												<p>译者:  {item.translator}</p>
+												<p>出版年: {item.publishYear}</p>
+												<p>页数: {item.pages}</p>
+												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+											</div>
+											</div>
+									 )
+								 })
+							 }
             </div>
 		)
 	}

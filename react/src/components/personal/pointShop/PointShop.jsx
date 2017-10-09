@@ -14,6 +14,7 @@ class PointShop extends React.Component{
     api.pointShopList().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+					pointShopList:data.IntegralShopList?data.IntegralShopList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -28,12 +29,14 @@ class PointShop extends React.Component{
 				{
 					this.state.pointShopList.map((item,index)=>{
 						return(
-                            <div key={index} className="am-panel goods-list">
-								<div className="goods-img"><img src={require('../../../style/images/test.png')}/></div>
+                <div key={index} className="am-panel goods-list">
+								<div className="goods-img"><img src={require('../../../style/images/test.png')}
+							//	src={item.shopCover}
+								/></div>
 								<div className="goods-info">
-									<h3>Lamy恒星系列2017限量款太平洋蓝钢笔</h3>
-									<p><label>兑换积分:</label><span>2800</span></p>
-									<p><label>库存:</label><font>80</font></p>
+									<h3>{item.shopName}</h3>
+									<p><label>兑换积分:</label><span>{item.exchangeIntegral}</span></p>
+									<p><label>库存:</label><font>{item.stock}</font></p>
 									<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
 								</div>
 							</div>

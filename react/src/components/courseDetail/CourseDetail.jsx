@@ -1,9 +1,9 @@
 import React from 'react'
 import  './CourseDetail.less'
-import { message } from 'antd';
-import * as tools from '../../config/tools' 
 import {Link} from 'react-router'
-
+import * as tool from '../../config/tools'
+import * as api from '../../config/api'
+import {message} from 'antd'
 
 class CourseDetail extends React.Component{
 	constructor(args){
@@ -11,7 +11,18 @@ class CourseDetail extends React.Component{
 		this.state={
 		}
 	}
-
+    componentWillMount() {
+    api.couCollection().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render() {
 		return (
 			<div className="warpper">

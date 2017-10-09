@@ -1,6 +1,5 @@
 import React from 'react'
 import './dynamic.less'
-import * as tools from '../../../config/tools' 
 import {Link} from 'react-router'
 import * as api from '../../../config/api'
 import {message} from 'antd'
@@ -16,6 +15,7 @@ class CourseDy extends React.Component{
     api.courseClick().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+          courseList:data.myCourseList?data.myCourseList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -27,17 +27,25 @@ class CourseDy extends React.Component{
     render(){
         return(
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                        <div className="am-panel cur-list">
-							<Link to='App/Course/CourseDetail'>
-								<img src={require('../../../style/images/test.png')}/>
-								<div className="right">
-									<p className="time">2017.06.15  17:21</p>
-									<h2>课程名称</h2>
-									<p className="like"><span><i className="fa fa-heart-o"></i>12331</span><span><i className="fa fa-thumbs-o-up"></i>12331</span></p>
-								</div>
-							</Link>
-						</div>
-               </div>
+                 {
+                   this.state.courseList.map((item,index)=>{
+                     return(
+                         <div key={index} className="am-panel cur-list">
+                          <Link to='App/Course/CourseDetail'>
+                            <img src={require('../../../style/images/test.png')}
+                            //src={item.coursevideoPath}
+                            />
+                            <div className="right">
+                              <p className="time">{tool.formatTimestamp(item.recordTime)}</p>
+                              <h2>{item.courseName}</h2>
+                              <p className="like"><span><i className="fa fa-heart-o"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-o-up"></i>{item.sumCollection}</span></p>
+                            </div>
+                          </Link>
+					            	</div>
+                     )
+                   })
+                 }
+           </div>
         )
     }
 }
@@ -52,6 +60,7 @@ class EssayDy extends React.Component{
     api.moreEssay().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
+          EssayList:data.myEssayDongList?data.myEssayDongList:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -63,25 +72,40 @@ class EssayDy extends React.Component{
     render(){
         return(
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
-						<div className="am-panel article-list">
-							<img src={require('../../../style/images/portrait.png')}/>
-							<div className="cont">
-								<p className="info"><span>用户B</span>xxxxxxx分公司</p>
-								<p className="time">2016.06.15</p>
-								<Link to='App/PersonalCenter/ArticleDetail'>
-									<article className="am-article">
-									  	<div className="am-article-hd">
-									   		<h1 className="am-article-title"><div className="jc-icon"></div>如何用保险保障自己的一生？</h1>
-									  	</div>
-									  	<div className="am-article-bd">
-									    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-									  	</div>
-									</article>
-								</Link>
-								<p className="like"><span><i className="fa fa-heart-o"></i>12331</span><span><i className="fa fa-thumbs-o-up"></i>12331</span></p>
-							</div>
-						</div>
-                    </div> 
+             {
+               this.state.EssayList.map((item,index)=>{
+                 return(
+                   <div className="am-panel article-list" key={index}>
+                     {
+                       item.essayPhotos.map((item,index)=>{
+                         return(
+                               <img key={index} src={require('../../../style/images/portrait.png')}
+                               //src={item.essayPhotoPath}
+                               />
+                         )
+                       })
+                     }
+                      <div className="cont">
+                        <p className="info"><span>{item.userRealName}</span>xxxxxxx分公司</p>
+                        <p className="time">{tool.formatTimestamp(item.createTime)}</p>
+                        <Link to='App/PersonalCenter/ArticleDetail'>
+                          <article className="am-article">
+                              <div className="am-article-hd">
+                                <h1 className="am-article-title"><div className="jc-icon"></div>{item.essayTitle}</h1>
+                              </div>
+                              <div className="am-article-bd">
+                                <p className="am-article-lead">{item.essayNote}</p>
+                              </div>
+                          </article>
+                        </Link>
+                        <p className="like"><span><i className="fa fa-heart-o"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-o-up"></i>{item.sumCollection}</span></p>
+                      </div>
+					      	</div>
+                 )
+
+               })
+             }
+         </div> 
         )
     }
 }

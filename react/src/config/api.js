@@ -258,13 +258,13 @@ export const courseClick = (bM={}) => {
     });
   }
   /**
-   * /essaycenter/morecolessay锋行圈收藏
+   * /appessaycenter/morecolessay锋行圈收藏
   */
    export const morecolEssay = (bM={}) => {
     let body = tool.behavior(bM, 'morecolessay', 'menu');
     return new Promise((resolve, reject) => {
       sfetch.get({
-        url: `${api_Ip}/essaycenter/morecolessay`,
+        url: `${api_Ip}/appessaycenter/morecolessay`,
         timeout: 8000,
         body: body
       }).then((data) => {
@@ -393,3 +393,22 @@ export const courseClick = (bM={}) => {
   /**
    * 积分详情
   */
+  /**
+   * /appessaycenter/selectessay文章详情
+  */
+   export const selectEssay = (bM={}) => {
+    let body = tool.behavior(bM, 'selectEssay', 'button');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appessaycenter/selectessay`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }

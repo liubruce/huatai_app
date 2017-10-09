@@ -16,6 +16,7 @@ class TestCenter extends React.Component{
 		api.unreadInformationlist().then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
+				testList:data.informationList?data.informationList:[]
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -37,7 +38,11 @@ class TestCenter extends React.Component{
 		})
 	}
 	componentWillMount() {
-       this.unreadInformationlist();
+		if(this.state.tab===1){
+           this.unreadInformationlist();
+		}else{
+			this.readInformationlist();
+		}
     }
 	changeTab(tab) {
 		this.setState({
@@ -64,10 +69,10 @@ class TestCenter extends React.Component{
                                       <div key={index} className="am-panel msg-list">
 										<div className="read-sta"><i className="fa fa-envelope"></i></div>
 										<div className="msg-cont">
-											<p className="msg-title">华泰蜂行智能学习平台上线通知</p>
-											<p className="msg-info">华泰蜂行智能学习平台与 2017年XX月XX日，XX时XX分XX秒正式上线。请点击如下连接下载安装。</p>
+											<p className="msg-title">{item.informationTitle}</p>
+											<p className="msg-info">{item.informationNote}</p>
 											<a>www.xxx.com/fengxing/#</a>
-											<p className="time">2017.06.12  14:50</p>
+											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>
 						             </div>
 								)
