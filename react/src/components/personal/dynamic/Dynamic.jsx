@@ -2,10 +2,28 @@ import React from 'react'
 import './dynamic.less'
 import * as tools from '../../../config/tools' 
 import {Link} from 'react-router'
+import * as api from '../../../config/api'
+import {message} from 'antd'
+import * as tool from '../../../config/tools'
 class CourseDy extends React.Component{
     constructor(args){
-		super()
+		super();
+		this.state={
+			courseList:tool.getObject(0)
+		}
 	}
+	componentWillMount() {
+    api.courseClick().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+    }
     render(){
         return(
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -25,8 +43,23 @@ class CourseDy extends React.Component{
 }
 class EssayDy extends React.Component{
 	constructor(args){
-		super()
+		super();
+		this.state={
+			EssayList:tool.getObject(0)
+		}
 	}
+	componentWillMount() {
+    api.moreEssay().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+    }
     render(){
         return(
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
