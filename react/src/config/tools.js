@@ -222,8 +222,8 @@ export const url_parameter = (data) => {
 	return toString;
 	// return toString.replace(/$/, "");
 }
-export const url_format = (url, operationType, behaviorDataType) => {
-	return url + url_parameter(behavior({}, operationType, behaviorDataType));
+export const url_format = (url, operationType, behaviorDataType,body={}) => {
+	return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
 
 export const getAnswer = (num) => {
