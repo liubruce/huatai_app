@@ -123,6 +123,25 @@ index
  */
 export const homeIndex = () => {
     let url = `${api_Ip}/apphome/index`;
+    url = tool.url_format(url, 'appMainPage', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+        timeout: 8000
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+/*
+myhome /appuseranalysis/myhome
+ */
+export const myhome = () => {
+    let url = `${api_Ip}/appuseranalysis/myhome`;
     url = tool.url_format(url, 'myhome', 'menu');
     return new Promise((resolve, reject) => {
       sfetch.get({
@@ -137,7 +156,25 @@ export const homeIndex = () => {
       });
     });
   }
-
+/*
+article 
+ */
+export const essaylist = () => {
+    let url = `${api_Ip}/appessaycenter/essaylist`;
+    url = tool.url_format(url, 'essaylist', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: url,
+        timeout: 8000
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
 
 
 /*

@@ -1,46 +1,61 @@
 import React from 'react'
 import './article.less'
-import * as tool from '../../config/tools'
 import { message,Spin } from 'antd';
 import $ from 'jquery'
 import {Link} from 'react-router'
+import * as api from '../../config/api'
+import * as tool from '../../config/tools'
+import {getFile_IP } from '../../config/serverIp'
 class Article extends React.Component {
 	constructor(args) {
 		super()
     this.state = {
-      articleList:tool.getObject(4),
+      essayList:tool.getObject(0),
       loading:true
     }
 	}
-  add() {
-    if (this.state.articleList.length > 10) {
-      message.error('没有数据了', 3);
-      this.setState({
-        loading: false
-      })
-      return;
-    }
-    setTimeout(() => {
-      this.setState({
-        articleList: this.state.articleList.concat(this.state.articleList)
-      })
-    }, 500)
-  }
-  componentDidMount() {
-    let method = () => {
-      this.add();
-    }
-    $(window).on('scroll.article', function() {
-      var scrollTop = $(this).scrollTop();　　
-      var scrollHeight = $(document).height();　　
-      var windowHeight = $(this).height();　　
-      if (scrollTop + windowHeight === scrollHeight) {　　
-        method();　
+  // add() {
+  //   if (this.state.essayList.length > 10) {
+  //     message.error('没有数据了', 3);
+  //     this.setState({
+  //       loading: false
+  //     })
+  //     return;
+  //   }
+  //   setTimeout(() => {
+  //     this.setState({
+  //       essayList: this.state.essayList.concat(this.state.essayList)
+  //     })
+  //   }, 500)
+  // }
+  // componentDidMount() {
+  //   let method = () => {
+  //     this.add();
+  //   }
+  //   $(window).on('scroll.article', function() {
+  //     var scrollTop = $(this).scrollTop();　　
+  //     var scrollHeight = $(document).height();　　
+  //     var windowHeight = $(this).height();　　
+  //     if (scrollTop + windowHeight === scrollHeight) {　　
+  //       method();　
+  //     }
+  //   });
+  // }
+  // componentWillUnmount() {
+  //   $(window).off('.article');
+  // }
+  componentWillMount() {
+    api.essaylist().then((data)=>{
+      if (data.result === 'RC100') {
+        this.setState({
+          essayList:data.essayList
+        })
+      } else {
+        message.error(data.errMsg, 3);
       }
-    });
-  }
-  componentWillUnmount() {
-    $(window).off('.article');
+    }, (res) => {
+      tool.reject(res);
+    })
   }
 	render(){
 		return(
@@ -48,35 +63,39 @@ class Article extends React.Component {
      <div className="warpper">
         <div className="am-panel">
 
-        {this.state.articleList.map((item,index)=>{
+        {this.state.essayList.map((item,index)=>{
           return(
               <div className="article-list" key={index} >
-                <img alt='test' src={require('../../style/images/portrait.png')} />
+                <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
                 <div className="cont">
-                  <p className="info"><span>用户B</span>xxxxxxx分公司</p>
-                  <p className="time">2016.06.15</p>
-                  <Link to='App/PersonalCenter/ArticleDetail'>
+                  <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
+                  <p className="time">{tool.formatTimestamp(item.createTime)}</p>
+                  <Link to='/App/PersonalCenter/ArticleDetail'>
                     <article className="am-article">
                       <div className="am-article-hd">
-                        <h1 className="am-article-title"><div className="jc-icon" />如何用保险保障自己的一生？</h1>
+                        <h1 className="am-article-title">
+                        {item.goodEssay === '1'?<div className="jc-icon" />:null}
+                        {item.essayTitle}</h1>
                       </div>
                       <div className="am-article-bd">
-                        <p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
+                        <p className="am-article-lead">{item.essayNote}</p>
                         <ul className="am-avg-sm-3 am-thumbnails">
-                          <li><img alt='test' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
-                          <li><img alt='test' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-                          <li><img alt='test' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+                        {item.essayPhotos.map((img,index)=>{
+                          return(
+                             <li key={index} ><img alt='test' src={getFile_IP + '/downfile/' + img.essayPhotoPath} /></li>
+                            )
+                        })}
                         </ul>
                       </div>
                     </article>
                   </Link>
-                  <p className="like"><span><i className="fa fa-heart-o" />12331</span><span><i className="fa fa-thumbs-o-up" />12331</span></p>
+                  <p className="like"><span><i className="fa fa-heart-o" />{item.sumCollection}</span><span><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
                 </div>
               </div>
             )
         })}
 
-        <div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>
+        {/*<div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>*/}
 
         </div>
       </div>
