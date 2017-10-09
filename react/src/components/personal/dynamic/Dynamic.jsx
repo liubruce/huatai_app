@@ -29,7 +29,7 @@ class EssayDy extends React.Component{
 	}
     render(){
         return(
-           <div data-tab-panel-1 className="am-tab-panel tab">
+           <div data-tab-panel-1 className="am-tab-panel am-active tab">
 						<div className="am-panel article-list">
 							<img src={require('../../../style/images/portrait.png')}/>
 							<div className="cont">
@@ -77,7 +77,9 @@ class Dynamic extends React.Component{
                         </li>
 				   </ul>
                    <div className="am-tabs-bd">
-					 <CourseDy/>
+					 {
+                            this.state.tab===1?<CourseDy/>:<EssayDy/>
+                     }
                    </div>
                </div>
 			</div>
