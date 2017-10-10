@@ -3,51 +3,56 @@ import  './ArticleDetail.less'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
+import {getFile_IP } from '../../config/serverIp'
 
 class ArticleDetail extends React.Component{
-	constructor(args){
+	constructor(args) {
 		super()
-		this.state={
+		this.state = {
+			essay:{},
+			essayPhotos:[]
 		}
 	}
-	 componentWillMount() {
-    api.selectEssay().then((data) => {
-      if (data.result === 'RC100') {
-        this.setState({
-        })
-      } else {
-        message.error(data.errMsg, 3);
-      }
-    }, (res) => {
-      tool.reject(res);
-    })
-  }
+	componentWillMount() {
+		let body = {
+			essayId: this.props.params.id
+		};
+		api.selectEssay(body).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					essay: data.essay,
+					essayPhotos:data.essay.essayPhotos
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
+		}, (res) => {
+			tool.reject(res);
+		})
+	}
 	render(){
+		let essay = this.state.essay;
 		return(
 			<div className="warpper">
 				<div className="am-panel article-details">
 					<article className="am-article">
 					  	<div className="am-article-hd">
-					   		<h1 className="am-article-title">如何用保险保障自己的一生？</h1>
-					   		<p className="like">2017.06.18 15:50</p>
+					   		<h1 className="am-article-title">{essay.essayTitle}</h1>
+					   		<p className="like">{tool.formatTimestamp(essay.createTime)}</p>
 					  	</div>
 					  	<div className="am-article-bd">
-					    	<p className="am-article-lead">希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-					    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-					    	<p className="am-article-lead">希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-					    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
-					    	<p className="am-article-lead">我写这回答的目的是希望各位有幸看到本文的朋友能抽出您人生中的30分钟尽量一字不拉地读完本…</p>
+					    	<p className="am-article-lead">{essay.essayNote}</p>
 					    	<ul className="am-avg-sm-3 am-thumbnails">
-								<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
-								<li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-								<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+					    	      {this.state.essayPhotos.map((img,index)=>{
+                                    return(
+                                       <li key={index} ><img alt='test' src={getFile_IP + '/downfile/' + img.essayPhotoPath} /></li>
+                                      )
+                                  })}
 							</ul>
 					  	</div>
 					</article>
 				</div>
 			</div>
-
-
 		)
 	}
 

@@ -15,11 +15,15 @@ class Title extends React.Component {
 			title='故事线'
 		}
 		if (pathname.indexOf('/PersonalCenter') !== -1) {
-			title='我的'
+			title='我的名片'
 		}
 		if (pathname.indexOf('/MyArticle') !== -1) {
 			title='我的蜂行圈'
 		}
+		if (pathname.indexOf('/ArticleDetail') !== -1) {
+			title='课程详情'
+		}
+		
 		
 		this.setState({
 			title

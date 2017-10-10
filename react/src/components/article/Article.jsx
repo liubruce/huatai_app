@@ -79,7 +79,7 @@ class Article extends React.Component {
                 <div className="cont">
                   <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
                   <p className="time">{tool.formatTimestamp(item.createTime)}</p>
-                  <Link to='/App/PersonalCenter/ArticleDetail'>
+                  <Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
                     <article className="am-article">
                       <div className="am-article-hd">
                         <h1 className="am-article-title">
