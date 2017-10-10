@@ -57,12 +57,12 @@ class Login extends React.Component {
           <h6>Huatai Insurance Group</h6>
           <p><input type="text" defaultValue='13920001354' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
           <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
-          <div className="am-g">
+{/*          <div className="am-g">
             <label className="am-checkbox am-warning">
               <input type="checkbox" defaultChecked="checked" defaultValue data-am-ucheck />记住密码
             </label>
             <a className="floatR">找回密码</a>
-          </div>
+          </div>*/}
           <button className="btn-login" type='submit' >登 录</button>
         </div>
       </form>
