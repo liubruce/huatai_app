@@ -9,7 +9,11 @@ class Menu extends React.Component {
 		super()
 		this.state = {
 			menuItems: [],
-      user:{}
+      user:{
+        userRealName:'default',
+        vipGradName:'default',
+        seifInformation:'default'
+      }
 		}
 	}
   // test() {
@@ -55,7 +59,6 @@ class Menu extends React.Component {
   //   });
   // }
   componentWillMount() {
-        // this.test();return;
     if (tool.user === null || tool.user.menu.length === 0) {
       return;
     }
@@ -83,6 +86,17 @@ class Menu extends React.Component {
     })
 
   }
+  sign(){
+    api.sign().then((data)=>{
+      if (data.result === 'RC100') {
+
+      }else{
+         message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
     let user = this.state.user;
 		return(
@@ -93,7 +107,7 @@ class Menu extends React.Component {
             <p className="name">{user.userRealName}</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>
-          <div className="sign"><i className="fa fa-calendar-check-o" /></div>
+          <div onClick={()=>this.sign()} className="sign"><i className="fa fa-calendar-check-o" /></div>
           <p>{user.seifInformation}</p>
         </div>
         <ul className="am-list am-list-border list-in">

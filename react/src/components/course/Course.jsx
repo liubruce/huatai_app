@@ -1,13 +1,18 @@
 import React from 'react'
 import './course.less'
-import * as tool from '../../config/tools'
 import {Link} from 'react-router'
+import { message , Spin } from 'antd';
+import * as api from '../../config/api'
+import * as tool from '../../config/tools'
+import {getFile_IP } from '../../config/serverIp'
+
 class Course extends React.Component {
 	constructor(args) {
 		super()
     this.state = {
       tab : 1,
-      courseList:tool.getObject(4)
+      courseList:[],
+      loading:true
     }
 	}
   changeTab(tab){
@@ -15,10 +20,26 @@ class Course extends React.Component {
       tab
     })
   }
+  componentWillMount() {
+    this.show();
+  }
+  show() {
+    api.appStudentSelectCoursePager().then((data) => {
+      if (data.result === 'RC100') {
+
+      } else {
+        message.error(data.errMsg, 3);
+      }
+      tool.loading(this, false);
+    }, (res) => {
+      tool.loading(this, false);
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
-
              <div className="warpper">
+             <Spin spinning={this.state.loading} tip="加载列表中...">
                 <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                   <ul className="am-tabs-nav am-cf nav">
                     <li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)} >
@@ -38,7 +59,14 @@ class Course extends React.Component {
                            <div data-tab-panel-0 className="am-tab-panel am-active tab">
                              <div className="am-panel cur-list">
                                <Link to='App/Course/CourseDetail'>
-                                 <img alt='test' src={require('../../style/images/test.png')} />
+                                 <video 
+                                 src={getFile_IP+'/downfile/'+item.coursevideoPath}   
+                                 width="100%"  
+                                 height="100%" 
+                                 className="v-img"
+                                 >
+                                 您的浏览器不支持 video 标签。
+                                </video>
                                  <div className="right">
                                    <p className="time">2017.06.15  17:21</p>
                                    <h2>课程名称</h2>
@@ -50,8 +78,8 @@ class Course extends React.Component {
                          </div>
                       )
                   })}
-
                 </div>
+                </Spin>
               </div>
 
 			)

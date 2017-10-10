@@ -19,27 +19,27 @@ class App extends Component {
 			return;
 		}
 		if (!tool.isPc) {
-			this.setState({
-				loading: true
-			})
+			// this.setState({
+			// 	loading: true
+			// })
 			tool.info().then((data) => {
-				this.setState({
-					loading: false
-				})
+				// this.setState({
+				// 	loading: false
+				// })
 			}, () => {
-				this.setState({
-					loading: false
-				})
+				// this.setState({
+				// 	loading: false
+				// })
 			})
 		} else {
-			this.setState({
-				loading: true
-			});
-			setTimeout(() => {
-				this.setState({
-					loading: false
-				});
-			}, 500)
+			// this.setState({
+			// 	loading: true
+			// });
+			// setTimeout(() => {
+			// 	this.setState({
+			// 		loading: false
+			// 	});
+			// }, 500)
 		}
 	}
 	render() {
