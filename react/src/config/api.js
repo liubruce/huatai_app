@@ -159,9 +159,9 @@ export const myhome = () => {
   /*
   article 
    */
-export const essaylist = () => {
+export const essaylist = (body) => {
   let url = `${api_Ip}/appessaycenter/essaylist`;
-  url = tool.url_format(url, 'essaylist', 'menu');
+  url = tool.url_format(url, 'essaylist', 'menu',body);
   return new Promise((resolve, reject) => {
     sfetch.get({
       url: url,
@@ -200,6 +200,25 @@ coursetop
 export const coursetop = (body) => {
   let url = `${api_Ip}/apptop/coursetop`;
   url = tool.url_format(url, 'coursetop', 'menu',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000,
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
+/appuseranalysis/sign
+ */
+export const sign = () => {
+  let url = `${api_Ip}/apptop/coursetop`;
+  url = tool.url_format(url, 'sign', 'button');
   return new Promise((resolve, reject) => {
     sfetch.get({
       url: url,

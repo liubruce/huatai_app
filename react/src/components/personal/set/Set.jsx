@@ -5,8 +5,6 @@ import {
   Modal
 } from 'antd';
 const confirm = Modal.confirm;
-
-
 class Set extends React.Component {
 	constructor(args) {
 		super()
@@ -15,7 +13,7 @@ class Set extends React.Component {
     if (!tool.isPc) {
       window.open(tool.back_url)
     }
-    // tool.back();
+    tool.back();
   }
   exit() {
     confirm({
@@ -25,7 +23,7 @@ class Set extends React.Component {
         if (!tool.isPc) {
           window.open(tool.exit_url)
         }
-        // tool.exit();
+        tool.exit();
       },
       onCancel() {
 
@@ -33,17 +31,9 @@ class Set extends React.Component {
     });
   }
 	render() {
-
-
 		return (
 	   <div className="warpper">
         <ul className="am-list am-list-border list-in">
-{/*          <li>
-            <a><i className="icon icon-set-up" />修改密码<i className="fa fa-angle-right floatR" /></a>
-          </li>
-          <li>
-            <a><i className="icon icon-set-up" />系统升级<i className="fa fa-angle-right floatR" /></a>
-          </li>*/}
           <li>
             <a onClick={()=>this.back()} ><i className="icon icon-jfdetils" />返回首页<i className="fa fa-angle-right floatR" /></a>
           </li>

@@ -11,7 +11,7 @@ class Course extends React.Component {
 		super()
     this.state = {
       tab : 1,
-      courseList:tool.getObject(0),
+      courseList:[],
       loading:true
     }
 	}

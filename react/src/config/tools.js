@@ -193,6 +193,7 @@ export const checkldToken = () => {
 }
 
 export const behavior = (body, operationType, behaviorDataType) => {
+	if(user === null){hashHistory.push('/Login');return;}
 	return Object.assign(body, {
 		operationTypes: operationType,
 		behaviorDataType: behaviorDataType,

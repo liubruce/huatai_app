@@ -4,12 +4,32 @@ import {browserHistory} from 'react-router'
 class Title extends React.Component {
 	constructor(args) {
 		super()
+		this.state = {
+			title:''
+		}
+	}
+	componentWillMount() {
+		let pathname = this.props.pathname;
+		let title:'标题';
+		if (pathname.indexOf('/StoryLine') !== -1) {
+			title='故事线'
+		}
+		if (pathname.indexOf('/PersonalCenter') !== -1) {
+			title='我的'
+		}
+		if (pathname.indexOf('/MyArticle') !== -1) {
+			title='我的蜂行圈'
+		}
+		
+		this.setState({
+			title
+		})
 	}
 	render(){
 		return(
 		     <header className="header">
 		     	<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-		     	<h1>我的</h1>
+		     	<h1>{this.state.title}</h1>
 		     </header>
 			)
 	}
