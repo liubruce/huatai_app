@@ -12,7 +12,7 @@ class CourseDy extends React.Component{
 		}
 	}
 	componentWillMount() {
-    api.courseClick().then((data) => {
+    api.courseClick({pageno:1}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
           courseList:data.myCourseList?data.myCourseList:[]

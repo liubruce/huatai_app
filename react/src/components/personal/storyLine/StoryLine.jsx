@@ -1,9 +1,28 @@
 import React from 'react'
 import './storyLine.less'
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
+import {message} from 'antd'
 class StoryLine extends React.Component{
 	constructor(args){
-		super()
+		super();
+		this.state={
+			storyData:[]
+		}
 	}
+	componentWillMount() {
+    api.selectuserDetail().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+	      storyData:data.data?data.data:[]
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
 	render(){
 		return(
 		    <div className="story-box">

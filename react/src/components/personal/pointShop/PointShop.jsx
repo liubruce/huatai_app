@@ -7,7 +7,7 @@ class PointShop extends React.Component{
 	constructor(args){
 		super();
 		this.state={
-			pointShopList:tool.getObject(10)
+			pointShopList:tool.getObject(0)
 		}
 	}
 	componentWillMount() {

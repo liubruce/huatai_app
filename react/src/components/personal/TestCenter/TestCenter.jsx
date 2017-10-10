@@ -9,7 +9,7 @@ class TestCenter extends React.Component{
 		super()
 		this.state = {
            tab:1,
-		   testList:tool.getObject(10),
+		   testList:tool.getObject(0),
 		}
 	}
 	unreadInformationlist(){

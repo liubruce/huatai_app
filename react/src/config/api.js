@@ -412,3 +412,61 @@ export const courseClick = (bM={}) => {
       });
     });
   }
+  /**
+   * /appuserintgrallog/applookintegraldetails个人积分详情
+  */
+   export const integralDetails = (bM={}) => {
+    let body = tool.behavior(bM, 'lookIntegraldetail', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appuserintgrallog/applookintegraldetails`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+   /**
+   * /appuserintgrallog/appfuzzyintgraldetails积分详情查询
+  */
+  export const fuzzyIntgral = (bM={}) => {
+    let body = tool.behavior(bM, 'lookIntegraldetail', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appuserintgrallog/appfuzzyintgraldetails`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+  /**
+   * /appstoryline/appselectuserdetail故事线
+  */
+   export const selectuserDetail = (bM={}) => {
+    let body = tool.behavior(bM, 'storyline', 'menu');
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/appstoryline/appselectuserdetail`,
+        timeout: 8000,
+        body: body
+      }).then((data) => {
+        if (data.ok) {
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+  }
+ 

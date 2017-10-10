@@ -8,7 +8,7 @@ class CourseCol extends React.Component{
     constructor(args){
 		super()
         this.state={
-            colCourseList:tool.getObject(10),
+            colCourseList:tool.getObject(0),
         }
 	}
 
@@ -52,7 +52,7 @@ class EssayCol extends React.Component{
     constructor(args){
 		super()
         this.state={
-            colCourseList:tool.getObject(10),
+            colCourseList:tool.getObject(0),
         }
 	}
     componentWillMount() {
