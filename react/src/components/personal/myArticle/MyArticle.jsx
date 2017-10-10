@@ -8,7 +8,7 @@ class UserCard extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
-			 tab:null,
+			 tab:'',
 			 essayList:[]
 		}
 	}
@@ -40,7 +40,7 @@ class UserCard extends React.Component{
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
-					<li className={this.state.tab===null?'am-active':null} onClick={()=>this.changeTab(null)}>
+					<li className={this.state.tab===''?'am-active':null} onClick={()=>this.changeTab('')}>
 						<a >已发布</a>
 					</li>
 					<li className={this.state.tab===3?'am-active':null} onClick={()=>this.changeTab(3)}>
@@ -57,7 +57,7 @@ class UserCard extends React.Component{
 									this.state.essayList.map((item,index)=>{
 										return(
 											<div key={index} className="am-panel-bd">
-												<Link to='App/PersonalCenter/ArticleDetail'>
+												<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
 														<article className="am-article">
 															<div className="am-article-hd">
 																<h1 className="am-article-title">{item.essayTitle}</h1>

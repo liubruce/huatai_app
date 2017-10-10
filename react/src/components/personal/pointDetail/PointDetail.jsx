@@ -9,18 +9,29 @@ class PointDetail extends React.Component{
 	constructor(args){
 		super();
 		this.state = {
-		    time:new Date(new Date()-1000*60*60*24*7),
+		    time:'',
+				//new Date(new Date()-1000*60*60*24*7),
  	    	isOpen: false,
 				isOpenEND:false,
-	    	dataDetailList:[],
-				timeEND:new Date()
+	    	dataDetailList:{},
+				dataDetailLists:[],
+				timeEND:'',
+				timeDefalut:new Date()
+				//new Date()
 	    }
 	}
 	fuzzyIntgral(){
-		api.fuzzyIntgral({}).then((data) => {
+		let startTime='',endTime='';
+		if(this.state.time!==''){
+			startTime=tool.formatTimestamp(this.state.time,'y/m/d');
+		}
+		if(this.state.timeEND!==''){
+			endTime=tool.formatTimestamp(this.state.timeEND,'y/m/d');
+		}
+		api.fuzzyIntgral({startTime:startTime,endTime:endTime}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					dataDetailList:data.data
+					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -33,7 +44,8 @@ class PointDetail extends React.Component{
     api.integralDetails({}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					dataDetailList:data.data
+					dataDetailList:data?data:{},
+					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[]
         })
       } else {
         message.error(data.errMsg, 3);
@@ -43,7 +55,7 @@ class PointDetail extends React.Component{
     })
 	}
   componentWillMount() {
-		this.fuzzyIntgral();
+	//	this.fuzzyIntgral();
 		this.integralDetails();
   }
 	handleClick = () => {
@@ -64,9 +76,12 @@ class PointDetail extends React.Component{
 	handleSelectEND = (time) => {
 		this.setState({ timeEND:time, isOpenEND: false });
 	}
-
+  searchDetail(){
+		this.fuzzyIntgral();
+	}
 	render(){
 		let dataDetailList=this.state.dataDetailList;
+		let dataDetailLists=this.state.dataDetailLists;
 		let differencePercentage=dataDetailList.differencePercentage?dataDetailList.differencePercentage:0
 		return(
 				<div className="warpper">
@@ -93,21 +108,28 @@ class PointDetail extends React.Component{
 							<p>开始日期应小于结束日期！</p>
 						</div>
 						<div className="datepicker1">
-							<label	type="button" className="am-margin-right"	onClick={this.handleClick}>开始日期</label><span id="my-startDate">{tool.formatTimestamp(this.state.time,'y-m-d')}</span>
-							<DatePicker value={this.state.time} theme="ios" isOpen={this.state.isOpen}  onSelect={this.handleSelect} onCancel={this.handleCancel} style={{width:'100%'}}/>
+							<label	type="button" className="am-margin-right"	onClick={this.handleClick}>开始日期</label><span id="my-startDate">{this.state.time===''?'年-月-日':tool.formatTimestamp(this.state.time,'y-m-d')}</span>
+							<DatePicker value={this.state.time===''?this.state.timeDefalut:this.state.time} theme="ios" isOpen={this.state.isOpen}  onSelect={this.handleSelect} onCancel={this.handleCancel} style={{width:'100%'}}/>
 						</div>
 						<div className="datepicker1">
-							<label	type="button" className="am-margin-right"	onClick={this.handleClick}>结束日期</label><span id="my-endDate">{tool.formatTimestamp(this.state.timeEND,'y-m-d')}</span>
-							<DatePicker value={this.state.timeEND} theme="ios" isOpen={this.state.isOpenEND}  onSelect={this.handleSelectEND} onCancel={this.handleCancelEND} style={{width:'100%'}}/>
+							<label	type="button" className="am-margin-right"	onClick={this.handleClickEND}>结束日期</label><span id="my-endDate">{this.state.timeEND===''?'年-月-日':tool.formatTimestamp(this.state.timeEND,'y-m-d')}</span>
+							<DatePicker value={this.state.timeEND===''?this.state.timeDefalut:this.state.timeEND} theme="ios" isOpen={this.state.isOpenEND}  onSelect={this.handleSelectEND} onCancel={this.handleCancelEND} style={{width:'100%'}}/>
 						</div>
-						<button type="button" className="btn-query">查询</button>
+						<button type="button" className="btn-query" onClick={this.searchDetail.bind(this)}>查询</button>
 					</div>
-					<div className="am-panel jf-list">
-						<p className="jf-tag">获得</p>
-						<p className="time">2017.06.10  12:00</p>
-						<p className="jf-list-cont">您通过在线学习，获得10点等级积分和用积分。当前等级积分X点，可用积分Y点</p>
+					
+						{
+							dataDetailLists.map((item,index)=>{
+								return(
+                  <div className="am-panel jf-list">
+										<p className="jf-tag">{item.integralChangType}</p>
+					        	<p className="time">{tool.formatTimestamp(item.integralChangTime)}</p>
+					        	<p className="jf-list-cont">{item.integralChangInfo}</p>
+									</div>
+								)
+							})
+						}
 					</div>
-				</div> 
 		)
 	}
 

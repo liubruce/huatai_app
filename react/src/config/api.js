@@ -512,7 +512,7 @@ export const courseClick = (bM={}) => {
    * /appuserintgrallog/appfuzzyintgraldetails积分详情查询
   */
   export const fuzzyIntgral = (bM={}) => {
-    let body = tool.behavior(bM, 'lookIntegraldetail', 'menu');
+    let body = tool.behavior(bM, 'fuzzyIntgraldetail', 'button');
     return new Promise((resolve, reject) => {
       sfetch.get({
         url: `${api_Ip}/appuserintgrallog/appfuzzyintgraldetails`,

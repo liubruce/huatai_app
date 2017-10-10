@@ -23,6 +23,27 @@ class Title extends React.Component {
 		if (pathname.indexOf('/ArticleDetail') !== -1) {
 			title='课程详情'
 		}
+		if (pathname.indexOf('/NewsCenter') !== -1) {
+			title='任务中心'
+		}
+		if (pathname.indexOf('/Dynamic') !== -1) {
+			title='动态'
+		}
+		if (pathname.indexOf('/Collector') !== -1) {
+			title='收藏夹'
+		}
+		if (pathname.indexOf('/Library') !== -1) {
+			title='图书馆'
+		}
+		if (pathname.indexOf('/PointShop') !== -1) {
+			title='积分商城'
+		}
+		if (pathname.indexOf('/PointDetail') !== -1) {
+			title='积分详情'
+		}
+		if (pathname.indexOf('/Set') !== -1) {
+			title='设置'
+		}
 		
 		
 		this.setState({

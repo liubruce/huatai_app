@@ -29,6 +29,7 @@ class TestCenter extends React.Component{
 		api.readInformationlist().then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
+				testList:data.informationList?data.informationList:[]
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -47,6 +48,12 @@ class TestCenter extends React.Component{
 	changeTab(tab) {
 		this.setState({
 			tab: tab
+		},()=>{
+		if(tab===1){
+           this.unreadInformationlist();
+		}else{
+			this.readInformationlist();
+		}
 		})
 	}
 	render(){
