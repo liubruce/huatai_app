@@ -176,6 +176,25 @@ export const essaylist = (body) => {
   });
 }
 /*
+/appessaycenter/cashessay
+ */
+export const cashessay = (body) => {
+  let url = `${api_Ip}/appessaycenter/cashessay`;
+  url = tool.url_format(url, 'cashessay', 'button',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
 /apptop/studenttop
  */
 export const studenttop = (body) => {

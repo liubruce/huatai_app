@@ -114,6 +114,7 @@ class Index extends React.Component {
             {this.state.articleList.map((item,index)=>{
               return(
                   <div key={index} className="am-panel-bd">
+                   
                    <div className="pepole-info">
                      <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
                      <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
@@ -130,6 +131,7 @@ class Index extends React.Component {
                      </article>
                    </a>
                    <p className="like"><span><i className="fa fa-heart-o" />{item.sumCollection}</span><span><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
+               
                  </div>
                 )
             })}

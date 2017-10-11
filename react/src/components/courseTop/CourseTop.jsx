@@ -69,9 +69,9 @@ class CourseTop extends React.Component{
 					   		<div key={index} className="am-panel rank-list">
 							    <img className='head_img' src={getFile_IP + '/downfile/' + item.headPath} onError={(e) => tool.headImageError(e)} alt='img' />
 							    <div className="rank-info">
-							    	<p>&lceil;<span>{item.userRealName}</span>&rfloor;<lable>{item.courseName}</lable>
+							    	<div>&lceil;<span>{item.userRealName}</span>&rfloor;<lable>{item.courseName}</lable>
 							    	{item.goodCourse === '1'?<div className="jc-icon" />:null}
-							    	</p>
+							    	</div>
 							    	<span>{tool.formatTimestamp(item.createTime)}</span>
 							    </div>
 							    <Switch condition={index+1}>
