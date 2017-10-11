@@ -13,8 +13,8 @@ export const sino_cordova_checkApp = () => {
 	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 	// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
 	// IOS UA为 SINO_IOS_APP/1.0
-	var reData = {};
-	var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
+	let reData = {};
+	let match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
 	if (match) {
 		reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
 		reData.version = match[2];
@@ -88,11 +88,11 @@ export const getUserCode = () => {
 export const execSQL = (sql, value) => {
 	log(sql);
 	return new Promise((resolve, reject) => {
-		var db = window.SQLitePlugin.sqlitePlugin.openDatabase({
+		let db = window.SQLitePlugin.sqlitePlugin.openDatabase({
 			name: 'HuaTai.db',
 			location: 'default'
 		});
-		var sqlValue = [];
+		let sqlValue = [];
 		if (value !== "") {
 			sqlValue = value;
 		}
@@ -206,14 +206,31 @@ export const behavior = (body, operationType, behaviorDataType) => {
 		operationLocation: '',
 	})
 }
+export const getQueryString =(name)=> {
+	let url = window.location.hash.slice(window.location.hash.indexOf('?'),window.location.hash.length);
+    let qs = url.substr(1), // 获取url中"?"符后的字串   
+        args = {}, // 保存参数数据的对象
+        items = qs.length ? qs.split("&") : [], // 取得每一个参数项,
+        item = null,
+        len = items.length;
 
+    for(let i = 0; i < len; i++) {
+        item = items[i].split("=");
+        let name = decodeURIComponent(item[0]),
+            value = decodeURIComponent(item[1]);
+        if(name) {
+            args[name] = value;
+        }
+    }
+    return args[name]===undefined ? '':args[name];
+}
 export const url_parameter = (data) => {
 
-	var toString = "";
-	for (var key in data) {
-		var obj = data[key];
+	let toString = "";
+	for (let key in data) {
+		let obj = data[key];
 		if (Array.isArray(obj)) {
-			var arrayString = obj.join(",");
+			let arrayString = obj.join(",");
 			toString += key + "=" + arrayString + "&";
 		} else {
 			toString += key + "=" + data[key] + "&";

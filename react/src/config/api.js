@@ -176,6 +176,25 @@ export const essaylist = (body) => {
   });
 }
 /*
+/appessaymanager/operateessay
+ */
+export const operateessay = (body) => {
+  let url = `${api_Ip}/appessaycenter/operateessay`;
+  url = tool.url_format(url, 'operateEssay', 'button',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
 /appessaycenter/cashessay
  */
 export const cashessay = (body) => {

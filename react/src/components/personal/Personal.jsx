@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import Title from './Title.jsx'
 import './personal.less'
+import Footer from '../footer/Footer.jsx'
 class Personal extends Component {
   constructor(args) {
     super()
@@ -8,7 +9,7 @@ class Personal extends Component {
       showTitle:true
     }
   }
-  checkPage(pathname) {
+  checkUrl(pathname) {
     let showTitle = true;
     if (pathname === '/Personal') {
       showTitle = false;
@@ -18,10 +19,10 @@ class Personal extends Component {
     })
   }
   componentWillMount() {
-    this.checkPage(this.props.location.pathname);
+    this.checkUrl(this.props.location.pathname);
   }
   componentWillReceiveProps(nextProps) {
-    this.checkPage(nextProps.location.pathname);
+    this.checkUrl(nextProps.location.pathname);
   }
   render() {
     return (
@@ -30,9 +31,9 @@ class Personal extends Component {
 
           {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
 
-          <div>
              {this.props.children}
-          </div>
+
+          <Footer pathname={this.props.location.pathname} />
 
       </div>
 
