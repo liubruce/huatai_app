@@ -2,7 +2,6 @@ import React from 'react'
 import './article.less'
 import { message,Spin } from 'antd';
 import $ from 'jquery'
-import {Link} from 'react-router'
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
 import {getFile_IP } from '../../config/serverIp'
@@ -49,7 +48,8 @@ class Article extends React.Component {
   show(){
     tool.loading(this, true);
     let body = {
-      pageno:this.state.pageNo
+      pageno:this.state.pageNo,
+      search:tool.getQueryString('search')
     }
     api.essaylist(body).then((data)=>{
       if (data.result === 'RC100') {
@@ -68,6 +68,9 @@ class Article extends React.Component {
     })
   }
   componentWillMount() {
+    this.show();
+  }
+  componentWillReceiveProps(nextProps) {
     this.show();
   }
   jump(item) {
