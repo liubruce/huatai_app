@@ -23,8 +23,8 @@ class UserCard extends React.Component{
        api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				//essayList:data.essayList?data.essayList:[]
-				essayList:tool.getObject(10)
+				essayList:data.essayList?data.essayList:[]
+				//essayList:tool.getObject(10)
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -72,7 +72,7 @@ class UserCard extends React.Component{
 												{
 													item.checkState===2||item.checkState==='2'?
 													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
-													:<Link  to={'/App/PubArticle/1'} className="edit"><i className="fa fa-edit"></i></Link>
+													:null
 												}
 												<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
 														<article className="am-article">
