@@ -305,6 +305,9 @@ export const formatTimestamp = (timestamp, type) => {
 	if (type === 'y-m-d') {
 		return year + "-" + month + "-" + day;
 	}
+	if (type === 'y/m/d'){
+		return year + "/" + month + "/" + day;
+	}
 	if (type === 'y-m-d h-m') {
 		return year + "-" + month + "-" + day + " " + hour + ":" + minute;
 	}
