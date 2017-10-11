@@ -565,4 +565,7 @@ export const courseClick = (bM={}) => {
       });
     });
   }
+  /**
+   * 
+  */
  

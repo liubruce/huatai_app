@@ -23,7 +23,8 @@ class UserCard extends React.Component{
        api.essayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				essayList:data.essayList?data.essayList:[]
+				//essayList:data.essayList?data.essayList:[]
+				essayList:tool.getObject(10)
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -37,7 +38,7 @@ class UserCard extends React.Component{
 	}
 	render(){
 		return(
-			<div>
+			<div> 
 				<header className="header">
 					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
                    <div className="search" style={{left: '71px'}}>
@@ -46,7 +47,7 @@ class UserCard extends React.Component{
 							// defaultValue={`userCode: ${tool.user!==null?tool.user.userCode:'null'}`} 
 							type="text" placeholder="搜索" />
 					</div>
-					<div className="header-right"><Link to='' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
+					<div className="header-right"><Link to='/App/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
                  </header>
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
@@ -63,11 +64,16 @@ class UserCard extends React.Component{
 				</ul>
                 <div className="am-tabs-bd">
                    <div className="am-tabs-bd">    
-                       <div className="am-panel">
 								{
 									this.state.essayList.map((item,index)=>{
 										return(
+										<div className="am-panel">
 											<div key={index} className="am-panel-bd">
+												{
+													item.checkState===2||item.checkState==='2'?
+													<Link  to='/App/PubArticle' className="edit"><i className="fa fa-edit"></i></Link>
+													:null
+												}
 												<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
 														<article className="am-article">
 															<div className="am-article-hd">
@@ -89,12 +95,13 @@ class UserCard extends React.Component{
 														</article>
 													</Link>
 								                 <p className="like">{tool.formatTimestamp(item.createTime)}</p>
+												 <p className="evaluate">审核意见：{item.auditOpinion}</p>
 									         </div>
+										  </div>
 										)
 									})
 								}
                             </div>
-						</div>
                 </div>
 				</div>
 			</div>
