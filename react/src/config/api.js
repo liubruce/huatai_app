@@ -174,6 +174,25 @@ export const essaylist = (body) => {
     });
 }
 /*
+/appessaymanager/operateessay
+ */
+export const operateessay = (body) => {
+  let url = `${api_Ip}/appessaycenter/operateessay`;
+  url = tool.url_format(url, 'operateEssay', 'button',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
 /appessaycenter/cashessay
  */
 export const cashessay = (body) => {
@@ -297,7 +316,7 @@ export const userCard = (userCode) => {
   我的蜂行圈
 */
 
-export const essayList = (bM = {}) => {
+export const myEssayList = (bM = {}) => {
     let body = tool.behavior(bM, 'myessaylists', 'menu');
     return new Promise((resolve, reject) => {
         sfetch.get({

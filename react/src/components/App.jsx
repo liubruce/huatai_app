@@ -48,7 +48,7 @@ class App extends Component {
 			   <div className='app' style={{marginTop:this.state.loading?'50%':'0',marginLeft:this.state.loading?'45%':'0'}} >
 			     {!this.state.loading?
 			        <div>
-			            {this.props.location.pathname.indexOf('/Personal') === -1 ?<Header />:null}
+			            <Header pathname={this.props.location.pathname} />
 			            {this.props.children}
 			            <Footer pathname={this.props.location.pathname} />
 			         </div>

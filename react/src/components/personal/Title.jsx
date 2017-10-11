@@ -44,24 +44,24 @@ class Title extends React.Component {
 		if (pathname.indexOf('/Set') !== -1) {
 			title='设置'
 		}
+		if (pathname.indexOf('/CourseTop') !== -1) {
+			title='点击榜'
+		}
+		if (pathname.indexOf('/StudentTop') !== -1) {
+			title='学霸榜'
+		}
 		
-		
+
 		this.setState({
 			title
 		})
 	}
 	render(){
 		return(
-			<div>
-				{
-					this.props.pathname.indexOf('/MyArticle') !== -1?
-					null:
 					<header className="header">
 		            	<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
 		            	<h1>{this.state.title}</h1>
 		            </header>
-				}
-			</div>
 			)
 	}
 }

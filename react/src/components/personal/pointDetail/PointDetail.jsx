@@ -22,9 +22,15 @@ class PointDetail extends React.Component{
 		let startTime='',endTime='';
 		if(this.state.time!==''){
 			startTime=tool.formatTimestamp(this.state.time,'y/m/d');
+		}else{
+			message.warning('请输入有效的开始日期', 3);
+			return;
 		}
 		if(this.state.timeEND!==''){
 			endTime=tool.formatTimestamp(this.state.timeEND,'y/m/d');
+		}else{
+			message.warning('请输入有效的结束日期', 3);
+			return;
 		}
 		api.fuzzyIntgral({startTime:startTime,endTime:endTime}).then((data) => {
       if (data.result === 'RC100') {

@@ -1,24 +1,39 @@
 import React,{Component} from 'react'
 import Title from './Title.jsx'
 import './personal.less'
+import Footer from '../footer/Footer.jsx'
 class Personal extends Component {
   constructor(args) {
     super()
     this.state = {
-      showHeader:false
+      showTitle:true
     }
   }
-
+  checkUrl(pathname) {
+    let showTitle = true;
+    if (pathname === '/Personal') {
+      showTitle = false;
+    }
+    this.setState({
+      showTitle
+    })
+  }
+  componentWillMount() {
+    this.checkUrl(this.props.location.pathname);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.checkUrl(nextProps.location.pathname);
+  }
   render() {
     return (
 
       <div className='app'>
 
-          {this.props.location.pathname !== '/Personal' ?<Title pathname={this.props.location.pathname} />:null}
+          {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
 
-          <div>
              {this.props.children}
-          </div>
+
+          <Footer pathname={this.props.location.pathname} />
 
       </div>
 
