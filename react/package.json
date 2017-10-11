@@ -34,6 +34,7 @@
     "immutable": "^3.8.1",
     "is-promise": "^2.1.0",
     "jest": "20.0.4",
+    "jquery": "^3.2.1",
     "less-loader": "^4.0.5",
     "mimic-fn": "^1.1.0",
     "object-assign": "4.1.1",
