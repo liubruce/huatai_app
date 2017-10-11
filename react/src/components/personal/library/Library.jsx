@@ -122,7 +122,7 @@ class MyLibrary extends React.Component{
 											</div>
 											</div>
 									 )
-								 })
+									})
 							 }
 							<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirms">
 						       	<div className="am-modal-dialog">
@@ -184,9 +184,20 @@ class Database extends React.Component{
 									 )
 								 })
 							 }
+				<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-modal">
+					<div className="am-modal-dialog">
+						<div className="am-modal-hd">温馨提示</div>
+						<div className="am-modal-bd">
+							图书下载成功
+						</div>
+						<div className="am-modal-footer">
+							<span className="am-modal-btn">确定</span>
+						</div>
+					</div>
+				</div>
             </div>
 		)
-	}
+	}f
 }
 class Library extends React.Component{
 	constructor(args){
