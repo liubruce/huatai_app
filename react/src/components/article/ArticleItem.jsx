@@ -15,6 +15,7 @@ class ArticleItem extends React.Component {
 	jump(item) {
 		if (item.goodEssay !== '1') {
 			hashHistory.push(`/App/PersonalCenter/ArticleDetail/${item.essayId}`);
+			return;
 		}
 		this.setState({
 			now_item: item
@@ -28,12 +29,38 @@ class ArticleItem extends React.Component {
 			if (data.result === 'RC100') {
 				hashHistory.push(`/App/PersonalCenter/ArticleDetail/${this.state.now_item.essayId}`);
 			} else {
-				message.error(data.errMsg, 3);
+				message.error(data.errMsg, 1);
 			}
 			tool.loading(this, false);
 		}, (res) => {
 			tool.loading(this, false);
 			tool.reject(res);
+		})
+	}
+	action(essayId,recordType){
+		let body = {
+			essayId,
+			recordType
+		};
+		api.operateessay(body).then((data) => {
+			if (data.result === 'RC100') {
+				this.props.show();
+			} else {
+				message.error(data.errMsg, 1);
+			}
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
+		})
+	}
+	click(item){
+		if (item.goodEssay !== '1') {
+			this.action(item.essayId,1);
+			return;
+		}
+		this.setState({
+			now_item: item
 		})
 	}
 	render(){
@@ -64,7 +91,9 @@ class ArticleItem extends React.Component {
                       </div>
                     </article>
                   </a>
-                  <p className="like"><span><i className="fa fa-heart-o" />{item.sumCollection}</span><span><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
+                  <p className="like">
+                  <span data-am-modal={isBuy?"{target: '#my-confirm'}":""} onClick={()=>this.click(item)} ><i className="fa fa-heart-o" />{item.sumCollection}</span>
+                  <span onClick={()=>this.action(item.essayId,0)} ><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
                 </div>
 
       <div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
@@ -79,7 +108,6 @@ class ArticleItem extends React.Component {
          </div>
         </div>
        </div>
-
               </div>
 			)
 	}

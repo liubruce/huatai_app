@@ -47,7 +47,8 @@ class Index extends React.Component {
       if (data.result === 'RC100') {
         this.setState({
           courseList: data.goodCourseList,
-          articleList: data.goodEssayList
+          articleList: data.goodEssayList,
+          score:data.score
         })
       } else {
         message.error(data.errMsg, 3);
@@ -118,7 +119,7 @@ class Index extends React.Component {
             </div>
             {this.state.articleList.map((item,index)=>{
               return(
-                <ArticleItem key={index} score={this.state.score} item={item} />
+                <ArticleItem key={index} show={this.show.bind(this)} score={this.state.score} item={item} />
                 )
             })}
           </div>

@@ -76,7 +76,7 @@ class Article extends React.Component {
         <div className="am-panel">
         {this.state.essayList.map((item,index)=>{
           return(
-            <ArticleItem key={index} score={this.state.score} item={item} />
+            <ArticleItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
             )
         })}
         <div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>
