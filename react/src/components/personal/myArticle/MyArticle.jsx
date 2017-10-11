@@ -23,8 +23,8 @@ class UserCard extends React.Component{
        api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				essayList:data.essayList?data.essayList:[]
-				//essayList:tool.getObject(10)
+				//essayList:data.essayList?data.essayList:[]
+				essayList:tool.getObject(10)
 			})
 		} else {
 			message.error(data.errMsg, 3);

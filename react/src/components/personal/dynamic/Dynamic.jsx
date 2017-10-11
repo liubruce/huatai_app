@@ -4,6 +4,7 @@ import {Link} from 'react-router'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import * as tool from '../../../config/tools'
+import ArticleItem from '../../article/ArticleItem.jsx'
 class CourseDy extends React.Component{
     constructor(args){
 		super();
@@ -56,7 +57,7 @@ class EssayDy extends React.Component{
 			EssayList:tool.getObject(0)
 		}
 	}
-	componentWillMount() {
+  moreEssay(){
     api.moreEssay().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
@@ -68,6 +69,9 @@ class EssayDy extends React.Component{
     }, (res) => {
       tool.reject(res);
     })
+  }
+	componentWillMount() {
+    this.moreEssay();
     }
     render(){
         return(
@@ -75,32 +79,7 @@ class EssayDy extends React.Component{
              {
                this.state.EssayList.map((item,index)=>{
                  return(
-                   <div className="am-panel article-list" key={index}>
-                     {
-                       item.essayPhotos.map((item,index)=>{
-                         return(
-                               <img key={index} src={require('../../../style/images/portrait.png')}
-                               //src={item.essayPhotoPath}
-                               />
-                         )
-                       })
-                     }
-                      <div className="cont">
-                        <p className="info"><span>{item.userRealName}</span>xxxxxxx分公司</p>
-                        <p className="time">{tool.formatTimestamp(item.createTime)}</p>
-                        <Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
-                          <article className="am-article">
-                              <div className="am-article-hd">
-                                <h1 className="am-article-title"><div className="jc-icon"></div>{item.essayTitle}</h1>
-                              </div>
-                              <div className="am-article-bd">
-                                <p className="am-article-lead">{item.essayNote}</p>
-                              </div>
-                          </article>
-                        </Link>
-                        <p className="like"><span><i className="fa fa-heart-o"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-o-up"></i>{item.sumCollection}</span></p>
-                      </div>
-					      	</div>
+                  <ArticleItem show={this.moreEssay.bind(this)} key={index} item={item} />
                  )
 
                })
