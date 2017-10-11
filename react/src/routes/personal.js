@@ -15,6 +15,10 @@ import StoryLine from '../components/personal/storyLine/StoryLine.jsx'
 import ArticleDetail from '../components/articleDetail/ArticleDetail.jsx'
 import CourseDetail from '../components/courseDetail/CourseDetail.jsx'
 import AnswerOnline from '../components/courseDetail/answerOnline/AnswerOnline.jsx'
+
+import StudentTop from '../components/studentTop/StudentTop.jsx'
+import CourseTop from '../components/courseTop/CourseTop.jsx'
+
 const personalRoutes = (
           <Route path='Personal' component={Personal}>
            	<IndexRoute component={Menu}/>
@@ -31,6 +35,8 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>
             <Route path='/App/StoryLine' component={StoryLine}/>
+            <Route path='/StudentTop' component={StudentTop} />
+            <Route path='/CourseTop' component={CourseTop} />
     </Route>
 
 );

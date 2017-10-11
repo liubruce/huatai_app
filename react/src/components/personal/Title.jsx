@@ -44,6 +44,13 @@ class Title extends React.Component {
 		if (pathname.indexOf('/Set') !== -1) {
 			title='设置'
 		}
+		if (pathname.indexOf('/CourseTop') !== -1) {
+			title='点击榜'
+		}
+		if (pathname.indexOf('/StudentTop') !== -1) {
+			title='学霸榜'
+		}
+		
 		
 		
 		this.setState({
