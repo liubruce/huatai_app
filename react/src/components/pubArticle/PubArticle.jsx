@@ -9,21 +9,20 @@ class PubArticle extends React.Component{
 		super()
 		this.state={
 			 tab:'',
-			 essayList:[]
+			 essayDetail:{},
+			 essayPhotos:[],
+			 essayTitle:'',
+			 essayNote:''
 		}
 	}
-	changeTab(tab) {
-		this.setState({
-			tab: tab
-		},()=>{
-			this.essayList();
-		})
-	}
-	essayList(){
-       api.essayList({pageno:1,checkState:this.state.tab}).then((data) => {
+	selectEssay(){
+       api.selectEssay({essayId:this.props.params.id}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				essayList:data.essayList?data.essayList:[]
+				essayDetail:data.essay?data.essay:{},
+				essayPhotos:data.essay.essayPhotos?data.essay.essayPhotos:[],
+				essayTitle:data.essay.essayTitle?data.essay.essayTitle:'',
+				essayNote:data.essay.essayNote?data.essay.essayNote:''
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -33,9 +32,19 @@ class PubArticle extends React.Component{
 		})
 	}
 	componentWillMount() {
-		this.essayList();
+		if(this.props.params.id){
+           this.selectEssay();
+		}else{
+			this.setState({
+				essayDetail:{},
+				essayPhotos:[],
+				essayTitle:'',
+				essayNote:''
+			})
+		}
 	}
 	render(){
+		let essayDetail=this.state.essayDetail;
 		return(
 			<div> 
 				<header className="header">
@@ -46,16 +55,20 @@ class PubArticle extends React.Component{
 			<div className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
-                        <input type="text" placeholder="请输入标题"/>
-                        <textarea placeholder="请输入正文"></textarea>
+                        <input type="text" value={this.state.essayTitle?this.state.essayTitle:''}  placeholder="请输入标题"/>
+                        <textarea value={this.state.essayNote?this.state.essayNote:''} placeholder="请输入正文"></textarea>
                     </div>
                 </div>
                 <div className="am-panel">
                     <ul className="file-imgs am-avg-sm-3 clearFix">
-                        <li data-am-modal="{target: '#my-confirm'}"><img src={require("../../style/images/test.png")}/></li>
-                        <li data-am-modal="{target: '#my-confirm'}"><img src={require("../../style/images/test.png")}/></li>
-                        <li data-am-modal="{target: '#my-confirm'}"><img src={require("../../style/images/test.png")}/></li>
-                        <li><label for="file" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
+						{
+							this.state.essayPhotos.map((item,index)=>{
+								return(
+                                    <li key={index} data-am-modal="{target: '#my-confirm'}"><img src={require("../../style/images/test.png")}/></li>
+								)
+							})
+						}
+                        <li><label className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
                 </div>	
 			</div>

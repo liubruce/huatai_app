@@ -299,7 +299,7 @@ export const userCard = (userCode) => {
   我的蜂行圈
 */
 
-export const essayList = (bM = {}) => {
+export const myEssayList = (bM = {}) => {
   let body = tool.behavior(bM, 'myessaylists', 'menu');
   return new Promise((resolve, reject) => {
     sfetch.get({

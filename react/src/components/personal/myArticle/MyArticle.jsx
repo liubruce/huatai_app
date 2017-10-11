@@ -16,11 +16,11 @@ class UserCard extends React.Component{
 		this.setState({
 			tab: tab
 		},()=>{
-			this.essayList();
+			this.myEssayList();
 		})
 	}
-	essayList(){
-       api.essayList({pageno:1,checkState:this.state.tab}).then((data) => {
+	myEssayList(){
+       api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
 				//essayList:data.essayList?data.essayList:[]
@@ -34,7 +34,7 @@ class UserCard extends React.Component{
 		})
 	}
 	componentWillMount() {
-		this.essayList();
+		this.myEssayList();
 	}
 	render(){
 		return(
@@ -67,12 +67,12 @@ class UserCard extends React.Component{
 								{
 									this.state.essayList.map((item,index)=>{
 										return(
-										<div className="am-panel">
-											<div key={index} className="am-panel-bd">
+										<div  key={index} className="am-panel">
+											<div className="am-panel-bd">
 												{
 													item.checkState===2||item.checkState==='2'?
-													<Link  to='/App/PubArticle' className="edit"><i className="fa fa-edit"></i></Link>
-													:null
+													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
+													:<Link  to={'/App/PubArticle/1'} className="edit"><i className="fa fa-edit"></i></Link>
 												}
 												<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
 														<article className="am-article">
