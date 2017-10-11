@@ -215,7 +215,7 @@ class Library extends React.Component{
                             <a>资料库</a>
                         </li>
 				       </ul>
-                       <div className="am-tabs-bd">
+                       <div>
 						   {
 							   this.state.tab===1?<Bookshelf />:this.state.tab===2?<MyLibrary/>:<Database/>
 						   }
