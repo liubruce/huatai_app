@@ -10,14 +10,12 @@ class PointDetail extends React.Component{
 		super();
 		this.state = {
 		    time:'',
-				//new Date(new Date()-1000*60*60*24*7),
  	    	isOpen: false,
 				isOpenEND:false,
 	    	dataDetailList:{},
 				dataDetailLists:[],
 				timeEND:'',
 				timeDefalut:new Date()
-				//new Date()
 	    }
 	}
 	fuzzyIntgral(){
@@ -121,7 +119,7 @@ class PointDetail extends React.Component{
 						{
 							dataDetailLists.map((item,index)=>{
 								return(
-                  <div className="am-panel jf-list">
+                  <div key={index} className="am-panel jf-list">
 										<p className="jf-tag">{item.integralChangType}</p>
 					        	<p className="time">{tool.formatTimestamp(item.integralChangTime)}</p>
 					        	<p className="jf-list-cont">{item.integralChangInfo}</p>

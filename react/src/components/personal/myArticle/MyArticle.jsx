@@ -3,7 +3,7 @@ import  './myArticle.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
-import {Link} from 'react-router'
+import {Link,browserHistory} from 'react-router'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -37,6 +37,17 @@ class UserCard extends React.Component{
 	}
 	render(){
 		return(
+			<div>
+				<header className="header">
+					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+                   <div className="search" style={{left: '71px'}}>
+					<i className="fa fa-search" />
+					<input 
+							// defaultValue={`userCode: ${tool.user!==null?tool.user.userCode:'null'}`} 
+							type="text" placeholder="搜索" />
+					</div>
+					<div className="header-right"><Link to='' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
+                 </header>
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
@@ -87,7 +98,7 @@ class UserCard extends React.Component{
                 </div>
 				</div>
 			</div>
-
+      </div>
 		)
 	}
 }
