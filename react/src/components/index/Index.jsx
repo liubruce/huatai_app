@@ -5,9 +5,9 @@ import {Link} from 'react-router'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
-import {getFile_IP } from '../../config/serverIp'
+import ArticleItem from '../article/ArticleItem.jsx'
 
-function SampleNextArrow(props) {
+ const SampleNextArrow =(props)=> {
   const {onClick} = props
   return (
     <div
@@ -18,7 +18,7 @@ function SampleNextArrow(props) {
   );
 }
 
-function SamplePrevArrow(props) {
+const SamplePrevArrow =(props)=> {
   const {onClick} = props
   return (
     <div
@@ -33,11 +33,16 @@ class Index extends React.Component {
   constructor(args) {
     super();
     this.state = {
-      courseList: tool.getObject(0),
-      articleList: tool.getObject(0)
+      courseList: [],
+      articleList: [],
+      now_item:0,
+      score:0
     }
   }
   componentWillMount() {
+    this.show();
+  }
+  show() {
     api.homeIndex().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
@@ -113,26 +118,7 @@ class Index extends React.Component {
             </div>
             {this.state.articleList.map((item,index)=>{
               return(
-                  <div key={index} className="am-panel-bd">
-                   
-                   <div className="pepole-info">
-                     <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
-                     <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
-                     <p className="time">{tool.formatTimestamp(item.createTime)}</p>
-                   </div>
-                   <a>
-                     <article className="am-article">
-                       <div className="am-article-hd">
-                         <h1 className="am-article-title">{item.goodEssay === '1'?<div className="jc-icon" />:null}{item.essayTitle}</h1>
-                       </div>
-                       <div className="am-article-bd">
-                         <p className="am-article-lead">{item.essayNote}</p>
-                       </div>
-                     </article>
-                   </a>
-                   <p className="like"><span><i className="fa fa-heart-o" />{item.sumCollection}</span><span><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
-               
-                 </div>
+                <ArticleItem key={index} score={this.state.score} item={item} />
                 )
             })}
           </div>
