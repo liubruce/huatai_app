@@ -5,16 +5,30 @@ class Personal extends Component {
   constructor(args) {
     super()
     this.state = {
-      showHeader:false
+      showTitle:true
     }
   }
-
+  checkPage(pathname) {
+    let showTitle = true;
+    if (pathname === '/Personal') {
+      showTitle = false;
+    }
+    this.setState({
+      showTitle
+    })
+  }
+  componentWillMount() {
+    this.checkPage(this.props.location.pathname);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.checkPage(nextProps.location.pathname);
+  }
   render() {
     return (
 
       <div className='app'>
 
-          {this.props.location.pathname !== '/Personal' ?<Title pathname={this.props.location.pathname} />:null}
+          {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
 
           <div>
              {this.props.children}
