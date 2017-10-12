@@ -193,11 +193,11 @@ export const operateessay = (body) => {
   });
 }
 /*
-/appcoursemanagement/operatecourse
+/thriftClient/operateCourse
  */
 export const operatecourse = (body) => {
-  let url = `${api_Ip}/appcoursemanagement/operatecourse`;
-  url = tool.url_format(url, 'operateEssay', 'button',body);
+  let url = `${api_Ip}/thriftClient/operateCourse`;
+  url = tool.url_format(url, 'operatecourse', 'button',body);
   return new Promise((resolve, reject) => {
     sfetch.get({
       url: url,
@@ -210,6 +210,25 @@ export const operatecourse = (body) => {
       }
     });
   });
+}
+/*
+/thriftClient/cashcourse
+ */
+export const cashcourse = (body) => {
+    let url = `${api_Ip}/thriftClient/cashCourse`;
+    url = tool.url_format(url, 'cashcourse', 'button', body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000
+        }).then((data) => {
+            if (data.ok) {
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
 }
 /*
 /appessaycenter/cashessay
@@ -230,25 +249,7 @@ export const cashessay = (body) => {
         });
     });
 }
-/*
-/appcoursemanagement/cashcourse
- */
-export const cashcourse = (body) => {
-    let url = `${api_Ip}/appcoursemanagement/cashcourse`;
-    url = tool.url_format(url, 'cashcourse', 'button', body);
-    return new Promise((resolve, reject) => {
-        sfetch.get({
-            url: url,
-            timeout: 8000
-        }).then((data) => {
-            if (data.ok) {
-                resolve(data.json)
-            } else {
-                reject(data)
-            }
-        });
-    });
-}
+
 /*
 /apptop/studenttop
  */

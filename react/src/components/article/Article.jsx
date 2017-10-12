@@ -15,34 +15,13 @@ class Article extends React.Component {
       pageNo:1,
     }
 	}
-  add() {
-    if(this.state.pageNo + 1 > this.state.totalPage){
-      // $(window).off('.article');
-    }else{
-      this.setState({
-        pageNo:this.state.pageNo + 1
-      },()=>{
-          this.show();
-      })
-    }
-  }
   componentDidMount() {
-    let method = () => {
-      this.add();
-    }
-    $(window).on('scroll.article', function() {
-      var scrollTop = $(this).scrollTop();　　
-      var scrollHeight = $(document).height();　　
-      var windowHeight = $(this).height();　　
-      if (scrollTop + windowHeight === scrollHeight) {　　
-        method();　
-      }
-    });
+    tool.addScroll(this);
   }
   componentWillUnmount() {
-    $(window).off('.article');
+    tool.removeScroll();
   }
-  show(){
+  show(flag){
     tool.loading(this, true);
     let body = {
       pageno:this.state.pageNo,
@@ -51,7 +30,8 @@ class Article extends React.Component {
     api.essaylist(body).then((data)=>{
       if (data.result === 'RC100') {
         this.setState({
-          essayList:this.state.essayList.concat(data.essayList),
+          essayList:flag?this.state.essayList.concat(data.essayList):data.essayList,
+          // essayList:data.essayList,
           totalPage:data.total,
           score:data.score
         })

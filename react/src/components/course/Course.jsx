@@ -13,7 +13,8 @@ class Course extends React.Component {
       loading: false,
       currentPage: 1,
       elecReqCourse: 0,
-      goodCourse: 1
+      goodCourse: 1,
+      score:0
     }
   }
   changeTab(tab) {
@@ -62,7 +63,9 @@ class Course extends React.Component {
     api.appStudentSelectCoursePager(body).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          courseList: this.state.courseList.concat(data.coursePage.pageItems)
+          // courseList: this.state.courseList.concat(data.coursePage.pageItems)
+          courseList:data.coursePage.pageItems,
+          score:data.score
         })
       } else {
         message.error(data.errMsg, 3);
@@ -76,7 +79,7 @@ class Course extends React.Component {
 	render(){
 		return(
              <div className="warpper">
-               <Spin spinning={this.state.loading} tip="加载列表中...">
+              
                   <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
                       <li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)} >
@@ -89,14 +92,15 @@ class Course extends React.Component {
                         <a>必修课程</a>
                       </li>
                     </ul>
-  
-                    {this.state.courseList.map((item,index)=>{
-                      return(
-                        <CourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
-                        )
-                    })}
+                     <Spin spinning={this.state.loading} tip="加载列表中...">
+                       {this.state.courseList.map((item,index)=>{
+                         return(
+                           <CourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
+                           )
+                       })}
+                     </Spin>
                   </div>
-                  </Spin>
+                
               </div>
 
 			)
