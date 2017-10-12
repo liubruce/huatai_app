@@ -4,44 +4,91 @@ import {Link} from 'react-router'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
-
+import {getFile_IP } from '../../config/serverIp'
+let old_time = 0;
 class CourseDetail extends React.Component{
-	constructor(args){
+	constructor(args) {
 		super()
-		this.state={
+		this.state = {
+			coursedata:{},
+			courseattach:[],
+			isEnd:false
 		}
 	}
-    componentWillMount() {
-    api.couCollection().then((data) => {
-      if (data.result === 'RC100') {
-        this.setState({
-        })
-      } else {
-        message.error(data.errMsg, 3);
-      }
-    }, (res) => {
-      tool.reject(res);
-    })
-  }
+	componentWillMount() {
+		let body = {
+			courseId: this.props.params.id
+		};
+		api.appLoadCourse(body).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					coursedata:data.coursedata,
+					courseattach:data.courseattach
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
+		}, (res) => {
+			tool.reject(res);
+		})
+	}
+	videoEnd(e) {
+		this.setState({
+				isEnd: true
+			})
+			// if (!this.state.isQuick) {
+			// 	this.setState({
+			// 		isEnd: true
+			// 	})
+			// }else{
+			// 	message.error('请勿快进视频');
+			// 	this.setState({
+			// 		isQuick:false
+			// 	})
+			// }
+	}
+	onTimeUpdate(e) {
+		let test = document.getElementById('course_id');
+		if (test.currentTime - old_time > 1) {
+			test.currentTime = old_time;
+			this.setState({
+				isQuick: true
+			})
+		} else {
+			if (test.currentTime >= test.duration) {
+				this.videoEnd();
+			}
+		}
+		old_time = test.currentTime
+	}
 	render() {
+		let course = this.state.coursedata;
 		return (
 			<div className="warpper">
 				<div className="video-box">
-					<video controls preload="none" width="100%" height="210" poster="images/test.png">
-						<source src="images/周杰伦 - 告白气球.mp4" type='video/mp4'></source>
+
+					<video 
+					id="course_id"
+					src={getFile_IP +'/downfile/'+course.coursevideoPath}
+					controls="controls"  width="100%" height="210"
+					// onEnded={(e)=>this.videoEnd(e)}
+					onTimeUpdate={(e)=>this.onTimeUpdate(e)}
+					preload="auto">
+						您的浏览器不支持 video 标签。
 					</video>
-					<span><i className="fa fa-youtube-play"></i></span>
-					<p className="like"><span><i className="fa fa-heart-o"></i>12331</span><span><i className="fa fa-thumbs-o-up"></i>12331</span></p>
+
+					{/*<p className="like"><span><i className="fa fa-heart-o"></i>12331</span>
+					<span><i className="fa fa-thumbs-o-up"></i>12331</span></p>*/}
 				</div>
 				
 				<div className="am-panel">
 					<div className="am-panel-bd">
 						<article className="am-article">
 						  	<div className="am-article-hd">
-						   		<h1 className="am-article-title">课程名称</h1>
+						   		<h1 className="am-article-title">{course.courseName}</h1>
 						  	</div>
 						  	<div className="am-article-bd">
-						    	<p className="am-article-lead">课程简述：那一刻是凌晨，我从线下活动的郑州赶回来，下了火车直奔家门。客厅的灯开着，家人早已入睡，我身子只是一斜，肩头的包就溜到了沙发上。我去卧室时才发觉手里居然还………</p>
+						    	<p className="am-article-lead">{course.courseDesc}</p>
 						  	</div>
 						</article>
 					</div>
@@ -51,13 +98,20 @@ class CourseDetail extends React.Component{
 					<div className="am-panel-hd">附件</div>
 					<div className="am-panel-bd">
 						<ul className="am am-avg-sm-3" style={{fontSize: '1.4rem'}}>
-							<li>课程附件_1.doc</li>
-							<li>课程附件_2.pdf</li>
-							<li>课程附件_3.xls</li>
+						    {this.state.courseattach.map((item,index)=>{
+						    	return(
+						    		<li><a>{item.courseAttrachPath}</a></li>
+						    		)
+						    })}
 						</ul>
 					</div>
 				</div>
-				<Link to='App/Course/AnswerOnline' className="am-btn am-btn-block btn-border">在线答题</Link>
+				{this.state.isEnd?
+					<Link to='App/Course/AnswerOnline' className="am-btn am-btn-block btn-border">在线答题</Link>
+					:
+					<a className="am-btn am-btn-block btn-border test-btn">在线答题</a>
+				}
+				
 			</div>
 		);
 	}

@@ -11,8 +11,8 @@
 		var scriptE = document.createElement('script');
 		scriptE.setAttribute('type', 'text/javascript');
 
-		// scriptE.setAttribute('src','IOS/cordova.js');
-		scriptE.setAttribute('src', device + '/cordova.js');
+		// scriptE.setAttribute('src','js/IOS/cordova.js');
+		scriptE.setAttribute('src', 'js/' + device + '/cordova.js');
 
 		document.body.appendChild(scriptE);
 	}

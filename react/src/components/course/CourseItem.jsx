@@ -14,7 +14,7 @@ class CourseItem extends React.Component {
 		}
 	}
 	jump(item) {
-		if (item.goodCourse !== '1') {
+		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
 			hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
 			return;
 		}
@@ -26,7 +26,7 @@ class CourseItem extends React.Component {
 		let body = {
 			courseId: this.state.now_item.courseId
 		}
-		api.cashessay(body).then((data) => {
+		api.cashcourse(body).then((data) => {
 			if (data.result === 'RC100') {
 				hashHistory.push(`/App/Course/courseDetail/${this.state.now_item.courseId}`);
 			} else {
@@ -56,7 +56,7 @@ class CourseItem extends React.Component {
 		})
 	}
 	click(item){
-		if (item.goodCourse !== '1') {
+		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
 			this.action(item.courseId,2);
 			return;
 		}
@@ -66,24 +66,23 @@ class CourseItem extends React.Component {
 	}
 	render(){
 		let item = this.props.item;
-		let isBuy = item.goodCourse ==='1' && item.userCourseOperation.isBuy !== '1';
+		let isBuy = item.goodCourse ==='1' && item.userCourseOperation.isBuy !== 1;
 		return(
             <div className="course-item">
               <div data-tab-panel-0 className="am-tab-panel am-active tab">
                 <div className="am-panel cur-list">
                  <a>
                     <video 
-                    onClick={()=>this.jump(item)}
-                    data-am-modal={isBuy?"{target: '#course-confirm'}":""}
                     src={getFile_IP+'/downfile/'+item.coursevideoPath}   
                     className="v-img"
                     >
                     您的浏览器不支持 video 标签。
                    </video>
                     <div className="right">
-                      <p onClick={()=>this.jump(item)} data-am-modal={isBuy?"{target: '#course-confirm'}":""} className="time">{tool.formatTimestamp(item.createTime)}</p>
-                      <h2 onClick={()=>this.jump(item)} data-am-modal={isBuy?"{target: '#course-confirm'}":""} >{item.courseName}
-                      {item.goodCourse === '1'?<div className="jc-icon" />:null}</h2>
+                  
+                    	<p onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} className="time">{tool.formatTimestamp(item.createTime)}</p>
+                    	<h2 onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} >{item.courseName}{item.goodCourse === '1'?<div className="jc-icon" />:null}</h2>
+                    
                       <p className="like">
                       <span className={item.userCourseOperation.isCollection===1?'active':''} data-am-modal={isBuy?"{target: '#course-confirm'}":""} onClick={()=>this.click(item)} ><i className="fa fa-heart-o" />{item.sumCollection}</span>
                       <span className={item.userCourseOperation.isLike===1?'active':''} onClick={()=>this.action(item.courseId,3)} ><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
@@ -93,7 +92,7 @@ class CourseItem extends React.Component {
               </div>
         
 
-      <div className="am-modal am-modal-confirm" tabIndex="-1" id="course-confirm">
+      <div className="am-modal am-modal-confirm" tabIndex="-1" id={`course-confirm${item.courseId}`}>
        <div className="am-modal-dialog">
          <div className="am-modal-hd">温馨提示</div>
          <div className="am-modal-bd">
