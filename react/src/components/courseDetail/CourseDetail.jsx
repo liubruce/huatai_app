@@ -100,7 +100,7 @@ class CourseDetail extends React.Component{
 						<ul className="am am-avg-sm-3" style={{fontSize: '1.4rem'}}>
 						    {this.state.courseattach.map((item,index)=>{
 						    	return(
-						    		<li><a>{item.courseAttrachPath}</a></li>
+						    		<li key={index} ><a>{item.courseAttrachPath}</a></li>
 						    		)
 						    })}
 						</ul>
