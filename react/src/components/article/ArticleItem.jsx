@@ -1,6 +1,5 @@
 import React from 'react'
-import { message,Spin } from 'antd';
-import $ from 'jquery'
+import { message } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
 import {getFile_IP } from '../../config/serverIp'
@@ -9,7 +8,9 @@ class ArticleItem extends React.Component {
 	constructor(args) {
 		super();
 		this.state = {
-			now_item: 0
+			now_item: {
+				exchangeIntegral:0
+			}
 		}
 	}
 	jump(item) {
@@ -73,14 +74,16 @@ class ArticleItem extends React.Component {
                   <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
                   <p className="time">{tool.formatTimestamp(item.createTime)}</p>
                   <a onClick={()=>this.jump(item)}>
-                    <article data-am-modal={isBuy?"{target: '#my-confirm'}":""} className="am-article">
+                    <article data-am-modal={isBuy?"{target: '#article-confirm'}":""} className="am-article">
                       <div className="am-article-hd">
                         <h1 className="am-article-title">
-                        {item.goodEssay === '1'?<div className="jc-icon" />:null}
-                        {item.essayTitle}</h1>
+                        {item.essayTitle}
+                        {item.goodEssay === '1'?<div className="jc-icon" />:null}</h1>
                       </div>
                       <div className="am-article-bd">
-                        <p className="am-article-lead">{item.essayNote}</p>
+
+                        <p className="am-article-lead shorthand">{item.essayNote?item.essayNote:'没有文字'}{item.essayNote?<span>...查看全文</span>:null}</p>
+
                         <ul className="am-avg-sm-3 am-thumbnails">
                         {item.essayPhotos.map((img,index)=>{
                           return(
@@ -92,15 +95,18 @@ class ArticleItem extends React.Component {
                     </article>
                   </a>
                   <p className="like">
-                  <span data-am-modal={isBuy?"{target: '#my-confirm'}":""} onClick={()=>this.click(item)} ><i className="fa fa-heart-o" />{item.sumCollection}</span>
-                  <span onClick={()=>this.action(item.essayId,0)} ><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
+                  <span className={item.userEssayOperation.isCollection===1?'active':''} data-am-modal={isBuy?"{target: '#article-confirm'}":""} onClick={()=>this.click(item)} >
+                  <i className="fa fa-heart-o" />{item.sumCollection}</span>
+                  <span className={item.userEssayOperation.isLike===1?'active':''} onClick={()=>this.action(item.essayId,0)} >
+                  <i className="fa fa-thumbs-o-up" />{item.sumLike}</span>
+                  </p>
                 </div>
 
-      <div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
+      <div className="am-modal am-modal-confirm" tabIndex="-1" id="article-confirm">
        <div className="am-modal-dialog">
          <div className="am-modal-hd">温馨提示</div>
          <div className="am-modal-bd">
-           兑换将需要{this.state.now_item.exchangeIntegral}积分，您的当前积分为{this.props.score}，是否继续？
+           兑换文章将需要{this.state.now_item.exchangeIntegral}积分，您的当前积分为{this.props.score}，是否继续？
          </div>
          <div className="am-modal-footer">
            <span className="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -108,6 +114,7 @@ class ArticleItem extends React.Component {
          </div>
         </div>
        </div>
+
               </div>
 			)
 	}

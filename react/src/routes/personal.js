@@ -29,7 +29,7 @@ const personalRoutes = (
             <Route path='/App/NewsCenter' component={TestCenter}/>
             <Route path='/App/PersonalCenter/Collector' component={Collector}/>
             <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
-            <Route path='/App/Course/CourseDetail' component={CourseDetail}/>
+            <Route path='/App/Course/CourseDetail/:id' component={CourseDetail}/>
             <Route path='/App/Course/AnswerOnline' component={AnswerOnline}/>
             <Route path='/App/PersonalCenter/Library' component={Library}/>
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>

@@ -4,6 +4,7 @@ import './collector.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
+import ArticleItem from '../../article/ArticleItem.jsx'
 class CourseCol extends React.Component{
     constructor(args){
 		super()
@@ -55,45 +56,29 @@ class EssayCol extends React.Component{
             colCourseList:tool.getObject(0),
         }
 	}
-    componentWillMount() {
-    api.morecolEssay().then((data) => {
-      if (data.result === 'RC100') {
-        this.setState({
-            colCourseList:data.myEssayColList?data.myEssayColList:[]
+    morecolEssay(){
+       api.morecolEssay().then((data) => {
+        if (data.result === 'RC100') {
+            this.setState({
+                colCourseList:data.myEssayColList?data.myEssayColList:[]
+            })
+        } else {
+            message.error(data.errMsg, 3);
+        }
+       }, (res) => {
+          tool.reject(res);
         })
-      } else {
-        message.error(data.errMsg, 3);
       }
-    }, (res) => {
-      tool.reject(res);
-    })
-  }
+    componentWillMount() {
+      this.morecolEssay();
+    }
     render(){
         return(
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
-                           <div key={index} className="am-panel article-list">
-                                <img src={require("../../../style/images/test.png")}
-                               /// src={item.headPath}
-                                />
-							<div className="cont">
-								<p className="info"><span>{item.userRealName}</span></p>
-								<p className="time">{tool.formatTimestamp(item.createTime)}</p>
-								<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
-									<article className="am-article">
-									  	<div className="am-article-hd">
-									   		<h1 className="am-article-title"><div className="jc-icon"></div>{item.essayTitle}</h1>
-									  	</div>
-									  	<div className="am-article-bd">
-									    	<p className="am-article-lead">{item.essayNote}</p>
-									  	</div>
-									</article>
-								</Link>
-								<p className="like"><span><i className="fa fa-heart"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-up"></i>{item.sumCollection}</span></p>
-							</div>
-						   </div>
+                            <ArticleItem show={this.morecolEssay.bind(this)} key={index} item={item} />
                         )
                     })
                 }
