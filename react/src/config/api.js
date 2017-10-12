@@ -193,6 +193,25 @@ export const operateessay = (body) => {
   });
 }
 /*
+/appcoursemanagement/operatecourse
+ */
+export const operatecourse = (body) => {
+  let url = `${api_Ip}/appcoursemanagement/operatecourse`;
+  url = tool.url_format(url, 'operateEssay', 'button',body);
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: url,
+      timeout: 8000
+    }).then((data) => {
+      if (data.ok) {
+        resolve(data.json)
+      } else {
+        reject(data)
+      }
+    });
+  });
+}
+/*
 /appessaycenter/cashessay
  */
 export const cashessay = (body) => {
@@ -271,9 +290,9 @@ export const sign = () => {
 /*
 /appELearning/appCourse/appStudentSelectCoursePager
  */
-export const appStudentSelectCoursePager = () => {
+export const appStudentSelectCoursePager = (body={}) => {
     let url = `${lesson_api_IP}/appELearning/appCourse/appStudentSelectCoursePager`;
-    url = tool.url_format(url, 'mainPage', 'menu');
+    url = tool.url_format(url, 'mainPage', 'menu',body);
     return new Promise((resolve, reject) => {
         sfetch.get({
             url: url,

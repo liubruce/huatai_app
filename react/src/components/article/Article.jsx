@@ -10,7 +10,7 @@ class Article extends React.Component {
 		super()
     this.state = {
       essayList:[],
-      loading:true,
+      loading:false,
       totalPage:1,
       pageNo:1,
     }
@@ -73,6 +73,7 @@ class Article extends React.Component {
 	render(){
 		return(
      <div className="warpper">
+     <Spin spinning={this.state.loading} tip="加载列表中...">
         <div className="am-panel">
         {this.state.essayList.map((item,index)=>{
           return(
@@ -81,6 +82,7 @@ class Article extends React.Component {
         })}
         <div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>
         </div>
+        </Spin>
       </div>
 			)
 	}
