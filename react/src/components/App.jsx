@@ -22,15 +22,15 @@ class App extends Component {
 			// this.setState({
 			// 	loading: true
 			// })
-			tool.info().then((data) => {
+			// tool.info().then((data) => {
 				// this.setState({
 				// 	loading: false
 				// })
-			}, () => {
+			// }, () => {
 				// this.setState({
 				// 	loading: false
 				// })
-			})
+			// })
 		} else {
 			// this.setState({
 			// 	loading: true

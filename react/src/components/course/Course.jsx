@@ -48,6 +48,9 @@ class Course extends React.Component {
   componentWillMount() {
     this.show();
   }
+  componentWillReceiveProps(nextProps) {
+    this.show();
+  }
   show() {
     tool.loading(this, true);
     let body = {

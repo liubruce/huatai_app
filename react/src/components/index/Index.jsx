@@ -79,7 +79,7 @@ class Index extends React.Component {
                <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-4.jpg" />
              </Slider>
 
-          <div className="am-panel panel-in">
+          <div className="am-panel panel-in index-panel">
             <ul className="am-avg-sm-4 clearFix">
               <li className="li-1"><Link to='/StudentTop'></Link></li>
               <li className="li-2"><Link to='/CourseTop'></Link></li>
@@ -87,7 +87,7 @@ class Index extends React.Component {
               <li className="li-4"><Link to='/App/PersonalCenter' > </Link></li>
             </ul>
           </div>
-          <div className="am-panel">
+          <div className="am-panel index-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">热播课程</h2>
               <nav className="am-titlebar-nav">
