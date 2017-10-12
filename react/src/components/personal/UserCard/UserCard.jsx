@@ -82,7 +82,7 @@ class HonoraryCert  extends React.Component{
 						<h2 className="am-titlebar-title">荣誉证书</h2>
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider">
-						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
+						<ul className="am-slides honorary" style={{padding: '0 20px 10px'}}>
 							<li>
 								<img src={require('../../../style/images/zs.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
@@ -107,7 +107,7 @@ class HonoraryCert  extends React.Component{
 						<h2 className="am-titlebar-title">蜂行荣誉</h2>
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider-1">
-						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
+						<ul className="am-slides honorary" style={{padding: '0 20px 10px'}}>
 							<li>
 								<img src={require('../../../style/images/hz.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>首次登录</p>
