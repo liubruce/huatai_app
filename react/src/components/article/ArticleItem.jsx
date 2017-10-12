@@ -80,7 +80,7 @@ class ArticleItem extends React.Component {
                         {item.essayTitle}</h1>
                       </div>
                       <div className="am-article-bd">
-                        <p className="am-article-lead">{item.essayNote}</p>
+                        <p className="am-article-lead shorthand">{item.essayNote?item.essayNote:'没有文字'}{item.essayNote?<span>...查看全文</span>:null}</p>
                         <ul className="am-avg-sm-3 am-thumbnails">
                         {item.essayPhotos.map((img,index)=>{
                           return(
