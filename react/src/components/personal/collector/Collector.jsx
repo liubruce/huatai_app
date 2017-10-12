@@ -5,6 +5,7 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../../article/ArticleItem.jsx'
+import {getFile_IP } from '../../../config/serverIp'
 class CourseCol extends React.Component{
     constructor(args){
 		super()
@@ -34,7 +35,7 @@ class CourseCol extends React.Component{
                         return(
                            <div key={index} className="am-panel cur-list">
                                 <Link to='App/Course/CourseDetail'>
-                                    <img src={require("../../../style/images/test.png")}/>
+                                    <img src={getFile_IP +'/downfile/'+ item.headPath}/>
                                     <div className="right">
                                         <p className="time">{tool.formatTimestamp(item.recordTime)}</p>
                                         <h2>{item.courseName}</h2>

@@ -5,6 +5,7 @@ import * as api from '../../../config/api'
 import {message} from 'antd'
 import * as tool from '../../../config/tools'
 import ArticleItem from '../../article/ArticleItem.jsx'
+import {getFile_IP } from '../../../config/serverIp'
 class CourseDy extends React.Component{
     constructor(args){
 		super();
@@ -33,7 +34,8 @@ class CourseDy extends React.Component{
                      return(
                          <div key={index} className="am-panel cur-list">
                           <Link to='App/Course/CourseDetail'>
-                            <img src={require('../../../style/images/test.png')}
+                             <img src={getFile_IP +'/downfile/'+ item.headPath}
+                             //src={require('../../../style/images/test.png')}
                             //src={item.coursevideoPath}
                             />
                             <div className="right">

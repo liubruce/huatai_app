@@ -4,6 +4,7 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import {Link,browserHistory} from 'react-router'
+import {getFile_IP } from '../../../config/serverIp'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -23,8 +24,7 @@ class UserCard extends React.Component{
        api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				//essayList:data.essayList?data.essayList:[]
-				essayList:tool.getObject(10)
+				essayList:data.essayList?data.essayList:[]
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -82,14 +82,14 @@ class UserCard extends React.Component{
 															<div className="am-article-bd">
 																<p className="am-article-lead">{item.essayNote}</p>
 																<ul className="am-avg-sm-3 am-thumbnails">
-																	{/*{
+																	{
 																		item.essayPhotos.map((item,index)=>{
-																			<li><img src={item.essayPhotoPath} /></li>
+																			<li><img src={getFile_IP +'/downfile/'+ item.essayPhotoPath} /></li>
 																		})
-																	}*/}
-																	<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+																	}
+																	{/*<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
 																	<li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-																	<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+																	<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>*/}
 																</ul>
 															</div>
 														</article>

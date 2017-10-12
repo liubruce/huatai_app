@@ -4,6 +4,7 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import {hashHistory} from 'react-router';
+import {getFile_IP } from '../../../config/serverIp'
 class PointShop extends React.Component{
 	constructor(args){
 		super();
@@ -37,7 +38,7 @@ class PointShop extends React.Component{
     }
     api.pointChange(body).then((data)=>{
       if (data.result === 'RC100') {
-         hashHistory.push(`/App/PersonalCenter/Library`);
+         hashHistory.push(`/App/PersonalCenter/PointShop`);
       } else {
         message.error(data.errMsg, 3);
       }
@@ -54,7 +55,7 @@ class PointShop extends React.Component{
 					this.state.pointShopList.map((item,index)=>{
 						return(
                 <div key={index} className="am-panel goods-list">
-								<div className="goods-img"><img src={require('../../../style/images/test.png')}
+								<div className="goods-img"><img src={getFile_IP +'/downfile/'+ item.shopCover}
 							//	src={item.shopCover}
 								/></div>
 								<div className="goods-info">
