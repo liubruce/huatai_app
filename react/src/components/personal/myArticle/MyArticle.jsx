@@ -3,14 +3,15 @@ import  './myArticle.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
-import {Link,browserHistory} from 'react-router'
+import {Link,browserHistory,hashHistory} from 'react-router'
 import {getFile_IP } from '../../../config/serverIp'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
 			 tab:'',
-			 essayList:[]
+			 essayList:[],
+			 score:0
 		}
 	}
 	changeTab(tab) {
@@ -20,17 +21,60 @@ class UserCard extends React.Component{
 			this.myEssayList();
 		})
 	}
+	action(essayId,recordType){
+		let body = {
+			essayId,
+			recordType
+		};
+		api.operateessay(body).then((data) => {
+			if (data.result === 'RC100') {
+				this.myEssayList();
+			} else {
+				message.error(data.errMsg, 1);
+			}
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
+		})
+	}
+	click(item){
+		if (item.goodEssay !== '1') {
+			this.action(item.essayId,1);
+			return;
+		}
+		this.setState({
+			now_item: item
+		})
+	}
 	myEssayList(){
        api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
 				essayList:data.essayList?data.essayList:[]
+				//essayList:tool.getObject(10)
 			})
 		} else {
 			message.error(data.errMsg, 3);
 		}
 		}, (res) => {
 		tool.reject(res);
+		})
+	}
+	ok(essayId) {
+		let body = {
+			essayId: this.state.now_item.essayId
+		}
+		api.cashessay(body).then((data) => {
+			if (data.result === 'RC100') {
+				hashHistory.push(`/App/PersonalCenter/ArticleDetail/${essayId}`);
+			} else {
+				message.error(data.errMsg, 1);
+			}
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
 		})
 	}
 	componentWillMount() {
@@ -74,7 +118,7 @@ class UserCard extends React.Component{
 													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
 													:null
 												}
-												<Link to={`/App/PersonalCenter/ArticleDetail/${item.essayId}`}>
+												<Link onClick={()=>this.click(item)}>
 														<article className="am-article">
 															<div className="am-article-hd">
 																<h1 className="am-article-title">{item.essayTitle}</h1>
@@ -97,6 +141,20 @@ class UserCard extends React.Component{
 								                 <p className="like">{tool.formatTimestamp(item.createTime)}</p>
 												 <p className="evaluate">审核意见：{item.auditOpinion}</p>
 									         </div>
+
+                                           <div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
+       <div className="am-modal-dialog">
+         <div className="am-modal-hd">温馨提示</div>
+         <div className="am-modal-bd">
+           兑换将需要{item.exchangeIntegral}积分，您的当前积分为{this.state.score}，是否继续？
+										  </div>
+         <div className="am-modal-footer">
+           <span className="am-modal-btn" data-am-modal-cancel>取消</span>
+           <span className="am-modal-btn" data-am-modal-confirm onClick={()=>this.ok(item.essayId)}>确定</span>
+         </div>
+        </div>
+       </div>
+
 										  </div>
 										)
 									})

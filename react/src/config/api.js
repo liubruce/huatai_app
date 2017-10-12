@@ -231,6 +231,25 @@ export const cashessay = (body) => {
     });
 }
 /*
+/appcoursemanagement/cashcourse
+ */
+export const cashcourse = (body) => {
+    let url = `${api_Ip}/appcoursemanagement/cashcourse`;
+    url = tool.url_format(url, 'cashcourse', 'button', body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000
+        }).then((data) => {
+            if (data.ok) {
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
 /apptop/studenttop
  */
 export const studenttop = (body) => {
@@ -249,6 +268,8 @@ export const studenttop = (body) => {
         });
     });
 }
+
+
 /*
 coursetop
  */
@@ -293,6 +314,25 @@ export const sign = () => {
 export const appStudentSelectCoursePager = (body={}) => {
     let url = `${lesson_api_IP}/appELearning/appCourse/appStudentSelectCoursePager`;
     url = tool.url_format(url, 'mainPage', 'menu',body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
+/eLearning/Course/appLoadCourse
+ */
+export const appLoadCourse = (body) => {
+    let url = `${lesson_api_IP}/eLearning/Course/appLoadCourse`;
+    url = tool.url_format(url, 'coursetop', 'menu', body);
     return new Promise((resolve, reject) => {
         sfetch.get({
             url: url,

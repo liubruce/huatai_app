@@ -50,8 +50,14 @@ class Title extends React.Component {
 		if (pathname.indexOf('/StudentTop') !== -1) {
 			title='学霸榜'
 		}
+		if (pathname.indexOf('/courseDetail') !== -1) {
+			title='课程详情'
+		}
+		if (pathname.indexOf('/ArticleDetail') !== -1) {
+			title='文章详情'
+		}
 		
-
+		
 		this.setState({
 			title
 		})

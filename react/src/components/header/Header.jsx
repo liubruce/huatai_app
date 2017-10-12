@@ -37,6 +37,8 @@ class Header extends React.Component {
     let pathname = this.props.pathname;
     if (pathname.indexOf('/Article') !== -1) {
       hashHistory.push(`/Article?search=${this.state.inputValue}`);
+    }else{
+      hashHistory.push(`/Course?search=${this.state.inputValue}`);
     }
   }
 	render(){

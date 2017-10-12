@@ -9,12 +9,12 @@ class ArticleItem extends React.Component {
 		super();
 		this.state = {
 			now_item: {
-				exchangeIntegral:0
+				
 			}
 		}
 	}
 	jump(item) {
-		if (item.goodEssay !== '1') {
+		if (item.goodEssay !== '1' || item.userEssayOperation.isBuy === 1) {
 			hashHistory.push(`/App/PersonalCenter/ArticleDetail/${item.essayId}`);
 			return;
 		}
@@ -56,7 +56,7 @@ class ArticleItem extends React.Component {
 		})
 	}
 	click(item){
-		if (item.goodEssay !== '1') {
+		if (item.goodEssay !== '1' || item.userEssayOperation.isBuy === 1) {
 			this.action(item.essayId,1);
 			return;
 		}
@@ -66,7 +66,7 @@ class ArticleItem extends React.Component {
 	}
 	render(){
 		let item = this.props.item;
-		let isBuy = item.goodEssay ==='1' && item.userEssayOperation.isBuy !== '1';
+		let isBuy = item.goodEssay ==='1' && item.userEssayOperation.isBuy !== 1;
 		return(
               <div className="article-list" >
                 <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + item.headPath} />
@@ -74,7 +74,9 @@ class ArticleItem extends React.Component {
                   <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
                   <p className="time">{tool.formatTimestamp(item.createTime)}</p>
                   <a onClick={()=>this.jump(item)}>
-                    <article data-am-modal={isBuy?"{target: '#article-confirm'}":""} className="am-article">
+                  
+                 
+                  	 <article data-am-modal={isBuy?`{target: '#article-confirm${item.essayId}'}`:""} className="am-article">
                       <div className="am-article-hd">
                         <h1 className="am-article-title">
                         {item.essayTitle}
@@ -93,16 +95,17 @@ class ArticleItem extends React.Component {
                         </ul>
                       </div>
                     </article>
+
                   </a>
                   <p className="like">
-                  <span className={item.userEssayOperation.isCollection===1?'active':''} data-am-modal={isBuy?"{target: '#article-confirm'}":""} onClick={()=>this.click(item)} >
+                  <span className={item.userEssayOperation.isCollection===1?'active':''} data-am-modal={isBuy?`{target: '#article-confirm${item.essayId}'}`:""} onClick={()=>this.click(item)} >
                   <i className="fa fa-heart-o" />{item.sumCollection}</span>
                   <span className={item.userEssayOperation.isLike===1?'active':''} onClick={()=>this.action(item.essayId,0)} >
                   <i className="fa fa-thumbs-o-up" />{item.sumLike}</span>
                   </p>
                 </div>
 
-      <div className="am-modal am-modal-confirm" tabIndex="-1" id="article-confirm">
+      <div className="am-modal am-modal-confirm" tabIndex="-1" id={`article-confirm${item.essayId}`}>
        <div className="am-modal-dialog">
          <div className="am-modal-hd">温馨提示</div>
          <div className="am-modal-bd">

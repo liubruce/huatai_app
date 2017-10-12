@@ -3,7 +3,130 @@ import  './UserCard.less'
 import { message } from 'antd';
 import * as tools from '../../../config/tools'
 import * as api from '../../../config/api'
-
+class Card extends React.Component{
+	constructor(args) {
+		super()
+	}
+	render(){
+		let userCard=this.props.userCard;
+		return(
+           <div data-tab-panel-0 className="am-tab-panel am-active tab">
+						<div className="am-panel user-info-list">
+							<div style={{borderBottom: '1px solid #E2EEFB'}}>
+								<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
+								    <h2 className="am-titlebar-title">基本信息</h2>
+								</div>
+								<ul className="am-list am-list-static">
+								  	<li>姓名<span>{userCard.userName}</span></li>
+								  	<li>手机<span>{userCard.phone}</span></li>
+								  	<li>邮箱<span>{userCard.email}</span></li>
+								</ul>
+							</div>
+							<div style={{borderBottom: '1px solid #E2EEFB'}}>
+								<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
+								    <h2 className="am-titlebar-title">工作信息</h2>
+								</div>
+								<ul className="am-list am-list-static">
+								  	<li>入职时间<span>{userCard.entryTime}</span></li>
+								  	<li>所在地区<span>{userCard.region}</span></li>
+								  	<li>职务<span>{userCard.job}</span></li>
+								  	<li>分公司<span>{userCard.branceOffice}</span></li>
+								  	<li>营业部<span>{userCard.businessDept}</span></li>
+								  	<li>营业组<span>{userCard.businessGroup}</span></li>
+								</ul>
+							</div>
+							<div className="panel-bd">
+								<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
+								    <h2 className="am-titlebar-title">个人说明</h2>
+								</div>
+								<div className="user-word">
+									{userCard.seifInformation}
+								</div>
+							</div>
+						</div>
+			</div>
+		)
+	}
+}
+class GrowingUp extends React.Component{
+	constructor(args) {
+		super()
+	}
+	render(){
+		let userCard=this.props.userCard;
+		return(
+        <div className="am-panel">
+				<div className="czjl">
+					<ul>
+						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+					</ul>
+				</div>
+		</div>
+		)
+	}
+}
+class HonoraryCert  extends React.Component{
+	constructor(args) {
+		super()
+	}
+	render(){
+		let userCard=this.props.userCard;
+		return(
+        <div className="am-panel user-info-list">
+				<div style={{borderBottom: '1px solid #E2EEFB'}}>
+					<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
+						<h2 className="am-titlebar-title">荣誉证书</h2>
+					</div>
+					<div className="am-slider am-slider-carousel" id="img-slider">
+						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
+							<li>
+								<img src="images/zs.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
+							</li>
+							<li>
+								<img src="images/zs.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
+							</li>
+							<li>
+								<img src="images/zs.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
+							</li>
+							<li>
+								<img src="images/zs.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div className="panel-bd">
+					<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
+						<h2 className="am-titlebar-title">蜂行荣誉</h2>
+					</div>
+					<div className="am-slider am-slider-carousel" id="img-slider-1">
+						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
+							<li>
+								<img src="images/hz.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>首次登录</p>
+							</li>
+							<li>
+								<img src="images/hz.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
+							</li>
+							<li>
+								<img src="images/hz.png" />
+								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+		</div>
+		)
+	}
+}
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -49,27 +172,9 @@ class UserCard extends React.Component{
 					</ul>
 
 					<div className="am-tabs-bd">
-						<div data-tab-panel-0 className="am-tab-panel am-active tab">
-							<div className="am-panel">
-								<div className="panel-bd">
-									<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
-									    <h2 className="am-titlebar-title">基本信息</h2>
-									</div>
-									<ul className="am-list am-list-static">
-									  	<li>姓名: <span> {this.state.userCard.userName}</span></li>
-									  	<li>手机: <span> {this.state.userCard.phone}</span></li>
-									  	<li>邮箱: <span> {this.state.userCard.email}</span></li>
-									</ul>
-								</div>
-								
-							</div>
-						</div>
-						<div data-tab-panel-1 className="am-tab-panel tab">
-							
-						</div>
-						<div data-tab-panel-2 className="am-tab-panel tab">
-							
-						</div>
+						{
+							this.state.tab===0?<Card userCard={this.state.userCard}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert/>)
+						}
 					</div>
 				</div>
 			</div>

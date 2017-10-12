@@ -48,6 +48,9 @@ class Course extends React.Component {
   componentWillMount() {
     this.show();
   }
+  componentWillReceiveProps(nextProps) {
+    this.show();
+  }
   show() {
     tool.loading(this, true);
     let body = {
@@ -59,7 +62,7 @@ class Course extends React.Component {
     api.appStudentSelectCoursePager(body).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          courseList: data.coursePage.pageItems
+          courseList: this.state.courseList.concat(data.coursePage.pageItems)
         })
       } else {
         message.error(data.errMsg, 3);
