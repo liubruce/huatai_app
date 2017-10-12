@@ -1,47 +1,42 @@
 import React from 'react'
-import {Link} from 'react-router'
 import './collector.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../../article/ArticleItem.jsx'
+import CourseItem from '../../course/CourseItem.jsx'
 class CourseCol extends React.Component{
     constructor(args){
 		super()
         this.state={
             colCourseList:tool.getObject(0),
+            score:0
         }
 	}
-
-    componentWillMount() {
-    api.couCollection().then((data) => {
-      if (data.result === 'RC100') {
+    couCollection(){
+       api.couCollection().then((data) => {
+       if (data.result === 'RC100') {
         this.setState({
-            colCourseList:data.myCourseList?data.myCourseList:[]
+            colCourseList:data.myCourseList?data.myCourseList:[],
+            score:data.score?data.score:0
         })
-      } else {
-        message.error(data.errMsg, 3);
-      }
-    }, (res) => {
-      tool.reject(res);
-    })
-  }
+       } else {
+           message.error(data.errMsg, 3);
+        }
+      }, (res) => {
+         tool.reject(res);
+       })
+    }
+    componentWillMount() {
+      this.couCollection();
+   }
     render(){
         return(
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
-                           <div key={index} className="am-panel cur-list">
-                                <Link to='App/Course/CourseDetail'>
-                                    <img src={require("../../../style/images/test.png")}/>
-                                    <div className="right">
-                                        <p className="time">{tool.formatTimestamp(item.recordTime)}</p>
-                                        <h2>{item.courseName}</h2>
-                                        <p className="like"><span><i className="fa fa-heart"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-up"></i>{item.sumCollection}</span></p>
-                                    </div>
-                                </Link>
-						   </div>
+                            <CourseItem show={this.couCollection.bind(this)} key={index} score={this.state.score} item={item} />
                         )
                     })
                 }

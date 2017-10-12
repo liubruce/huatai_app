@@ -1,22 +1,24 @@
 import React from 'react'
 import './dynamic.less'
-import {Link} from 'react-router'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import * as tool from '../../../config/tools'
 import ArticleItem from '../../article/ArticleItem.jsx'
+import CourseItem from '../../course/CourseItem.jsx'
 class CourseDy extends React.Component{
     constructor(args){
 		super();
 		this.state={
-			courseList:tool.getObject(0)
+			courseList:tool.getObject(0),
+      score:0
 		}
 	}
-	componentWillMount() {
-    api.courseClick({pageno:1}).then((data) => {
+  courseClick(){
+     api.courseClick({pageno:1}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          courseList:data.myCourseList?data.myCourseList:[]
+          courseList:data.myCourseList?data.myCourseList:[],
+          score:data.score?data.score:0
         })
       } else {
         message.error(data.errMsg, 3);
@@ -24,6 +26,9 @@ class CourseDy extends React.Component{
     }, (res) => {
       tool.reject(res);
     })
+  }
+	componentWillMount() {
+    this.courseClick();
     }
     render(){
         return(
@@ -31,18 +36,7 @@ class CourseDy extends React.Component{
                  {
                    this.state.courseList.map((item,index)=>{
                      return(
-                         <div key={index} className="am-panel cur-list">
-                          <Link to='App/Course/CourseDetail'>
-                            <img src={require('../../../style/images/test.png')}
-                            //src={item.coursevideoPath}
-                            />
-                            <div className="right">
-                              <p className="time">{tool.formatTimestamp(item.recordTime)}</p>
-                              <h2>{item.courseName}</h2>
-                              <p className="like"><span><i className="fa fa-heart-o"></i>{item.sumLike}</span><span><i className="fa fa-thumbs-o-up"></i>{item.sumCollection}</span></p>
-                            </div>
-                          </Link>
-					            	</div>
+                        <CourseItem show={this.courseClick.bind(this)} key={index} score={this.state.score} item={item} />
                      )
                    })
                  }
@@ -113,7 +107,7 @@ class Dynamic extends React.Component{
                         </li>
 				   </ul>
                    <div className="am-tabs-bd">
-					 {
+				          	 {
                             this.state.tab===1?<CourseDy/>:<EssayDy/>
                      }
                    </div>

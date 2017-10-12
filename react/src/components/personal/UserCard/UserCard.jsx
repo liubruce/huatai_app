@@ -84,19 +84,19 @@ class HonoraryCert  extends React.Component{
 					<div className="am-slider am-slider-carousel" id="img-slider">
 						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
 							<li>
-								<img src="images/zs.png" />
+								<img src={require('../../../style/images/zs.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
 							</li>
 							<li>
-								<img src="images/zs.png" />
+								<img src={require('../../../style/images/zs.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
 							</li>
 							<li>
-								<img src="images/zs.png" />
+								<img src={require('../../../style/images/zs.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
 							</li>
 							<li>
-								<img src="images/zs.png" />
+								<img src={require('../../../style/images/zs.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
 							</li>
 						</ul>
@@ -109,15 +109,15 @@ class HonoraryCert  extends React.Component{
 					<div className="am-slider am-slider-carousel" id="img-slider-1">
 						<ul className="am-slides" style={{padding: '0 20px 10px'}}>
 							<li>
-								<img src="images/hz.png" />
+								<img src={require('../../../style/images/hz.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>首次登录</p>
 							</li>
 							<li>
-								<img src="images/hz.png" />
+								<img src={require('../../../style/images/hz.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
 							</li>
 							<li>
-								<img src="images/hz.png" />
+								<img src={require('../../../style/images/hz.png')} />
 								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
 							</li>
 						</ul>
