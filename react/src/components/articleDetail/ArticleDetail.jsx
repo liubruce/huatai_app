@@ -35,10 +35,17 @@ class ArticleDetail extends React.Component{
 		return(
 			<div className="warpper">
 				<div className="am-panel article-details">
+				   <div className="pepole-info">
+					<img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + essay.headPath} />
+					<p className="info"><span>{essay.userRealName}</span>{essay.branchOffice}</p>
+					<p className="time">{tool.formatTimestamp(essay.createTime)}</p>
+				   </div>
 					<article className="am-article">
 					  	<div className="am-article-hd">
 					   		<h1 className="am-article-title">{essay.essayTitle}</h1>
-					   		<p className="like">{tool.formatTimestamp(essay.createTime)}</p>
+					   		{/*<p class="like"><span><i class="fa fa-heart-o"></i>12331</span>
+					   		<span><i class="fa fa-thumbs-o-up"></i>12331</span></p>*/}
+					   		{/*<p className="like">{tool.formatTimestamp(essay.createTime)}</p>*/}
 					  	</div>
 					  	<div className="am-article-bd">
 					    	<p className="am-article-lead">{essay.essayNote}</p>

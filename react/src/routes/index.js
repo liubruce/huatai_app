@@ -52,7 +52,11 @@ if (tool.isPc) {
             tool.setUrl(back_url, exit_url);
         }
         // alert('------------deviceready-------------')
-        start_render();
+        tool.info().then((data) => {
+            start_render();
+        }, () => {
+            start_render();
+        })
     }, false);
 }
 
