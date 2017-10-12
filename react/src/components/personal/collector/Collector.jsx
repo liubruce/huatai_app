@@ -5,6 +5,7 @@ import * as api from '../../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../../article/ArticleItem.jsx'
 import CourseItem from '../../course/CourseItem.jsx'
+import {getFile_IP } from '../../../config/serverIp'
 class CourseCol extends React.Component{
     constructor(args){
 		super()

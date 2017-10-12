@@ -51,7 +51,7 @@ class Article extends React.Component {
     api.essaylist(body).then((data)=>{
       if (data.result === 'RC100') {
         this.setState({
-          essayList:data.essayList,
+          essayList:this.state.essayList.concat(data.essayList),
           totalPage:data.total,
           score:data.score
         })

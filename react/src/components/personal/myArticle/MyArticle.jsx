@@ -4,6 +4,7 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import {Link,browserHistory,hashHistory} from 'react-router'
+import {getFile_IP } from '../../../config/serverIp'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -50,9 +51,8 @@ class UserCard extends React.Component{
        api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
-				essayList:data.essayList?data.essayList:[],
-				//essayList:tool.getObject(10),
-				score:data.score?data.score:0
+				essayList:data.essayList?data.essayList:[]
+				//essayList:tool.getObject(10)
 			})
 		} else {
 			message.error(data.errMsg, 3);
@@ -126,14 +126,14 @@ class UserCard extends React.Component{
 															<div className="am-article-bd">
 																<p className="am-article-lead">{item.essayNote}</p>
 																<ul className="am-avg-sm-3 am-thumbnails">
-																	{/*{
+																	{
 																		item.essayPhotos.map((item,index)=>{
-																			<li><img src={item.essayPhotoPath} /></li>
+																			<li><img src={getFile_IP +'/downfile/'+ item.essayPhotoPath} /></li>
 																		})
-																	}*/}
-																	<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
+																	}
+																	{/*<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
 																	<li><img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" /></li>
-																	<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>
+																	<li><img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" /></li>*/}
 																</ul>
 															</div>
 														</article>
@@ -147,7 +147,7 @@ class UserCard extends React.Component{
          <div className="am-modal-hd">温馨提示</div>
          <div className="am-modal-bd">
            兑换将需要{item.exchangeIntegral}积分，您的当前积分为{this.state.score}，是否继续？
-         </div>
+										  </div>
          <div className="am-modal-footer">
            <span className="am-modal-btn" data-am-modal-cancel>取消</span>
            <span className="am-modal-btn" data-am-modal-confirm onClick={()=>this.ok(item.essayId)}>确定</span>
