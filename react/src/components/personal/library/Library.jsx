@@ -3,7 +3,7 @@ import './library.less'
 import $ from 'jquery'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import { message } from 'antd'
+import { message,Spin } from 'antd'
 import { hashHistory } from 'react-router';
 import {getFile_IP } from '../../../config/serverIp'
 class Bookshelf extends React.Component {
@@ -17,7 +17,7 @@ class Bookshelf extends React.Component {
         }
     }
     componentDidMount() {
-       tool.addScroll(this);
+       tool.addScroll(this,this.myList.bind(this));
     }
     myList(flag){
         tool.loading(this, true);
@@ -45,6 +45,7 @@ class Bookshelf extends React.Component {
     }
     render() {
         return (
+            <Spin spinning={this.state.loading} tip="加载列表中...">
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
 				{
 		            this.state.bookList.map((item, index) => {
@@ -79,6 +80,7 @@ class Bookshelf extends React.Component {
 					</div>
 				</div>
             </div>
+            </Spin>
         )
     }
 }
@@ -93,6 +95,9 @@ class MyLibrary extends React.Component {
             totalPage:1,
             pageNo:1,
         }
+    }
+    componentDidMount() {
+     tool.addScroll(this,this.myBookList.bind(this));
     }
     myBookList(flag){
          tool.loading(this, true);
@@ -141,6 +146,7 @@ class MyLibrary extends React.Component {
     }
     render() {
         return (
+            <Spin spinning={this.state.loading} tip="加载列表中...">
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
 	            {
 		            this.state.myLibrary.map((item, index) => {
@@ -179,6 +185,7 @@ class MyLibrary extends React.Component {
 			        </div>
 			    </div>
             </div>
+            </Spin>
         )
     }
 }
@@ -192,6 +199,9 @@ class Database extends React.Component {
             pageNo:1,
             score:0
         }
+    }
+    componentDidMount() {
+      tool.addScroll(this,this.myBookList.bind(this));
     }
     myBookList(flag){
          tool.loading(this, true);
@@ -240,6 +250,7 @@ class Database extends React.Component {
     }
     render() {
         return (
+            <Spin spinning={this.state.loading} tip="加载列表中...">
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
               {
             this.state.dataBase.map((item, index) => {
@@ -276,6 +287,7 @@ class Database extends React.Component {
 					</div>
 				</div>
             </div>
+            </Spin>
         )
     }
     f
