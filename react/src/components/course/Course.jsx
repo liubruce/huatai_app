@@ -11,11 +11,18 @@ class Course extends React.Component {
       tab: 1,
       courseList: [],
       loading: false,
-      currentPage: 1,
+      pageNo: 1,
       elecReqCourse: 0,
       goodCourse: 1,
-      score:0
+      score:0,
+      totalPage:0
     }
+  }
+  componentDidMount() {
+    tool.addScroll(this);
+  }
+  componentWillUnmount() {
+    tool.removeScroll();
   }
   changeTab(tab) {
     let elecReqCourse = 0;
@@ -52,10 +59,10 @@ class Course extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.show();
   }
-  show() {
+  show(flag) {
     tool.loading(this, true);
     let body = {
-      currentPage: this.state.currentPage,
+      currentPage: this.state.pageNo,
       courseName: tool.getQueryString('search'),
       elecReqCourse: this.state.elecReqCourse,
       goodCourse: this.state.goodCourse
@@ -63,9 +70,9 @@ class Course extends React.Component {
     api.appStudentSelectCoursePager(body).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          // courseList: this.state.courseList.concat(data.coursePage.pageItems)
-          courseList:data.coursePage.pageItems,
-          score:data.score
+          courseList: flag?this.state.courseList.concat(data.coursePage.pageItems):data.coursePage.pageItems,
+          score:data.score,
+          totalPage:data.coursePage.totalPage
         })
       } else {
         message.error(data.errMsg, 3);

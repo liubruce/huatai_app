@@ -1,7 +1,7 @@
 import React from 'react'
 import './article.less'
 import { message,Spin } from 'antd';
-import $ from 'jquery'
+// import $ from 'jquery'
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
 import ArticleItem from './ArticleItem.jsx'
@@ -31,7 +31,6 @@ class Article extends React.Component {
       if (data.result === 'RC100') {
         this.setState({
           essayList:flag?this.state.essayList.concat(data.essayList):data.essayList,
-          // essayList:data.essayList,
           totalPage:data.total,
           score:data.score
         })
