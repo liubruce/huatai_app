@@ -1,6 +1,8 @@
 import React from 'react'
 import './footer.less'
 import {Link} from 'react-router'
+import $ from 'jquery'
+import * as tool from '../../config/tools'
 class Footer extends React.Component {
 	constructor(args) {
 		super();
@@ -40,6 +42,18 @@ class Footer extends React.Component {
     this.setState({
       tab
     })
+  }
+  ios() {
+    if (tool.isIOS) {
+      $('.app').css('marginTop', '20px');
+      $('.header').css('marginTop', '20px');
+    }
+  }
+  componentDidMount() {
+    this.ios();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    this.ios();
   }
 	render() {
 		return(

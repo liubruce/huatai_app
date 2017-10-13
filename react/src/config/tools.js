@@ -28,6 +28,7 @@ export const sino_cordova_checkApp = () => {
 
 // export const isPc = document.URL.indexOf(":8889") !== -1;
 export const isPc = sino_cordova_checkApp().device === 'Browser';
+export const isIOS = sino_cordova_checkApp().device === 'IOS';
 
 export let utils = {
 	test() {
@@ -113,7 +114,7 @@ export const execSQL = (sql, value) => {
 export const info = () => {
 	return new Promise((_resolve, _reject) => {
 		localStorage.setItem("device", sino_cordova_checkApp().device);
-		log("-------------device-------------" + localStorage.getItem('device'))
+		// log("-------------device-------------" + localStorage.getItem('device'))
 		let userCode = getUserCode();
 		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
 		localStorage.setItem("user", JSON.stringify({
@@ -127,6 +128,7 @@ export const info = () => {
 			_user.ldToken = item.LDTOKEN;
 			_user.phone = item.MOBILE;
 			_user.userCode = userCode;
+			_user.device = sino_cordova_checkApp().device;
 
 			localStorage.setItem("user", JSON.stringify(_user));
 			save_user();

@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import Title from './Title.jsx'
 import './personal.less'
 import Footer from '../footer/Footer.jsx'
+import * as tool from '../../config/tools'
 class Personal extends Component {
   constructor(args) {
     super()
@@ -26,17 +27,12 @@ class Personal extends Component {
   }
   render() {
     return (
-
       <div className='app'>
-
+          {tool.isIOS?<div className='ios-header' ></div>:null}
           {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
-
              {this.props.children}
-
           <Footer pathname={this.props.location.pathname} />
-
       </div>
-
     )
   }
 

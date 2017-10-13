@@ -59,7 +59,7 @@ class Article extends React.Component {
             <ArticleItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
             )
         })}
-        <div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>
+        {/*<div className="bottom-spin" > <Spin spinning={this.state.loading} size='small' /></div>*/}
         </div>
         </Spin>
       </div>

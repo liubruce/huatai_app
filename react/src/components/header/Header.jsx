@@ -44,16 +44,17 @@ class Header extends React.Component {
 	render(){
 		return(
         <form onSubmit={(e)=>this.submit(e)} >
-        <header className="header">
-          <a className="logo"> </a>
-          <div className="search">
-            <i className="fa fa-search" />
-            <input 
-            value={this.state.inputValue}
-            onChange={(e)=>{this.setState({inputValue:e.target.value})}}
-            type="text" placeholder={`${this.state.placeholder}`} />
-          </div>
-        </header>
+          {tool.isIOS?<div className='ios-header' ></div>:null}
+          <header className="header">
+            <a className="logo"> </a>
+            <div className="search">
+              <i className="fa fa-search" />
+              <input 
+              value={this.state.inputValue}
+              onChange={(e)=>{this.setState({inputValue:e.target.value})}}
+              type="text" placeholder={`${this.state.placeholder}`} />
+            </div>
+          </header>
         </form>
 			)
 	}
