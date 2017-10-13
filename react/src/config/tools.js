@@ -8,6 +8,7 @@ import {
 import {
 	message
 } from 'antd';
+import $ from 'jquery'
 
 export const sino_cordova_checkApp = () => {
 	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
@@ -193,7 +194,10 @@ export const checkldToken = () => {
 }
 
 export const behavior = (body, operationType, behaviorDataType) => {
-	if(user === null){hashHistory.push('/Login');return;}
+	if (user === null) {
+		hashHistory.push('/Login');
+		return;
+	}
 	return Object.assign(body, {
 		operationTypes: operationType,
 		behaviorDataType: behaviorDataType,
@@ -206,23 +210,23 @@ export const behavior = (body, operationType, behaviorDataType) => {
 		operationLocation: '',
 	})
 }
-export const getQueryString =(name)=> {
-	let url = window.location.hash.slice(window.location.hash.indexOf('?'),window.location.hash.length);
-    let qs = url.substr(1), // 获取url中"?"符后的字串   
-        args = {}, // 保存参数数据的对象
-        items = qs.length ? qs.split("&") : [], // 取得每一个参数项,
-        item = null,
-        len = items.length;
+export const getQueryString = (name) => {
+	let url = window.location.hash.slice(window.location.hash.indexOf('?'), window.location.hash.length);
+	let qs = url.substr(1), // 获取url中"?"符后的字串   
+		args = {}, // 保存参数数据的对象
+		items = qs.length ? qs.split("&") : [], // 取得每一个参数项,
+		item = null,
+		len = items.length;
 
-    for(let i = 0; i < len; i++) {
-        item = items[i].split("=");
-        let name = decodeURIComponent(item[0]),
-            value = decodeURIComponent(item[1]);
-        if(name) {
-            args[name] = value;
-        }
-    }
-    return args[name]===undefined ? '':args[name];
+	for (let i = 0; i < len; i++) {
+		item = items[i].split("=");
+		let name = decodeURIComponent(item[0]),
+			value = decodeURIComponent(item[1]);
+		if (name) {
+			args[name] = value;
+		}
+	}
+	return args[name] === undefined ? '' : args[name];
 }
 export const url_parameter = (data) => {
 
@@ -240,7 +244,7 @@ export const url_parameter = (data) => {
 	return toString;
 	// return toString.replace(/$/, "");
 }
-export const url_format = (url, operationType, behaviorDataType,body={}) => {
+export const url_format = (url, operationType, behaviorDataType, body = {}) => {
 	return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
 
@@ -322,7 +326,7 @@ export const formatTimestamp = (timestamp, type) => {
 	if (type === 'y-m-d') {
 		return year + "-" + month + "-" + day;
 	}
-	if (type === 'y/m/d'){
+	if (type === 'y/m/d') {
 		return year + "/" + month + "/" + day;
 	}
 	if (type === 'y-m-d h-m') {
@@ -333,9 +337,9 @@ export const formatTimestamp = (timestamp, type) => {
 
 export const reject = (res) => {
 	if (res.status === 499) {
-		message.error('请求超时', 3);
+		message.error('请求超时,请检查网络', 3);
 	} else {
-		message.error('请求失败', 3);
+		message.error('请求失败,请检查服务器', 3);
 	}
 }
 
@@ -368,6 +372,33 @@ export const loading = (_this, flag) => {
 	_this.setState({
 		loading: flag
 	})
+}
+
+/*
+scrollShow
+ */
+export const addScroll = (_this) => {　
+	let add = () => {
+		if (_this.state.totalPage >= _this.state.pageNo + 1) {
+			_this.setState({
+				pageNo: _this.state.pageNo + 1
+			}, () => {
+				_this.show(true);
+			})
+		}
+	}
+	$(window).on('scroll.show', function() {
+		let scrollTop = $(this).scrollTop();　　
+		let scrollHeight = $(document).height();　　
+		let windowHeight = $(this).height();　　
+		if (scrollTop + windowHeight === scrollHeight) {　
+			add();　
+		}
+	});
+}
+
+export const removeScroll = () => {
+	$(window).off('.show');
 }
 
 /**

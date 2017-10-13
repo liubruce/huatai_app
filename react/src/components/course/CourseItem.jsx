@@ -84,7 +84,7 @@ class CourseItem extends React.Component {
                     	<h2 onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} >{item.courseName}{item.goodCourse === '1'?<div className="jc-icon" />:null}</h2>
                     
                       <p className="like">
-                      <span className={item.userCourseOperation.isCollection===1?'active':''} data-am-modal={isBuy?"{target: '#course-confirm'}":""} onClick={()=>this.click(item)} ><i className="fa fa-heart-o" />{item.sumCollection}</span>
+                      <span className={item.userCourseOperation.isCollection===1?'active':''} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} onClick={()=>this.click(item)} ><i className="fa fa-heart-o" />{item.sumCollection}</span>
                       <span className={item.userCourseOperation.isLike===1?'active':''} onClick={()=>this.action(item.courseId,3)} ><i className="fa fa-thumbs-o-up" />{item.sumLike}</span></p>
                     </div>
                   </a>
