@@ -1,7 +1,7 @@
 import React from 'react'
 import  './UserCard.less'
 import { message } from 'antd';
-import * as tools from '../../../config/tools'
+import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 class Card extends React.Component{
 	constructor(args) {
@@ -141,6 +141,7 @@ class UserCard extends React.Component{
 		})
 	}
 	show(){
+		tool.loading(this, true);
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 
@@ -150,7 +151,11 @@ class UserCard extends React.Component{
 			}else{
 				message.error(data.errMsg, 3);
 			}
-		})
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
+    })
 	}
 	componentWillMount() {
 		this.show()

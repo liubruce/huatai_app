@@ -16,8 +16,9 @@ class PointShop extends React.Component{
       pageNo:1,
 		}
 	}
-	componentWillMount() {
-    api.pointShopList().then((data) => {
+	pointShopList(flag){
+		tool.loading(this, true);
+     api.pointShopList({pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
 					pointShopList:data.IntegralShopList?data.IntegralShopList:[],
@@ -26,9 +27,14 @@ class PointShop extends React.Component{
       } else {
         message.error(data.errMsg, 3);
       }
+			tool.loading(this, false);
     }, (res) => {
       tool.reject(res);
+			tool.loading(this, false);
     })
+	}
+	componentWillMount() {
+    this.pointShopList();
   }
   jump(item){
   	this.setState({

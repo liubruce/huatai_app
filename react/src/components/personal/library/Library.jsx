@@ -19,16 +19,21 @@ class Bookshelf extends React.Component {
     componentDidMount() {
        tool.addScroll(this);
     }
-    myList(){
-        api.myList().then((data) => {
+    myList(flag){
+        tool.loading(this, true);
+        api.myList({pageno:this.state.pageNo}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    bookList: data.bookList ? data.bookList : []
+                    bookList: data.bookList ? data.bookList : [],
+                    totalPage:data.totalPage?data.totalPage:0,
+                    score:data.score
                 })
             } else {
                 message.error(data.errMsg, 3);
             }
+            tool.loading(this, false);
         }, (res) => {
+            tool.loading(this, false);
             tool.reject(res);
         })
     }
@@ -86,19 +91,26 @@ class MyLibrary extends React.Component {
             pageNo:1,
         }
     }
-    componentWillMount() {
-        api.myBookList().then((data) => {
+    myBookList(flag){
+         tool.loading(this, true);
+         api.myBookList({pageno:this.state.pageNo,operationType:1}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
                     myLibrary: data.bookList ? data.bookList : [],
+                    totalPage:data.totalPage,
                     score: data.score
                 })
             } else {
                 message.error(data.errMsg, 3);
             }
+            tool.loading(this, false);
         }, (res) => {
+            tool.loading(this, false);
             tool.reject(res);
         })
+    }
+    componentWillMount() {
+        this.myBookList();
     }
     jump(item) {
         this.setState({
@@ -172,18 +184,48 @@ class Database extends React.Component {
             loading:false,
             totalPage:1,
             pageNo:1,
+            score:0
         }
     }
-    componentWillMount() {
-        api.myBookList().then((data) => {
+    myBookList(flag){
+         tool.loading(this, true);
+         api.myBookList({pageno:this.state.pageNo,operationType:2}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    dataBase: data.dataBase ? data.bookList : []
+                    dataBase: data.dataBase ? data.bookList : [],
+                    totalPage:data.totalPage,
+                    score: data.score
                 })
             } else {
                 message.error(data.errMsg, 3);
             }
+             tool.loading(this, false);
         }, (res) => {
+            tool.reject(res);
+            tool.loading(this, false);
+        })  
+    }
+    componentWillMount() {
+        this.myBookList();
+    }
+    jump(item) {
+        this.setState({
+            now_item: item
+        })
+    }
+    ok() {
+        let body = {
+            bookId: this.state.now_item.bookId
+        }
+        api.cashBook(body).then((data) => {
+            if (data.result === 'RC100') {
+                hashHistory.push(`/App/PersonalCenter/Library`);
+            } else {
+                message.error(data.errMsg, 3);
+            }
+            tool.loading(this, false);
+        }, (res) => {
+            tool.loading(this, false);
             tool.reject(res);
         })
     }

@@ -21,7 +21,10 @@ class PointDetail extends React.Component{
         pageNo:1,
 	    }
 	}
-	fuzzyIntgral(){
+	componentDidMount() {
+    tool.addScroll(this);
+  }
+	fuzzyIntgral(falg){
 		let startTime='',endTime='';
 		if(this.state.time!==''){
 			startTime=tool.formatTimestamp(this.state.time,'y/m/d');
@@ -35,35 +38,45 @@ class PointDetail extends React.Component{
 			message.warning('请输入有效的结束日期', 3);
 			return;
 		}
-		api.fuzzyIntgral({startTime:startTime,endTime:endTime}).then((data) => {
+		tool.loading(this, true);
+		api.fuzzyIntgral({startTime:startTime,endTime:endTime,pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[]
+					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[],
+					totalPage:data.total
         })
       } else {
         message.error(data.errMsg, 3);
       }
+			tool.loading(this, false);
     }, (res) => {
+			tool.loading(this, false);
       tool.reject(res);
     })
 	}
-	integralDetails(){
-    api.integralDetails({}).then((data) => {
+	integralDetails(falg){
+		tool.loading(this, true);
+    api.integralDetails({pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
 					dataDetailList:data?data:{},
-					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[]
+					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[],
+					totalPage:data.total
         })
       } else {
         message.error(data.errMsg, 3);
       }
+			tool.loading(this, false);
     }, (res) => {
       tool.reject(res);
+			tool.loading(this, false);
     })
 	}
   componentWillMount() {
-	//	this.fuzzyIntgral();
 		this.integralDetails();
+  }
+	componentWillUnmount() {
+    tool.removeScroll();
   }
 	handleClick = () => {
 		this.setState({ isOpen: true });
@@ -84,7 +97,11 @@ class PointDetail extends React.Component{
 		this.setState({ timeEND:time, isOpenEND: false });
 	}
   searchDetail(){
-		this.fuzzyIntgral();
+		this.setState({
+			pageNo:1
+		},()=>{
+    	this.fuzzyIntgral();
+		})
 	}
 	render(){
 		let dataDetailList=this.state.dataDetailList;

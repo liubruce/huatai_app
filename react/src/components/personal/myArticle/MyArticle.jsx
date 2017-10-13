@@ -83,6 +83,9 @@ class UserCard extends React.Component{
 	componentWillMount() {
 		this.myEssayList();
 	}
+	componentWillUnmount() {
+      tool.removeScroll();
+    }
 	render(){
 		return(
 			<div> 
