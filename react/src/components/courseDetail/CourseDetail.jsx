@@ -12,7 +12,8 @@ class CourseDetail extends React.Component{
 		this.state = {
 			coursedata:{},
 			courseattach:[],
-			isEnd:false
+			isEnd:false,
+			titleList:[]
 		}
 	}
 	componentWillMount() {
@@ -23,7 +24,8 @@ class CourseDetail extends React.Component{
 			if (data.result === 'RC100') {
 				this.setState({
 					coursedata:data.coursedata,
-					courseattach:data.courseattach
+					courseattach:data.courseattach,
+					titleList:data.titleList
 				})
 			} else {
 				message.error(data.errMsg, 3);
@@ -50,7 +52,7 @@ class CourseDetail extends React.Component{
 	onTimeUpdate(e) {
 		let test = document.getElementById('course_id');
 		if (test.currentTime - old_time > 1) {
-			test.currentTime = old_time;
+			// test.currentTime = old_time;
 			this.setState({
 				isQuick: true
 			})
@@ -62,10 +64,14 @@ class CourseDetail extends React.Component{
 		old_time = test.currentTime
 	}
 	wait(){
-		console.log('wait')
+		// console.log('wait')
 	}
 	render() {
 		let course = this.state.coursedata;
+		let path = {
+			pathname: 'App/Course/AnswerOnline',
+			state: {'course':this.state.coursedata,'titleList':this.state.titleList},
+		}
 		return (
 			<div className="warpper">
 				<div className="video-box">
@@ -110,11 +116,15 @@ class CourseDetail extends React.Component{
 						</ul>
 					</div>
 				</div>
+				{course.elecReqCourse !== '1'?
+				<div>
 				{this.state.isEnd?
-					<Link to='App/Course/AnswerOnline' className="am-btn am-btn-block btn-border">在线答题</Link>
+					<Link to={path} className="am-btn am-btn-block btn-border">在线答题</Link>
 					:
 					<a className="am-btn am-btn-block btn-border test-btn">在线答题</a>
 				}
+				</div>
+				:null}
 				
 			</div>
 		);

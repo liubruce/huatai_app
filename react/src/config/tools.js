@@ -379,13 +379,13 @@ export const loading = (_this, flag) => {
 /*
 scrollShow
  */
-export const addScroll = (_this) => {　
+export const addScroll = (_this,show) => {　
 	let add = () => {
 		if (_this.state.totalPage >= _this.state.pageNo + 1) {
 			_this.setState({
 				pageNo: _this.state.pageNo + 1
 			}, () => {
-				_this.show(true);
+				show(true);
 			})
 		}
 	}

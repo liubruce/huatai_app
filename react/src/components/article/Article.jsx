@@ -16,7 +16,7 @@ class Article extends React.Component {
     }
 	}
   componentDidMount() {
-    tool.addScroll(this);
+    tool.addScroll(this,this.show.bind(this));
   }
   componentWillUnmount() {
     tool.removeScroll();

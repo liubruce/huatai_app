@@ -19,7 +19,7 @@ class Course extends React.Component {
     }
   }
   componentDidMount() {
-    tool.addScroll(this);
+    tool.addScroll(this,this.show.bind(this));
   }
   componentWillUnmount() {
     tool.removeScroll();
@@ -33,10 +33,8 @@ class Course extends React.Component {
         elecReqCourse = 0;
         break;
       case 2:
-        this.setState({
-          courseList: [],
-          tab:2
-        })
+        goodCourse = 0;
+        elecReqCourse = 0;
         break;
       case 3:
         goodCourse = 0;
@@ -60,7 +58,6 @@ class Course extends React.Component {
     this.show();
   }
   show(flag) {
-    if(this.state.tab === 2){return;}
     tool.loading(this, true);
     let body = {
       currentPage: this.state.pageNo,
