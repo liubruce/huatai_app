@@ -75,10 +75,10 @@ class Index extends React.Component {
         <div className="warpper">
 
              <Slider {...settings}>
-               <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
-               <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-2.jpg" />
-               <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-3.jpg" />
-               <img alt='test' src="http://s.amazeui.org/media/i/demos/bing-4.jpg" />
+               <img alt='test' src={require('../../style/images/bing-1.jpg')} />
+               <img alt='test' src={require('../../style/images/bing-2.jpg')} />
+               <img alt='test' src={require('../../style/images/bing-3.jpg')} />
+               <img alt='test' src={require('../../style/images/bing-4.jpg')} />
              </Slider>
 
           <div className="am-panel panel-in index-panel">

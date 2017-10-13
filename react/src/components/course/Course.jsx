@@ -8,7 +8,7 @@ class Course extends React.Component {
   constructor(args) {
     super()
     this.state = {
-      tab: 1,
+      tab: 2,
       courseList: [],
       loading: false,
       pageNo: 1,
@@ -37,7 +37,7 @@ class Course extends React.Component {
           courseList: [],
           tab:2
         })
-        return;
+        break;
       case 3:
         goodCourse = 0;
         elecReqCourse = 1;
@@ -60,6 +60,7 @@ class Course extends React.Component {
     this.show();
   }
   show(flag) {
+    if(this.state.tab === 2){return;}
     tool.loading(this, true);
     let body = {
       currentPage: this.state.pageNo,
