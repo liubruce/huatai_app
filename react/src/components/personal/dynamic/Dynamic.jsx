@@ -10,26 +10,39 @@ class CourseDy extends React.Component{
 		super();
 		this.state={
 			courseList:tool.getObject(0),
-      score:0
+      score:0,
+      loading:false,
+      totalPage:1,
+      pageNo:1,
 		}
 	}
-  courseClick(){
-     api.courseClick({pageno:1}).then((data) => {
+  componentDidMount() {
+    tool.addScroll(this);
+  }
+  courseClick(flag){
+     tool.loading(this, true);
+     api.courseClick({pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
           courseList:data.myCourseList?data.myCourseList:[],
+          totalPage:data.totalPage,
           score:data.score?data.score:0
         })
       } else {
         message.error(data.errMsg, 3);
       }
+      tool.loading(this, false);
     }, (res) => {
+      tool.loading(this, false);
       tool.reject(res);
     })
   }
-	componentWillMount() {
+	  componentWillMount() {
     this.courseClick();
     }
+    componentWillReceiveProps(nextProps) {
+    this.courseClick();
+  }
     render(){
         return(
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -48,25 +61,39 @@ class EssayDy extends React.Component{
 	constructor(args){
 		super();
 		this.state={
-			EssayList:tool.getObject(0)
+			EssayList:tool.getObject(0),
+      loading:false,
+      totalPage:1,
+      pageNo:1,
 		}
 	}
-  moreEssay(){
+  componentDidMount() {
+    tool.addScroll(this);
+  }
+  moreEssay(flag){
+    tool.loading(this, true);
     api.moreEssay().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          EssayList:data.myEssayDongList?data.myEssayDongList:[]
+          EssayList:data.myEssayDongList?data.myEssayDongList:[],
+          totalPage:data.totalPage,
+          score:data.score
         })
       } else {
         message.error(data.errMsg, 3);
       }
+      tool.loading(this, false);
     }, (res) => {
+      tool.loading(this, false);
       tool.reject(res);
     })
   }
 	componentWillMount() {
     this.moreEssay();
     }
+  componentWillReceiveProps(nextProps) {
+    this.moreEssay();
+  }
     render(){
         return(
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
@@ -94,6 +121,9 @@ class Dynamic extends React.Component{
            tab
         })
     }
+  componentWillUnmount() {
+    tool.removeScroll();
+  }
 	render(){
 		return(
 			<div className="warpper">

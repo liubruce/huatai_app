@@ -15,7 +15,10 @@ class PointDetail extends React.Component{
 	    	dataDetailList:{},
 				dataDetailLists:[],
 				timeEND:'',
-				timeDefalut:new Date()
+				timeDefalut:new Date(),
+				loading:false,
+        totalPage:1,
+        pageNo:1,
 	    }
 	}
 	fuzzyIntgral(){

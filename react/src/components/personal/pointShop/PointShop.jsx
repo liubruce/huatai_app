@@ -10,7 +10,10 @@ class PointShop extends React.Component{
 		super();
 		this.state={
 			pointShopList:tool.getObject(0),
-			now_item:0
+			now_item:0,
+			loading:false,
+      totalPage:1,
+      pageNo:1,
 		}
 	}
 	componentWillMount() {

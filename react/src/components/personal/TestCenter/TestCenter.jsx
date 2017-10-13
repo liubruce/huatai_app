@@ -10,6 +10,9 @@ class TestCenter extends React.Component{
 		this.state = {
            tab:1,
 		   testList:tool.getObject(0),
+		   loading:false,
+           totalPage:1,
+           pageNo:1,
 		}
 	}
 	unreadInformationlist(){

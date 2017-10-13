@@ -10,10 +10,16 @@ class Bookshelf extends React.Component {
     constructor(args) {
         super();
         this.state = {
-            bookList: []
+            bookList: [],
+            loading:false,
+            totalPage:1,
+            pageNo:1,
         }
     }
-    componentWillMount() {
+    componentDidMount() {
+       tool.addScroll(this);
+    }
+    myList(){
         api.myList().then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
@@ -25,6 +31,9 @@ class Bookshelf extends React.Component {
         }, (res) => {
             tool.reject(res);
         })
+    }
+    componentWillMount() {
+        this.myList();
     }
     render() {
         return (
@@ -71,7 +80,10 @@ class MyLibrary extends React.Component {
         this.state = {
             myLibrary: [],
             now_item: 0,
-            score: 0
+            score: 0,
+            loading:false,
+            totalPage:1,
+            pageNo:1,
         }
     }
     componentWillMount() {
@@ -156,7 +168,10 @@ class Database extends React.Component {
     constructor(args) {
         super();
         this.state = {
-            dataBase: []
+            dataBase: [],
+            loading:false,
+            totalPage:1,
+            pageNo:1,
         }
     }
     componentWillMount() {

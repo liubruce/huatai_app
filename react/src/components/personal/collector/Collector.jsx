@@ -11,7 +11,10 @@ class CourseCol extends React.Component{
 		super()
         this.state={
             colCourseList:tool.getObject(0),
-            score:0
+            score:0,
+            loading:false,
+            totalPage:1,
+            pageNo:1,
         }
 	}
     couCollection(){

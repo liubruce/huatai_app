@@ -11,7 +11,10 @@ class UserCard extends React.Component{
 		this.state={
 			 tab:'',
 			 essayList:[],
-			 score:0
+			 score:0,
+			 loading:false,
+             totalPage:1,
+             pageNo:1,
 		}
 	}
 	changeTab(tab) {
