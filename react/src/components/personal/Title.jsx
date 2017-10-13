@@ -56,6 +56,9 @@ class Title extends React.Component {
 		if (pathname.indexOf('/ArticleDetail') !== -1) {
 			title='文章详情'
 		}
+		if (pathname.indexOf('/AnswerOnline') !== -1) {
+			title='在线答题'
+		}
 		
 		
 		this.setState({

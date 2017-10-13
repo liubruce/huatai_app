@@ -33,8 +33,8 @@ class Course extends React.Component {
         elecReqCourse = 0;
         break;
       case 2:
-        goodCourse = 0;
-        elecReqCourse = 0;
+        goodCourse = '';
+        elecReqCourse = 2;
         break;
       case 3:
         goodCourse = 0;
