@@ -3,7 +3,8 @@ import {Link} from 'react-router'
 import './testCenter.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin } from 'antd'
+import {getFile_IP } from '../../../config/serverIp'
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
@@ -16,6 +17,7 @@ class TestCenter extends React.Component{
 		}
 	}
 	unreadInformationlist(){
+		tool.loading(this, true);
 		api.unreadInformationlist().then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
@@ -24,11 +26,14 @@ class TestCenter extends React.Component{
 		} else {
 			message.error(data.errMsg, 3);
 		}
+		 tool.loading(this, false);		
 		}, (res) => {
+			tool.loading(this, false);	
 		tool.reject(res);
 		})
 	}
 	readInformationlist(){
+		tool.loading(this, true);
 		api.readInformationlist().then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
@@ -37,7 +42,9 @@ class TestCenter extends React.Component{
 		} else {
 			message.error(data.errMsg, 3);
 		}
+		tool.loading(this, false)	
 		}, (res) => {
+		tool.loading(this, false)	
 		tool.reject(res);
 		})
 	}
@@ -62,6 +69,7 @@ class TestCenter extends React.Component{
 	render(){
 		return(
 			<div className="warpper">
+			 <Spin spinning={this.state.loading} tip="加载列表中...">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
 					<ul className="am-tabs-nav am-cf nav">
 					<li className={this.state.tab === 1 ?"am-active":''} onClick={()=>this.changeTab(1)}>
@@ -81,7 +89,7 @@ class TestCenter extends React.Component{
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
-											<a>www.xxx.com/fengxing/#</a>
+											<a href={getFile_IP+'/downfile/'+item.inforURL}>{item.inforURL}</a>
 											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>
 						             </div>
@@ -91,6 +99,7 @@ class TestCenter extends React.Component{
 					</div>
 				</div>
 				</div>
+				</Spin>
 			</div>
 		)
 	}
