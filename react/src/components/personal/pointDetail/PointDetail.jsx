@@ -19,12 +19,13 @@ class PointDetail extends React.Component{
 				loading:false,
         totalPage:1,
         pageNo:1,
+				search:0,
 	    }
 	}
 	componentDidMount() {
     tool.addScroll(this);
   }
-	fuzzyIntgral(falg){
+	fuzzyIntgral(flag){
 		let startTime='',endTime='';
 		if(this.state.time!==''){
 			startTime=tool.formatTimestamp(this.state.time,'y/m/d');
@@ -42,7 +43,7 @@ class PointDetail extends React.Component{
 		api.fuzzyIntgral({startTime:startTime,endTime:endTime,pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[],
+					dataDetailLists:data.fuzzylistuserintgral?data.fuzzylistuserintgral:[],
 					totalPage:data.total
         })
       } else {
@@ -54,7 +55,7 @@ class PointDetail extends React.Component{
       tool.reject(res);
     })
 	}
-	integralDetails(falg){
+	integralDetails(flag){
 		tool.loading(this, true);
     api.integralDetails({pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
@@ -73,10 +74,21 @@ class PointDetail extends React.Component{
     })
 	}
   componentWillMount() {
-		this.integralDetails();
+		if(this.state.search===0){
+        this.integralDetails();
+		}else{
+			this.fuzzyIntgral();
+		}
   }
 	componentWillUnmount() {
     tool.removeScroll();
+  }
+	componentWillReceiveProps(nextProps) {
+		if(this.state.search===0){
+        this.integralDetails();
+		}else{
+			this.fuzzyIntgral();
+		}
   }
 	handleClick = () => {
 		this.setState({ isOpen: true });
@@ -98,7 +110,8 @@ class PointDetail extends React.Component{
 	}
   searchDetail(){
 		this.setState({
-			pageNo:1
+			pageNo:1,
+			search:1
 		},()=>{
     	this.fuzzyIntgral();
 		})

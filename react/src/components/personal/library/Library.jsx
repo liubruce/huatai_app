@@ -40,6 +40,9 @@ class Bookshelf extends React.Component {
     componentWillMount() {
         this.myList();
     }
+    componentWillReceiveProps(nextProps) {
+       this.myList();
+    }
     render() {
         return (
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
@@ -111,6 +114,9 @@ class MyLibrary extends React.Component {
     }
     componentWillMount() {
         this.myBookList();
+    }
+    componentWillReceiveProps(nextProps) {
+       this.myBookList();
     }
     jump(item) {
         this.setState({
@@ -208,6 +214,9 @@ class Database extends React.Component {
     componentWillMount() {
         this.myBookList();
     }
+    componentWillReceiveProps(nextProps) {
+        this.myBookList();
+  }
     jump(item) {
         this.setState({
             now_item: item
@@ -283,6 +292,9 @@ class Library extends React.Component {
             tab
         })
     }
+    componentWillUnmount() {
+        tool.removeScroll();
+     }
     render() {
         return (
             <div className="warpper">
