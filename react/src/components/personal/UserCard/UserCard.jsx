@@ -1,6 +1,6 @@
 import React from 'react'
 import  './UserCard.less'
-import { message } from 'antd';
+import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 class Card extends React.Component{
@@ -175,12 +175,13 @@ class UserCard extends React.Component{
 							<a  onClick={()=>this.changeTab(2)}>荣誉证书</a>
 						</li>
 					</ul>
-
+                   <Spin spinning={this.state.loading} tip="加载列表中...">
 					<div className="am-tabs-bd">
 						{
 							this.state.tab===0?<Card userCard={this.state.userCard}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert/>)
 						}
 					</div>
+				  </Spin>
 				</div>
 			</div>
 

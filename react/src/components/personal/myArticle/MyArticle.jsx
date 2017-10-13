@@ -2,7 +2,7 @@ import React from 'react'
 import  './myArticle.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 import {Link,browserHistory,hashHistory} from 'react-router'
 import {getFile_IP } from '../../../config/serverIp'
 class UserCard extends React.Component{
@@ -15,6 +15,7 @@ class UserCard extends React.Component{
 			 loading:false,
              totalPage:1,
              pageNo:1,
+			 searchValue:''
 		}
 	}
 	changeTab(tab) {
@@ -51,7 +52,8 @@ class UserCard extends React.Component{
 		})
 	}
 	myEssayList(){
-       api.myEssayList({pageno:1,checkState:this.state.tab}).then((data) => {
+		tool.loading(this, true);
+       api.myEssayList({pageno:1,checkState:this.state.tab,EssayTitle:this.state.searchValue}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
 				essayList:data.essayList?data.essayList:[]
@@ -60,8 +62,10 @@ class UserCard extends React.Component{
 		} else {
 			message.error(data.errMsg, 3);
 		}
+		tool.loading(this, false);
 		}, (res) => {
 		tool.reject(res);
+		tool.loading(this, false);
 		})
 	}
 	ok(essayId) {
@@ -86,6 +90,11 @@ class UserCard extends React.Component{
 	componentWillUnmount() {
       tool.removeScroll();
     }
+	changeValue(e){
+      this.setState({
+		  searchValue:e.target.value
+	  })
+	}
 	render(){
 		return(
 			<div> 
@@ -93,13 +102,12 @@ class UserCard extends React.Component{
 					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
                    <div className="search" style={{left: '71px'}}>
 					<i className="fa fa-search" />
-					<input 
-							// defaultValue={`userCode: ${tool.user!==null?tool.user.userCode:'null'}`} 
-							type="text" placeholder="搜索" />
+					<input value={this.state.searchValue} onChange={this.changeValue.bind(this)} type="text" placeholder="搜索" />
 					</div>
 					<div className="header-right"><Link to='/App/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
                  </header>
 			<div className="warpper">
+			<Spin spinning={this.state.loading} tip="加载列表中...">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
 					<li className={this.state.tab===''?'am-active':null} onClick={()=>this.changeTab('')}>
@@ -168,6 +176,7 @@ class UserCard extends React.Component{
                             </div>
                 </div>
 				</div>
+				</Spin>
 			</div>
       </div>
 		)
