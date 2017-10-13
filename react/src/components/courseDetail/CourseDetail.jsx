@@ -61,6 +61,9 @@ class CourseDetail extends React.Component{
 		}
 		old_time = test.currentTime
 	}
+	wait(){
+		console.log('wait')
+	}
 	render() {
 		let course = this.state.coursedata;
 		return (
@@ -73,6 +76,7 @@ class CourseDetail extends React.Component{
 					controls="controls"  width="100%" height="210"
 					// onEnded={(e)=>this.videoEnd(e)}
 					onTimeUpdate={(e)=>this.onTimeUpdate(e)}
+					onWaiting={()=>this.wait()}
 					preload="auto">
 						您的浏览器不支持 video 标签。
 					</video>
