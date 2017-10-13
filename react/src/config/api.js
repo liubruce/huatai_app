@@ -332,7 +332,7 @@ export const appStudentSelectCoursePager = (body={}) => {
 /eLearning/Course/appLoadCourse
  */
 export const appLoadCourse = (body) => {
-    let url = `${lesson_api_IP}/eLearning/Course/appLoadCourse`;
+    let url = `${lesson_api_IP}/appELearning/appCourse/appLoadCourse`;
     url = tool.url_format(url, 'coursetop', 'menu', body);
     return new Promise((resolve, reject) => {
         sfetch.get({

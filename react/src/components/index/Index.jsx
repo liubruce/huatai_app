@@ -6,6 +6,8 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
+import {getFile_IP } from '../../config/serverIp'
+import CourseItem from '../course/CourseItem.jsx'
 
  const SampleNextArrow =(props)=> {
   const {onClick} = props
@@ -97,15 +99,23 @@ class Index extends React.Component {
             <ul className="am-gallery am-avg-sm-2 am-gallery-default">
             {this.state.courseList.map((item,index)=>{
               return(
-                    <li key={index} >
+                <CourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
+/*                    <li key={index} >
                      <div className="am-gallery-item">
                        <a>
-                         <img alt='img not found' src="http://s.amazeui.org/media/i/demos/bing-1.jpg" />
-                         <h3 className="am-gallery-title">课程名称</h3>
-                         <div className="am-gallery-desc"><i className="fa fa-heart-o" />13,888</div>
+                         <video 
+                           src={getFile_IP+'/downfile/'+item.coursevideoPath}   
+                           className="v-img"
+                           height='90px'
+                           width='100%'
+                           >
+                           您的浏览器不支持 video 标签。
+                         </video>
+                         <h3 className="am-gallery-title">{item.courseName}</h3>
+                         <div className="am-gallery-desc"><i className="fa fa-heart-o" />{item.sumCollection}</div>
                        </a>
                      </div>
-                    </li>
+                    </li>*/
                 )
             })}
             </ul>

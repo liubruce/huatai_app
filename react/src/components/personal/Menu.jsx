@@ -122,11 +122,11 @@ class Menu extends React.Component {
         <li>
             <Link to='/Personal/Set' ><i className="icon icon-set-up" />设置<i className="fa fa-angle-right floatR"/></Link>
         </li>
-          {!tool.isPc?
+{/*          {!tool.isPc?
           <li>
             <a onClick={()=>tool.refreshToken()} >REFRESH TOKEN</a>
           </li>
-          :null}
+          :null}*/}
         </ul>
       </div>
 			)
