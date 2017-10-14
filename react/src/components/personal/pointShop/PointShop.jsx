@@ -16,6 +16,12 @@ class PointShop extends React.Component{
       pageNo:1,
 		}
 	}
+	componentDidMount() {
+    tool.addScroll(this,this.pointShopList.bind(this));
+  }
+	componentWillUnmount() {
+    tool.removeScroll();
+  }
 	pointShopList(flag){
 		tool.loading(this, true);
      api.pointShopList({pageno:this.state.pageNo}).then((data) => {
@@ -34,6 +40,9 @@ class PointShop extends React.Component{
     })
 	}
 	componentWillMount() {
+    this.pointShopList();
+  }
+	componentWillReceiveProps(nextProps) {
     this.pointShopList();
   }
   jump(item){

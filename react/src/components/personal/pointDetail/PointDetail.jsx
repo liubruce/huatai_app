@@ -2,7 +2,7 @@ import React from 'react'
 import './pointDetail.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 import $ from 'jquery'
 import DatePicker from 'react-mobile-datepicker';
 class PointDetail extends React.Component{
@@ -23,7 +23,11 @@ class PointDetail extends React.Component{
 	    }
 	}
 	componentDidMount() {
-    tool.addScroll(this);
+		if(this.state.search===0){
+       tool.addScroll(this,this.integralDetails.bind(this));
+		}else{
+       tool.addScroll(this,this.fuzzyIntgral.bind(this));
+		}
   }
 	fuzzyIntgral(flag){
 		let startTime='',endTime='';
@@ -154,7 +158,7 @@ class PointDetail extends React.Component{
 						</div>
 						<button type="button" className="btn-query" onClick={this.searchDetail.bind(this)}>查询</button>
 					</div>
-					
+					<Spin spinning={this.state.loading} tip="加载列表中...">
 						{
 							dataDetailLists.map((item,index)=>{
 								return(
@@ -166,6 +170,7 @@ class PointDetail extends React.Component{
 								)
 							})
 						}
+					</Spin>
 					</div>
 		)
 	}
