@@ -38,21 +38,11 @@ class CourseDetail extends React.Component{
 		this.setState({
 				isEnd: true
 			})
-			// if (!this.state.isQuick) {
-			// 	this.setState({
-			// 		isEnd: true
-			// 	})
-			// }else{
-			// 	message.error('请勿快进视频');
-			// 	this.setState({
-			// 		isQuick:false
-			// 	})
-			// }
 	}
 	onTimeUpdate(e) {
 		let test = document.getElementById('course_id');
 		if (test.currentTime - old_time > 1) {
-			test.currentTime = old_time;
+			// test.currentTime = old_time;
 			this.setState({
 				isQuick: true
 			})

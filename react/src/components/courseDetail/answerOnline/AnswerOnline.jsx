@@ -3,6 +3,7 @@ import  './AnswerOnline.less'
 import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
+import $ from 'jquery'
 
 class AnswerOnline extends React.Component{
 	constructor(args) {
@@ -112,16 +113,100 @@ class AnswerOnline extends React.Component{
         }
         return number;
     }
+	submit() {
+		let radioTitles = [];
+		let checkboxTitles = [];
+		clearInterval(this.timerAuctionHandler);
+		$('.radio-test-online').each((i,element)=> {
+			let checkboxList = $(element).find("input[type='radio']");
+			let answer = 0;
+			checkboxList.each((index, el) => {
+				if (el.checked) {
+					switch (index) {
+						case 0:
+							answer += 1;
+							break;
+						case 1:
+							answer += 2;
+							break;
+						case 2:
+							answer += 4;
+							break;
+						case 3:
+							answer += 8;
+							break;
+						default:
+							break;
+					}
+				}
+			})
+			radioTitles.push({
+				titleType:'1',
+				answer:answer
+			})
+			// console.log(this.state.single[i].answer,answer)
+		})
+		$('.check-test-online').each((i, element)=> {
+			let checkboxList = $(element).find("input[type='checkbox']");
+			let answer = 0;
+			checkboxList.each((index, el) => {
+				if (el.checked) {
+					switch (index) {
+						case 0:
+							answer += 1;
+							break;
+						case 1:
+							answer += 2;
+							break;
+						case 2:
+							answer += 4;
+							break;
+						case 3:
+							answer += 8;
+							break;
+						default:
+							break;
+					}
+				}
+			})
+			checkboxTitles.push({
+				titleType:'0',
+				answer:answer
+			})
+		})
+
+		let coursedata = {
+			courseId: this.props.params.id
+		}
+		let formData = new FormData();
+		formData.append('coursedata', JSON.stringify(coursedata))
+		formData.append('radioTitles', JSON.stringify(radioTitles));
+		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
+		api.appSubmCourseTitle(formData).then((data) => {
+		
+			if (data.result === 'RC100') {
+				this.setState({
+					// point: coursedata.answerScore
+				})
+			} else {
+
+				message.error(data.errMsg, 3);
+			}
+
+		}, (res) => {
+			tool.reject(res);
+		})
+	}
 	render(){
 		return(
 
 			<div className="warpper">
 				<p className="ans-tips">答题倒计时<span>{this.state.hourAuction}:{this.state.minAuction}:{this.state.secAuction}</span></p>
 				<div className="am-panel online-ans">
-					<h3>单项选择题：</h3>
+					{this.state.single.length>0?<h3>单项选择题：</h3>:null}
 				     {this.state.single.map((item,index)=>{
 				     	return(
-					         <div key={index} className="am-panel-bd">
+					         <div key={index} className="am-panel-bd radio-test-online">
 					         	<p className="ans-title">{index+1}、{item.title}</p>
 					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />A. {item.A}</label>
 					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />B. {item.B}</label>
@@ -130,10 +215,10 @@ class AnswerOnline extends React.Component{
 					         </div>
 				     		)
 				     })}
-					<h3>多项选择题：</h3>
-					{this.state.single.map((item,index)=>{
+					{this.state.multiple.length>0?<h3>多项选择题：</h3>:null}
+					{this.state.multiple.map((item,index)=>{
 						return(
-					       <div key={index} className="am-panel-bd">
+					       <div key={index} className="am-panel-bd check-test-online">
 					       	<p className="ans-title">{index+1}、{item.title}</p>
 					       	<label className="am-checkbox am-warning"><input type="checkbox"  />A. {item.A}</label>
 					       	<label className="am-checkbox am-warning"><input type="checkbox"  />B. {item.B}</label>
@@ -144,7 +229,7 @@ class AnswerOnline extends React.Component{
 					})}
 				</div>
 				<div className="am-panel">
-					<button type="button" className="submit-btn" data-am-modal="{target: '#online-modal'}">提交答案</button>
+					<button type="button" className="submit-btn" data-am-modal="{target: '#online-modal'}" onClick={()=>this.submit()} >提交答案</button>
 				</div>
 		         <div className="am-modal am-modal-confirm" tabIndex="-1" id="online-modal">
 		         	<div className="am-modal-dialog">
