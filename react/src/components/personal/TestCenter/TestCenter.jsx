@@ -89,7 +89,7 @@ class TestCenter extends React.Component{
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
-											<a href={getFile_IP+'/downfile/'+item.inforURL}>{item.inforURL}</a>
+											<a href={item.inforURL}>{item.inforURL}</a>
 											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>
 						             </div>
