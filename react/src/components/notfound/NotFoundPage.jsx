@@ -1,5 +1,7 @@
 import React from 'react'
 import './notfound.less'
+import {browserHistory} from 'react-router'
+
 class NotFoundPage extends React.Component {
 	constructor(props) {
 		super();
@@ -9,7 +11,7 @@ class NotFoundPage extends React.Component {
 			  <div className="notfound">
                  <div className="logo">
                     <img src={require('../../style/images/404.png')} alt="404"  />
-                    <p onClick={()=>{window.history.back();}}><a>BACK</a></p>
+                    <p onClick={()=>browserHistory.goBack()}><a>BACK</a></p>
                  </div>
                   
               </div>

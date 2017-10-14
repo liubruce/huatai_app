@@ -4,6 +4,7 @@ import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import $ from 'jquery'
+import {browserHistory} from 'react-router'
 
 class AnswerOnline extends React.Component{
 	constructor(args) {
@@ -99,7 +100,7 @@ class AnswerOnline extends React.Component{
                 secAuction: '00',
                 showLayer: true,
             },()=>{
-				// this.submit();
+				this.submit();
 			})
         }
     }
@@ -142,7 +143,7 @@ class AnswerOnline extends React.Component{
 			})
 			radioTitles.push({
 				titleType:'1',
-				answer:answer
+				radioAnswer:answer
 			})
 			// console.log(this.state.single[i].answer,answer)
 		})
@@ -170,8 +171,8 @@ class AnswerOnline extends React.Component{
 				}
 			})
 			checkboxTitles.push({
-				titleType:'0',
-				answer:answer
+				titleType:'2',
+				checkboxAnswer:answer
 			})
 		})
 
@@ -183,10 +184,9 @@ class AnswerOnline extends React.Component{
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
 		api.appSubmCourseTitle(formData).then((data) => {
-		
 			if (data.result === 'RC100') {
 				this.setState({
-					// point: coursedata.answerScore
+					point: data.answerScore
 				})
 			} else {
 
@@ -238,7 +238,7 @@ class AnswerOnline extends React.Component{
 		         			考试得分: {this.state.point}<br/>若答题结果不理想，您可重新学习当前课程后再次答题，系统最终将记录您当前课程的最高答题得分！
 		         		</div>
 		         		<div className="am-modal-footer">
-		         			<span className="am-modal-btn">确定</span>
+		         			<span className="am-modal-btn" onClick={()=>browserHistory.goBack()} >确定</span>
 		         		</div>
 		         	</div>
 		         </div>

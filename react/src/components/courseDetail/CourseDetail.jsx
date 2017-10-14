@@ -42,7 +42,7 @@ class CourseDetail extends React.Component{
 	onTimeUpdate(e) {
 		let test = document.getElementById('course_id');
 		if (test.currentTime - old_time > 1) {
-			// test.currentTime = old_time;
+			test.currentTime = old_time;
 			this.setState({
 				isQuick: true
 			})
