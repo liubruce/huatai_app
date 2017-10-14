@@ -47,7 +47,7 @@ class PointDetail extends React.Component{
 		api.fuzzyIntgral({startTime:startTime,endTime:endTime,pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					dataDetailLists:data.fuzzylistuserintgral?data.fuzzylistuserintgral:[],
+					dataDetailLists:flag?this.state.dataDetailLists.concat(data.fuzzylistuserintgral):data.fuzzylistuserintgral,
 					totalPage:data.total
         })
       } else {
@@ -65,7 +65,7 @@ class PointDetail extends React.Component{
       if (data.result === 'RC100') {
         this.setState({
 					dataDetailList:data?data:{},
-					dataDetailLists:data.listIntegralDetails?data.listIntegralDetails:[],
+					dataDetailLists:flag?this.state.dataDetailLists.concat(data.listIntegralDetails):data.listIntegralDetails,
 					totalPage:data.total
         })
       } else {

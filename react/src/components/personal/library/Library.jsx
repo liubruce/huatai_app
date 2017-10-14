@@ -24,7 +24,7 @@ class Bookshelf extends React.Component {
         api.myList({pageno:this.state.pageNo}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    bookList: data.bookList ? data.bookList : [],
+                    bookList:flag?this.state.bookList.concat(data.bookList):data.bookList,
                     totalPage:data.totalPage?data.totalPage:0,
                     score:data.score
                 })
@@ -104,7 +104,7 @@ class MyLibrary extends React.Component {
          api.myBookList({pageno:this.state.pageNo,operationType:1}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    myLibrary: data.bookList ? data.bookList : [],
+                    myLibrary:flag?this.state.myLibrary.concat(data.bookList):data.bookList,
                     totalPage:data.totalPage,
                     score: data.score
                 })
@@ -208,7 +208,7 @@ class Database extends React.Component {
          api.myBookList({pageno:this.state.pageNo,operationType:2}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    dataBase: data.dataBase ? data.bookList : [],
+                    dataBase:flag?this.state.dataBase.concat(data.dataBase):data.dataBase,
                     totalPage:data.totalPage,
                     score: data.score
                 })

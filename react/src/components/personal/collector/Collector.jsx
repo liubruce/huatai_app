@@ -20,12 +20,12 @@ class CourseCol extends React.Component{
     componentDidMount() {
        tool.addScroll(this,this.couCollection.bind(this));
     }
-    couCollection(){
+    couCollection(flag){
        tool.loading(this, true);
        api.couCollection().then((data) => {
        if (data.result === 'RC100') {
         this.setState({
-            colCourseList:data.myCourseList?data.myCourseList:[],
+            colCourseList:flag?this.state.colCourseList.concat(data.colCourseList):data.myCourseList,
             score:data.score?data.score:0,
             totalPage:data.totalPage
         })
@@ -78,7 +78,7 @@ class EssayCol extends React.Component{
        api.morecolEssay().then((data) => {
         if (data.result === 'RC100') {
             this.setState({
-                colCourseList:data.myEssayColList?data.myEssayColList:[],
+                colCourseList:flag?this.state.colCourseList.concat(data.myEssayColList):data.myEssayColList,
                 totalPage:data.total,
                 score:data.score
             })

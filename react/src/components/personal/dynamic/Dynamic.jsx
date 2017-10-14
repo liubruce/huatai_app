@@ -29,7 +29,7 @@ class CourseDy extends React.Component{
      api.courseClick({pageno:1}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          courseList:data.myCourseList?data.myCourseList:[],
+          courseList:flag?this.state.courseList.concat(data.myCourseList):data.myCourseList,
           totalPage:data.totalPage,
           score:data.score
         })
@@ -78,12 +78,12 @@ class EssayDy extends React.Component{
   componentWillUnmount() {
     tool.removeScroll();
   }
-  moreEssay(){
+  moreEssay(flag){
     tool.loading(this, true);
     api.moreEssay().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          EssayList:data.myEssayDongList?data.myEssayDongList:[],
+          EssayList:flag?this.state.EssayList.concat(data.myEssayDongList):data.myEssayDongList,
           totalPage:data.totalPage,
           score:data.score
         })

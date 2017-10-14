@@ -27,8 +27,9 @@ class PointShop extends React.Component{
      api.pointShopList({pageno:this.state.pageNo}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-					pointShopList:data.IntegralShopList?data.IntegralShopList:[],
-					score:data.score
+					pointShopList:flag?this.state.pointShopList.concat(data.IntegralShopList):data.IntegralShopList,
+					score:data.score,
+					totalPage:data.totalPage
         })
       } else {
         message.error(data.errMsg, 3);
