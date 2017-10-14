@@ -333,7 +333,45 @@ export const appStudentSelectCoursePager = (body={}) => {
  */
 export const appLoadCourse = (body) => {
     let url = `${lesson_api_IP}/appELearning/appCourse/appLoadCourse`;
-    url = tool.url_format(url, 'coursetop', 'menu', body);
+    url = tool.url_format(url, 'mainPage', 'menu', body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
+/eLearning/Course/appOnlineAnswer
+ */
+export const appOnlineAnswer = (body) => {
+    let url = `${lesson_api_IP}/appELearning/appCourse/appOnlineAnswer`;
+    url = tool.url_format(url, 'mainPage', 'menu', body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
+/eLearning/Course/appSubmCourseTitle
+ */
+export const appSubmCourseTitle = (body) => {
+    let url = `${lesson_api_IP}/appELearning/appCourse/appSubmCourseTitle`;
+    url = tool.url_format(url, 'mainPage', 'menu', body);
     return new Promise((resolve, reject) => {
         sfetch.get({
             url: url,

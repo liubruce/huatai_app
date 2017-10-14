@@ -1,87 +1,163 @@
 import React from 'react'
 import  './AnswerOnline.less'
 import { message } from 'antd';
-import * as tools from '../../../config/tools' 
-
+import * as tool from '../../../config/tools'
+import * as api from '../../../config/api'
 
 class AnswerOnline extends React.Component{
-	constructor(args){
+	constructor(args) {
 		super()
-		this.stae={
-
+		this.state = {
+			single: [],
+			multiple: [],
+            hourAuction: '00',
+            minAuction: '00',
+            secAuction: '00',
+			answerTime:0,
+			point:0
 		}
 	}
 
+	componentWillMount() {
+		let body = {
+			courseId: this.props.params.id
+		};
+		api.appOnlineAnswer(body).then((data) => {
+			if (data.result === 'RC100') {
+				let single = [],
+					multiple = [];
+				for (let x of data.titleList) {
+					if (x.titleType === '1') {
+						single.push(x);
+					} else {
+						multiple.push(x);
+					}
+				}
+				this.setState({
+					single,
+					multiple,
+					answerTime: data.answerTime ? data.answerTime : 0
+				}, () => {
+					this.countdown();
+				});
+			} else {
+				message.error(data.errMsg, 3);
+			}
+		}, (res) => {
+			tool.reject(res);
+		})
+	}
+	countdown() {
+        let t = parseInt(this.state.answerTime,10)*60;
+        let h = parseInt(t / 3600,10);
+        let m = parseInt((t - h * 3600) / 60,10);
+        let s = t - h * 3600 - m * 60;
+
+        this.setState({
+            counterAuction:t,
+            hourAuction: this.getNumber(h),
+            minAuction: this.getNumber(m),
+            secAuction: this.getNumber(s)
+        });
+        if (t !== 0) {
+            this.startTimer()
+        }
+    }
+
+	startTimer() {
+        if (!this.timerAuctionHandler) {
+            this.timerAuctionHandler = setInterval(() => {
+
+                let counter = parseInt(this.state.counterAuction,10) - 1;
+
+                if (counter === 0) {
+                    this.stopTimer()
+                }
+
+                let t = parseInt(counter,10);
+                let h = parseInt(t / 3600,10);
+                let m = parseInt((t - h * 3600) / 60,10);
+                let s = t - h * 3600 - m * 60;
+
+                this.setState({
+                    counterAuction: counter,
+                    hourAuction: this.getNumber(h),
+                    minAuction: this.getNumber(m),
+                    secAuction: this.getNumber(s)
+                })
+            }, 1000);
+        }
+    }
+
+    stopTimer() {
+        if (this.timerAuctionHandler) {
+            clearInterval(this.timerAuctionHandler)
+            this.setState({
+                hourAuction: '00',
+                minAuction: '00',
+                secAuction: '00',
+                showLayer: true,
+            },()=>{
+				// this.submit();
+			})
+        }
+    }
+
+    getNumber(no) {
+        let number = '00';
+        if (no < 10) {
+            number = '0' + no;
+        } else {
+            number = no + ''
+        }
+        return number;
+    }
 	render(){
 		return(
 
 			<div className="warpper">
-				<p className="ans-tips">答题倒计时<span>300</span>s</p>
+				<p className="ans-tips">答题倒计时<span>{this.state.hourAuction}:{this.state.minAuction}:{this.state.secAuction}</span></p>
 				<div className="am-panel online-ans">
 					<h3>单项选择题：</h3>
-					<div className="am-panel-bd">
-						<p className="ans-title">1、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-radio am-warning"><input type="radio" name="a" value=""  />XXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="a" value=""  />XXXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="a" value=""  />XXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="a" value=""  />XXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">2、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-radio am-warning"><input type="radio" name="b" value=""  />XXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="b" value=""  />XXXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="b" value=""  />XXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="b" value=""  />XXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">3、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-radio am-warning"><input type="radio" name="c" value=""  />XXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="c" value=""  />XXXXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="c" value=""  />XXX</label>
-						<label className="am-radio am-warning"><input type="radio" name="c" value=""  />XXX</label>
-					</div>
+				     {this.state.single.map((item,index)=>{
+				     	return(
+					         <div key={index} className="am-panel-bd">
+					         	<p className="ans-title">{index+1}、{item.title}</p>
+					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />A. {item.A}</label>
+					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />B. {item.B}</label>
+					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />C. {item.C}</label>
+					         	<label className="am-radio am-warning"><input type="radio" name={'radio' + index}  />D. {item.D}</label>
+					         </div>
+				     		)
+				     })}
 					<h3>多项选择题：</h3>
-					<div className="am-panel-bd">
-						<p className="ans-title">1、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">2、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">3、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">4、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXX</label>
-					</div>
-					<div className="am-panel-bd">
-						<p className="ans-title">5、在风险管理方法中，为高层建筑安装火灾警报器的方式属于?</p>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXXXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXX</label>
-						<label className="am-checkbox am-warning"><input type="checkbox" value=""  />XXXXXX</label>
-					</div>
+					{this.state.single.map((item,index)=>{
+						return(
+					       <div key={index} className="am-panel-bd">
+					       	<p className="ans-title">{index+1}、{item.title}</p>
+					       	<label className="am-checkbox am-warning"><input type="checkbox"  />A. {item.A}</label>
+					       	<label className="am-checkbox am-warning"><input type="checkbox"  />B. {item.B}</label>
+					       	<label className="am-checkbox am-warning"><input type="checkbox"  />C. {item.C}</label>
+					       	<label className="am-checkbox am-warning"><input type="checkbox"  />D. {item.D}</label>
+					       </div>
+					    )
+					})}
 				</div>
 				<div className="am-panel">
-					<button type="button" className="submit-btn" data-am-modal="{target: '#my-modal'}">提交答案</button>
+					<button type="button" className="submit-btn" data-am-modal="{target: '#online-modal'}">提交答案</button>
 				</div>
+		         <div className="am-modal am-modal-confirm" tabIndex="-1" id="online-modal">
+		         	<div className="am-modal-dialog">
+		         		<div className="am-modal-hd">温馨提示</div>
+		         		<div className="am-modal-bd">
+		         			考试得分: {this.state.point}<br/>若答题结果不理想，您可重新学习当前课程后再次答题，系统最终将记录您当前课程的最高答题得分！
+		         		</div>
+		         		<div className="am-modal-footer">
+		         			<span className="am-modal-btn">确定</span>
+		         		</div>
+		         	</div>
+		         </div>
 			</div>
-
 		)
 	}
 

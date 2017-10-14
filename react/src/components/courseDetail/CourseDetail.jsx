@@ -52,7 +52,7 @@ class CourseDetail extends React.Component{
 	onTimeUpdate(e) {
 		let test = document.getElementById('course_id');
 		if (test.currentTime - old_time > 1) {
-			// test.currentTime = old_time;
+			test.currentTime = old_time;
 			this.setState({
 				isQuick: true
 			})
@@ -68,10 +68,6 @@ class CourseDetail extends React.Component{
 	}
 	render() {
 		let course = this.state.coursedata;
-		let path = {
-			pathname: 'App/Course/AnswerOnline',
-			state: {'course':this.state.coursedata,'titleList':this.state.titleList},
-		}
 		return (
 			<div className="warpper">
 				<div className="video-box">
@@ -119,7 +115,7 @@ class CourseDetail extends React.Component{
 				{course.elecReqCourse !== '1'?
 				<div>
 				{this.state.isEnd?
-					<Link to={path} className="am-btn am-btn-block btn-border">在线答题</Link>
+					<Link to={`App/Course/AnswerOnline/${course.courseId}`} className="am-btn am-btn-block btn-border">在线答题</Link>
 					:
 					<a className="am-btn am-btn-block btn-border test-btn">在线答题</a>
 				}

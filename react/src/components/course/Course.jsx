@@ -12,8 +12,8 @@ class Course extends React.Component {
       courseList: [],
       loading: false,
       pageNo: 1,
-      elecReqCourse: 0,
-      goodCourse: 1,
+      elecReqCourse: 2,
+      goodCourse: '',
       score:0,
       totalPage:0
     }
@@ -33,8 +33,8 @@ class Course extends React.Component {
         elecReqCourse = 0;
         break;
       case 2:
-        goodCourse = 0;
-        elecReqCourse = 0;
+        goodCourse = '';
+        elecReqCourse = 2;
         break;
       case 3:
         goodCourse = 0;
@@ -73,6 +73,10 @@ class Course extends React.Component {
           totalPage:data.coursePage.totalPage
         })
       } else {
+        this.setState({
+          courseList:[],
+          totalPage:0
+        })
         message.error(data.errMsg, 3);
       }
       tool.loading(this, false);
