@@ -103,7 +103,7 @@ class Menu extends React.Component {
      <div className="container">
         <div className="user-header">
           <div className="tx-name">
-             <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + user.headPath} />
+            <Link to={"/App/PersonalCenter/EditUser"}><img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={getFile_IP + '/downfile/' + user.headPath} /></Link>
             <p className="name">{user.userRealName}</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>

@@ -59,8 +59,12 @@ class Title extends React.Component {
 		if (pathname.indexOf('/AnswerOnline') !== -1) {
 			title='在线答题'
 		}
-		
-		
+		if (pathname.indexOf('/EditUser') !== -1) {
+			title='编辑'
+		}
+		if (pathname.indexOf('/StoryDetails') !== -1) {
+			title='故事线'
+		}
 		this.setState({
 			title
 		})

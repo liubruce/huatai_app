@@ -77,18 +77,41 @@
     right: 10%;
     top: 48%;
 }
-
+.story-link {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    text-align: center;
+    color: #FFFFFF;
+    z-index: 10;
+}
+.story-link h2 {
+    font-size: 2rem;
+    font-weight: normal;
+    color: #FFFFFF;
+}
 // .island .base.active .light-1{position: absolute;bottom: 8px;left:-25px;width: 50px;height: 15px;background: url(../../../style/images/light-1@2x.png) no-repeat center;background-size: 100%;animation: light-1 infinite .5s alternate;z-index: 4;}
 .island .base .fxz {
     display: none;
     position: absolute;
-    top: -80px;
-    left: 12px;
-    width: 100px;
-    height: 100px;
-    z-index: 3;
+    top: -49px;
+    left: -6px;
+    width: 60px;
+    height: 60px;
+    z-index: 5;
     animation: fxz infinite 1s alternate;
 }
-
-// .island .base .fxz.man{background: url(../../../style/images/man-tx.png) no-repeat center;background-size: 100%;}
-// .island .base .fxz.woman{background: url(../../../style/images/woman-tx.png) no-repeat center;background-size: 100%;}
+.island .base .fxz h2 {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 60px;
+    transform: translateX(-50%);
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: normal;
+}
+.island .base .fxz.man{background: url(../../../style/images/man-tx.png) no-repeat center;background-size: 100%;}
+.island .base .fxz.woman{background: url(../../../style/images/woman-tx.png) no-repeat center;background-size: 100%;}

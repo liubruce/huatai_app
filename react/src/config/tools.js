@@ -9,7 +9,6 @@ import {
 	message
 } from 'antd';
 import $ from 'jquery'
-
 export const sino_cordova_checkApp = () => {
 	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 	// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
@@ -25,8 +24,20 @@ export const sino_cordova_checkApp = () => {
 	}
 	return reData;
 }
-
-// export const isPc = document.URL.indexOf(":8889") !== -1;
+export const IsPC = () => {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
 export const isPc = sino_cordova_checkApp().device === 'Browser';
 export const isIOS = sino_cordova_checkApp().device === 'IOS';
 
@@ -426,4 +437,11 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 		}
 	}
 	return false;
+}
+
+export const checkLogin=(data)=>{
+	if(data.result==="RC500"){
+        hashHistory.push('/Login');
+		message.error(data.errMsg,3);
+	}
 }
