@@ -42,7 +42,7 @@ class CourseDetail extends React.Component{
 	onTimeUpdate(e) {
 		let test = document.getElementById('course_id');
 		if (test.currentTime - old_time > 1) {
-			test.currentTime = old_time;
+			// test.currentTime = old_time;
 			this.setState({
 				isQuick: true
 			})
@@ -102,7 +102,7 @@ class CourseDetail extends React.Component{
 						</ul>
 					</div>
 				</div>
-				{course.elecReqCourse !== '1'?
+				{course.goodCourse !== '1'?
 				<div>
 				{this.state.isEnd?
 					<Link to={`App/Course/AnswerOnline/${course.courseId}`} className="am-btn am-btn-block btn-border">在线答题</Link>

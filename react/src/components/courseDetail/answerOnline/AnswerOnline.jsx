@@ -142,7 +142,7 @@ class AnswerOnline extends React.Component{
 				}
 			})
 			radioTitles.push({
-				titleType:'1',
+				radioTitleType:'1',
 				radioAnswer:answer
 			})
 			// console.log(this.state.single[i].answer,answer)
@@ -171,7 +171,7 @@ class AnswerOnline extends React.Component{
 				}
 			})
 			checkboxTitles.push({
-				titleType:'2',
+				checkboxTitleType:'2',
 				checkboxAnswer:answer
 			})
 		})
@@ -189,7 +189,6 @@ class AnswerOnline extends React.Component{
 					point: data.answerScore
 				})
 			} else {
-
 				message.error(data.errMsg, 3);
 			}
 
