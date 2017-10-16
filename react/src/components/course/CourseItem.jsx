@@ -73,6 +73,7 @@ class CourseItem extends React.Component {
                 <div className="am-panel cur-list">
                  <a>
                     <video 
+                    onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""}
                     src={getFile_IP+'/downfile/'+item.coursevideoPath}   
                     className="v-img"
                     >

@@ -371,11 +371,13 @@ export const appOnlineAnswer = (body) => {
  */
 export const appSubmCourseTitle = (body) => {
     let url = `${lesson_api_IP}/appELearning/appCourse/appSubmCourseTitle`;
-    url = tool.url_format(url, 'mainPage', 'menu', body);
+    url = tool.url_format(url, 'mainPage', 'menu');
     return new Promise((resolve, reject) => {
-        sfetch.get({
+        sfetch.post({
             url: url,
             timeout: 8000,
+            body:body,
+            dataType: 'formdata'
         }).then((data) => {
             if (data.ok) {
                 resolve(data.json)
