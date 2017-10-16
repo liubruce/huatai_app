@@ -12,6 +12,8 @@ import Library from '../components/personal/library/Library.jsx'
 import PointShop from '../components/personal/pointShop/PointShop.jsx'
 import PointDetail from '../components/personal/pointDetail/PointDetail.jsx'
 import StoryLine from '../components/personal/storyLine/StoryLine.jsx'
+import StoryDetail from '../components/personal/storyLine/storyDetails/StoryDetails.jsx'
+import EditUser from '../components/personal/editUser/EditUser.jsx'
 import ArticleDetail from '../components/articleDetail/ArticleDetail.jsx'
 import CourseDetail from '../components/courseDetail/CourseDetail.jsx'
 import AnswerOnline from '../components/courseDetail/answerOnline/AnswerOnline.jsx'
@@ -34,7 +36,9 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter/Library' component={Library}/>
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>
+            <Route path='/App/PersonalCenter/EditUser' component={EditUser}/>
             <Route path='/App/StoryLine' component={StoryLine}/>
+            <Route path='/App/StoryLine/StoryDetail/:id' component={StoryDetail}/>
             <Route path='/StudentTop' component={StudentTop} />
             <Route path='/CourseTop' component={CourseTop} />
     </Route>

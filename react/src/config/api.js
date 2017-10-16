@@ -716,6 +716,26 @@ export const selectuserDetail = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                console.log(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/**
+ * /appuseranalysis/update个人名片修改
+*/
+export const userUpdate = (bM = {}) => {
+    let body = tool.behavior(bM, 'update', 'button');
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${api_Ip}/appuseranalysis/update`,
+            timeout: 8000,
+            body: body
+        }).then((data) => {
+            if (data.ok) {
                 resolve(data.json)
             } else {
                 reject(data)
