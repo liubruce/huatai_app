@@ -101,6 +101,7 @@ class EssayCol extends React.Component{
         return(
             <Spin spinning={this.state.loading} tip="加载列表中...">
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                <div className="am-panel">
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
@@ -108,7 +109,8 @@ class EssayCol extends React.Component{
                         )
                     })
                 }
-             </div>
+                </div>
+                </div>
              </Spin>
         )
     }

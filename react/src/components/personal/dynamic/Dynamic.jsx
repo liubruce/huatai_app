@@ -105,6 +105,7 @@ class EssayDy extends React.Component{
     render(){
         return(
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
+             <div className="am-panel">
              {
                this.state.EssayList.map((item,index)=>{
                  return(
@@ -113,6 +114,7 @@ class EssayDy extends React.Component{
 
                })
              }
+             </div>
          </div> 
         )
     }
