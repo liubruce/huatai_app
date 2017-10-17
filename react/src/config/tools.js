@@ -442,6 +442,6 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 export const checkLogin=(data)=>{
 	if(data.result==="RC500"){
         hashHistory.push('/Login');
-		message.error(data.errMsg,3);
+		// message.error(data.errMsg,3);
 	}
 }

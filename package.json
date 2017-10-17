@@ -15,7 +15,9 @@
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.2.0",
         "cordova-plugin-image-picker": "^1.1.3",
-        "cordova-plugin-whitelist": "^1.3.2"
+        "cordova-plugin-whitelist": "^1.3.2",
+        "multi-image-picker": "0.0.3",
+        "com.lihau.multiimagepicker": "~0.0.3"
     },
     "cordova": {
         "plugins": {
@@ -26,7 +28,8 @@
             },
             "cordova-plugin-image-picker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
-            }
+            },
+            "com.lihau.multiimagepicker": {}
         },
         "platforms": [
             "android",

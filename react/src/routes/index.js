@@ -36,30 +36,35 @@ const start_render = () => {
     );
 }
 
-if (tool.isPc) {    
-    document.addEventListener('deviceready', () => {
-        console.log('---------local deviceready')
-        start_render();
-    }, false);
+if (tool.IsPC()) {
+    start_render();
 } else {
-    console.log('---------run on APP')
-    document.addEventListener('deviceready', () => {
-        console.log('---------APP deviceready')
-        if (tool.sino_cordova_checkApp().device === 'IOS') {
-            let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
-            let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
-            tool.setUrl(back_url, exit_url);
-        } else {
-            let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
-            let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
-            tool.setUrl(back_url, exit_url);
-        }
-        tool.info().then((data) => {
+    if (tool.isPc) {
+        document.addEventListener('deviceready', () => {
+            console.log('--------------------local deviceready')
             start_render();
-        }, () => {
-            start_render();
-        })
-    }, false);
+        }, false);
+    } else {
+        console.log('--------------------run on APP')
+        document.addEventListener('deviceready', () => {
+            console.log('----------------APP deviceready')
+            if (tool.sino_cordova_checkApp().device === 'IOS') {
+                let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
+                let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
+                tool.setUrl(back_url, exit_url);
+            } else {
+                let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
+                let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
+                tool.setUrl(back_url, exit_url);
+            }
+            tool.info().then((data) => {
+                start_render();
+            }, () => {
+                start_render();
+            })
+        }, false);
+    }
 }
+
 
 
