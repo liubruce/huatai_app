@@ -294,7 +294,7 @@ export const coursetop = (body) => {
 /appuseranalysis/sign
  */
 export const sign = () => {
-    let url = `${api_Ip}/apptop/coursetop`;
+    let url = `${api_Ip}/appuseranalysis/sign`;
     url = tool.url_format(url, 'sign', 'button');
     return new Promise((resolve, reject) => {
         sfetch.get({

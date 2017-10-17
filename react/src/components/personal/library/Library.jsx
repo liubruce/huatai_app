@@ -46,7 +46,7 @@ class Bookshelf extends React.Component {
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab">
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
 				{
 		            this.state.bookList.map((item, index) => {
 		                return (
@@ -147,7 +147,7 @@ class MyLibrary extends React.Component {
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab">
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
 	            {
 		            this.state.myLibrary.map((item, index) => {
 		                return (
@@ -208,7 +208,7 @@ class Database extends React.Component {
          api.myBookList({pageno:this.state.pageNo,operationType:2}).then((data) => {
             if (data.result === 'RC100') {
                 this.setState({
-                    dataBase:flag?this.state.dataBase.concat(data.dataBase):data.dataBase,
+                    dataBase:flag?this.state.dataBase.concat(data.bookList):data.bookList,
                     totalPage:data.totalPage,
                     score: data.score
                 })
@@ -251,14 +251,12 @@ class Database extends React.Component {
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab">
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
               {
             this.state.dataBase.map((item, index) => {
                 return (
                     <div key={index} className="am-panel goods-list">
-                     <div className="goods-img"><img alt='test' src={getFile_IP +'/downfile/'+ item.bookPath}
-                    src={item.bookPath}
-                    /></div>
+                     <div className="goods-img"><img alt='test' src={getFile_IP +'/downfile/'+ item.bookPath}/></div>
 											<div className="goods-info">
 												<p>图书名：{item.bookName}</p>
 												<p>作者：{item.author}</p>

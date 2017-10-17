@@ -12,7 +12,8 @@ class Menu extends React.Component {
       user:{
         userRealName:'default',
         vipGradName:'default',
-        seifInformation:'default'
+        seifInformation:'default',
+        sign:0
       }
 		}
 	}
@@ -89,7 +90,9 @@ class Menu extends React.Component {
   sign(){
     api.sign().then((data)=>{
       if (data.result === 'RC100') {
-
+          this.setState({
+            sign:data.sign
+          })
       }else{
          message.error(data.errMsg, 3);
       }
@@ -107,7 +110,10 @@ class Menu extends React.Component {
             <p className="name">{user.userRealName}</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>
-          <div onClick={()=>this.sign()} className="sign"><i className="fa fa-calendar-check-o" /></div>
+          <div onClick={()=>this.sign()} className="sign"><img src={
+            this.state.sign===1||this.state.sign==='1'?
+            require('../../style/images/sign.png'):require('../../style/images/noSign.png')
+            } style={{width:'18px',marginTop:'-5px'}} /></div>
           <p>{user.seifInformation}</p>
         </div>
         <ul className="am-list am-list-border list-in">
