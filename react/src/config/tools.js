@@ -24,8 +24,20 @@ export const sino_cordova_checkApp = () => {
 	}
 	return reData;
 }
-
-// export const isPc = document.URL.indexOf(":8889") !== -1;
+export const IsPC = () => {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    return flag;
+}
 export const isPc = sino_cordova_checkApp().device === 'Browser';
 export const isIOS = sino_cordova_checkApp().device === 'IOS';
 

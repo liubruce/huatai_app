@@ -43,14 +43,30 @@ class PubArticle extends React.Component{
 			})
 		}
 	}
+	addPicture() {
+		console.log('------------------getPicture');
+		navigator.camera.getPicture(function(imageData) {
+				console.log(imageData)
+			},
+			function(error) {
+				console.log("---------照片获取失败！---" + error)
+			}, {
+				quality: 50,
+				destinationType: navigator.camera.DestinationType.FILE_URI,
+				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+			});
+	}
+	add() {
+		console.log('-------------test add')
+	}
 	render(){
-		let essayDetail=this.state.essayDetail;
+		// let essayDetail=this.state.essayDetail;
 		return(
 			<div> 
 				<header className="header">
 					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
                     <h1>蜂行圈发布</h1>
-					<div className="header-right"><span>发布</span></div>
+					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
 			<div className="warpper">
                 <div className="am-panel">
@@ -64,11 +80,11 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
-                                    <li key={index} data-am-modal="{target: '#my-confirm'}"><img src={require("../../style/images/test.png")}/></li>
+                                    <li key={index} data-am-modal="{target: '#my-confirm'}"><img alt='test' src={require("../../style/images/test.png")}/></li>
 								)
 							})
 						}
-                        <li><label className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
+                        <li onClick={()=>this.addPicture()} ><label className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
                 </div>	
 			</div>

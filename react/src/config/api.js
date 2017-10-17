@@ -16,6 +16,7 @@ export const refreshTken = () => {
             body: body,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -35,6 +36,7 @@ export const goback = () => {
             body: body,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -53,6 +55,7 @@ export const login = (phone, password) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -72,6 +75,7 @@ export const getMenu = () => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -91,6 +95,7 @@ export const pc_loginOut = () => {
             url: url,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -109,6 +114,7 @@ export const loginOut = () => {
             url: url,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -128,6 +134,7 @@ export const homeIndex = () => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -147,6 +154,7 @@ export const myhome = () => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -166,6 +174,7 @@ export const essaylist = (body) => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -185,6 +194,7 @@ export const operateessay = (body) => {
       timeout: 8000
     }).then((data) => {
       if (data.ok) {
+        tool.checkLogin(data.json);
         resolve(data.json)
       } else {
         reject(data)
@@ -204,6 +214,7 @@ export const operatecourse = (body) => {
       timeout: 8000
     }).then((data) => {
       if (data.ok) {
+        tool.checkLogin(data.json);
         resolve(data.json)
       } else {
         reject(data)
@@ -223,6 +234,7 @@ export const cashcourse = (body) => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -242,6 +254,7 @@ export const cashessay = (body) => {
             timeout: 8000
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -262,6 +275,7 @@ export const studenttop = (body) => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -283,6 +297,7 @@ export const coursetop = (body) => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -302,6 +317,7 @@ export const sign = () => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -321,6 +337,7 @@ export const appStudentSelectCoursePager = (body={}) => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -340,6 +357,7 @@ export const appLoadCourse = (body) => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -359,6 +377,7 @@ export const appOnlineAnswer = (body) => {
             timeout: 8000,
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -380,6 +399,7 @@ export const appSubmCourseTitle = (body) => {
             dataType: 'formdata'
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -404,6 +424,7 @@ export const userCard = (userCode) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -424,6 +445,7 @@ export const myEssayList = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -444,6 +466,7 @@ export const courseClick = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -463,6 +486,7 @@ export const moreEssay = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -482,6 +506,7 @@ export const morecolEssay = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -501,6 +526,7 @@ export const couCollection = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -520,6 +546,7 @@ export const unreadInformationlist = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -539,6 +566,7 @@ export const readInformationlist = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -558,6 +586,7 @@ export const myList = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -577,6 +606,7 @@ export const myBookList = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -599,6 +629,7 @@ export const cashBook = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -619,6 +650,7 @@ export const pointShopList = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -638,6 +670,7 @@ export const pointChange = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -661,6 +694,7 @@ export const selectEssay = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -680,6 +714,7 @@ export const integralDetails = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -699,6 +734,7 @@ export const fuzzyIntgral = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)
@@ -718,7 +754,7 @@ export const selectuserDetail = (bM = {}) => {
             body: body
         }).then((data) => {
             if (data.ok) {
-                console.log(data.json);
+                tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
                 reject(data)

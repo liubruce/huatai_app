@@ -36,12 +36,15 @@ const start_render = () => {
     );
 }
 
-if (tool.isPc) {
-    // console.log('-----Run on PC------')
-    start_render();
-} else {
-    // alert('---------addEventListener---------')
+if (tool.isPc) {    
     document.addEventListener('deviceready', () => {
+        console.log('---------local deviceready')
+        start_render();
+    }, false);
+} else {
+    console.log('---------run on APP')
+    document.addEventListener('deviceready', () => {
+        console.log('---------APP deviceready')
         if (tool.sino_cordova_checkApp().device === 'IOS') {
             let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
             let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
@@ -51,7 +54,6 @@ if (tool.isPc) {
             let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
             tool.setUrl(back_url, exit_url);
         }
-        // alert('------------deviceready-------------')
         tool.info().then((data) => {
             start_render();
         }, () => {
