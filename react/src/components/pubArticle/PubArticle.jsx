@@ -45,36 +45,31 @@ class PubArticle extends React.Component{
 		}
 	}
 	getPicture(flag) {
-		if (tool.IsPC()) {
+		if (!window.cordova) {
 			this.addPicture("/static/media/test.13065ad9.png");
 			return;
 		}
-		console.log('------'+JSON.stringify(navigator.camera));
 		if (!flag) {
 			window.imagePicker.getPictures(
 				(imgs) => {
 					for (let i = 0; i < imgs.length; i++) {
 						this.addPicture(imgs[i])
-						console.log('------Image URI: ' + imgs[i]);
 					}
 				},
 				(error) => {
 					console.log('------Error: ' + error);
-				}, 
-				{
-					maximumImagesCount: 10,
+				}, {
+					maximumImagesCount: 9 - this.state.essayPhotos.length,
 					width: 800
 				}
 			);
 		} else {
-			// navigator.camera.PictureSourceType.PHOTOLIBRARY
 			navigator.camera.getPicture((imgSrc) => {
 					this.addPicture(imgSrc)
 				},
 				(error) => {
 					console.log("------Error" + error)
-				}, 
-				{
+				}, {
 					quality: 50,
 					sourceType: navigator.camera.PictureSourceType.CAMERA
 				}
@@ -97,6 +92,7 @@ class PubArticle extends React.Component{
 		})
 	}
 	add() {
+
 
 	}
 	render(){
@@ -125,7 +121,7 @@ class PubArticle extends React.Component{
 								)
 							})
 						}
-                        <li data-am-modal="{target: '#choose-action'}" ><label className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
+                        <li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
                 </div>	
 			</div>

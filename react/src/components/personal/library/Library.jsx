@@ -43,6 +43,28 @@ class Bookshelf extends React.Component {
     componentWillReceiveProps(nextProps) {
        this.myList();
     }
+    down(filename) {
+        // getFile_IP +'/downfile/'+ filename
+        // const FileTransfer = window.getCordova("FileTransfer");
+        // var fileTransfer =  window.FileTransfer;
+        var fileURL = 'cdvfile://localhost/persistent/download/';
+        var uri = encodeURI('https://raw.githubusercontent.com/BosNaufal/react-loading-bar/master/LICENSE');
+        window.FileTransfer.download(
+            uri,
+            fileURL,
+            function(entry) {
+                console.log("%%%%%%download complete: " + entry.toURL());
+            },
+            function(error) {
+                console.log("%%%%%%download error source " + error.source);
+                console.log("%%%%%%download error target " + error.target);
+                console.log("%%%%%%download error code" + error.code);
+            },
+            false, {}
+        );
+    }
+
+
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -62,12 +84,19 @@ class Bookshelf extends React.Component {
 									<p>译者:  {item.translator}</p>
 									<p>出版年: {item.publishYear}</p>
 									<p>页数: {item.pages}</p>
-									<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">下载</button>
+									<button type="button" className="am-btn-primary" 
+                                    onClick={()=>this.down(item.bookEntityPath)}
+                                    // data-am-modal="{target: '#my-modal'}"
+                                    >
+                                    <a href={getFile_IP +'/downfile/'+ item.bookEntityPath} download={item.bookEntityPath} >
+                                    下载</a>
+                                    </button>
 								</div>
 							</div>
 		                )
 		            })
 	            }
+
 				<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-modal">
 					<div className="am-modal-dialog">
 						<div className="am-modal-hd">温馨提示</div>
@@ -79,6 +108,7 @@ class Bookshelf extends React.Component {
 						</div>
 					</div>
 				</div>
+
             </div>
             </Spin>
         )
