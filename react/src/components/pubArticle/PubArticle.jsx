@@ -46,7 +46,6 @@ class PubArticle extends React.Component{
 	}
 	getPicture(flag) {
 		if (!window.cordova) {
-			this.addPicture("/static/media/test.13065ad9.png");
 			return;
 		}
 		if (!flag) {
@@ -110,6 +109,7 @@ class PubArticle extends React.Component{
 								)
 							})
 						}
+{/*						<li ><img alt='test' src={window.cordova.file.dataDirectory + 'abc.jpg'} /></li>*/}
                         <li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
                 </div>	

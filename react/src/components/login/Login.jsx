@@ -52,19 +52,23 @@ class Login extends React.Component {
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />
+        {tool.isPc?
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
           <p><input type="text" defaultValue='13920001354' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
           <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
-{/*          <div className="am-g">
-            <label className="am-checkbox am-warning">
-              <input type="checkbox" defaultChecked="checked" defaultValue data-am-ucheck />记住密码
-            </label>
-            <a className="floatR">找回密码</a>
-          </div>*/}
           <button className="btn-login" type='submit' >登 录</button>
         </div>
+        :
+        <div className="login-box">
+          <h1>华泰蜂行智能学习平台</h1>
+          <h6>Huatai Insurance Group</h6>
+          <p><input type="text" className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="password" className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
+          <button className="btn-login" type='submit' >登 录</button>
+        </div>
+      }
       </form>
     )
   }

@@ -36,7 +36,8 @@ const start_render = () => {
     );
 }
 
-if (!window.cordova) {
+if (tool.IsPC()) {
+    console.log('--------------PC')
     start_render();
 } else {
     if (tool.isPc) {

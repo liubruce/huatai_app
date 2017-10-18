@@ -54,18 +54,19 @@ export const sino_cordova_checkApp = () => {
 	return reData;
 }
 export const IsPC = () => {
-    var userAgentInfo = navigator.userAgent;
-    var Agents = ["Android", "iPhone",
-                "SymbianOS", "Windows Phone",
-                "iPad", "iPod"];
-    var flag = true;
-    for (var v = 0; v < Agents.length; v++) {
-        if (userAgentInfo.indexOf(Agents[v]) > 0) {
-            flag = false;
-            break;
-        }
-    }
-    return flag;
+	var userAgentInfo = navigator.userAgent;
+	var Agents = ["Android", "iPhone",
+		"SymbianOS", "Windows Phone",
+		"iPad", "iPod"
+	];
+	var flag = true;
+	for (var v = 0; v < Agents.length; v++) {
+		if (userAgentInfo.indexOf(Agents[v]) > 0) {
+			flag = false;
+			break;
+		}
+	}
+	return flag;
 }
 export const isPc = sino_cordova_checkApp().device === 'Browser';
 export const isIOS = sino_cordova_checkApp().device === 'IOS';
@@ -419,7 +420,7 @@ export const loading = (_this, flag) => {
 /*
 scrollShow
  */
-export const addScroll = (_this,show) => {　
+export const addScroll = (_this, show) => {　
 	let add = () => {
 		if (_this.state.totalPage >= _this.state.pageNo + 1) {
 			_this.setState({
@@ -468,9 +469,10 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 	return false;
 }
 
-export const checkLogin=(data)=>{
-	if(data.result==="RC500"){
-        hashHistory.push('/Login');
-		// message.error(data.errMsg,3);
+export const checkLogin = (data) => {
+	if (data.result === "RC500") {
+		if(sino_cordova_checkApp().device === 'Browser'){
+			hashHistory.push('/Login');
+		}
 	}
 }

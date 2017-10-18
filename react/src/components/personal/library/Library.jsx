@@ -47,6 +47,28 @@ class Bookshelf extends React.Component {
     }
 
     down(filename) {
+        
+        // window.requestFileSystem(
+        //     // LocalFileSystem.PERSISTENT, //永久目录
+        //     //LocalFileSystem.TEMPORARY,  //临时目录
+        //     0, //如果是需要创建 PERSISTENT 永久文件 需要为0
+        //     function(fs) { //fs FileSystem  {name: string, root: DirectoryEntry}
+        //         alert("fs名字：" + fs.name); //persistent
+        //         alert("DirectoryEntry：" + fs.root); // DirectoryEntry 对象
+        //         alert("DirectoryEntry isFile：" + fs.root.isFile); //false
+        //         alert("DirectoryEntry isDirectory：" + fs.root.isDirectory); //true
+        //         alert("DirectoryEntry name：" + fs.root.name); //""
+        //         alert("DirectoryEntry fullPath：" + fs.root.fullPath); // /
+        //         alert("DirectoryEntry fileSystem：" + fs.root.fileSystem); // undefined
+        //         alert("DirectoryEntry nativeURL：" + fs.root.nativeURL); // file:///data/data/com.example.hello/files/files/
+        //     },
+        //     function(file_error) {
+        //         alert("错误：" + file_error);
+        //     }
+        // );
+
+
+
         try {
             // let fileURL = window.cordova.file.cacheDirectory;
             let fileURL = window.cordova.file.dataDirectory;
@@ -57,7 +79,7 @@ class Bookshelf extends React.Component {
 
             fileURL += filename;
 
-            console.log(fileURI+'---'+fileURL)
+            console.log(fileURI + '---' + fileURL)
 
             navigator.fileTransfer.onprogress = (progressEvent) => {
                 if (progressEvent.lengthComputable) {
