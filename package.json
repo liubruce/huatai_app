@@ -10,7 +10,6 @@
     "author": "JiChuangWei",
     "license": "Apache-2.0",
     "dependencies": {
-        "com.lihau.multiimagepicker": "~0.0.3",
         "cordova-android": "^6.2.3",
         "cordova-ios": "^4.5.2",
         "cordova-plugin-camera": "^2.4.1",
@@ -30,7 +29,6 @@
             "cordova-plugin-image-picker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
             },
-            "com.lihau.multiimagepicker": {},
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {}
         },

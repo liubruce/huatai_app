@@ -41,7 +41,7 @@ if (!window.cordova) {
 } else {
     if (tool.isPc) {
         document.addEventListener('deviceready', () => {
-            console.log('--------------------local deviceready')
+            console.log('--------------------LOCAL deviceready')
             start_render();
         }, false);
     } else {

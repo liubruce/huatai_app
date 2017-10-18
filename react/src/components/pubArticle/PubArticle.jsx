@@ -50,30 +50,19 @@ class PubArticle extends React.Component{
 			return;
 		}
 		if (!flag) {
-			window.imagePicker.getPictures(
-				(imgs) => {
-					for (let i = 0; i < imgs.length; i++) {
-						this.addPicture(imgs[i])
-					}
-				},
-				(error) => {
-					console.log('------Error: ' + error);
-				}, {
-					maximumImagesCount: 9 - this.state.essayPhotos.length,
-					width: 800
+			tool.imagePicker().then((imgs) => {
+				for (let i = 0; i < imgs.length; i++) {
+					this.addPicture(imgs[i])
 				}
-			);
+			}, (error) => {
+				alert("Error:" + error)
+			})
 		} else {
-			navigator.camera.getPicture((imgSrc) => {
-					this.addPicture(imgSrc)
-				},
-				(error) => {
-					console.log("------Error" + error)
-				}, {
-					quality: 50,
-					sourceType: navigator.camera.PictureSourceType.CAMERA
-				}
-			);
+			tool.camera().then((imgSrc) => {
+				this.addPicture(imgSrc)
+			}, (error) => {
+				alert("Error:" + error)
+			})
 		}
 	}
 	addPicture(src) {

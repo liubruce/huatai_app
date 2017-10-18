@@ -9,6 +9,35 @@ import {
 	message
 } from 'antd';
 import $ from 'jquery'
+export const camera = () => {
+	return new Promise((resolve, reject) => {
+		navigator.camera.getPicture((imgSrc) => {
+				resolve(imgSrc)
+			},
+			(error) => {
+				reject(error);
+			}, {
+				quality: 50,
+				sourceType: navigator.camera.PictureSourceType.CAMERA
+			}
+		);
+	});
+}
+export const imagePicker = () => {
+	return new Promise((resolve, reject) => {
+		window.imagePicker.getPictures(
+			(imgs) => {
+				resolve(imgs);
+			},
+			(error) => {
+				reject(error);
+			}, {
+				maximumImagesCount: 9,
+				width: 800
+			}
+		);
+	});
+}
 export const sino_cordova_checkApp = () => {
 	// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 	// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号

@@ -6,6 +6,7 @@ import * as api from '../../../config/api'
 import { message,Spin } from 'antd'
 import { hashHistory } from 'react-router';
 import {getFile_IP } from '../../../config/serverIp'
+
 class Bookshelf extends React.Component {
     constructor(args) {
         super();
@@ -14,6 +15,7 @@ class Bookshelf extends React.Component {
             loading:false,
             totalPage:1,
             pageNo:1,
+            percent:0
         }
     }
     componentDidMount() {
@@ -41,30 +43,54 @@ class Bookshelf extends React.Component {
         this.myList();
     }
     componentWillReceiveProps(nextProps) {
-       this.myList();
+        this.myList();
     }
+
     down(filename) {
-        // getFile_IP +'/downfile/'+ filename
-        // const FileTransfer = window.getCordova("FileTransfer");
-        // var fileTransfer =  window.FileTransfer;
-        var fileURL = 'cdvfile://localhost/persistent/download/';
-        var uri = encodeURI('https://raw.githubusercontent.com/BosNaufal/react-loading-bar/master/LICENSE');
-        window.FileTransfer.download(
-            uri,
-            fileURL,
-            function(entry) {
-                console.log("%%%%%%download complete: " + entry.toURL());
-            },
-            function(error) {
-                console.log("%%%%%%download error source " + error.source);
-                console.log("%%%%%%download error target " + error.target);
-                console.log("%%%%%%download error code" + error.code);
-            },
-            false, {}
-        );
+        try {
+            // let fileURL = window.cordova.file.cacheDirectory;
+            let fileURL = window.cordova.file.dataDirectory;
+            // let fileURL = window.cordova.file.applicationStorageDirectory;
+            // let fileURL = window.cordova.file.externalRootDirectory;
+            // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
+            let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
+
+            fileURL += filename;
+
+            console.log(fileURI+'---'+fileURL)
+
+            navigator.fileTransfer.onprogress = (progressEvent) => {
+                if (progressEvent.lengthComputable) {
+                    console.log(progressEvent.loaded / progressEvent.total * 100);
+                    this.setState({
+                        percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+                    })
+                } else {
+                    console.log('complete')
+                }
+            };
+
+            navigator.fileTransfer.download(
+                fileURI,
+                fileURL,
+                function(entry) {
+                    // alert("SUCESS: " + entry.toURL());
+                    alert("SUCESS: " + JSON.stringify(entry, null, 4))
+                },
+                function(error) {
+                    alert('Error: ' + JSON.stringify(error, null, 4));
+                },
+                false, {}
+            );
+
+
+        } catch (err) {
+            alert("catch Error: " + err.message);
+        }
     }
-
-
+    cancelDown(){
+        navigator.fileTransfer.abort();
+    }
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -86,9 +112,11 @@ class Bookshelf extends React.Component {
 									<p>页数: {item.pages}</p>
 									<button type="button" className="am-btn-primary" 
                                     onClick={()=>this.down(item.bookEntityPath)}
-                                    // data-am-modal="{target: '#my-modal'}"
+                                    data-am-modal="{target: '#load-modal'}"
                                     >
-                                    <a href={getFile_IP +'/downfile/'+ item.bookEntityPath} download={item.bookEntityPath} >
+                                    <a 
+                                    // href={getFile_IP +'/downfile/'+ item.bookEntityPath} download={item.bookEntityPath}
+                                     >
                                     下载</a>
                                     </button>
 								</div>
@@ -96,6 +124,22 @@ class Bookshelf extends React.Component {
 		                )
 		            })
 	            }
+
+                <div className="am-modal am-modal-confirm" tabIndex="-1" id="load-modal">
+                    <div className="am-modal-dialog">
+                        <div className="am-modal-hd">下载中</div>
+                        <div className="am-modal-bd">
+                            {this.state.percent}%
+                        </div>
+                        <div className="am-modal-footer">
+                           {this.state.percent === 100 || this.state.percent === '100' ?
+                            <span className="am-modal-btn">确定</span>
+                            :
+                            <span onClick={()=>this.cancelDown()} className="am-modal-btn">取消</span>
+                           }
+                        </div>
+                    </div>
+                </div>
 
 				<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-modal">
 					<div className="am-modal-dialog">

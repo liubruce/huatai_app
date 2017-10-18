@@ -1,23 +1,132 @@
 /*login*/
-.login-bg{position: fixed;top: 0;left: 0;background: url(../../style/images/login_bg.jpg) no-repeat top center;background-size: 100%;width: 100%;height: 100%}
-.login-box{position: relative;width: 85%;height: auto;margin: 0 auto;padding-top: 30%;}
-.login-box h1{font-size: 2.4rem;font-weight: normal;}
-.login-box h1,
-.login-box h6{color: #FFFFFF;text-align: center;}
-.login-box h6{margin-bottom: 30px}
-.login-box p{margin-bottom: 20px}
-.login-box .am-g label{width: 50%;float: left;color: #FFFFFF}
-.login-box .am-g a{color: #FFFFFF;line-height: 43px}
-.login-box p input{width: 100%;height: 40px;padding-left: 5px;background-color: rgba(255,255,255,.7)}
-.login-box p input::-webkit-input-placeholder { color: #005496;}
-.login-box p input:-moz-placeholder {color: #005496;}
-.login-box p input::-moz-placeholder { color: #005496;}
-.login-box p input:-ms-input-placeholder {color: #005496;}
-.login-box .btn-login{display: block;width: 100%;height: 45px;font-size: 2rem;margin-top: 50px;background: #FFCA05;line-height: 45px;text-align: center;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.40);border-radius: 4px;}
-.am-checkbox-inline.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons, .am-checkbox-inline.am-warning .am-ucheck-radio:checked+.am-ucheck-icons, .am-checkbox.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons, .am-checkbox.am-warning .am-ucheck-radio:checked+.am-ucheck-icons, .am-radio-inline.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons, .am-radio-inline.am-warning .am-ucheck-radio:checked+.am-ucheck-icons, .am-radio.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons, .am-radio.am-warning .am-ucheck-radio:checked+.am-ucheck-icons{color: #FFCA05}
-.am-checkbox-inline.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-checkbox-inline.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-checkbox.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-checkbox.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-radio-inline.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-radio-inline.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-radio.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons, .am-radio.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons{color: #FFCA05}
 
-.mod-psw p{position: relative}
-.mod-psw p i.eye{position: absolute;right: 8%;top: 10px;color: #DEE6F4}
-.mod-psw input{display: block;width: 90%;height: 40px;margin: 15px auto;padding-left: 5px;border: 1px solid #DEE6F4;border-radius: 4px;}
-.mod-psw .submit-btn{margin-top: 40px}
+.login-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: url(../../style/images/login_bg.jpg) no-repeat top center;
+    // background-size: 100%;
+    width: 100%;
+    height: 100%
+}
+
+.login-box {
+    position: relative;
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 30%;
+}
+
+.login-box h1 {
+    font-size: 2.4rem;
+    font-weight: normal;
+}
+
+.login-box h1,
+.login-box h6 {
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.login-box h6 {
+    margin-bottom: 30px
+}
+
+.login-box p {
+    margin-bottom: 20px
+}
+
+.login-box .am-g label {
+    width: 50%;
+    float: left;
+    color: #FFFFFF
+}
+
+.login-box .am-g a {
+    color: #FFFFFF;
+    line-height: 43px
+}
+
+.login-box p input {
+    width: 100%;
+    height: 40px;
+    padding-left: 5px;
+    background-color: rgba(255, 255, 255, .7)
+}
+
+.login-box p input::-webkit-input-placeholder {
+    color: #005496;
+}
+
+.login-box p input:-moz-placeholder {
+    color: #005496;
+}
+
+.login-box p input::-moz-placeholder {
+    color: #005496;
+}
+
+.login-box p input:-ms-input-placeholder {
+    color: #005496;
+}
+
+.login-box .btn-login {
+    display: block;
+    width: 100%;
+    height: 45px;
+    font-size: 2rem;
+    margin-top: 50px;
+    background: #FFCA05;
+    line-height: 45px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.40);
+    border-radius: 4px;
+}
+
+.am-checkbox-inline.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons,
+.am-checkbox-inline.am-warning .am-ucheck-radio:checked+.am-ucheck-icons,
+.am-checkbox.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons,
+.am-checkbox.am-warning .am-ucheck-radio:checked+.am-ucheck-icons,
+.am-radio-inline.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons,
+.am-radio-inline.am-warning .am-ucheck-radio:checked+.am-ucheck-icons,
+.am-radio.am-warning .am-ucheck-checkbox:checked+.am-ucheck-icons,
+.am-radio.am-warning .am-ucheck-radio:checked+.am-ucheck-icons {
+    color: #FFCA05
+}
+
+.am-checkbox-inline.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-checkbox-inline.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-checkbox.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-checkbox.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-radio-inline.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-radio-inline.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-radio.am-warning .am-ucheck-checkbox:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons,
+.am-radio.am-warning .am-ucheck-radio:hover:not(.am-nohover):not(:disabled)+.am-ucheck-icons {
+    color: #FFCA05
+}
+
+.mod-psw p {
+    position: relative
+}
+
+.mod-psw p i.eye {
+    position: absolute;
+    right: 8%;
+    top: 10px;
+    color: #DEE6F4
+}
+
+.mod-psw input {
+    display: block;
+    width: 90%;
+    height: 40px;
+    margin: 15px auto;
+    padding-left: 5px;
+    border: 1px solid #DEE6F4;
+    border-radius: 4px;
+}
+
+.mod-psw .submit-btn {
+    margin-top: 40px
+}
