@@ -1,6 +1,6 @@
 import React from 'react'
 import './editUser.less'
-import {Link,browserHistory} from 'react-router'
+import {Link,hashHistory} from 'react-router'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
@@ -21,10 +21,9 @@ class EditUser extends React.Component{
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 				this.setState({
-					headPath:data.user.headPath,
-                    seifInformation:data.user.seifInformation?data.user.seifInformation:''
+					headPath:data.user.headPath,   
+                    seifInformation:data.user.seifInformation||''
 				})
-                browserHistory.push('/App/PersonalCenter');
 			}else{
 				message.error(data.errMsg, 3);
 			}
@@ -76,6 +75,7 @@ class EditUser extends React.Component{
 			<div className="warpper">
                 <Spin spinning={this.state.loading} tip="加载列表中...">
                 <div className="am-panel">
+
 					{this.state.headPath||this.state.headPath===null?
 						<img src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
 						<img src={this.state.cover_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
@@ -98,6 +98,14 @@ class EditUser extends React.Component{
 					<textarea value={this.state.seifInformation} onChange={this.seifInformation.bind(this)} placeholder="请输入个人说明" style={{width: '100%',height: '100px',padding: '5px',resize: 'none',border: '1px solid #E2EEFB'}}></textarea>		
 				
                    
+
+                    <img alt='head' onError={(e) => tool.headImageError(e)} src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
+                    <label htmlFor="file" style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}}>更换头像</label>
+                    <input type="file" name="" id="file" value="" style={{display: 'none'}}/>
+                </div>
+                <div className="am-panel" style={{paddingTop: '10px'}}>
+                    <textarea value={this.state.seifInformation} onChange={(e)=>this.seifInformation(e)} placeholder="请输入个人说明" style={{width: '100%',height: '100px',padding: '5px',resize: 'none',border: '1px solid #E2EEFB'}}></textarea>
+
                     <button type="button" onClick={this.onSubmit.bind(this)} className="submit-btn">保&emsp;存</button>
                 </div>
                 </Spin>
