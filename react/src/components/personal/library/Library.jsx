@@ -47,17 +47,40 @@ class Bookshelf extends React.Component {
     }
 
     down(filename) {
+        
+        // window.requestFileSystem(
+        //     // LocalFileSystem.PERSISTENT, //永久目录
+        //     //LocalFileSystem.TEMPORARY,  //临时目录
+        //     0, //如果是需要创建 PERSISTENT 永久文件 需要为0
+        //     function(fs) { //fs FileSystem  {name: string, root: DirectoryEntry}
+        //         alert("fs名字：" + fs.name); //persistent
+        //         alert("DirectoryEntry：" + fs.root); // DirectoryEntry 对象
+        //         alert("DirectoryEntry isFile：" + fs.root.isFile); //false
+        //         alert("DirectoryEntry isDirectory：" + fs.root.isDirectory); //true
+        //         alert("DirectoryEntry name：" + fs.root.name); //""
+        //         alert("DirectoryEntry fullPath：" + fs.root.fullPath); // /
+        //         alert("DirectoryEntry fileSystem：" + fs.root.fileSystem); // undefined
+        //         alert("DirectoryEntry nativeURL：" + fs.root.nativeURL); // file:///data/data/com.example.hello/files/files/
+        //     },
+        //     function(file_error) {
+        //         alert("错误：" + file_error);
+        //     }
+        // );
 
-        // try {
+
+
+        try {
             // let fileURL = window.cordova.file.cacheDirectory;
-            // let fileURL = window.cordova.file.dataDirectory;
+            let fileURL = window.cordova.file.dataDirectory;
             // let fileURL = window.cordova.file.applicationStorageDirectory;
-            let fileURL = window.cordova.file.externalDataDirectory;
+            // let fileURL = window.cordova.file.externalRootDirectory;
             // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
             let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
+
             fileURL += filename;
-            console.log(fileURI);
-            console.log(fileURL);
+
+            console.log(fileURI + '---' + fileURL)
+
             navigator.fileTransfer.onprogress = (progressEvent) => {
                 if (progressEvent.lengthComputable) {
                     console.log(progressEvent.loaded / progressEvent.total * 100);
@@ -68,20 +91,24 @@ class Bookshelf extends React.Component {
                     console.log('complete')
                 }
             };
+
             navigator.fileTransfer.download(
                 fileURI,
                 fileURL,
                 function(entry) {
-                    alert("下载成功: " + JSON.stringify(entry, null, 4))
+                    // alert("SUCESS: " + entry.toURL());
+                    alert("SUCESS: " + JSON.stringify(entry, null, 4))
                 },
                 function(error) {
-                    alert('下载失败: ' + JSON.stringify(error, null, 4));
+                    alert('Error: ' + JSON.stringify(error, null, 4));
                 },
                 false, {}
             );
-        // } catch (err) {
-        //     alert("catch Error: " + err.message);
-        // }
+
+
+        } catch (err) {
+            alert("catch Error: " + err.message);
+        }
     }
     cancelDown(){
         navigator.fileTransfer.abort();
