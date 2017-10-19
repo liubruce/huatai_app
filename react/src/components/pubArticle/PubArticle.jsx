@@ -1,8 +1,8 @@
 import React from 'react'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
-import {message} from 'antd'
-import {Link,browserHistory} from 'react-router'
+import {message,Spin} from 'antd'
+import {Link,browserHistory,hashHistory} from 'react-router'
 import './pubArticle.less'
 import $ from 'jquery'
 import Dropzone from 'react-dropzone';
@@ -15,6 +15,7 @@ class PubArticle extends React.Component{
 			 essayPhotos:[],
 			 essayTitle:'',
 			 essayNote:'',
+			 loading:false,
 		}
 	}
 	selectEssay(){
@@ -41,7 +42,8 @@ class PubArticle extends React.Component{
 				essayDetail:{},
 				essayPhotos:[],
 				essayTitle:'',
-				essayNote:''
+				essayNote:'',
+				essayId:''
 			})
 		}
 	}
@@ -94,7 +96,47 @@ class PubArticle extends React.Component{
 		}
 	}
 	add() {
-		// let essayPhotos = this.state.essayPhotos;
+		 tool.loading(this, true);
+		 if(this.state.essayTitle === ''){
+		 	message.error('请输入文章标题', 3);
+		 	tool.loading(this, false);
+		 	return
+		 }
+		 if(this.state.essayNote === ''){
+		 	message.error('请输入文章内容', 3);
+		 	tool.loading(this, false);
+		 	return
+		 }
+		 let formData = new FormData()
+		 formData.append('essayTitle',this.state.essayTitle);
+    	 formData.append('essayNote',this.state.essayNote);
+		 formData.append('essayId',this.state.essayId);
+		 let essayPhotos = this.state.essayPhotos;
+		 for (let x of essayPhotos){
+		 	formData.append('file',x)
+		 }
+		 api.appAddArticle(formData).then((data)=>{
+		 	if (data.result ==='RC100') {
+		 		this.setState({
+		 			essayTitle:'',
+		 			essayNote:'',
+		 			essayPhotos:[]
+		 		},()=>{
+		 			hashHistory.push("/App/PersonalCenter/MyArticle")
+		 		})
+		 		tool.loading(this, false);
+		 	}else{
+		 		tool.loading(this, false);
+		 		message.error(data.errMsg, 3);
+		 	}
+		 })
+
+	}
+	inputValue=(event)=>{
+       this.setState({essayTitle: event.target.value});
+	}
+	textareaValue=(event)=>{
+       this.setState({essayNote: event.target.value});
 	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
@@ -105,12 +147,12 @@ class PubArticle extends React.Component{
                     <h1>蜂行圈发布</h1>
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
-
+			<Spin spinning={this.state.loading} tip="加载列表中...">
 			<div className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
-                        <input type="text" value={this.state.essayTitle?this.state.essayTitle:''}  placeholder="请输入标题"/>
-                        <textarea value={this.state.essayNote?this.state.essayNote:''} placeholder="请输入正文"></textarea>
+                        <input type="text" value={this.state.essayTitle} onChange={this.inputValue.bind()}  placeholder="请输入标题"/>
+                        <textarea value={this.state.essayNote} onChange={this.textareaValue.bind()} placeholder="请输入正文"></textarea>
                     </div>
                 </div>
                 <div className="am-panel">
@@ -150,7 +192,7 @@ class PubArticle extends React.Component{
                <button className="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
              </div>
            </div>
-
+		</Spin>
       </div>
 		)
 	}

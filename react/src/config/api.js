@@ -454,6 +454,30 @@ export const myEssayList = (bM = {}) => {
     })
 
 }
+
+/*
+  /appessaycenter/insertOrUpdate我的蜂行圈文章发布
+*/
+export const appAddArticle = (body) => {
+    let url = `${api_Ip}/appessaycenter/insertOrUpdate`;
+    url = tool.url_format(url, 'essayOperation', 'button');
+    return new Promise((resolve, reject) => {
+        sfetch.post({
+            url: url,
+            timeout: 8000,
+            body:body,
+            dataType: 'formdata'
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+
 /**
  * /appcoursemanagement/moreclick课程动态
 */
