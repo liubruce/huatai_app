@@ -110,8 +110,8 @@ class Menu extends React.Component {
             <p className="name">{user.userRealName}</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>
-          <div onClick={()=>this.sign()} className="sign"><img src={
-            this.state.sign===1||this.state.sign==='1'?
+          <div onClick={()=>this.sign()} className="sign">
+          <img alt='head' src={this.state.sign===1||this.state.sign==='1'?
             require('../../style/images/sign.png'):require('../../style/images/noSign.png')
             } style={{width:'18px',marginTop:'-5px'}} /></div>
           <p>{user.seifInformation}</p>

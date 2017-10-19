@@ -50,13 +50,14 @@ class Bookshelf extends React.Component {
 
         // try {
             // let fileURL = window.cordova.file.cacheDirectory;
-            let fileURL = window.cordova.file.dataDirectory;
+            // let fileURL = window.cordova.file.dataDirectory;
             // let fileURL = window.cordova.file.applicationStorageDirectory;
-            // let fileURL = window.cordova.file.externalRootDirectory;
+            let fileURL = window.cordova.file.externalDataDirectory;
             // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
             let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
             fileURL += filename;
-            console.log(fileURI + '---' + fileURL)
+            console.log(fileURI);
+            console.log(fileURL);
             navigator.fileTransfer.onprogress = (progressEvent) => {
                 if (progressEvent.lengthComputable) {
                     console.log(progressEvent.loaded / progressEvent.total * 100);
@@ -71,11 +72,10 @@ class Bookshelf extends React.Component {
                 fileURI,
                 fileURL,
                 function(entry) {
-                    // alert("SUCESS: " + entry.toURL());
-                    alert("SUCESS: " + JSON.stringify(entry, null, 4))
+                    alert("下载成功: " + JSON.stringify(entry, null, 4))
                 },
                 function(error) {
-                    alert('Error: ' + JSON.stringify(error, null, 4));
+                    alert('下载失败: ' + JSON.stringify(error, null, 4));
                 },
                 false, {}
             );
