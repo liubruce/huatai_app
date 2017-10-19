@@ -13,7 +13,7 @@ class PubArticle extends React.Component{
 			 essayDetail:{},
 			 essayPhotos:[],
 			 essayTitle:'',
-			 essayNote:''
+			 essayNote:'',
 			 loading:false,
 		}
 	}
