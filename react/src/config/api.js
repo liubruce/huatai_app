@@ -765,13 +765,15 @@ export const selectuserDetail = (bM = {}) => {
 /**
  * /appuseranalysis/update个人名片修改
 */
-export const userUpdate = (bM = {}) => {
-    let body = tool.behavior(bM, 'update', 'button');
+export const userUpdate = (formData) => {
+    let url = `${api_Ip}/appuseranalysis/update`;
+    url = tool.url_format(url, 'update', 'button');
+    // let body = tool.behavior(bM, 'update', 'button');
     return new Promise((resolve, reject) => {
         sfetch.get({
-            url: `${api_Ip}/appuseranalysis/update`,
+            url:url,
             timeout: 8000,
-            body: body
+            body: formData
         }).then((data) => {
             if (data.ok) {
                 resolve(data.json)
