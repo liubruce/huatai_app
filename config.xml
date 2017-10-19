@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.HUATAI.ELearning" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.huatai.ELearning" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>HuaTai</name>
     <description>
         华泰蜂行学习平台
     </description>
-    <author email="2323176669@qq.com" href="http://github/JCW0811">
+    <author email="2323176669@qq.com" href="https://github.com/JCW0811">
         JiChuangWei
     </author>
     <content src="index.html" />
@@ -22,10 +22,6 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <preference name="iosPersistentFileLocation" value="Compatibility" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
-    <preference name="AndroidExtraFilesystems" value="sdcard" />
     <engine name="android" spec="^6.2.3" />
     <engine name="ios" spec="^4.5.2" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">

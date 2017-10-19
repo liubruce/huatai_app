@@ -5,6 +5,7 @@ import {message} from 'antd'
 import {Link,browserHistory} from 'react-router'
 import './pubArticle.less'
 import $ from 'jquery'
+import Dropzone from 'react-dropzone';
 class PubArticle extends React.Component{
 	constructor(args) {
 		super()
@@ -13,7 +14,7 @@ class PubArticle extends React.Component{
 			 essayDetail:{},
 			 essayPhotos:[],
 			 essayTitle:'',
-			 essayNote:''
+			 essayNote:'',
 		}
 	}
 	selectEssay(){
@@ -45,6 +46,10 @@ class PubArticle extends React.Component{
 		}
 	}
 	getPicture(flag) {
+		if (tool.IsPC()) {
+			this.addPicture("/static/media/test.13065ad9.png");
+			return;
+		}
 		if (!window.cordova) {
 			return;
 		}
@@ -79,9 +84,17 @@ class PubArticle extends React.Component{
 			newEssayPhotos
 		})
 	}
+	chooseImage(accepted, rejected){
+		if(accepted.length+this.state.essayPhotos.length>9){
+			message.error('图片不能超过9张')
+		}else{
+			this.setState({
+				essayPhotos:this.state.essayPhotos.concat(accepted),
+			})
+		}
+	}
 	add() {
-
-
+		// let essayPhotos = this.state.essayPhotos;
 	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
@@ -105,13 +118,24 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
-                                    <li onClick={()=>this.del(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
+                                    <li onClick={()=>this.del(index)} key={index}>
+                                        <img type="image" src={item.preview} alt={`img-${item.previe}`} />
+                                    </li>
 								)
 							})
 						}
-{/*						<li ><img alt='test' src={window.cordova.file.dataDirectory + 'abc.jpg'} /></li>*/}
-                        <li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
+
+                    	<Dropzone
+							multiple={true}
+							onDrop={this.chooseImage.bind(this)}
+							className = 'choose-image am-avg-sm-3'
+							accept="image/*"
+						>												
+						<li><label
+						// data-am-modal="{target: '#choose-action'}"
+						 className="file-img">+</label></li>
+						</Dropzone>
                 </div>	
 			</div>
 

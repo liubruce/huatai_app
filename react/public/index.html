@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
 }, false);
 document.addEventListener("deviceready", function() {
+    console.log('index.html----deviceready')
     var fileTransfer = new FileTransfer();
     navigator.fileTransfer = fileTransfer;
 }, false);
