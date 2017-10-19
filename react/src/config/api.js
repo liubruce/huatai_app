@@ -770,10 +770,11 @@ export const userUpdate = (formData) => {
     url = tool.url_format(url, 'update', 'button');
     // let body = tool.behavior(bM, 'update', 'button');
     return new Promise((resolve, reject) => {
-        sfetch.get({
+        sfetch.post({
             url:url,
             timeout: 8000,
-            body: formData
+            body: formData,
+            dataType: 'formdata'
         }).then((data) => {
             if (data.ok) {
                 resolve(data.json)
