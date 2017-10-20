@@ -10,25 +10,31 @@
         "cordova-plugin-camera": {
             "CAMERA_USAGE_DESCRIPTION": " ",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.huatai.ELearning"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
         },
         "cordova-plugin-image-picker": {
             "PHOTO_LIBRARY_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.huatai.ELearning"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.huatai.ELearning"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
         },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "com.huatai.ELearning"
         }
     }
 }

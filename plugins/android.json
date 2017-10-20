@@ -21,6 +21,12 @@
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.huatai.ELearning"
         }
     },
     "dependent_plugins": {

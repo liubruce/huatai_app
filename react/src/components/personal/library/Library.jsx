@@ -49,41 +49,56 @@ class Bookshelf extends React.Component {
     down(filename) {
 
         // try {
-            // let fileURL = window.cordova.file.cacheDirectory;
-            // let fileURL = window.cordova.file.dataDirectory;
-            // let fileURL = window.cordova.file.applicationStorageDirectory;
-            let fileURL = window.cordova.file.externalDataDirectory;
-            // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
-            let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
-            fileURL += filename;
-            console.log(fileURI);
-            console.log(fileURL);
-            navigator.fileTransfer.onprogress = (progressEvent) => {
-                if (progressEvent.lengthComputable) {
-                    console.log(progressEvent.loaded / progressEvent.total * 100);
-                    this.setState({
-                        percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
-                    })
-                } else {
-                    console.log('complete')
-                }
-            };
-            navigator.fileTransfer.download(
-                fileURI,
-                fileURL,
-                function(entry) {
-                    alert("下载成功: " + JSON.stringify(entry, null, 4))
-                },
-                function(error) {
-                    alert('下载失败: ' + JSON.stringify(error, null, 4));
-                },
-                false, {}
-            );
+        // let fileURL = window.cordova.file.cacheDirectory;
+        let fileURL = window.cordova.file.dataDirectory;
+        // let fileURL = window.cordova.file.applicationStorageDirectory;
+        // let fileURL = window.cordova.file.externalDataDirectory;
+        // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
+
+        let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
+        fileURL += filename;
+        console.log(fileURI);
+        console.log(fileURL);
+        navigator.fileTransfer.download(
+            fileURI,
+            fileURL,
+            function(entry) {
+                navigator.notification.alert(
+                    JSON.stringify(entry, null, 4), 
+                    () => {
+                        console.log('callback')
+                    }, 
+                    '下载成功', 
+                    'Done'
+                );
+            },
+            function(error) {
+                navigator.notification.alert(
+                    JSON.stringify(error, null, 4), 
+                    () => {
+                        console.log('callback')
+                    }, 
+                    '下载失败', 
+                    'Done' 
+                );
+            },
+            false, {}
+        );
+        navigator.fileTransfer.onprogress = (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                console.log(progressEvent.loaded / progressEvent.total * 100);
+                this.setState({
+                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+                })
+            } else {
+                console.log('complete')
+            }
+        };
         // } catch (err) {
         //     alert("catch Error: " + err.message);
         // }
     }
-    cancelDown(){
+    cancelDown() {
         navigator.fileTransfer.abort();
     }
     render() {
