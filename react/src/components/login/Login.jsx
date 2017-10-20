@@ -49,7 +49,6 @@ class Login extends React.Component {
   //   hashHistory.push("/");
   // }
   render() {
-    // Idiot
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />

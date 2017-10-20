@@ -1,11 +1,10 @@
 import React from 'react'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
-import {message} from 'antd'
-import {Link,browserHistory} from 'react-router'
+import {message,Spin} from 'antd'
+import {Link,browserHistory,hashHistory} from 'react-router'
 import './pubArticle.less'
 import $ from 'jquery'
-import Dropzone from 'react-dropzone';
 class PubArticle extends React.Component{
 	constructor(args) {
 		super()
@@ -15,6 +14,7 @@ class PubArticle extends React.Component{
 			 essayPhotos:[],
 			 essayTitle:'',
 			 essayNote:'',
+			 loading:false,
 		}
 	}
 	selectEssay(){
@@ -41,15 +41,12 @@ class PubArticle extends React.Component{
 				essayDetail:{},
 				essayPhotos:[],
 				essayTitle:'',
-				essayNote:''
+				essayNote:'',
+				essayId:''
 			})
 		}
 	}
 	getPicture(flag) {
-		if (tool.IsPC()) {
-			this.addPicture("/static/media/test.13065ad9.png");
-			return;
-		}
 		if (!window.cordova) {
 			return;
 		}
@@ -84,17 +81,48 @@ class PubArticle extends React.Component{
 			newEssayPhotos
 		})
 	}
-	chooseImage(accepted, rejected){
-		if(accepted.length+this.state.essayPhotos.length>9){
-			message.error('图片不能超过9张')
-		}else{
-			this.setState({
-				essayPhotos:this.state.essayPhotos.concat(accepted),
-			})
-		}
-	}
 	add() {
-		// let essayPhotos = this.state.essayPhotos;
+		 tool.loading(this, true);
+		 if(this.state.essayTitle === ''){
+		 	message.error('请输入文章标题', 3);
+		 	tool.loading(this, false);
+		 	return
+		 }
+		 if(this.state.essayNote === ''){
+		 	message.error('请输入文章内容', 3);
+		 	tool.loading(this, false);
+		 	return
+		 }
+		 let formData = new FormData()
+		 formData.append('essayTitle',this.state.essayTitle);
+    	 formData.append('essayNote',this.state.essayNote);
+		 formData.append('essayId',this.state.essayId);
+		 let essayPhotos = this.state.essayPhotos;
+		 for (let x of essayPhotos){
+		 	formData.append('file',x)
+		 }
+		 api.appAddArticle(formData).then((data)=>{
+		 	if (data.result ==='RC100') {
+		 		this.setState({
+		 			essayTitle:'',
+		 			essayNote:'',
+		 			essayPhotos:[]
+		 		},()=>{
+		 			hashHistory.push("/App/PersonalCenter/MyArticle")
+		 		})
+		 		tool.loading(this, false);
+		 	}else{
+		 		tool.loading(this, false);
+		 		message.error(data.errMsg, 3);
+		 	}
+		 })
+
+	}
+	inputValue=(event)=>{
+       this.setState({essayTitle: event.target.value});
+	}
+	textareaValue=(event)=>{
+       this.setState({essayNote: event.target.value});
 	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
@@ -105,12 +133,12 @@ class PubArticle extends React.Component{
                     <h1>蜂行圈发布</h1>
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
-
+			<Spin spinning={this.state.loading} tip="加载列表中...">
 			<div className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
-                        <input type="text" value={this.state.essayTitle?this.state.essayTitle:''}  placeholder="请输入标题"/>
-                        <textarea value={this.state.essayNote?this.state.essayNote:''} placeholder="请输入正文"></textarea>
+                        <input type="text" value={this.state.essayTitle} onChange={this.inputValue.bind()}  placeholder="请输入标题"/>
+                        <textarea value={this.state.essayNote} onChange={this.textareaValue.bind()} placeholder="请输入正文"></textarea>
                     </div>
                 </div>
                 <div className="am-panel">
@@ -118,24 +146,13 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
-                                    <li onClick={()=>this.del(index)} key={index}>
-                                        <img type="image" src={item.preview} alt={`img-${item.previe}`} />
-                                    </li>
+                                    <li onClick={()=>this.del(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
 								)
 							})
 						}
+{/*						<li ><img alt='test' src={window.cordova.file.dataDirectory + 'abc.jpg'} /></li>*/}
+                        <li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
-
-                    	<Dropzone
-							multiple={true}
-							onDrop={this.chooseImage.bind(this)}
-							className = 'choose-image am-avg-sm-3'
-							accept="image/*"
-						>												
-						<li><label
-						// data-am-modal="{target: '#choose-action'}"
-						 className="file-img">+</label></li>
-						</Dropzone>
                 </div>	
 			</div>
 
@@ -150,7 +167,7 @@ class PubArticle extends React.Component{
                <button className="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
              </div>
            </div>
-
+		</Spin>
       </div>
 		)
 	}

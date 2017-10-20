@@ -47,7 +47,6 @@ class Bookshelf extends React.Component {
     }
 
     down(filename) {
-
         // try {
         // let fileURL = window.cordova.file.cacheDirectory;
         let fileURL = window.cordova.file.dataDirectory;

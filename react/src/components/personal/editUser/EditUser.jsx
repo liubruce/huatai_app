@@ -5,13 +5,15 @@ import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
 import {getFile_IP } from '../../../config/serverIp'
+import Dropzone from 'react-dropzone'
 class EditUser extends React.Component{
 	constructor(args){
 		super();
         this.state={
             userCard:{},
             headPath:'',
-            loading:false
+			loading:false,
+			cover_image:{},
         }
     }
     show(){
@@ -19,7 +21,7 @@ class EditUser extends React.Component{
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 				this.setState({
-					headPath:data.user.headPath,
+					headPath:data.user.headPath,   
                     seifInformation:data.user.seifInformation||''
 				})
 			}else{
@@ -39,13 +41,20 @@ class EditUser extends React.Component{
 		   seifInformation:event.target.value,
 	   })
 	}
+	chooseImage(accepted, rejected){
+		this.setState({
+			cover_image:accepted[0],
+			headPath:""
+		})
+	}
     onSubmit(){
+	
 	  let formData = new FormData();
-	//   if(this.state.headPath===''){
-	// 	formData.append('file',this.state.cover_image);
-	//   }else{
-	// 	formData.append('file',this.state.headPath);
-	//   }
+	  if(this.state.headPath===''){
+		formData.append('file',this.state.cover_image);
+	  }else{
+		formData.append('file',this.state.headPath);
+	  }
 	  formData.append('seifInformation',this.state.seifInformation);
 	     tool.loading(this,true);
 		api.userUpdate(formData).then((data) => {
@@ -66,12 +75,33 @@ class EditUser extends React.Component{
 			<div className="warpper">
                 <Spin spinning={this.state.loading} tip="加载列表中...">
                 <div className="am-panel">
+
+					{this.state.headPath||this.state.headPath===null?
+						<img  onError={(e) => tool.headImageError(e)} src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
+						<img onError={(e) => tool.headImageError(e)} src={this.state.cover_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
+					}
+                  
+                    <Dropzone
+					onDrop={this.chooseImage.bind(this)}					
+					className = 'choose-image'
+					accept="image/jpeg, image/png"
+					>
+                    <label for="file" style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
+					</Dropzone>
+				   
+					
+                    <input type="file" name="" id="file" value="" style={{display: 'none'}}/>
+                </div>
+                {/* <div className="am-panel" style={{paddingTop: '10px'}}>
+					
+					<textarea value={this.state.seifInformation} onChange={this.seifInformation.bind(this)} placeholder="请输入个人说明" style={{width: '100%',height: '100px',padding: '5px',resize: 'none',border: '1px solid #E2EEFB'}}></textarea>		
                     <img alt='head' onError={(e) => tool.headImageError(e)} src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
                     <label htmlFor="file" style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}}>更换头像</label>
                     <input type="file" name="" id="file" value="" style={{display: 'none'}}/>
-                </div>
+                </div> */}
                 <div className="am-panel" style={{paddingTop: '10px'}}>
                     <textarea value={this.state.seifInformation} onChange={(e)=>this.seifInformation(e)} placeholder="请输入个人说明" style={{width: '100%',height: '100px',padding: '5px',resize: 'none',border: '1px solid #E2EEFB'}}></textarea>
+
                     <button type="button" onClick={this.onSubmit.bind(this)} className="submit-btn">保&emsp;存</button>
                 </div>
                 </Spin>
