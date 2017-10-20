@@ -51,6 +51,9 @@ class PointDetail extends React.Component{
 					totalPage:data.total
         })
       } else {
+				this.setState({
+					dataDetailLists:[]
+				})
         message.error(data.errMsg, 3);
       }
 			tool.loading(this, false);
