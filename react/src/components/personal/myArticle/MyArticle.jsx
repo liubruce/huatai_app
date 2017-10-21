@@ -143,7 +143,9 @@ class UserCard extends React.Component{
 																<ul className="am-avg-sm-3 am-thumbnails">
 																	{
 																		item.essayPhotos.map((item,index)=>{
-																			<li><img src={getFile_IP +'/downfile/'+ item.essayPhotoPath} /></li>
+																			return(
+																				<li key={index} ><img alt='test' src={getFile_IP +'/downfile/'+ item.essayPhotoPath} /></li>
+																				)
 																		})
 																	}
 																	{/*<li><img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" /></li>
