@@ -2,10 +2,9 @@ import React from 'react'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message,Spin} from 'antd'
-import {browserHistory,hashHistory} from 'react-router'
+import {Link,browserHistory,hashHistory} from 'react-router'
 import './pubArticle.less'
-// import $ from 'jquery'
-import Dropzone from 'react-dropzone'
+import $ from 'jquery'
 class PubArticle extends React.Component{
 	constructor(args) {
 		super()
@@ -15,6 +14,7 @@ class PubArticle extends React.Component{
 			 essayPhotos:[],
 			 essayTitle:'',
 			 essayNote:'',
+			 
 			 loading:false,
 		}
 	}
@@ -98,6 +98,8 @@ class PubArticle extends React.Component{
 		 formData.append('essayTitle',this.state.essayTitle);
     	 formData.append('essayNote',this.state.essayNote);
 		 formData.append('essayId',this.state.essayId);
+		 formData.append('checkState','3');
+		 // formData.append('checkState':'4');
 		 let essayPhotos = this.state.essayPhotos;
 		 for (let x of essayPhotos){
 		 	formData.append('file',x)
@@ -125,15 +127,6 @@ class PubArticle extends React.Component{
 	textareaValue=(event)=>{
        this.setState({essayNote: event.target.value});
 	}
-	chooseImage(accepted, rejected){
-		if(accepted.length+this.state.essayPhotos.length>9){
-			message.error('图片不能超过9张')
-		}else{
-			this.setState({
-				essayPhotos:this.state.essayPhotos.concat(accepted),
-			})
-		}
-	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
 		return(
@@ -156,29 +149,12 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
-                                     <li onClick={()=>this.del(index)} key={index}>
-                                         <img type="image" src={item.preview} alt={`img-${item.previe}`} />
-                                     </li>
+                                    <li onClick={()=>this.del(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
 								)
 							})
 						}
-			
-
-                    	<Dropzone
-							multiple={true}
-							onDrop={this.chooseImage.bind(this)}
-							className = 'choose-image am-avg-sm-3'
-							accept="image/*"
-						>												
-						<li><label
-						// data-am-modal="{target: '#choose-action'}"
-						 className="file-img">+</label></li>
-						</Dropzone>
-				
-				 {/*<li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>*/}
-		
 {/*						<li ><img alt='test' src={window.cordova.file.dataDirectory + 'abc.jpg'} /></li>*/}
-                       
+                        <li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>
                     </ul>
                 </div>	
 			</div>
