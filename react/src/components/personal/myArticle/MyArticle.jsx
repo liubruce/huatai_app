@@ -139,7 +139,7 @@ class UserCard extends React.Component{
 																<h1 className="am-article-title">{item.essayTitle}</h1>
 															</div>
 															<div className="am-article-bd">
-																<p className="am-article-lead">{item.essayNote}</p>
+																<p className="am-article-lead">{item.essayNote?tool.subString(item.essayNote,100):'没有文字'}</p>
 																<ul className="am-avg-sm-3 am-thumbnails">
 																	{
 																		item.essayPhotos.map((item,index)=>{

@@ -48,7 +48,7 @@ class ArticleDetail extends React.Component{
 					   		{/*<p className="like">{tool.formatTimestamp(essay.createTime)}</p>*/}
 					  	</div>
 					  	<div className="am-article-bd">
-					    	<p className="am-article-lead">{essay.essayNote}</p>
+					    	<pre className="am-article-lead">{essay.essayNote}</pre>
 					    	<ul className="am-avg-sm-3 am-thumbnails">
 					    	      {this.state.essayPhotos.map((img,index)=>{
                                     return(
