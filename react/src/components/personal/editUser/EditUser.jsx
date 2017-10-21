@@ -86,7 +86,7 @@ class EditUser extends React.Component{
 					className = 'choose-image'
 					accept="image/jpeg, image/png"
 					>
-                    <label for="file" style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
+                    <label style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
 					</Dropzone>
 				   
 					
