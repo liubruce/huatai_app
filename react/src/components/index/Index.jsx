@@ -7,7 +7,7 @@ import * as api from '../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
 import {getFile_IP } from '../../config/serverIp'
-import CourseItem from '../course/CourseItem.jsx'
+import IndexCourseItem from '../course/IndexCourseItem.jsx'
 
  const SampleNextArrow =(props)=> {
   const {onClick} = props
@@ -99,23 +99,7 @@ class Index extends React.Component {
             <ul className="am-gallery am-avg-sm-2 am-gallery-default">
             {this.state.courseList.map((item,index)=>{
               return(
-                <CourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
-/*                    <li key={index} >
-                     <div className="am-gallery-item">
-                       <a>
-                         <video 
-                           src={getFile_IP+'/downfile/'+item.coursevideoPath}   
-                           className="v-img"
-                           height='90px'
-                           width='100%'
-                           >
-                           您的浏览器不支持 video 标签。
-                         </video>
-                         <h3 className="am-gallery-title">{item.courseName}</h3>
-                         <div className="am-gallery-desc"><i className="fa fa-heart-o" />{item.sumCollection}</div>
-                       </a>
-                     </div>
-                    </li>*/
+                <IndexCourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
                 )
             })}
             </ul>
