@@ -128,6 +128,14 @@ class Bookshelf extends React.Component {
                                      >
                                     下载</a>
                                     </button>
+
+                                    <button type="button" className="am-btn-primary" 
+                                    >
+                                    <a 
+                                    href={getFile_IP +'/downfile/'+ item.bookEntityPath}
+                                     >
+                                    查看</a>
+                                    </button>
 								</div>
 							</div>
 		                )

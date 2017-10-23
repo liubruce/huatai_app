@@ -37,7 +37,7 @@ const start_render = () => {
 }
 
 if (tool.IsPC()) {
-    console.log('--------------PC')
+    // console.log('--------------PC')
     start_render();
 } else {
     if (tool.isPc) {
@@ -45,6 +45,7 @@ if (tool.IsPC()) {
             console.log('--------------------LOCAL deviceready')
             start_render();
         }, false);
+        start_render();
     } else {
         console.log('--------------------run on APP')
         document.addEventListener('deviceready', () => {

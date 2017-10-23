@@ -14,6 +14,7 @@ class PubArticle extends React.Component{
 			 essayPhotos:[],
 			 essayTitle:'',
 			 essayNote:'',
+			 
 			 loading:false,
 		}
 	}
@@ -97,6 +98,8 @@ class PubArticle extends React.Component{
 		 formData.append('essayTitle',this.state.essayTitle);
     	 formData.append('essayNote',this.state.essayNote);
 		 formData.append('essayId',this.state.essayId);
+		 formData.append('checkState','3');
+		 // formData.append('checkState':'4');
 		 let essayPhotos = this.state.essayPhotos;
 		 for (let x of essayPhotos){
 		 	formData.append('file',x)
