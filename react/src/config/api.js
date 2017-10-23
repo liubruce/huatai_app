@@ -808,3 +808,22 @@ export const userUpdate = (formData) => {
         });
     });
 }
+/**
+ * 积分规则
+*/
+/**
+ *integralmall/levelset/积分规则
+*/
+export const levelSet = (body = {}) => {
+  body = tool.behavior(body, 'certificate', 'menu')
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: `${api_Ip}/integralmall/levelset`,
+      body
+    }).then((data) => {
+      tool.checkLogin(data.json);
+      resolve(data.json)
+    });
+  });
+
+}

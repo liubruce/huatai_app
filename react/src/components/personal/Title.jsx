@@ -65,6 +65,9 @@ class Title extends React.Component {
 		if (pathname.indexOf('/StoryDetails') !== -1) {
 			title='故事线'
 		}
+		if (pathname.indexOf('/IntegralRules') !== -1) {
+			title='积分规则'
+		}
 		this.setState({
 			title
 		})
