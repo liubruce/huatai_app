@@ -65,6 +65,7 @@ class StoryLine extends React.Component{
 		    		<div className="base base-7"><a><div className="light"></div><div className={`fxz ${sex}`}></div></a></div>
 		    		<div className="base base-8"><a><div className="light"></div><div className={`fxz ${sex}`}></div></a></div>
 		    	</div>
+					<Link className="point-rule">积分规则</Link>
 				</div>
 		)
 	}
