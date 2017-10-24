@@ -34,6 +34,7 @@ class StoryLine extends React.Component{
    }
 	render(){
 		let sex=this.state.sex;
+		let index=0;
 		return(
 		  <div className="warpper">
 			<div className="jf-table">
@@ -54,7 +55,7 @@ class StoryLine extends React.Component{
               this.state.allLevelSet.map((item,index)=>{
                 return(
                 <li key={index}>
-									<span>{item.mainId}</span>
+									<span>{index+1}</span>
 									<span>{item.integralName}</span>
 									<span>{item.integralBegin}</span>
 									<span>{item.integralEnd}</span>
