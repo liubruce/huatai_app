@@ -34,6 +34,10 @@ class CourseDetail extends React.Component{
 			tool.reject(res);
 		})
 	}
+	componentDidMount() {
+		alert(navigator.connection.type);
+		console.log(navigator.connection.type)
+	}
 	videoEnd(e) {
 		this.setState({
 				isEnd: true
