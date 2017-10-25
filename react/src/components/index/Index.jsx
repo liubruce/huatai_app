@@ -7,8 +7,7 @@ import * as api from '../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
 import {getFile_IP } from '../../config/serverIp'
-import IndexCourseItem from '../course/IndexCourseItem.jsx'
-
+import CourseItem from '../course/CourseItem.jsx'
  const SampleNextArrow =(props)=> {
   const {onClick} = props
   return (
@@ -96,10 +95,10 @@ class Index extends React.Component {
                 <Link to='/Course' className>更多课程</Link>
               </nav>
             </div>
-            <ul className="am-gallery am-avg-sm-2 am-gallery-default">
+            <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
             {this.state.courseList.map((item,index)=>{
               return(
-                <IndexCourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
+                <CourseItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />
                 )
             })}
             </ul>

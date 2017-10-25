@@ -51,6 +51,8 @@ class CourseDy extends React.Component{
     render(){
         return(
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                 <div className="am-panel">
+               <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                  {
                    this.state.courseList.map((item,index)=>{
                      return(
@@ -58,6 +60,8 @@ class CourseDy extends React.Component{
                      )
                    })
                  }
+                 </ul>
+                 </div>
            </div>
         )
     }
@@ -105,8 +109,6 @@ class EssayDy extends React.Component{
     render(){
         return(
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
-             <div className="am-panel">
-               <ul class="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
              {
                this.state.EssayList.map((item,index)=>{
                  return(
@@ -115,8 +117,6 @@ class EssayDy extends React.Component{
 
                })
              }
-             </ul>
-             </div>
          </div> 
         )
     }

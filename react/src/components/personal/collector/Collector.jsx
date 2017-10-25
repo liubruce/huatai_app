@@ -48,7 +48,7 @@ class CourseCol extends React.Component{
         return(
             <Spin spinning={this.state.loading} tip="加载列表中...">
             <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                <ul class="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
+                <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
