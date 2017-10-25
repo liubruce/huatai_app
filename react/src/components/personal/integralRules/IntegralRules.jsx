@@ -4,7 +4,7 @@ import $ from 'jquery'
 import {Link} from 'react-router'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 var lineIndex=0;
 class StoryLine extends React.Component{
 	constructor(args){
@@ -37,9 +37,8 @@ class StoryLine extends React.Component{
 		let index=0;
 		return(
 		  <div className="warpper">
+				<Spin spinning={this.state.loading} tip="加载列表中...">
 			<div className="jf-table">
-				
-				
 				<ul className="table-title clearFix">
 					<li>序号</li>
 					<li>积分称谓</li>
@@ -66,6 +65,7 @@ class StoryLine extends React.Component{
             }
 				</ul>
 			</div>
+			</Spin>
 		</div>
 		)
 	}

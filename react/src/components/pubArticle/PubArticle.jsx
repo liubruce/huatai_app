@@ -12,9 +12,9 @@ class PubArticle extends React.Component{
 			 tab:'',
 			 essayDetail:{},
 			 essayPhotos:[],
+			 essayPhotosPH:[],
 			 essayTitle:'',
 			 essayNote:'',
-			 
 			 loading:false,
 		}
 	}
@@ -23,7 +23,7 @@ class PubArticle extends React.Component{
 		if (data.result === 'RC100') {
 			this.setState({
 				essayDetail:data.essay?data.essay:{},
-				essayPhotos:data.essay.essayPhotos?data.essay.essayPhotos:[],
+				essayPhotosPH:data.essay.essayPhotos?data.essay.essayPhotos:[],
 				essayTitle:data.essay.essayTitle?data.essay.essayTitle:'',
 				essayNote:data.essay.essayNote?data.essay.essayNote:''
 			})
@@ -41,9 +41,9 @@ class PubArticle extends React.Component{
 			this.setState({
 				essayDetail:{},
 				essayPhotos:[],
+				essayPhotosPH:[],
 				essayTitle:'',
-				essayNote:'',
-				essayId:''
+				essayNote:''
 			})
 		}
 	}
@@ -79,7 +79,14 @@ class PubArticle extends React.Component{
 		let essayPhotos = this.state.essayPhotos;
 		let newEssayPhotos = essayPhotos.splice(index, 1);
 		this.setState({
-			newEssayPhotos
+			essayPhotos:newEssayPhotos
+		})
+	}
+	delPH(index) {
+		let essayPhotosPH = this.state.essayPhotosPH;
+		let newEssayPhotosPH = essayPhotosPH.splice(index, 1);
+		this.setState({
+			essayPhotosPH:newEssayPhotosPH
 		})
 	}
 	add() {
@@ -97,12 +104,17 @@ class PubArticle extends React.Component{
 		 let formData = new FormData()
 		 formData.append('essayTitle',this.state.essayTitle);
     	 formData.append('essayNote',this.state.essayNote);
-		 formData.append('essayId',this.state.essayId);
+		 if(this.props.params.id){
+             formData.append('essayId',this.props.params.id);
+		 }
 		 formData.append('checkState','3');
 		 // formData.append('checkState':'4');
-		 let essayPhotos = this.state.essayPhotos;
+		 let essayPhotos = this.state.essayPhotos,essayPhotosPH=this.state.essayPhotosPH;
 		 for (let x of essayPhotos){
 		 	formData.append('file',x)
+		 }
+		 for (let x of essayPhotosPH){
+			 formData.append('photoPath',x)
 		 }
 		 api.appAddArticle(formData).then((data)=>{
 		 	if (data.result ==='RC100') {
@@ -150,6 +162,13 @@ class PubArticle extends React.Component{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
                                     <li onClick={()=>this.del(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
+								)
+							})
+						}
+						{
+							this.state.essayPhotosPH.map((item,index)=>{
+								return(
+                                    <li onClick={()=>this.delPH(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
 								)
 							})
 						}
