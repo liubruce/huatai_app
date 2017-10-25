@@ -18,6 +18,9 @@ class Header extends React.Component {
   }
   checkUrl(pathname) {
     let placeholder = '';
+    if (pathname.indexOf('/') !== -1) {
+      placeholder = '课程名称';
+    }
     if (pathname.indexOf('/Index') !== -1) {
       placeholder = '课程名称';
     }

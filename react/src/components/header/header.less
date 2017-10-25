@@ -9,8 +9,7 @@
     z-index: 999;
     padding: 0 16px;
     line-height: 44px;
-    background-color: #005496;
-    // color: #FFFFFF;
+    background-color: #005496; // color: #FFFFFF;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
 }
@@ -44,6 +43,26 @@
     background-size: 100%
 }
 
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #999;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #999;
+}
+
 .header .search {
     position: absolute;
     top: 7px;
@@ -51,15 +70,15 @@
     width: 61.9%;
     height: 30px;
     padding: 0 5px;
-    line-height: 30px;
+    line-height: 30px; 
     background-color: #FFFFFF;
+    // background-color: #005496;
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
 
 .header .search i {
-    float: left;
-    // margin-top: 6px;
+    float: left; // margin-top: 6px;
     line-height: 30px;
     color: #C3C4C7;
 }
@@ -68,7 +87,9 @@
     position: absolute;
     width: 89%;
     height: 100%;
-    padding-left: 5px
+    padding-left: 5px;
+    // border-bottom: 1px solid #fff;
+    // color:#fff;
 }
 
 .header .header-right {
@@ -114,15 +135,34 @@
 }
 
 @media screen and (max-width: 320px) {
-    .am-article-bd img{height: 71px;}
-    .am-gallery-default .am-gallery-item img{height: 80px}
-    .header .search {width: 57%;}
-    .header.header-1 .search{width: 46%}
-    .panel-in ul li a{display: inline-block;width: 65px;height: 65px;}
+    .am-article-bd img {
+        height: 71px;
+    }
+    .am-gallery-default .am-gallery-item img {
+        height: 80px
+    }
+    .header .search {
+        width: 57%;
+    }
+    .header.header-1 .search {
+        width: 46%
+    }
+    .panel-in ul li a {
+        display: inline-block;
+        width: 65px;
+        height: 65px;
+    }
 }
 
-@media only screen and (min-width: 768px){
-    .am-gallery-default .am-gallery-item img{height: 170px}
-    .panel-in ul li a{width: 9.8rem;height: 9.8rem}
-    .am-slider .am-slides img{height: 27rem}
+@media only screen and (min-width: 768px) {
+    .am-gallery-default .am-gallery-item img {
+        height: 170px
+    }
+    .panel-in ul li a {
+        width: 9.8rem;
+        height: 9.8rem
+    }
+    .am-slider .am-slides img {
+        height: 27rem
+    }
 }
