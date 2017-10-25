@@ -47,8 +47,8 @@ export const goback = () => {
 
 export const login = (phone, password) => {
     let body = {};
-    body.phone = phone;
-    body.password = password;
+    body.userCode = phone;
+    body.passWord = password;
     return new Promise((resolve, reject) => {
         sfetch.get({
             url: api_Ip + '/login/dologin',

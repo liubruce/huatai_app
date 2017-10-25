@@ -17,67 +17,71 @@ class Menu extends React.Component {
       }
 		}
 	}
-  // test() {
-  //   let menuItems = [{
-  //     "nodeName": "我的名片",
-  //     "runscript": "/App/PersonalCenter",
-  //     "nodeClass": "icon icon-my-card",
-  //   }, {
-  //     "nodeName": "我的蜂行圈",
-  //     "runscript": "/App/PersonalCenter/MyArticle",
-  //     "nodeClass": "icon icon-my-fxq",
-  //   }, {
-  //     "nodeName": "任务中心",
-  //     "runscript": "/App/NewsCenter",
-  //     "nodeClass": "icon icon-task",
-  //   }, {
-  //     "nodeName": "动态",
-  //     "runscript": "/App/PersonalCenter/Dynamic",
-  //     "nodeClass": "icon icon-dt",
-  //   }, {
-  //     "nodeName": "收藏夹",
-  //     "runscript": "/App/PersonalCenter/Collector",
-  //     "nodeClass": "icon icon-scj",
-  //   }, {
-  //     "nodeName": "图书馆",
-  //     "runscript": "/App/PersonalCenter/Library",
-  //     "nodeClass": "icon icon-books",
-  //   }, {
-  //     "nodeName": "积分商城",
-  //     "runscript": "/App/PersonalCenter/PointShop",
-  //     "nodeClass": "icon icon-jfshop",
-  //   }, {
-  //     "nodeName": "积分详情",
-  //     "runscript": "/App/PersonalCenter/PointDetail",
-  //     "nodeClass": "icon icon-jfdetils",
-  //   }, {
-  //     "nodeName": "故事线",
-  //     "runscript": "/App/StoryLine",
-  //     "nodeClass": "icon icon-stroy",
-  //   }];
-  //   this.setState({
-  //     menuItems
-  //   });
-  // }
-  componentWillMount() {
-    if (tool.user === null || tool.user.menu.length === 0) {
-      return;
-    }
-    let menuItems = [];
-    let data = tool.user.menu[0].nodeResult;
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].parentNodeCode !== '0') {
-        menuItems.push(data[i]);
-      }
-    }
+  test() {
+    let menuItems = [{
+      "nodeName": "我的名片",
+      "runscript": "/App/PersonalCenter",
+      "nodeClass": "icon icon-my-card",
+    }, {
+      "nodeName": "我的蜂行圈",
+      "runscript": "/App/PersonalCenter/MyArticle",
+      "nodeClass": "icon icon-my-fxq",
+    }, {
+      "nodeName": "任务中心",
+      "runscript": "/App/NewsCenter",
+      "nodeClass": "icon icon-task",
+    }, {
+      "nodeName": "动态",
+      "runscript": "/App/PersonalCenter/Dynamic",
+      "nodeClass": "icon icon-dt",
+    }, {
+      "nodeName": "收藏夹",
+      "runscript": "/App/PersonalCenter/Collector",
+      "nodeClass": "icon icon-scj",
+    }, {
+      "nodeName": "图书馆",
+      "runscript": "/App/PersonalCenter/Library",
+      "nodeClass": "icon icon-books",
+    }, {
+      "nodeName": "积分商城",
+      "runscript": "/App/PersonalCenter/PointShop",
+      "nodeClass": "icon icon-jfshop",
+    }, {
+      "nodeName": "积分详情",
+      "runscript": "/App/PersonalCenter/PointDetail",
+      "nodeClass": "icon icon-jfdetils",
+    }, {
+      "nodeName": "故事线",
+      "runscript": "/App/StoryLine",
+      "nodeClass": "icon icon-stroy",
+    }];
     this.setState({
       menuItems
-    })
+    });
+  }
+  componentWillMount() {
+    if (tool.isPc) {
+      this.test();
+    } else {
+      if (tool.user === null || tool.user.menu.length === 0) {
+        return;
+      }
+      let menuItems = [];
+      let data = tool.user.menu[0].nodeResult;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].parentNodeCode !== '0') {
+          menuItems.push(data[i]);
+        }
+      }
+      this.setState({
+        menuItems
+      })
+    }
 
     api.myhome().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
-          user:data.user
+          user: data.user
         })
       } else {
         message.error(data.errMsg, 3);

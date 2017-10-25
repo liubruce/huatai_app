@@ -19,6 +19,7 @@
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-image-picker": "^1.1.3",
+        "cordova-plugin-network-information": "^1.3.3",
         "cordova-plugin-whitelist": "^1.3.2"
     },
     "cordova": {
@@ -34,7 +35,8 @@
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-console": {},
-            "cordova-plugin-dialogs": {}
+            "cordova-plugin-dialogs": {},
+            "cordova-plugin-network-information": {}
         },
         "platforms": [
             "android",
