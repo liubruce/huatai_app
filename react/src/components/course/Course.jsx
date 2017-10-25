@@ -10,7 +10,7 @@ class Course extends React.Component {
     this.state = {
       tab: 2,
       courseList: [],
-      loading: false,
+      // loading: false,
       pageNo: 1,
       elecReqCourse: 2,
       goodCourse: '',
