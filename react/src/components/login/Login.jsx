@@ -21,20 +21,21 @@ class Login extends React.Component {
         user.deadTime = _data.deadTime;
         localStorage.setItem("user", JSON.stringify(user));
         tool.save_user();
-        api.getMenu().then((data) => {
-          data.menu = data.menu
-          if (data.result === 'RC100') {
-            localStorage.setItem("user", JSON.stringify(data));
-            tool.save_user();
-            hashHistory.push("/");
-          } else {
-            message.error(data.errMsg, 3);
-            localStorage.setItem("user", null);
-            tool.save_user();
-          }
-        }, (res) => {
-          tool.reject(res);
-        })
+        hashHistory.push("/");
+        // api.getMenu().then((data) => {
+        //   data.menu = data.menu
+        //   if (data.result === 'RC100') {
+        //     localStorage.setItem("user", JSON.stringify(data));
+        //     tool.save_user();
+        //     hashHistory.push("/");
+        //   } else {
+        //     message.error(data.errMsg, 3);
+        //     localStorage.setItem("user", null);
+        //     tool.save_user();
+        //   }
+        // }, (res) => {
+        //   tool.reject(res);
+        // })
       } else {
         message.error(_data.errMsg, 3);
       }
@@ -56,7 +57,7 @@ class Login extends React.Component {
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" defaultValue='13920001354' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="text" defaultValue='13920004935' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
           <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
           <button className="btn-login" type='submit' >登 录</button>
         </div>

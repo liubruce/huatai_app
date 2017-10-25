@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import Header from './header/Header.jsx'
 import Footer from './footer/Footer.jsx'
 import * as tool from '../config/tools'
-import {hashHistory} from 'react-router'
+// import {hashHistory} from 'react-router'
 import './app.less'
 class App extends Component {
 	constructor(args) {
@@ -14,7 +14,7 @@ class App extends Component {
 	}
 	componentWillMount() {
 		if ((tool.user === null || tool.user.menu === undefined) && tool.isPc) {
-			hashHistory.push('/Login');
+			// hashHistory.push('/Login');
 			return;
 		}
 	}

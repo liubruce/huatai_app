@@ -27,6 +27,9 @@
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.huatai.ELearning"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "io.HUATAI.ELearning"
         }
     },
     "dependent_plugins": {
