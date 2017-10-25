@@ -35,8 +35,7 @@ class CourseDetail extends React.Component{
 		})
 	}
 	componentDidMount() {
-		alert(navigator.connection.type);
-		console.log(navigator.connection.type)
+		message.warning('当前网络:' + navigator.connection.type, 3);
 	}
 	videoEnd(e) {
 		this.setState({
