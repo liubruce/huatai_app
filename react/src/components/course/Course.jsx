@@ -10,7 +10,7 @@ class Course extends React.Component {
     this.state = {
       tab: 2,
       courseList: [],
-      // loading: false,
+      loading: false,
       pageNo: 1,
       elecReqCourse: 2,
       goodCourse: '',
@@ -101,6 +101,9 @@ class Course extends React.Component {
                         <a>必修课程</a>
                       </li>
                     </ul>
+                    <div class="am-tabs-bd">
+					             <div data-tab-panel-0 class="am-tab-panel am-active tab">
+					             	<ul class="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                      <Spin spinning={this.state.loading} tip="加载列表中...">
                        {this.state.courseList.map((item,index)=>{
                          return(
@@ -108,6 +111,9 @@ class Course extends React.Component {
                            )
                        })}
                      </Spin>
+                     </ul>
+                     </div>
+                     </div>
                   </div>
                 
               </div>
