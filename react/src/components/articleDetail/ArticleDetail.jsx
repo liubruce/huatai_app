@@ -36,7 +36,7 @@ class ArticleDetail extends React.Component{
 			<div className="warpper">
 				<div className="am-panel article-details">
 				   <div className="pepole-info">
-					<img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile('/downfile/' + essay.headPath)} />
+					<img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(essay.headPath)} />
 					<p className="info"><span>{essay.userRealName}</span>{essay.branchOffice}</p>
 					<p className="time">{tool.formatTimestamp(essay.createTime)}</p>
 				   </div>
@@ -52,7 +52,7 @@ class ArticleDetail extends React.Component{
 					    	<ul className="am-avg-sm-3 am-thumbnails">
 					    	      {this.state.essayPhotos.map((img,index)=>{
                                     return(
-                                       <li key={index} ><img alt='test' src={tool.getFile('/downfile/' + img.essayPhotoPath)} /></li>
+                                       <li key={index} ><img alt='test' src={tool.getFile(img.essayPhotoPath)} /></li>
                                       )
                                   })}
 							</ul>

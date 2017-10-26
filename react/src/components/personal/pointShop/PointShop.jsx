@@ -73,7 +73,7 @@ class PointShop extends React.Component{
 					this.state.pointShopList.map((item,index)=>{
 						return(
                 <div key={index} className="am-panel goods-list">
-								<div className="goods-img"><img src={tool.getFile('/downfile/'+ item.shopCover)}
+								<div className="goods-img"><img src={tool.getFile(item.shopCover)}
 							//	src={item.shopCover}
 								/></div>
 								<div className="goods-info">

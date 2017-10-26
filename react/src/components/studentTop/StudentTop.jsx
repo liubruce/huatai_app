@@ -66,7 +66,7 @@ class StudentTop extends React.Component{
 					   {this.state.studentTopList.map((item,index)=>{
 					   	return(
 					   		<div key={index} className="am-panel rank-list">
-							    <img className='head_img' src={tool.getFile('/downfile/' + item.headPath)} onError={(e) => tool.headImageError(e)} alt='img' />
+							    <img className='head_img' src={tool.getFile(item.headPath)} onError={(e) => tool.headImageError(e)} alt='img' />
 							    <div className="rank-info">
 							    	<p>{item.userRealName}    {item.vipGradName}</p>
 							    	<span>{item.branchOffice}</span>

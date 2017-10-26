@@ -68,7 +68,7 @@ class ArticleItem extends React.Component {
 		let isBuy = item.goodEssay ==='1' && item.userEssayOperation.isBuy !== 1;
 		return(
               <div className="article-list" >
-                <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile('/downfile/' + item.headPath)} />
+                <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(item.headPath)} />
                 <div className="cont">
                   <p className="info"><span>{item.userRealName}</span>{item.branchOffice}</p>
                   <p className="time">{tool.formatTimestamp(item.createTime)}</p>
@@ -88,7 +88,7 @@ class ArticleItem extends React.Component {
                         <ul className="am-avg-sm-3 am-thumbnails">
                         {item.essayPhotos.map((img,index)=>{
                           return(
-                             <li key={index} ><img alt='test' src={tool.getFile('/downfile/' + img.essayPhotoPath)} /></li>
+                             <li key={index} ><img alt='test' src={tool.getFile(img.essayPhotoPath)} /></li>
                             )
                         })}
                         </ul>

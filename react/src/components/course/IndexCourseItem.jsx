@@ -74,7 +74,7 @@ class IndexCourseItem extends React.Component {
                        <a>
                          <video 
                          onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""}
-                           src={tool.getFile('/downfile/'+item.coursevideoPath)}   
+                           src={tool.getFile(item.coursevideoPath)}   
                            className="v-img"
                            >
                            您的浏览器不支持 video 标签。
