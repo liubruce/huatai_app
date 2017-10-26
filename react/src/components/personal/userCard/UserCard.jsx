@@ -3,6 +3,7 @@ import  './UserCard.less'
 import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
+import {getFile_IP } from '../../../config/serverIp'
 class Card extends React.Component{
 	constructor(args) {
 		super()
@@ -73,31 +74,21 @@ class HonoraryCert  extends React.Component{
 	constructor(args) {
 		super()
 	}
+
 	render(){
-		let userCard=this.props.userCard;
+		let Honor2List=this.props.Honor2List;
 		return(
-        <div className="am-panel user-info-list">
-				<div style={{borderBottom: '1px solid #E2EEFB'}}>
+		
+			<div className="am-panel user-info-list">
+				<div style={{ borderBottom: '1px solid #E2EEFB' }}>
 					<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
 						<h2 className="am-titlebar-title">荣誉证书</h2>
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider">
-						<ul className="am-slides honorary" style={{padding: '0 20px 10px'}}>
-							<li>
+						<ul className="am-slides">
+							<li style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
 								<img src={require('../../../style/images/zs.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
-							</li>
-							<li>
-								<img src={require('../../../style/images/zs.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
-							</li>
-							<li>
-								<img src={require('../../../style/images/zs.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
-							</li>
-							<li>
-								<img src={require('../../../style/images/zs.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>荣誉证书名称</p>
+								<p style={{ textAlign: 'center' }}>荣誉证书名称</p>
 							</li>
 						</ul>
 					</div>
@@ -107,23 +98,20 @@ class HonoraryCert  extends React.Component{
 						<h2 className="am-titlebar-title">蜂行荣誉</h2>
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider-1">
-						<ul className="am-slides honorary" style={{padding: '0 20px 10px'}}>
-							<li>
-								<img src={require('../../../style/images/hz.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>首次登录</p>
-							</li>
-							<li>
-								<img src={require('../../../style/images/hz.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
-							</li>
-							<li>
-								<img src={require('../../../style/images/hz.png')} />
-								<p style={{width: '100%',textAlign: 'center'}}>等级名称达成</p>
-							</li>
+						<ul className="am-slides">
+							{Honor2List.map((item, index) => {
+								return (
+									<li key={index} style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
+										<img src={getFile_IP + '/downfile/' + item.honorBadge} alt='test' />
+										<p>{item.honorName}</p>
+									</li>
+								)
+							})}
 						</ul>
 					</div>
 				</div>
-		</div>
+			</div>
+						
 		)
 	}
 }
@@ -132,6 +120,7 @@ class UserCard extends React.Component{
 		super()
 		this.state={
 			userCard:[],
+			Honor2List:[],
 			tab:0,
 		}
 	}
@@ -144,7 +133,7 @@ class UserCard extends React.Component{
 		tool.loading(this, true);
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
-
+               
 				this.setState({
 					userCard:data.obj.data
 				})
@@ -157,8 +146,34 @@ class UserCard extends React.Component{
 			tool.reject(res);
     })
 	}
+	myHonor() {
+		tool.loading(this, true);
+		api.myHonor({}).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					Honor2List: data.allHonor ? data.allHonor : [],
+					Honor2ListMy: data.myHonor ? data.myHonor : []
+				}, () => {
+					let myHonor = []
+					for (let x of this.state.Honor2ListMy) {
+						myHonor.push(x.honorId);
+					}
+					this.setState({
+						Honor2ListMy: myHonor
+					})
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
+			tool.loading(this, false);
+		}, () => {
+			tool.loading(this, false);
+			message.error('请求失败', 3);
+		})
+	}
 	componentWillMount() {
 		this.show()
+		this.myHonor()
 	}
 	render(){
 		return(
@@ -178,7 +193,7 @@ class UserCard extends React.Component{
                    <Spin spinning={this.state.loading} tip="加载列表中...">
 					<div className="am-tabs-bd">
 						{
-							this.state.tab===0?<Card userCard={this.state.userCard}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert/>)
+							this.state.tab===0?<Card userCard={this.state.userCard}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert Honor2List={this.state.Honor2List}/>)
 						}
 					</div>
 				  </Spin>
