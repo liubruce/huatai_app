@@ -4,7 +4,6 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import {Link,browserHistory,hashHistory} from 'react-router'
-import {getFile_IP } from '../../../config/serverIp'
 class UserCard extends React.Component{
 	constructor(args) {
 		super()
@@ -155,7 +154,7 @@ class UserCard extends React.Component{
 																	{
 																		item.essayPhotos.map((item,index)=>{
 																			return(
-																				<li key={index} ><img alt='test' src={getFile_IP +'/downfile/'+ item.essayPhotoPath} /></li>
+																				<li key={index} ><img alt='test' src={tool.getFile('/downfile/'+ item.essayPhotoPath)} /></li>
 																				)
 																		})
 																	}

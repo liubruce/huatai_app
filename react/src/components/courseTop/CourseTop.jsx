@@ -3,7 +3,6 @@ import  './courseTop.less'
 import { message , Spin } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
-import {getFile_IP } from '../../config/serverIp'
 import Switch, { Case, Default } from 'react-switch-case';
 
 class CourseTop extends React.Component{
@@ -67,7 +66,7 @@ class CourseTop extends React.Component{
 					   {this.state.courseTopList.map((item,index)=>{
 					   	return(
 					   		<div key={index} className="am-panel rank-list">
-							    <img className='head_img' src={getFile_IP + '/downfile/' + item.headPath} onError={(e) => tool.headImageError(e)} alt='img' />
+							    <img className='head_img' src={tool.getFile('/downfile/' + item.headPath)} onError={(e) => tool.headImageError(e)} alt='img' />
 							    <div className="rank-info">
 							    	<div>&lceil;<span>{item.userRealName}</span>&rfloor;<lable>{item.courseName}</lable>
 							    	{item.goodCourse === '1'?<div className="jc-icon" />:null}

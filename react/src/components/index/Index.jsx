@@ -6,7 +6,6 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
-import {getFile_IP } from '../../config/serverIp'
 import CourseItem from '../course/CourseItem.jsx'
  const SampleNextArrow =(props)=> {
   const {onClick} = props

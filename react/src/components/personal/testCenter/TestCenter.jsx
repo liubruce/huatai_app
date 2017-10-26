@@ -1,10 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router'
 import './testCenter.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin } from 'antd'
-import {getFile_IP } from '../../../config/serverIp'
 class TestCenter extends React.Component{
 	constructor(args){
 		super()

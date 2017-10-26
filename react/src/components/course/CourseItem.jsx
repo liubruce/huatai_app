@@ -2,7 +2,6 @@ import React from 'react'
 import { message } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
-import {getFile_IP } from '../../config/serverIp'
 import {hashHistory} from 'react-router';
 class CourseItem extends React.Component {
 	constructor(args) {

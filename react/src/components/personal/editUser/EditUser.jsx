@@ -1,10 +1,8 @@
 import React from 'react'
 import './editUser.less'
-import {Link,hashHistory} from 'react-router'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
-import {getFile_IP } from '../../../config/serverIp'
 import Dropzone from 'react-dropzone'
 class EditUser extends React.Component{
 	constructor(args){
@@ -77,8 +75,8 @@ class EditUser extends React.Component{
                 <div className="am-panel">
 
 					{this.state.headPath||this.state.headPath===null?
-						<img  onError={(e) => tool.headImageError(e)} src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
-						<img onError={(e) => tool.headImageError(e)} src={this.state.cover_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
+						<img alt='test'  onError={(e) => tool.headImageError(e)} src={tool.getFile('/downfile/' + headPath)} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
+						<img alt='test' onError={(e) => tool.headImageError(e)} src={this.state.cover_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
 					}
                   
                     <Dropzone
@@ -95,7 +93,7 @@ class EditUser extends React.Component{
                 {/* <div className="am-panel" style={{paddingTop: '10px'}}>
 					
 					<textarea value={this.state.seifInformation} onChange={this.seifInformation.bind(this)} placeholder="请输入个人说明" style={{width: '100%',height: '100px',padding: '5px',resize: 'none',border: '1px solid #E2EEFB'}}></textarea>		
-                    <img alt='head' onError={(e) => tool.headImageError(e)} src={getFile_IP + '/downfile/' + headPath} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
+                    <img alt='head' onError={(e) => tool.headImageError(e)} src={tool.getFile('/downfile/' + headPath)} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
                     <label htmlFor="file" style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}}>更换头像</label>
                     <input type="file" name="" id="file" value="" style={{display: 'none'}}/>
                 </div> */}

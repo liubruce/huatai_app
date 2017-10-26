@@ -3,7 +3,6 @@ import  './UserCard.less'
 import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {getFile_IP } from '../../../config/serverIp'
 class Card extends React.Component{
 	constructor(args) {
 		super()
@@ -102,7 +101,7 @@ class HonoraryCert  extends React.Component{
 							{Honor2List.map((item, index) => {
 								return (
 									<li key={index} style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
-										<img src={getFile_IP + '/downfile/' + item.honorBadge} alt='test' />
+										<img src={tool.getFile('/downfile/' + item.honorBadge)} alt='test' />
 										<p>{item.honorName}</p>
 									</li>
 								)

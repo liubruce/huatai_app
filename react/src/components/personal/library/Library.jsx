@@ -1,11 +1,9 @@
 import React from 'react'
 import './library.less'
-import $ from 'jquery'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import { message,Spin } from 'antd'
 import { hashHistory } from 'react-router';
-import {getFile_IP } from '../../../config/serverIp'
 
 class Bookshelf extends React.Component {
     constructor(args) {
@@ -54,7 +52,7 @@ class Bookshelf extends React.Component {
         // let fileURL = window.cordova.file.externalDataDirectory;
         // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
 
-        let fileURI = encodeURI(getFile_IP + '/downfile/' + filename);
+        let fileURI = encodeURI(tool.getFile('/downfile/' + filename));
         fileURL += filename;
         console.log(fileURI);
         console.log(fileURL);
@@ -109,7 +107,7 @@ class Bookshelf extends React.Component {
 		                return (
 		                    <div key={index} className="am-panel goods-list">
 			                    <div className="goods-img">
-			                    <img alt='test' src={getFile_IP +'/downfile/'+ item.bookPath} />
+			                    <img alt='test' src={tool.getFile('/downfile/'+ item.bookPath)} />
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
@@ -124,7 +122,7 @@ class Bookshelf extends React.Component {
                                     data-am-modal="{target: '#load-modal'}"
                                     >
                                     <a 
-                                    // href={getFile_IP +'/downfile/'+ item.bookEntityPath} download={item.bookEntityPath}
+                                    // href={tool.getFile('/downfile/'+ item.bookEntityPath)} download={item.bookEntityPath}
                                      >
                                     下载</a>
                                     </button>
@@ -132,7 +130,7 @@ class Bookshelf extends React.Component {
                                     <button type="button" className="am-btn-primary" 
                                     >
                                     <a 
-                                    href={getFile_IP +'/downfile/'+ item.bookEntityPath}
+                                    href={tool.getFile('/downfile/'+ item.bookEntityPath)}
                                      >
                                     查看</a>
                                     </button>
@@ -244,7 +242,7 @@ class MyLibrary extends React.Component {
 		                return (
 		                    <div key={index} className="am-panel goods-list">
 			                    <div className="goods-img">
-			                     	<img alt='test' src={getFile_IP +'/downfile/'+ item.bookPath}/>
+			                     	<img alt='test' src={tool.getFile('/downfile/'+ item.bookPath)}/>
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
@@ -347,7 +345,7 @@ class Database extends React.Component {
             this.state.dataBase.map((item, index) => {
                 return (
                     <div key={index} className="am-panel goods-list">
-                     <div className="goods-img"><img alt='test' src={getFile_IP +'/downfile/'+ item.bookPath}/></div>
+                     <div className="goods-img"><img alt='test' src={tool.getFile('/downfile/'+ item.bookPath)}/></div>
 											<div className="goods-info">
 												<p>图书名：{item.bookName}</p>
 												<p>作者：{item.author}</p>
