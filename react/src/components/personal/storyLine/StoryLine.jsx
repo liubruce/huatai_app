@@ -25,17 +25,20 @@ class StoryLine extends React.Component{
           $('.base').click(function(){
 					$(this).addClass('active').siblings().removeClass('active');
 					$(this).addClass('active').siblings().find('.fxz').fadeOut();
-					$(this).find('.fxz').fadeIn();
-					
 					var index = $(this).index();
 					var data = ['楔子','第一章','第二章','第三章','第四章','第五章','第六章','第七章']
 					var data1 = ['楔子','天道不公','人道不平','血性儿郎','无良军痞','第五章','第六章','第七章'];
          if(index<=chapter){
+					  $(this).find('.fxz').fadeIn();
 				   	$('.story-link').show();
             $('.story-link p').html(data1[index]);
             $(this).find('.fxz').html('<h2>'+data[index]+'</h2>');
             lineIndex=index;
-          }
+          }else{
+						$('.story-link').hide();
+            $('.story-link p').html('');
+            $(this).find('.fxz').html('<h2></h2>');
+					}
 				})
 				})
       } else {
