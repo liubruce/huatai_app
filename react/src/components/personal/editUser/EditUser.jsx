@@ -4,6 +4,7 @@ import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
 import Dropzone from 'react-dropzone'
+import {hashHistory} from 'react-router';
 class EditUser extends React.Component{
 	constructor(args){
 		super();
@@ -57,7 +58,8 @@ class EditUser extends React.Component{
 	     tool.loading(this,true);
 		api.userUpdate(formData).then((data) => {
 			if(data.result==='RC100'){
-              message.success('保存成功', 3);
+			  message.success('保存成功', 3);
+			  hashHistory.push("/#/Index")
 			}else{
               message.error(data.errMsg, 3);
 			}
@@ -82,7 +84,7 @@ class EditUser extends React.Component{
                     <Dropzone
 					onDrop={this.chooseImage.bind(this)}					
 					className = 'choose-image'
-					accept="image/jpeg, image/png"
+					accept="image/*"
 					>
                     <label style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#005496',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
 					</Dropzone>

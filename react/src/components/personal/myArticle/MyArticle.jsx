@@ -52,7 +52,7 @@ class UserCard extends React.Component{
 	}
 	myEssayList(flag){
 		tool.loading(this, true);
-       api.myEssayList({pageno:this.state.pageNo,checkState:this.state.tab,EssayTitle:this.state.searchValue}).then((data) => {
+       api.myEssayList({pageno:this.state.pageNo,checkState:this.state.tab,essayTitle:this.state.searchValue}).then((data) => {
 		if (data.result === 'RC100') {
 			this.setState({
 				essayList:flag?this.state.essayList.concat(data.essayList):data.essayList,
