@@ -4,7 +4,7 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import {Link,browserHistory,hashHistory} from 'react-router'
-class UserCard extends React.Component{
+class MyArticle extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
@@ -166,7 +166,11 @@ class UserCard extends React.Component{
 														</article>
 													</Link>
 								                 <p className="like">{tool.formatTimestamp(item.createTime)}</p>
-												 <p className="evaluate">审核意见：{item.auditOpinion}</p>
+												 {
+													 this.state.tab===2?
+													 <p className="evaluate">审核意见：{item.auditOpinion}</p>:null
+												 }
+												 
 									         </div>
 
                                            <div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
@@ -197,4 +201,4 @@ class UserCard extends React.Component{
 }
 
 
-export default UserCard
+export default MyArticle

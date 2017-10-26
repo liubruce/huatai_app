@@ -3,6 +3,7 @@ import './testCenter.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin } from 'antd'
+import {hashHistory} from 'react-router';
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
@@ -64,6 +65,12 @@ class TestCenter extends React.Component{
 		}
 		})
 	}
+	clickMe(item){
+		console.log(item.inforURL);
+		let index=item.indexOf("/TestPaper");
+        let arr=item.substring(index);
+		hashHistory.push('/Login'+arr);
+	}
 	render(){
 		return(
 			<div className="warpper">
@@ -87,7 +94,10 @@ class TestCenter extends React.Component{
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
-											<a href={item.inforURL}>{item.inforURL}</a>
+											{
+												item.informationType === '1' && item.isExam === 0 ?
+												<a onClick={()=>this.clickMe(item)} style={{cursor:"pointer"}}>任务地址</a>:null
+                                             }
 											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>
 						             </div>
