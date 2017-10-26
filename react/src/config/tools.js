@@ -9,6 +9,9 @@ import {
 	message
 } from 'antd';
 import $ from 'jquery'
+
+import {getFile_IP} from './serverIp'
+
 export const camera = () => {
 	return new Promise((resolve, reject) => {
 		navigator.camera.getPicture((imgSrc) => {
@@ -290,7 +293,10 @@ export const url_parameter = (data) => {
 export const url_format = (url, operationType, behaviorDataType, body = {}) => {
 	return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
-
+export const getFile = (fileName) =>{
+	// return url_format(getFile_IP + fileName);
+	return getFile_IP + fileName;
+}
 export const getAnswer = (num) => {
 	let answer = []
 	switch (num) {
@@ -321,17 +327,23 @@ export const getAnswer = (num) => {
 		case 10:
 			answer = [1, 3];
 			break;
-		case 7:
+		case 12:
 			answer = [2, 3];
 			break;
-		case 11:
+		case 7:
 			answer = [0, 1, 2];
+			break;
+		case 11:
+			answer = [0, 1, 3];
+			break;
+		case 13:
+			answer = [0, 2, 3];
 			break;
 		case 14:
 			answer = [1, 2, 3];
 			break;
 		case 15:
-			answer = [1, 2, 3, 4];
+			answer = [0, 1, 2, 3];
 			break;
 		default:
 			break;

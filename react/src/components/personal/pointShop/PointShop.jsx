@@ -4,7 +4,6 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
 import {hashHistory} from 'react-router';
-import {getFile_IP } from '../../../config/serverIp'
 class PointShop extends React.Component{
 	constructor(args){
 		super();
@@ -74,7 +73,7 @@ class PointShop extends React.Component{
 					this.state.pointShopList.map((item,index)=>{
 						return(
                 <div key={index} className="am-panel goods-list">
-								<div className="goods-img"><img src={getFile_IP +'/downfile/'+ item.shopCover}
+								<div className="goods-img"><img src={tool.getFile('/downfile/'+ item.shopCover)}
 							//	src={item.shopCover}
 								/></div>
 								<div className="goods-info">

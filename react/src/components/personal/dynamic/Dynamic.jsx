@@ -1,12 +1,10 @@
 import React from 'react'
 import './dynamic.less'
-import {Link} from 'react-router'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
 import ArticleItem from '../../article/ArticleItem.jsx'
 import CourseItem from '../../course/CourseItem.jsx'
-import {getFile_IP } from '../../../config/serverIp'
 class CourseDy extends React.Component{
     constructor(args){
 		super();

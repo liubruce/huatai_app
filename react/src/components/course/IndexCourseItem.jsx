@@ -2,7 +2,6 @@ import React from 'react'
 import { message } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
-import {getFile_IP } from '../../config/serverIp'
 import {hashHistory} from 'react-router';
 class IndexCourseItem extends React.Component {
 	constructor(args) {
@@ -75,7 +74,7 @@ class IndexCourseItem extends React.Component {
                        <a>
                          <video 
                          onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""}
-                           src={getFile_IP+'/downfile/'+item.coursevideoPath}   
+                           src={tool.getFile('/downfile/'+item.coursevideoPath)}   
                            className="v-img"
                            >
                            您的浏览器不支持 video 标签。

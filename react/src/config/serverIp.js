@@ -1,5 +1,5 @@
 export const ip = localStorage.getItem("sever_ip"); //from '/public/config.js'
-console.log(`${ip}`)
+// console.log(`${ip}`)
 
 export const api_Ip = `${ip}/api/interworking`;
 export const lesson_api_IP = `${ip}/api/lesson`;
