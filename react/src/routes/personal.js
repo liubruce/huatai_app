@@ -35,7 +35,7 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
             <Route path='/App/Course/CourseDetail/:id' component={CourseDetail}/>
             <Route path='/App/Course/AnswerOnline/:id' component={AnswerOnline}/>
-            Route path='/App/Course/TestPaper/:id' component={TestPaper}/>
+            <Route path='/App/Course/TestPaper/:id' component={TestPaper}/>
             <Route path='/App/PersonalCenter/Library' component={Library}/>
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>
