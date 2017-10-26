@@ -96,9 +96,19 @@ class UserCard extends React.Component{
 		  searchValue:e.target.value
 	  })
 	}
+	submit(e){
+		e.preventDefault();
+		this.setState({
+           pageNo:1,
+		},()=>{
+			this.myEssayList();
+		})
+	}
 	render(){
 		return(
 			<div> 
+				<form onSubmit={(e)=>this.submit(e)} >
+				{tool.isIOS?<div className='ios-header' ></div>:null}
 				<header className="header">
 					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
                    <div className="search" style={{left: '71px'}}>
@@ -107,6 +117,7 @@ class UserCard extends React.Component{
 					</div>
 					<div className="header-right"><Link to='/App/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
                  </header>
+				 </form>
 			<div className="warpper">
 			<Spin spinning={this.state.loading} tip="加载列表中...">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
