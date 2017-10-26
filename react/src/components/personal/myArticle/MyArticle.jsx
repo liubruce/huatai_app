@@ -154,7 +154,7 @@ class UserCard extends React.Component{
 																	{
 																		item.essayPhotos.map((item,index)=>{
 																			return(
-																				<li key={index} ><img alt='test' src={tool.getFile('/downfile/'+ item.essayPhotoPath)} /></li>
+																				<li key={index} ><img alt='test' src={tool.getFile(item.essayPhotoPath)} /></li>
 																				)
 																		})
 																	}
