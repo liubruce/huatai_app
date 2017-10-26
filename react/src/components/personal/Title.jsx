@@ -8,8 +8,13 @@ class Title extends React.Component {
 			title:''
 		}
 	}
+	componentWillReceiveProps(nextProps) {
+		this.checkUrl(nextProps.pathname)
+	}
 	componentWillMount() {
-		let pathname = this.props.pathname;
+		this.checkUrl(this.props.pathname)
+	}
+	checkUrl(pathname) {
 		let title:'标题';
 		if (pathname.indexOf('/StoryLine') !== -1) {
 			title='故事线'
