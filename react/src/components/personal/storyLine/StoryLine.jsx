@@ -11,7 +11,7 @@ class StoryLine extends React.Component{
 		super();
 		this.state={
 			chapter:'',
-      sex:'man'
+			sex:'man',
 		}
 	}
 	componentWillMount() {
@@ -37,7 +37,9 @@ class StoryLine extends React.Component{
           }else{
 						$('.story-link').hide();
             $('.story-link p').html('');
-            $(this).find('.fxz').html('<h2></h2>');
+						$(this).find('.fxz').html('<h2></h2>');
+						 $('.base').addClass('active').siblings().removeClass('active');
+						message.warning("未解锁",3)
 					}
 				})
 				})

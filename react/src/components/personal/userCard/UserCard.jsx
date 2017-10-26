@@ -30,7 +30,7 @@ class Card extends React.Component{
 								<ul className="am-list am-list-static">
 								  	<li>入职时间<span>{userCard.entryTime}</span></li>
 								  	<li>所在地区<span>{userCard.region}</span></li>
-								  	<li>职务<span>{userCard.job}</span></li>
+								  	<li>职务<span>{userCard.jobName}</span></li>
 								  	<li>分公司<span>{userCard.branceOffice}</span></li>
 								  	<li>营业部<span>{userCard.businessDept}</span></li>
 								  	<li>营业组<span>{userCard.businessGroup}</span></li>

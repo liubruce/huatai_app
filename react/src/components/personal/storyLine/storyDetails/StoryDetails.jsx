@@ -10,11 +10,12 @@ class storyDetails extends React.Component{
         }
     }
     componentWillMount() {
+	
        this.setState({
          lineIndex:this.props.params.id,
        },()=>{
-           let lineIndex=this.state.lineIndex;
-           $('.tab').eq(lineIndex).show();
+		   let lineIndex=this.state.lineIndex;
+		   $('.tab').eq(lineIndex).show();
        })
     }
 	render(){
