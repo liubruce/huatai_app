@@ -88,7 +88,7 @@ class Index extends React.Component {
               <li className="li-4"><Link to='/App/PersonalCenter' > </Link></li>
             </ul>
           </div>
-          <div className="am-panel index-panel">
+          <div className="index-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">热播课程</h2>
               <nav className="am-titlebar-nav">

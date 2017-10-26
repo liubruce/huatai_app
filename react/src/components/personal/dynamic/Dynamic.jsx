@@ -2,7 +2,7 @@ import React from 'react'
 import './dynamic.less'
 import {Link} from 'react-router'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
 import ArticleItem from '../../article/ArticleItem.jsx'
 import CourseItem from '../../course/CourseItem.jsx'
@@ -51,7 +51,6 @@ class CourseDy extends React.Component{
     render(){
         return(
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                 <div className="am-panel">
                <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                  {
                    this.state.courseList.map((item,index)=>{
@@ -61,7 +60,6 @@ class CourseDy extends React.Component{
                    })
                  }
                  </ul>
-                 </div>
            </div>
         )
     }
@@ -108,7 +106,9 @@ class EssayDy extends React.Component{
   }
     render(){
         return(
+          <Spin spinning={this.state.loading} tip="加载列表中...">
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
+             <div className="am-panel">
              {
                this.state.EssayList.map((item,index)=>{
                  return(
@@ -117,7 +117,9 @@ class EssayDy extends React.Component{
 
                })
              }
+             </div>
          </div> 
+         </Spin>
         )
     }
 }
