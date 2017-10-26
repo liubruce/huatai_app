@@ -432,7 +432,28 @@ export const userCard = (userCode) => {
         });
     });
 }
+/**
+ *honor/myhonor//称号个人名片显示荣誉
+*/
+export const myHonor = (body = {}) => {
+  body = tool.behavior(body, 'honor', 'menu')
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: api_Ip+'/honor/myhonor',
+      body:body
+    }).then((data) => {
+        if(data.ok){
+            tool.checkLogin(data.json);
+            resolve(data.json)
+        }else{
+            reject(data) 
+        }
+      
+      
+    });
+  });
 
+}
 /*
   我的蜂行圈
 */
