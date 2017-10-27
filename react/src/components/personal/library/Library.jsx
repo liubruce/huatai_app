@@ -128,17 +128,13 @@ class Bookshelf extends React.Component {
 									<p>页数: {item.pages}</p>
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <a className='show-pdf' onClick={()=>this.showPDF(item.bookEntityPath)}>查看</a>
-                                        :null}
-									{item.operationType === '2' ?<button type="button" className="am-btn-primary" 
-                                    onClick={()=>this.down(item.bookEntityPath)}
-                                    data-am-modal="{target: '#load-modal'}"
-                                    >
+                                     :null}
+									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.down(item.bookEntityPath)} data-am-modal="{target: '#load-modal'}">
                                     <a 
                                     // href={tool.getFile(item.bookEntityPath)} download={item.bookEntityPath}
-                                     >
-                                    下载</a>:null}
-								</div>
+                                     >下载</a></button>:null}
 							</div>
+                            </div>
 		                )
 		            })
 	            }
