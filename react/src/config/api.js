@@ -408,6 +408,49 @@ export const appSubmCourseTitle = (body) => {
     });
 }
 
+/*
+综合考题
+appELearning/appCourse/appTestPaperOnlineAnswer
+ */
+export const appTestPaperOnlineAnswer = (body) => {
+    let url = `${lesson_api_IP}/appELearning/appCourse/appTestPaperOnlineAnswer`;
+    url = tool.url_format(url, 'mainPage', 'menu', body);
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
+appELearning/appCourse/appSubmTestPaperTitle
+ */
+export const appSubmTestPaperTitle = (body) => {
+    let url = `${lesson_api_IP}/appELearning/appCourse/appSubmTestPaperTitle`;
+    url = tool.url_format(url, 'mainPage', 'menu');
+    return new Promise((resolve, reject) => {
+        sfetch.post({
+            url: url,
+            timeout: 8000,
+            body:body,
+            dataType: 'formdata'
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
 //------------------------------------------------------
 
 /*

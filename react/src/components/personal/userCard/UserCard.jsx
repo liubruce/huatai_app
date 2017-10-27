@@ -3,6 +3,7 @@ import  './UserCard.less'
 import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
+import {browserHistory} from 'react-router'
 class Card extends React.Component{
 	constructor(args) {
 		super()
@@ -17,7 +18,7 @@ class Card extends React.Component{
 								    <h2 className="am-titlebar-title">基本信息</h2>
 								</div>
 								<ul className="am-list am-list-static">
-								  	<li>姓名<span>{userCard.userName}</span></li>
+								  	<li>姓名<span>{userCard.userRealName}</span></li>
 								  	<li>手机<span>{userCard.phone}</span></li>
 								  	<li>邮箱<span>{userCard.email}</span></li>
 								</ul>
@@ -132,9 +133,8 @@ class UserCard extends React.Component{
 		tool.loading(this, true);
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
-               
 				this.setState({
-					userCard:data.obj.data
+					userCard:data.user
 				})
 			}else{
 				message.error(data.errMsg, 3);
@@ -174,8 +174,21 @@ class UserCard extends React.Component{
 		this.show()
 		this.myHonor()
 	}
+	shareWeiXin(){
+		console.log(window.Wechat)
+	}
 	render(){
+		let user = this.state.userCard;
 		return(
+			<div>
+			{tool.isIOS?<div className='ios-header' ></div>:null}
+	          <header className="header">
+	             <a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+	             <div className="user-name-share">
+	             	<img alt='head' src={tool.getFile(user.headPath)} />{user.userRealName}
+	             </div>
+		     	<img onClick={()=>this.shareWeiXin()} alt='share' className='share-img' src={require('../../../style/images/share.png')}/>
+		      </header>
 			<div className="warpper">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
 					<ul className="am-tabs-nav am-cf nav">
@@ -197,6 +210,8 @@ class UserCard extends React.Component{
 					</div>
 				  </Spin>
 				</div>
+			</div>
+
 			</div>
 
 		)

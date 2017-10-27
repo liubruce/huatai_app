@@ -19,7 +19,8 @@ class MyArticle extends React.Component{
 	}
 	changeTab(tab) {
 		this.setState({
-			tab: tab
+			tab: tab,
+			pageNo:1
 		},()=>{
 			this.myEssayList();
 		})
@@ -54,6 +55,7 @@ class MyArticle extends React.Component{
 		tool.loading(this, true);
        api.myEssayList({pageno:this.state.pageNo,checkState:this.state.tab,essayTitle:this.state.searchValue}).then((data) => {
 		if (data.result === 'RC100') {
+
 			this.setState({
 				essayList:flag?this.state.essayList.concat(data.essayList):data.essayList,
 				totalPage:data.totalPage

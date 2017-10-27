@@ -16,7 +16,7 @@ class CourseDetail extends React.Component {
 			courseattach: [],
 			isEnd: false,
 			titleList: [],
-			showTitle: navigator.connection.type !== 'wifi'
+			showTitle:tool.isPc?'':navigator.connection.type!=="wifi"
 		}
 	}
 	componentWillMount() {
@@ -96,7 +96,7 @@ class CourseDetail extends React.Component {
 
 {/*					    <video 
 					    id="course_id"
-					    // src={tool.getFile(course.coursevideoPath)}
+					    // src={tool.getFile('/downfile/'+course.coursevideoPath)}
 					    controls="controls"  width="100%" height="210"
 					    // onEnded={(e)=>this.videoEnd(e)}
 					    onTimeUpdate={(e)=>this.onTimeUpdate(e)}
@@ -113,7 +113,7 @@ class CourseDetail extends React.Component {
                      onError={()=>{message.error('视频获取失败', 1);}}
                      poster={require('../../style/images/test.png')}
                      height={210}
-                     src={tool.getFile(course.coursevideoPath)}
+                     src={tool.getFile('/downfile/'+course.coursevideoPath)}
                      >
                      <source
                       autoPlay
@@ -150,7 +150,7 @@ class CourseDetail extends React.Component {
 				</div>
 				
 				<div className="am-panel">
-					<div className="am-panel-hd">附件{navigator.connection.type}</div>
+					<div className="am-panel-hd">附件{tool.isPc?'':navigator.connection.type}</div>
 					<div className="am-panel-bd">
 						<ul className="am am-avg-sm-3" style={{fontSize: '1.4rem'}}>
 						    {this.state.courseattach.map((item,index)=>{
