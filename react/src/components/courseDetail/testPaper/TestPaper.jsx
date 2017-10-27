@@ -23,9 +23,9 @@ class testPaper extends React.Component{
 	componentWillMount() {
 		//console.log(this.props.params.id)
 		let body = {
-			courseId: this.props.params.id
+			testpaperId: this.props.params.id
 		};
-		api.appOnlineAnswer(body).then((data) => {
+		api.appTestPaperOnlineAnswer(body).then((data) => {
 			if (data.result === 'RC100') {
 				let single = [],
 					multiple = [];
@@ -39,7 +39,7 @@ class testPaper extends React.Component{
 				this.setState({
 					single,
 					multiple,
-					answerTime: data.answerTime ? data.answerTime : 0
+					answerTime: data.testpapers.answerTime ? data.testpapers.answerTime : 0
 				}, () => {
 					this.countdown();
 				});
@@ -55,7 +55,6 @@ class testPaper extends React.Component{
         let h = parseInt(t / 3600,10);
         let m = parseInt((t - h * 3600) / 60,10);
         let s = t - h * 3600 - m * 60;
-
         this.setState({
             counterAuction:t,
             hourAuction: this.getNumber(h),
@@ -177,14 +176,14 @@ class testPaper extends React.Component{
 			})
 		})
 
-		let coursedata = {
-			courseId: this.props.params.id
+		let testpaperdata = {
+			testpaperId: this.props.params.id
 		}
 		let formData = new FormData();
-		formData.append('coursedata', JSON.stringify(coursedata))
+		formData.append('testPapeData', JSON.stringify(testpaperdata))
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
-		api.appSubmCourseTitle(formData).then((data) => {
+		api.appSubmTestPaperTitle(formData).then((data) => {
 			if (data.result === 'RC100') {
 				this.setState({
 					point: data.answerScore
