@@ -1,118 +1,84 @@
 /*story*/
-
-.story-box {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url(../../../style/images/stroy_bg@2x.png) no-repeat center top;
-    background-size: 100%;
-}
-
-.story-box .island {
-    position: absolute;
-    // top: 20%;
-    top:-10%;
-    left: 0;
-    width: 100%;
-    // height: 45rem;
-    height: 80%;
-    margin: 20px auto;
-    background: url(../../../style/images/island@2x.png) no-repeat center;
-    background-size: 100%;
-}
-
-
-.island .base {
-    position: absolute;
-    width: 50px;
-    height: 15px;
-    background: url(../../../style/images/base.png) no-repeat center;
-    background-size: 100%;
-    cursor: pointer;
-    z-index: 99;
-}
-
-.island .base.active {
-    background: url(../../../style/images/base-1.png) no-repeat center;
-    background-size: 100%
-}
-
-.island .base-1 {
-    left: 13%;
-    top: 38%;
-}
-
-.island .base-2 {
-    left: 25%;
-    top: 36%;
-}
-
-.island .base-3 {
-    left: 20%;
-    top: 42%;
-}
-
-.island .base-4 {
-    left: 40%;
-    top: 40%;
-}
-
-.island .base-5 {
-    left: 43%;
-    top: 35%;
-}
-
-.island .base-6 {
-    right: 29%;
-    top: 39%;
-    z-index: 9;
-}
-
-.island .base-7 {
-    right: 30%;
-    top: 35%;
-}
-
-.island .base-8 {
-    right: 10%;
-    top: 38%;
-}
-.story-link {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    text-align: center;
-    color: #FFFFFF;
-    z-index: 10;
-}
-.story-link h2 {
-    font-size: 2rem;
-    font-weight: normal;
-    color: #FFFFFF;
-}
-// .island .base.active .light-1{position: absolute;bottom: 8px;left:-25px;width: 50px;height: 15px;background: url(../../../style/images/light-1@2x.png) no-repeat center;background-size: 100%;animation: light-1 infinite .5s alternate;z-index: 4;}
-.island .base .fxz {
-    display: none;
-    position: absolute;
-    top: -49px;
-    left: -6px;
-    width: 60px;
-    height: 60px;
-    z-index: 5;
-    animation: fxz infinite 1s alternate;
-}
-.island .base .fxz h2 {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    width: 60px;
-    transform: translateX(-50%);
-    color: #FFFFFF;
-    text-align: center;
-    font-weight: normal;
-}
+.story-box{width: 100%;height: 100%;background: url(../../../style/images/stroy_bg@2x.jpg) no-repeat center top;background-size: 100%;}
+.story-box .island{position: absolute; top: 20%;;left: 0;width: 100%;height: 25.4rem;margin: 20px auto;background: url(../../../style/images/island@2x.png) no-repeat center;background-size: 100%}
+.island .base{position: absolute;width: 50px;height: 15px;background: url(../../../style/images/base.png) no-repeat center;background-size: 100%;cursor: pointer;z-index: 99;}
+.island .base.active{background: url(../../../style/images/base-1.png) no-repeat center;background-size: 100%}
+.island .base-1{left: 8%;top: 33%}
+.island .base-2{left: 27%;top: 29%}
+.island .base-3{left: 46%;top: 28%}
+.island .base-4{right: 19%;top: 28%;}
+.island .base-5{right: 10%;top: 32%;}
+.island .base-6{right: 29%;top: 33%;z-index: 9;}
+.island .base-7{left: 36%;top: 36%;}
+.island .base-8{left: 17%;top: 39%;}
+.island .base.active .light{position: absolute;bottom: 4px;left:0px;width: 50px;height: 15px;background: url(../../../style/images/light@2x.png) no-repeat center;background-size: 100%;animation: light-1 infinite .5s alternate;z-index: 4;}
+.island .base .fxz{display: none;position: absolute;top: -46px;left: 1px;width: 50px;height: 50px;z-index: 5;animation: fxz infinite 1s alternate;}
 .island .base .fxz.man{background: url(../../../style/images/man-tx.png) no-repeat center;background-size: 100%;}
 .island .base .fxz.woman{background: url(../../../style/images/woman-tx.png) no-repeat center;background-size: 100%;}
+.island .base .fxz h2{position: absolute;top: -25px;left: 50%;width: 60px;transform: translateX(-50%);color: #FFFFFF;text-align: center;font-weight: normal}
+.story-link{position: absolute; top: 10%;left: 50%;-webkit-transform: translateX(-50%);transform: translateX(-50%);text-align: center;color: #FFFFFF}
+.story-link h2{font-size: 2rem;font-weight: normal}
 .point-rule{position: absolute;right: 10px;bottom: 65px;color: #FFFFFF}
+/*横屏 css*/
+@media screen and (orientation: landscape) {
+	
+	.warpper{padding: 66px 0 75px}
+	/*login*/
+	.login-bg{background: url(../../../style/images/login_bg_1.jpg) no-repeat center;background-size: 100% 100%}
+	.login-box{width: 40%;padding-top: 10%;font-size: 2.5rem}
+	.login-box p input{height: 60px;font-size: 2.5rem}
+	.login-box .btn-login{height: 60px;line-height: 60px;font-size: 2.5rem}
+	.login-box .am-g label{font-size: 2.5rem}
+	.am-ucheck-icons{top: 7px;font-size: 2.5rem}
+	.login-box h1{font-size: 3rem}
+	
+	/*header*/
+	.header{height: 66px;line-height: 66px}
+	.header .logo{width: 144px;height: 42px;top: 12px}
+	.header .search{top: 11px;left: initial;right: 50px;width: 40%;height: 45px;font-size: 2rem}
+	.header .search i{margin-top: 11px}
+	.header .user-name-share img{margin: 17px 5px 0 0}
+	
+	/*foot*/
+	.foot ul li{height: 75px}
+	.foot ul li a{width: 112px;height: 75px}
+	
+    .am-gallery-default .am-gallery-item img{height: 170px}
+	.panel-in ul li a{width: 10rem;height: 10rem}
+	.am-slider .am-slides img{height: 27rem;}
+	
+	.jf-table .table-title.fixed{top: 66px}
+	
+	
+	.story-box .island{width: 90%;height: 44rem;left: 50%;transform: translateX(-50%);}
+	.point-rule{bottom: 95px;}
+	.island .base{width: 150px;height: 45px}
+	.island .base-1{left: 8%;top: 24%}
+	.island .base-2{left: 27%;top: 18%;}
+	.island .base-3{left: 46%;top: 16%}
+	.island .base-4{right: 19%;top: 17%;}
+	.island .base-5{right: 7%;top: 22%}
+	.island .base-6{right: 29%;top: 27%;z-index: 999;}
+	.island .base-7{left: 36%;top: 30%;}
+	.island .base-8{left: 18%;top: 34%;}
+	.island .base .fxz{top: -70px;left: 25px;width: 100px;height: 100px;}
+	
+	.cur-list a {height: 180px}
+}
+
+@media screen and (orientation: landscape) and (min-width: 1366px){
+	html{font-size:12px;}
+	.story-box .island{width: 75%;height: 44rem;top: 25%;left: 50%;transform: translateX(-50%);}
+	.island .base-1{left: 8%;top: 24%}
+	.island .base-2{left: 27%;top: 17%;}
+	.island .base-3{left: 46%;top: 14%}
+	.island .base-4{right: 19%;top: 15%;}
+	.island .base-5{right: 7%;top: 22%}
+	.island .base-6{right: 29%;top: 24%;z-index: 999;}
+	.island .base-7{left: 36%;top: 30%;}
+	.island .base-8{left: 18%;top: 34%;}
+	
+	.cur-list a {height: 240px}
+}
+
+
