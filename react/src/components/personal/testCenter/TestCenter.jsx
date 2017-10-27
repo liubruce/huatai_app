@@ -66,11 +66,9 @@ class TestCenter extends React.Component{
 		})
 	}
 	clickMe(item){
-		console.log(item.inforURL);
 		let index=item.inforURL.indexOf("/TestPaper");
         let arr=item.inforURL.substring(index);
-		console.log('/App/Course/'+arr);
-		hashHistory.push('/App/Course/'+arr);
+		hashHistory.push('/App/Course'+arr);
 	}
 	render(){
 		return(
