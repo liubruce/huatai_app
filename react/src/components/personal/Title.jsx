@@ -73,16 +73,19 @@ class Title extends React.Component {
 		if (pathname.indexOf('/IntegralRules') !== -1) {
 			title='积分规则'
 		}
+		if (pathname.indexOf('/MyPDF') !== -1) {
+			title='在线查看'
+		}
 		this.setState({
 			title
 		})
 	}
 	render(){
 		return(
-					<header className="header">
-		            	<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-		            	<h1>{this.state.title}</h1>
-		            </header>
+			<header className="header">
+				<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+				<h1>{this.state.title}</h1>
+			</header>
 			)
 	}
 }

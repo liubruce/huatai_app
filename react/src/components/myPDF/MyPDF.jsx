@@ -2,6 +2,8 @@ import React, {
   Component
 } from 'react';
 import PDFViewer from 'mgr-pdf-viewer-react';
+import './myPDF.less';
+import $ from 'jquery'
 class MyPDF extends Component {
   constructor(args) {
     super();
@@ -11,12 +13,13 @@ class MyPDF extends Component {
   }
   componentWillMount() {
     this.setState({
-      url:this.props.location.state.pdf
+     url:this.props.location.state.pdf
+     //url:'https://arxiv.org/pdf/quant-ph/0410100.pdf'
     })
   }
   render(){
     return(
-          <div style={{minHeight:'783px'}} >
+          <div>
              <PDFViewer
                document={{
                  url: this.state.url
