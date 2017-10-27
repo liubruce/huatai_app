@@ -102,6 +102,7 @@ class Course extends React.Component {
                       </li>
                     </ul>
                     <div className="am-tabs-bd">
+                      <Spin spinning={this.state.loading} tip="加载列表中...">
 					             <div data-tab-panel-0 className="am-tab-panel am-active tab">
 					             	<ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                        {this.state.courseList.map((item,index)=>{
@@ -111,6 +112,7 @@ class Course extends React.Component {
                        })}
                      </ul>
                      </div>
+                     </Spin>
                      </div>
                   </div>
                 
