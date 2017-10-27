@@ -36,6 +36,7 @@
     "jest": "20.0.4",
     "jquery": "^3.2.1",
     "less-loader": "^4.0.5",
+    "mgr-pdf-viewer-react": "^1.0.0",
     "mimic-fn": "^1.1.0",
     "object-assign": "4.1.1",
     "p-map": "^1.1.1",
