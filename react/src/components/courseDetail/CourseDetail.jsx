@@ -110,7 +110,7 @@ class CourseDetail extends React.Component {
                      fluid={false} 
                      playsInline={true}
                      width={$(window).width()} 
-                     onError={()=>{message.error('正在获取视频信息，请稍等', 1);}}
+                     onError={()=>{message.success('正在获取视频信息，请稍等', 1);}}
                      poster={require('../../style/images/test.png')}
                      height={210}
                      src={tool.getFile(course.coursevideoPath)}
