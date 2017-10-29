@@ -113,7 +113,7 @@ class CourseDetail extends React.Component {
                      onError={()=>{message.error('视频获取失败', 1);}}
                      poster={require('../../style/images/test.png')}
                      height={210}
-                     src={tool.getFile('/downfile/'+course.coursevideoPath)}
+                     src={tool.getFile(course.coursevideoPath)}
                      >
                      <source
                       autoPlay

@@ -108,7 +108,7 @@ class EssayCol extends React.Component{
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
-                            <ArticleItem show={this.morecolEssay.bind(this)} key={index} item={item} />
+                        <ArticleItem show={this.morecolEssay.bind(this)} key={index} item={item} />
                         )
                     })
                 }

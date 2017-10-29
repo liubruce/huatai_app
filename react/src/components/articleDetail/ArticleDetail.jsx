@@ -39,10 +39,10 @@ class ArticleDetail extends React.Component{
 					<img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(essay.headPath)} />
 					<p className="info"><span>{essay.userRealName}</span>{essay.branchOffice}</p>
 					<p className="time">{tool.formatTimestamp(essay.createTime)}</p>
-				   </div>
+				   </div> 
 					<article className="am-article">
 					  	<div className="am-article-hd">
-					   		<h1 className="am-article-title">{essay.essayTitle}</h1>
+					   		<h1 className="am-article-title" style={{whiteSpace:'normal'}}>{essay.essayTitle}</h1>
 					   		{/*<p class="like"><span><i class="fa fa-heart-o"></i>12331</span>
 					   		<span><i class="fa fa-thumbs-o-up"></i>12331</span></p>*/}
 					   		{/*<p className="like">{tool.formatTimestamp(essay.createTime)}</p>*/}
