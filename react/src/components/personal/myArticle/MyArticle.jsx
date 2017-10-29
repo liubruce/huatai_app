@@ -8,7 +8,7 @@ class MyArticle extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
-			 tab:'',
+			 tab:5,
 			 essayList:[],
 			 score:0,
 			 loading:false,

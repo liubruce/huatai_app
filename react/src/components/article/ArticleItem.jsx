@@ -66,7 +66,6 @@ class ArticleItem extends React.Component {
 	render(){
 		let item = this.props.item;
 		let isBuy = item.goodEssay ==='1' && item.userEssayOperation.isBuy !== 1;
-		console.log(item.essayNote)
 		return(
               <div className="article-list" >
                 <img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(item.headPath)} />
@@ -79,9 +78,8 @@ class ArticleItem extends React.Component {
                   	 <article data-am-modal={isBuy?`{target: '#article-confirm${item.essayId}'}`:""} className="am-article">
                       <div className="am-article-hd">
                         <h1 className="am-article-title" style={{whiteSpace:'normal'}}>
-                       
                         {item.goodEssay === '1'?<div className="jc-icon" />:null}
-						 {item.essayTitle}
+						 {item.essayTitle ? tool.subString(item.essayTitle,25) : '没有文字'}
                         </h1>
                       </div>
                       <div className="am-article-bd">
