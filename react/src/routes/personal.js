@@ -22,6 +22,7 @@ import TestPaper from '../components/courseDetail/testPaper/TestPaper.jsx'
 import PubArticle from '../components/pubArticle/PubArticle.jsx'
 import StudentTop from '../components/studentTop/StudentTop.jsx'
 import CourseTop from '../components/courseTop/CourseTop.jsx'
+import MyPDF from '../components/myPDF/MyPDF.jsx'
 const personalRoutes = (
           <Route path='Personal' component={Personal}>
            	<IndexRoute component={Menu}/>
@@ -45,6 +46,7 @@ const personalRoutes = (
             <Route path='/App/IntegralRules' component={IntegralRules}/>
             <Route path='/StudentTop' component={StudentTop} />
             <Route path='/CourseTop' component={CourseTop} />
+            <Route path='/MyPDF' component={MyPDF}/>
     </Route>
 
 );

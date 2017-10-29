@@ -98,6 +98,15 @@ class Bookshelf extends React.Component {
     cancelDown() {
         navigator.fileTransfer.abort();
     }
+    showPDF(pdf) {
+		let path = {
+			pathname: '/MyPDF',
+			state: {
+				'pdf': tool.getFile(pdf)
+			},
+		}
+		hashHistory.push(path);
+	}
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -117,25 +126,13 @@ class Bookshelf extends React.Component {
 									<p>译者:  {item.translator}</p>
 									<p>出版年: {item.publishYear}</p>
 									<p>页数: {item.pages}</p>
-									<button type="button" className="am-btn-primary" 
-                                    onClick={()=>this.down(item.bookEntityPath)}
-                                    data-am-modal="{target: '#load-modal'}"
-                                    >
-                                    <a 
-                                    // href={tool.getFile(item.bookEntityPath)} download={item.bookEntityPath}
-                                     >
-                                    下载</a>
-                                    </button>
-
-                                    <button type="button" className="am-btn-primary" 
-                                    >
-                                    <a 
-                                    href={tool.getFile(item.bookEntityPath)}
-                                     >
-                                    查看</a>
-                                    </button>
-								</div>
+									{item.bookEntityPath.indexOf('pdf')!==-1?
+                                        <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
+                                     :null}
+									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.down(item.bookEntityPath)} data-am-modal="{target: '#load-modal'}">
+                                    下载</button>:null}
 							</div>
+                            </div>
 		                )
 		            })
 	            }

@@ -4,6 +4,7 @@ import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {browserHistory} from 'react-router'
+let  Wechat = window.WeChat || navigator.WeChat;
 class Card extends React.Component{
 	constructor(args) {
 		super()
@@ -171,11 +172,29 @@ class UserCard extends React.Component{
 		})
 	}
 	componentWillMount() {
-		this.show()
-		this.myHonor()
+		this.show();
+		this.myHonor();
 	}
-	shareWeiXin(){
-		console.log(window.Wechat)
+	shareWeiXin() {
+		Wechat.share({
+			text: "This is just a plain string",
+			scene: Wechat.Scene.TIMELINE // share to Timeline
+		}, function() {
+			alert("Success");
+		}, function(reason) {
+			alert("Failed: " + reason);
+		});
+	}
+	componentDidMount() {
+		console.log('navigator.WeChat' + JSON.stringify(Wechat));
+		console.log('window.weChat' + JSON.stringify(Wechat));
+		document.addEventListener("deviceready", function() {
+			Wechat.isInstalled(function(installed) {
+				alert("WeChat installed: " + (installed ? "Yes" : "No"));
+			}, function(reason) {
+				alert("Failed: " + reason);
+			});
+		}, false);
 	}
 	render(){
 		let user = this.state.userCard;
