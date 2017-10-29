@@ -93,6 +93,7 @@ class Menu extends React.Component {
   sign(){
     api.sign().then((data)=>{
       if (data.result === 'RC100') {
+        message.success("签到成功",3)
           this.setState({
             sign:data.sign
           })
