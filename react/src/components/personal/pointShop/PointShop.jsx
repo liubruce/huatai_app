@@ -72,10 +72,11 @@ class PointShop extends React.Component{
 				{
 					this.state.pointShopList.map((item,index)=>{
 						return(
-                <div key={index} className="am-panel goods-list">
-								<div className="goods-img"><img src={tool.getFile(item.shopCover)}
-							//	src={item.shopCover}
-								/></div>
+						<div  key={index}>
+							{
+								item.stock>0?
+								<div className="am-panel goods-list">
+								<div className="goods-img"><img src={tool.getFile(item.shopCover)}/></div>
 								<div className="goods-info">
 									<h3>{item.shopName}</h3>
 									<p><label>兑换积分:</label><span>{item.exchangeIntegral}</span></p>
@@ -84,7 +85,9 @@ class PointShop extends React.Component{
 										<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
 									</a>
 								</div>
-							</div>
+							</div>:null
+							}
+						</div>
 						)
 					})
 				}
