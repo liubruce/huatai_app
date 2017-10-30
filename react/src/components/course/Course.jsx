@@ -92,7 +92,6 @@ class Course extends React.Component {
   }
 
   jump(item) {
-    console.log(item);
 		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
 			hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
 			return;
