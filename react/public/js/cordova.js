@@ -5,7 +5,7 @@
 (function() {
 
 	var device = sino_cordova_checkApp().device;
-	// console.log('cordova加载器检测设备:', device);
+	console.log('cordova加载器检测设备:' + device);
 	//如果不是浏览器版本 需要添加cordova
 
 	if (device !== 'Browser') {
@@ -21,18 +21,49 @@
 		// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 		// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
 		// IOS UA为 SINO_IOS_APP/1.0
-		var reData = {};
-		var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
-		// alert(JSON.stringify(match))
-		if (match) {
-			reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
-			reData.version = match[2];
-		} else {
-			reData.device = 'Browser';
-			reData.version = '0'
+		// var reData = {};
+		// var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
+		// // alert(JSON.stringify(match))
+		// if (match) {
+		// 	reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
+		// 	reData.version = match[2];
+		// } else {
+		// 	reData.device = 'Browser';
+		// 	reData.version = '0'
+		// }
+
+		// return reData;
+
+		var userAgentInfo = navigator.userAgent;
+		var Agents = ["Android", "iPhone",
+			"SymbianOS", "Windows Phone",
+			"iPad", "iPod"
+		];
+		var device = 'Browser';
+		let reData = {};
+		for (var v = 0; v < Agents.length; v++) {
+			if (userAgentInfo.indexOf(Agents[v]) > 0) {
+				device = Agents[v];
+				break;
+			}
 		}
 
+		switch (device) {
+			case 'Android':
+				reData.device = 'Android';
+				break;
+			case 'iPhone':
+				reData.device = 'IOS';
+				break;
+			case 'Browser':
+				reData.device = 'Browser';
+				break;
+			default:
+				reData.device = 'Browser';
+				break;
+		}
 		return reData;
+
 	}
 
 	// function findCordovaPath() {
