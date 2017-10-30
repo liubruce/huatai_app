@@ -120,12 +120,31 @@ class Bookshelf extends React.Component {
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
+                                    {
+                                        item.subhead!==''?	<p>副标题：{item.subhead}</p>
+                                        :''
+									}
 									<p>作者：{item.author}</p>
-									<p>出版社: {item.press}</p>
-									<p>原作名: {item.originalAuthor}</p>
-									<p>译者:  {item.translator}</p>
-									<p>出版年: {item.publishYear}</p>
-									<p>页数: {item.pages}</p>
+									{
+								       			item.press!==''?<p>出版社: {item.press}</p>
+								       			:''
+								    }
+									{
+								       			item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+								       			:''
+								    }
+									{
+								       			item.translator!==''?<p>译者:  {item.translator}</p>
+								       			:''
+								    }
+									{
+								       			item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+								       			:''
+								    }
+                                    {
+								       			Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+								       			:''
+								    }
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
                                      :null}
@@ -243,12 +262,32 @@ class MyLibrary extends React.Component {
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
+                                    {
+												item.subhead!==''?	<p>副标题：{item.subhead}</p>
+												:''
+									}
 									<p>作者：{item.author}</p>
-									<p>出版社: {item.press}</p>
-									<p>原作名: {item.originalAuthor}</p>
-									<p>译者:  {item.translator}</p>
-									<p>出版年: {item.publishYear}</p>
-									<p>页数: {item.pages}</p>
+									{
+								       			item.press!==''?<p>出版社: {item.press}</p>
+								       			:''
+								    }
+									{
+								       			item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+								       			:''
+								    }
+									{
+								       			item.translator!==''?<p>译者:  {item.translator}</p>
+								       			:''
+								    }
+									{
+								       			item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+								       			:''
+								    }
+									{
+								       			Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+								       			:''
+								    }
+                                    <p>兑换积分: {item.cashIntegral}</p>
 									 <a onClick={() => this.jump(item)}>
 									 	<button type="button" className="am-btn-primary" data-am-modal={"{target: '#my-confirms'}"}>兑换</button>
 									 </a>
@@ -334,6 +373,60 @@ class Database extends React.Component {
             tool.reject(res);
         })
     }
+    down(filename) {
+        // try {
+        // let fileURL = window.cordova.file.cacheDirectory;
+        let fileURL = window.cordova.file.dataDirectory;
+        // let fileURL = window.cordova.file.applicationStorageDirectory;
+        // let fileURL = window.cordova.file.externalDataDirectory;
+        // let fileURL = window.cordova.file.externalApplicationStorageDirectory;
+
+        let fileURI = encodeURI(tool.getFile(filename));
+        fileURL += filename;
+        console.log(fileURI);
+        console.log(fileURL);
+        navigator.fileTransfer.download(
+            fileURI,
+            fileURL,
+            function(entry) {
+                navigator.notification.alert(
+                    JSON.stringify(entry, null, 4), 
+                    () => {
+                        console.log('callback')
+                    }, 
+                    '下载成功', 
+                    'Done'
+                );
+            },
+            function(error) {
+                navigator.notification.alert(
+                    JSON.stringify(error, null, 4), 
+                    () => {
+                        console.log('callback')
+                    }, 
+                    '下载失败', 
+                    'Done' 
+                );
+            },
+            false, {}
+        );
+        navigator.fileTransfer.onprogress = (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                console.log(progressEvent.loaded / progressEvent.total * 100);
+                this.setState({
+                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+                })
+            } else {
+                console.log('complete')
+            }
+        };
+        // } catch (err) {
+        //     alert("catch Error: " + err.message);
+        // }
+    }
+    cancelDown() {
+        navigator.fileTransfer.abort();
+    }
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -345,31 +438,67 @@ class Database extends React.Component {
                      <div className="goods-img"><img alt='test' src={tool.getFile(item.bookPath)}/></div>
 											<div className="goods-info">
 												<p>图书名：{item.bookName}</p>
+                                                {
+                                                    item.subhead!==''?	<p>副标题：{item.subhead}</p>
+                                                    :''
+											    }
 												<p>作者：{item.author}</p>
-												<p>出版社: {item.press}</p>
-												<p>原作名: {item.originalAuthor}</p>
-												<p>译者:  {item.translator}</p>
-												<p>出版年: {item.publishYear}</p>
-												<p>页数: {item.pages}</p>
-												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+												{
+                                                    item.press!==''?<p>出版社: {item.press}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.translator!==''?<p>译者:  {item.translator}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+                                                    :''
+								       		    }
+												{
+                                                    Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+                                                    :''
+								       		    }
+												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.down(item.bookEntityPath)} data-am-modal="{target: '#load-modal'}">
+                                    下载</button>:null}
 											</div>
 											</div>
                 )
             })
             }
 
-				<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
+              <div className="am-modal am-modal-confirm" tabIndex="-1" id="load-modal">
+                    <div className="am-modal-dialog">
+                        <div className="am-modal-hd">下载中</div>
+                        <div className="am-modal-bd">
+                            {this.state.percent}%
+                        </div>
+                        <div className="am-modal-footer">
+                           {this.state.percent === 100 || this.state.percent === '100' ?
+                            <span className="am-modal-btn">确定</span>
+                            :
+                            <span onClick={()=>this.cancelDown()} className="am-modal-btn">取消</span>
+                           }
+                        </div>
+                    </div>
+                </div>
+
+				<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-modal">
 					<div className="am-modal-dialog">
 						<div className="am-modal-hd">温馨提示</div>
 						<div className="am-modal-bd">
-							兑换《百年孤独》将需要100积分，您的当前积分为1,200，是否继续？
+							图书下载成功
 						</div>
 						<div className="am-modal-footer">
-							<span className="am-modal-btn" data-am-modal-cancel>取消</span>
-							<span className="am-modal-btn" data-am-modal-confirm>确定</span>
+							<span className="am-modal-btn">确定</span>
 						</div>
 					</div>
 				</div>
+
             </div>
             </Spin>
         )
