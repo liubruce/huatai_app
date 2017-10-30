@@ -8,7 +8,7 @@ class MyArticle extends React.Component{
 	constructor(args) {
 		super()
 		this.state={
-			 tab:'',
+			 tab:5,
 			 essayList:[],
 			 score:0,
 			 loading:false,
@@ -123,7 +123,7 @@ class MyArticle extends React.Component{
 			<Spin spinning={this.state.loading} tip="加载列表中...">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
-					<li className={this.state.tab===''?'am-active':null} onClick={()=>this.changeTab('')}>
+					<li className={this.state.tab===''?'am-active':null} onClick={()=>this.changeTab(5)}>
 						<a >已发布</a>
 					</li>
 					<li className={this.state.tab===3?'am-active':null} onClick={()=>this.changeTab(3)}>
@@ -151,7 +151,7 @@ class MyArticle extends React.Component{
 																<h1 className="am-article-title">{item.essayTitle}</h1>
 															</div>
 															<div className="am-article-bd">
-																<p className="am-article-lead">{item.essayNote?tool.subString(item.essayNote,100):'没有文字'}</p>
+																<p className="am-article-lead">{item.essayNote?tool.subString(item.essayNote,30):'没有文字'}</p>
 																<ul className="am-avg-sm-3 am-thumbnails">
 																	{
 																		item.essayPhotos.map((item,index)=>{

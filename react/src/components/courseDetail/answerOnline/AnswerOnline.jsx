@@ -143,7 +143,8 @@ class AnswerOnline extends React.Component{
 			})
 			radioTitles.push({
 				radioTitleType:'1',
-				radioAnswer:answer
+				radioAnswer:answer,
+				coursetestId:this.state.single[i].coursetestId
 			})
 			// console.log(this.state.single[i].answer,answer)
 		})
@@ -172,7 +173,8 @@ class AnswerOnline extends React.Component{
 			})
 			checkboxTitles.push({
 				checkboxTitleType:'2',
-				checkboxAnswer:answer
+				checkboxAnswer:answer,
+				coursetestId:this.state.multiple[i].coursetestId
 			})
 		})
 

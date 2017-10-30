@@ -77,13 +77,14 @@ class ArticleItem extends React.Component {
                  
                   	 <article data-am-modal={isBuy?`{target: '#article-confirm${item.essayId}'}`:""} className="am-article">
                       <div className="am-article-hd">
-                        <h1 className="am-article-title">
-                        {item.essayTitle}
-                        {item.goodEssay === '1'?<div className="jc-icon" />:null}</h1>
+                        <h1 className="am-article-title" style={{whiteSpace:'normal'}}>
+                        {item.goodEssay === '1'?<div className="jc-icon" />:null}
+						 {item.essayTitle ? tool.subString(item.essayTitle,25) : '没有文字'}
+                        </h1>
                       </div>
                       <div className="am-article-bd">
 
-                        <p className="am-article-lead shorthand">{item.essayNote?item.essayNote:'没有文字'}{item.essayNote?<span>...查看全文</span>:null}</p>
+                        <p className="am-article-lead shorthand">{item.essayNote ? tool.subString(item.essayNote,30) : '没有文字'}</p>
 
                         <ul className="am-avg-sm-3 am-thumbnails">
                         {item.essayPhotos.map((img,index)=>{

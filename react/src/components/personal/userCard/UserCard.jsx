@@ -171,11 +171,39 @@ class UserCard extends React.Component{
 		})
 	}
 	componentWillMount() {
-		this.show()
-		this.myHonor()
+		this.show();
+		this.myHonor();
 	}
-	shareWeiXin(){
-		console.log(window.Wechat)
+	shareWeiXin() {
+		navigator.WeChat.share({
+    message: {
+        title: "Hi, there",
+        description: "This is description.",
+        thumb: "www/img/thumbnail.png",
+        mediaTagName: "TEST-TAG-001",
+        messageExt: "这是第三方带的测试字段",
+        messageAction: "<action>dotalist</action>",
+        media: "YOUR_MEDIA_OBJECT_HERE"
+    },
+    scene: navigator.WeChat.Scene.TIMELINE   // share to Timeline
+}, function () {
+    alert("Success");
+}, function (reason) {
+    alert("Failed: " + reason);
+});
+		return;
+		
+		navigator.WeChat.share({
+			text: "This is just a plain string",
+			scene: navigator.WeChat.Scene.TIMELINE // share to Timeline
+		}, function() {
+			alert("Success");
+		}, function(reason) {
+			alert("Failed: " + reason);
+		});
+	}
+	componentDidMount() {
+		console.log('navigator.WeChat' + JSON.stringify(navigator.WeChat));
 	}
 	render(){
 		let user = this.state.userCard;

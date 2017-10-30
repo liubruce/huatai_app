@@ -70,5 +70,15 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-tx-wechat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-tx-wechat"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "[wxc6cfcd46b05ef392]"
+        }
     }
 }

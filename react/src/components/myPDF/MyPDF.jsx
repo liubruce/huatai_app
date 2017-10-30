@@ -17,6 +17,10 @@ class MyPDF extends Component {
      //url:'https://arxiv.org/pdf/quant-ph/0410100.pdf'
     })
   }
+  componentDidMount() {
+    // console.log( $('.customViewer').find('canvas'))
+    // $('.customViewer').find('canvas')
+  }
   render(){
     return(
           <div>

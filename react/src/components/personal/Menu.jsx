@@ -50,7 +50,7 @@ class Menu extends React.Component {
       "runscript": "/App/PersonalCenter/PointDetail",
       "nodeClass": "icon icon-jfdetils",
     }, {
-      "nodeName": "故事线",
+      "nodeName": "蜂行世界",
       "runscript": "/App/StoryLine",
       "nodeClass": "icon icon-stroy",
     }];
@@ -93,6 +93,7 @@ class Menu extends React.Component {
   sign(){
     api.sign().then((data)=>{
       if (data.result === 'RC100') {
+        message.success("签到成功",3)
           this.setState({
             sign:data.sign
           })
