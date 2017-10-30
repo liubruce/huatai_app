@@ -4,6 +4,10 @@ import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin } from 'antd'
 import {hashHistory} from 'react-router';
+import {
+	Modal
+  } from 'antd';
+  const confirm = Modal.confirm;
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
@@ -66,9 +70,27 @@ class TestCenter extends React.Component{
 		})
 	}
 	clickMe(item){
-		let index=item.inforURL.indexOf("/TestPaper");
-        let arr=item.inforURL.substring(index);
-		hashHistory.push('/App/Course'+arr);
+		confirm({
+			title: '是否测试开始',
+			content: '',
+			onOk() {
+				let index = item.inforURL.indexOf("/TestPaper");
+				let arr = item.inforURL.substring(index);
+				hashHistory.push('/App/Course' + arr);
+			},
+			onCancel() {
+			},
+		});
+	}
+	Details(id){
+		api.viewmessage(id).then((data)=>{
+			if(data.result === 'RC100'){
+			}else{
+				message.error(data.errMsg, 3);
+			}
+		}, (res) => {
+			tool.reject(res);
+		})
 	}
 	render(){
 		return(
@@ -88,17 +110,20 @@ class TestCenter extends React.Component{
                         {
 							this.state.testList.map((item,index)=>{
 								return(
-                                      <div key={index} className="am-panel msg-list">
+                                      <div key={index} className="am-panel msg-list"  onClick={()=>this.Details(item.informationId)}>
 										<div className="read-sta"><i className="fa fa-envelope"></i></div>
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
 											{
 												item.informationType === '1' && item.isExam === 0 ?
-												<a onClick={()=>this.clickMe(item)} style={{cursor:"pointer"}}>任务地址</a>:null
+												<a onClick={()=>this.clickMe(item,)} style={{cursor:"pointer"}}>任务地址</a>:null
                                              }
 											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>
+
+									
+										
 						             </div>
 								)
 							})

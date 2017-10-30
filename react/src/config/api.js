@@ -662,6 +662,25 @@ export const readInformationlist = (bM = {}) => {
         });
     });
 }
+  //查看消息接口
+  export const viewmessage = (id) => {
+  let body = {
+    informationId: id,
+
+  }
+  body = tool.behavior(body, 'markInformation', 'button')
+
+  return new Promise((resolve, reject) => {
+    sfetch.get({
+      url: `${api_Ip}/messagecenter/markinformationasread`, 
+      body
+    }).then((data) => {
+        tool.checkLogin(data.json);
+      resolve(data.json)
+    });
+  });
+}
+
 /**
  * /appbookmanagerment/mylist我的书架
 */
