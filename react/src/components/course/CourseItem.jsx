@@ -69,7 +69,7 @@ class CourseItem extends React.Component {
 		return(
 			  <li>
 						<a>
-							<img onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm'}`:""} src={require('../../style/images/test.png')}/>
+							<img onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} src={require('../../style/images/test.png')}/>
 							<p onClick={()=>this.jump(item)} data-am-modal={isBuy?`{target: '#course-confirm${item.courseId}'}`:""} className="time">{tool.formatTimestamp(item.createTime)}</p>
 						</a>
 						<div className="cur-list-info">
