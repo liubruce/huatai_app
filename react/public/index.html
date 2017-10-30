@@ -23,7 +23,7 @@
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/amazeui.min.js"></script>
     <script src='config.js' type="text/javascript"></script>
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <!-- <script type="text/javascript" charset="utf-8" src="cordova.js"></script> -->
     <title>HuaTai_APP</title>
 </head>
 <style type="text/css">
@@ -39,22 +39,23 @@ body {
 <script type='application/javascript' src='js/fastclick.js'></script>
 <script src="js/cordova.js"></script>
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
 }, false);
+
 document.addEventListener("deviceready", function() {
 
-    WeChat.isInstalled(function(installed) {
-        alert("WeChat installed: " + (installed ? "Yes" : "No"));
-    }, function(reason) {
-        alert("Failed: " + reason);
-    });
+    // Wechat.isInstalled(function(installed) {
+    //     alert("WeChat installed: " + (installed ? "Yes" : "No"));
+    // }, function(reason) {
+    //     alert("WeChat Failed: " + reason);
+    // });
 
-    navigator.WeChat = WeChat;
-    window.WeChat = WeChat;
-    
-    var fileTransfer = new FileTransfer();
-    navigator.fileTransfer = fileTransfer;
+    window.Wechat = Wechat;
+
+    // var fileTransfer = new FileTransfer();
+    // window.fileTransfer = fileTransfer;
 
 }, false);
 </script>

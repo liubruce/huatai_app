@@ -31,8 +31,11 @@
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "io.HUATAI.ELearning"
         },
-        "cordova-plugin-tx-wechat": {
-            "APP_ID": "[wxc6cfcd46b05ef392]",
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "io.HUATAI.ELearning"
+        },
+        "cordova-plugin-wechat": {
+            "WECHATAPPID": "wxc6cfcd46b05ef392",
             "PACKAGE_NAME": "io.HUATAI.ELearning"
         }
     },

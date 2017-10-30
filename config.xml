@@ -4,7 +4,7 @@
     <description>
         华泰蜂行学习平台
     </description>
-    <author email="2323176669@qq.com" href="http://github/JCW0811">
+    <author email="2323176669@qq.com" href="http://github.com/JCW0811">
         JiChuangWei
     </author>
     <content src="index.html" />
@@ -33,6 +33,7 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
+    <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-dialogs" spec="^1.3.3" />
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
@@ -40,8 +41,8 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
     <plugin name="cordova-plugin-network-information" spec="^1.3.3" />
-    <plugin name="cordova-plugin-tx-wechat" spec="^0.3.2">
-        <variable name="APP_ID" value="[wxc6cfcd46b05ef392]" />
+    <plugin name="cordova-plugin-wechat" spec="^2.0.0">
+        <variable name="WECHATAPPID" value="wxc6cfcd46b05ef392" />
     </plugin>
     <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
 </widget>

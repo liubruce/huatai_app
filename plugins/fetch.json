@@ -71,14 +71,22 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-tx-wechat": {
+    "cordova-plugin-device": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-tx-wechat"
+            "id": "cordova-plugin-device@^1.1.6"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-wechat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-wechat@2.0.0"
         },
         "is_top_level": true,
         "variables": {
-            "APP_ID": "[wxc6cfcd46b05ef392]"
+            "WECHATAPPID": "wxc6cfcd46b05ef392"
         }
     }
 }
