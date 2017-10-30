@@ -43,10 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
 }, false);
 document.addEventListener("deviceready", function() {
-    navigator.WeChat = Wechat;
-    window.WeChat = Wechat;
+
+    WeChat.isInstalled(function(installed) {
+        alert("WeChat installed: " + (installed ? "Yes" : "No"));
+    }, function(reason) {
+        alert("Failed: " + reason);
+    });
+
+    navigator.WeChat = WeChat;
+    window.WeChat = WeChat;
+    
     var fileTransfer = new FileTransfer();
     navigator.fileTransfer = fileTransfer;
+
 }, false);
 </script>
 

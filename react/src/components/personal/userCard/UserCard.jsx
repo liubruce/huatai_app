@@ -4,7 +4,6 @@ import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {browserHistory} from 'react-router'
-let  Wechat = window.WeChat || navigator.WeChat;
 class Card extends React.Component{
 	constructor(args) {
 		super()
@@ -176,9 +175,27 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
-		Wechat.share({
+		navigator.WeChat.share({
+    message: {
+        title: "Hi, there",
+        description: "This is description.",
+        thumb: "www/img/thumbnail.png",
+        mediaTagName: "TEST-TAG-001",
+        messageExt: "这是第三方带的测试字段",
+        messageAction: "<action>dotalist</action>",
+        media: "YOUR_MEDIA_OBJECT_HERE"
+    },
+    scene: navigator.WeChat.Scene.TIMELINE   // share to Timeline
+}, function () {
+    alert("Success");
+}, function (reason) {
+    alert("Failed: " + reason);
+});
+		return;
+		
+		navigator.WeChat.share({
 			text: "This is just a plain string",
-			scene: Wechat.Scene.TIMELINE // share to Timeline
+			scene: navigator.WeChat.Scene.TIMELINE // share to Timeline
 		}, function() {
 			alert("Success");
 		}, function(reason) {
@@ -186,15 +203,7 @@ class UserCard extends React.Component{
 		});
 	}
 	componentDidMount() {
-		console.log('navigator.WeChat' + JSON.stringify(Wechat));
-		console.log('window.weChat' + JSON.stringify(Wechat));
-		document.addEventListener("deviceready", function() {
-			Wechat.isInstalled(function(installed) {
-				alert("WeChat installed: " + (installed ? "Yes" : "No"));
-			}, function(reason) {
-				alert("Failed: " + reason);
-			});
-		}, false);
+		console.log('navigator.WeChat' + JSON.stringify(navigator.WeChat));
 	}
 	render(){
 		let user = this.state.userCard;
