@@ -120,12 +120,31 @@ class Bookshelf extends React.Component {
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
+                                    {
+                                        item.subhead!==''?	<p>副标题：{item.subhead}</p>
+                                        :''
+									}
 									<p>作者：{item.author}</p>
-									<p>出版社: {item.press}</p>
-									<p>原作名: {item.originalAuthor}</p>
-									<p>译者:  {item.translator}</p>
-									<p>出版年: {item.publishYear}</p>
-									<p>页数: {item.pages}</p>
+									{
+								       			item.press!==''?<p>出版社: {item.press}</p>
+								       			:''
+								    }
+									{
+								       			item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+								       			:''
+								    }
+									{
+								       			item.translator!==''?<p>译者:  {item.translator}</p>
+								       			:''
+								    }
+									{
+								       			item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+								       			:''
+								    }
+                                    {
+								       			Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+								       			:''
+								    }
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
                                      :null}
@@ -243,12 +262,32 @@ class MyLibrary extends React.Component {
 			                    </div>
 								<div className="goods-info">
 									<p>图书名：{item.bookName}</p>
+                                    {
+												item.subhead!==''?	<p>副标题：{item.subhead}</p>
+												:''
+									}
 									<p>作者：{item.author}</p>
-									<p>出版社: {item.press}</p>
-									<p>原作名: {item.originalAuthor}</p>
-									<p>译者:  {item.translator}</p>
-									<p>出版年: {item.publishYear}</p>
-									<p>页数: {item.pages}</p>
+									{
+								       			item.press!==''?<p>出版社: {item.press}</p>
+								       			:''
+								    }
+									{
+								       			item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+								       			:''
+								    }
+									{
+								       			item.translator!==''?<p>译者:  {item.translator}</p>
+								       			:''
+								    }
+									{
+								       			item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+								       			:''
+								    }
+									{
+								       			Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+								       			:''
+								    }
+                                    <p>兑换积分: {item.cashIntegral}</p>
 									 <a onClick={() => this.jump(item)}>
 									 	<button type="button" className="am-btn-primary" data-am-modal={"{target: '#my-confirms'}"}>兑换</button>
 									 </a>
@@ -345,13 +384,33 @@ class Database extends React.Component {
                      <div className="goods-img"><img alt='test' src={tool.getFile(item.bookPath)}/></div>
 											<div className="goods-info">
 												<p>图书名：{item.bookName}</p>
+                                                {
+                                                    item.subhead!==''?	<p>副标题：{item.subhead}</p>
+                                                    :''
+											    }
 												<p>作者：{item.author}</p>
-												<p>出版社: {item.press}</p>
-												<p>原作名: {item.originalAuthor}</p>
-												<p>译者:  {item.translator}</p>
-												<p>出版年: {item.publishYear}</p>
-												<p>页数: {item.pages}</p>
-												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-modal'}">兑换</button>
+												{
+                                                    item.press!==''?<p>出版社: {item.press}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.originalAuthor!==''?<p>原作名: {item.originalAuthor}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.translator!==''?<p>译者:  {item.translator}</p>
+                                                    :''
+								       		    }
+												{
+                                                    item.publishYear!==''?<p>出版年: {item.publishYear}</p>
+                                                    :''
+								       		    }
+												{
+                                                    Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
+                                                    :''
+								       		    }
+                                                   <p>兑换积分: {item.cashIntegral}</p>
+												<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
 											</div>
 											</div>
                 )
