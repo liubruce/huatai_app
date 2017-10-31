@@ -176,30 +176,22 @@ class UserCard extends React.Component{
 	}
 	shareWeiXin() {
 
-		window.Wechat.share({
-			message: {
-				title: "Hi, there",
-				description: "This is description.",
-				thumb: "www/img/thumbnail.png",
-				mediaTagName: "TEST-TAG-001",
-				messageExt: "这是第三方带的测试字段",
-				messageAction: "<action>dotalist</action>",
-				media: "YOUR_MEDIA_OBJECT_HERE"
-			},
-			scene: window.Wechat.Scene.TIMELINE // share to Timeline
+		navigator.Wechat.share({
+			text: "华泰分享测试",
+			scene: navigator.Wechat.Scene.TIMELINE // share to Timeline
 		}, function() {
 			alert("分享成功");
 		}, function(reason) {
 			alert("分享失败: " + reason);
 		});
 
-		// window.Wechat.share({
+		// navigator.Wechat.share({
 		// 	message: {
 		// 		title: "华泰分享测试",
 		// 		description: "请点击.",
 		// 		media: {
 		// 			type: window.Wechat.Type.WEBPAGE,
-		// 			webpageUrl: "http://life.ehuatai.com/"
+		// 			webpageUrl: "http://www.github.com/"
 		// 		}
 		// 	},
 		// 	scene: window.Wechat.Scene.TIMELINE // 分享到朋友圈(分享类型参数自定，详见文档)
@@ -211,7 +203,7 @@ class UserCard extends React.Component{
 
 	}
 	componentDidMount() {
-		
+
 	}
 	render(){
 		let user = this.state.userCard;

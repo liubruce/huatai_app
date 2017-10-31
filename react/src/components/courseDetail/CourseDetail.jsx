@@ -110,15 +110,15 @@ class CourseDetail extends React.Component {
                      fluid={false} 
                      playsInline={true}
                      width={$(window).width()} 
-                     onError={()=>{message.error('获取视频失败', 1);}}
+                     // onError={()=>{message.error('获取视频失败', 1);}}
                      poster={require('../../style/images/test.png')}
                      height={210}
                      src={tool.getFile(course.coursevideoPath)}
                      >
-                     <source
+                     {/*<source
                       autoPlay
                       src={tool.getFile(course.coursevideoPath)}
-                      />
+                      />*/}
                     </Player>
 
 					</a></div>

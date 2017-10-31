@@ -39,7 +39,6 @@ body {
 <script type='application/javascript' src='js/fastclick.js'></script>
 <script src="js/cordova.js"></script>
 <script>
-
 document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
 }, false);
@@ -52,10 +51,23 @@ document.addEventListener("deviceready", function() {
     //     alert("WeChat Failed: " + reason);
     // });
 
-    window.Wechat = Wechat;
+    navigator.Wechat = Wechat;
+    navigator.PERSISTENT = LocalFileSystem.PERSISTENT;
 
-    // var fileTransfer = new FileTransfer();
-    // window.fileTransfer = fileTransfer;
+    var fileTransfer = new FileTransfer();
+    navigator.fileTransfer = fileTransfer;
+
+    var scope = "snsapi_userinfo",
+        state = "_" + (+new Date());
+        
+    Wechat.auth(scope, state, function(response) {
+        // you may use response.code to get the access token.
+        alert(JSON.stringify(response));
+    }, function(reason) {
+        alert("Failed: " + reason);
+    });
+
+
 
 }, false);
 </script>

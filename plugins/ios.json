@@ -40,6 +40,9 @@
         "cordova-plugin-wechat": {
             "WECHATAPPID": "wxc6cfcd46b05ef392",
             "PACKAGE_NAME": "io.HUATAI.ELearning"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "io.HUATAI.ELearning"
         }
     },
     "dependent_plugins": {

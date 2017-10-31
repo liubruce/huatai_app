@@ -10,7 +10,9 @@ import {
 } from 'antd';
 import $ from 'jquery'
 
-import {getFile_IP} from './serverIp'
+import {
+	getFile_IP
+} from './serverIp'
 
 export const camera = () => {
 	return new Promise((resolve, reject) => {
@@ -293,7 +295,7 @@ export const url_parameter = (data) => {
 export const url_format = (url, operationType, behaviorDataType, body = {}) => {
 	return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
-export const getFile = (fileName) =>{
+export const getFile = (fileName) => {
 	return url_format(getFile_IP + fileName);
 	// return getFile_IP + fileName;
 }
@@ -456,6 +458,74 @@ export const removeScroll = () => {
 	$(window).off('.show');
 }
 
+export const cancelDown = () => {
+	navigator.fileTransfer.abort();
+}
+
+export const downFile = (filename) => {
+
+	// let downUrl = encodeURI(getFile(filename));
+	let downUrl = 'https://www.baidu.com/link?url=kthJ-JFI5KEcCsVduU0Ds_hFpJZwScThAtsQwNXAokH_7zFb9gNWqEMAhAVvIpzmi7oagY-onMgg9fwgf1-STYDKB2OZsTNE3mVqedb6-aq&wd=&eqid=9a2210cb00031ccb0000000659f7e06d';
+	getPath(downUrl,filename);
+
+	function getPath(downUrl,filename) {
+		window.requestFileSystem(navigator.PERSISTENT, 0, function(fs) {
+			console.log('打开的文件系统: ' + fs.name);
+			var url = downUrl;
+			fs.root.getFile(filename, {
+					create: true,
+					exclusive: false
+				},
+				function(fileEntry) {
+					download(fileEntry, url);
+				}, onErrorCreateFile);
+
+		}, onErrorLoadFs);
+	}
+
+	//下载文件
+	function download(fileEntry, uri) {
+		var fileURL = fileEntry.toURL();
+
+		navigator.fileTransfer.download(
+			uri,
+			fileURL,
+			function(entry) {
+				console.log("下载成功！");
+				console.log("文件保存位置: " + entry.toURL());
+			},
+			function(error) {
+				console.log("下载失败！");
+				console.log("error source " + error.source);
+				console.log("error target " + error.target);
+				console.log("error code" + error.code);
+			}
+		);
+	}
+
+	//文件创建失败回调
+	function onErrorCreateFile(error) {
+		console.log("文件创建失败！")
+	}
+
+	//FileSystem加载失败回调
+	function onErrorLoadFs(error) {
+		console.log("文件系统加载失败！")
+	}
+
+
+	navigator.fileTransfer.onprogress = (progressEvent) => {
+		if (progressEvent.lengthComputable) {
+			console.log(progressEvent.loaded / progressEvent.total * 100);
+			this.setState({
+				percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+			})
+		} else {
+			console.log('complete')
+		}
+	};
+}
+
 /**
  * 代码优化
  * by QianLi
@@ -482,18 +552,18 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 }
 
 export const checkLogin = (data) => {
-	if (data.result === "RC500") {
-		if(sino_cordova_checkApp().device === 'Browser'){
-			this.exit();
-			hashHistory.push('/Login');
+		if (data.result === "RC500") {
+			if (sino_cordova_checkApp().device === 'Browser') {
+				// exit();
+				hashHistory.push('/Login');
+			}
 		}
 	}
-}
-//文章显示
-export const subString=(string,subLength)=>{
-	if(string.length>subLength){
-          return string.substring(0,subLength)+'...'
-	}else{
-        return string
-	} 
+	//文章显示
+export const subString = (string, subLength) => {
+	if (string.length > subLength) {
+		return string.substring(0, subLength) + '...'
+	} else {
+		return string
+	}
 }
