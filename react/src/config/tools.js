@@ -462,22 +462,21 @@ export const cancelDown = () => {
 	navigator.fileTransfer.abort();
 }
 
-export const downFile = (filename) => {
+export const downFile = (filename, that) => {
 
 	// let downUrl = encodeURI(getFile(filename));
 	let downUrl = 'https://www.baidu.com/link?url=kthJ-JFI5KEcCsVduU0Ds_hFpJZwScThAtsQwNXAokH_7zFb9gNWqEMAhAVvIpzmi7oagY-onMgg9fwgf1-STYDKB2OZsTNE3mVqedb6-aq&wd=&eqid=9a2210cb00031ccb0000000659f7e06d';
-	getPath(downUrl, filename);
+	down(downUrl, filename);
 
-	function getPath(downUrl, filename) {
+	function down(downUrl, filename) {
 		window.requestFileSystem(navigator.PERSISTENT, 0, function(fs) {
-			console.log('打开的文件系统: ' + fs.name);
-			var url = downUrl;
+			console.log('----打开的文件系统----: ' + fs.name);
 			fs.root.getFile(filename, {
 					create: true,
 					exclusive: false
 				},
 				function(fileEntry) {
-					download(fileEntry, url);
+					download(fileEntry, downUrl);
 				}, onErrorCreateFile);
 
 		}, onErrorLoadFs);
@@ -486,42 +485,53 @@ export const downFile = (filename) => {
 	//下载文件
 	function download(fileEntry, uri) {
 		var fileURL = fileEntry.toURL();
-
 		navigator.fileTransfer.download(
 			uri,
 			fileURL,
 			function(entry) {
-				console.log("下载成功！");
-				console.log("文件保存位置: " + entry.toURL());
+				navigator.notification.alert(
+					JSON.stringify(entry, null, 4),
+					() => {
+						console.log('alert callback')
+					},
+					'下载成功',
+					'Done'
+				);
 			},
 			function(error) {
-				console.log("下载失败！");
-				console.log("error source " + error.source);
-				console.log("error target " + error.target);
-				console.log("error code" + error.code);
+				navigator.notification.alert(
+					JSON.stringify(error, null, 4),
+					() => {
+						console.log('alert callback')
+					},
+					'下载失败',
+					'Done'
+				);
 			}
 		);
 	}
 
 	//文件创建失败回调
 	function onErrorCreateFile(error) {
-		console.log("文件创建失败！")
+		alert("文件创建失败！")
 	}
 
 	//FileSystem加载失败回调
 	function onErrorLoadFs(error) {
-		console.log("文件系统加载失败！")
+		alert("文件系统加载失败！")
 	}
 
 
 	navigator.fileTransfer.onprogress = (progressEvent) => {
 		if (progressEvent.lengthComputable) {
-			console.log(progressEvent.loaded / progressEvent.total * 100);
-			this.setState({
+			console.log('----------'+progressEvent.loaded / progressEvent.total * 100);
+			that.setState({
 				percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
 			})
 		} else {
-			console.log('complete')
+			that.setState({
+				percent: 100
+			})
 		}
 	};
 }

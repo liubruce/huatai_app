@@ -69,68 +69,25 @@ class CourseDetail extends React.Component {
 		old_time = state.currentTime
 	}
 	play() {
-			this.refs.course_video.play();
-		}
-		/*	onTimeUpdate(e) {
-				let test = document.getElementById('course_id');
-				if (test.currentTime - old_time > 1) {
-					test.currentTime = old_time;
-					this.setState({
-						isQuick: true
-					})
-				} else {
-					if (test.currentTime >= test.duration) {
-						this.setState({
-							isEnd: true
-						})
-					}
-				}
-				old_time = test.currentTime
-			}*/
-	down(filename){
-		console.log(window.cordova)
-		let fileURL = window.cordova.file.dataDirectory;
-		let fileURI = encodeURI(tool.getFile(filename));
-		fileURL += filename;
-		navigator.fileTransfer.download(
-            fileURI,
-            fileURL,
-            function(entry) {
-                navigator.notification.alert(
-                    JSON.stringify(entry, null, 4), 
-                    () => {
-                        console.log('callback')
-                    }, 
-                    '下载成功', 
-                    'Done'
-                );
-            },
-            function(error) {
-                navigator.notification.alert(
-                    JSON.stringify(error, null, 4), 
-                    () => {
-                        console.log('callback')
-                    }, 
-                    '下载失败', 
-                    'Done' 
-                );
-            },
-            false, {}
-        );
-        navigator.fileTransfer.onprogress = (progressEvent) => {
-            if (progressEvent.lengthComputable) {
-                console.log(progressEvent.loaded / progressEvent.total * 100);
-                this.setState({
-                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
-                })
-            } else {
-                console.log('complete')
-            }
-        };
+		this.refs.course_video.play();
 	}
-	cancelDown() {
-        navigator.fileTransfer.abort();
-    }
+	// onTimeUpdate(e) {
+	// 	let test = document.getElementById('course_id');
+	// 	if (test.currentTime - old_time > 1) {
+	// 		test.currentTime = old_time;
+	// 		this.setState({
+	// 			isQuick: true
+	// 		})
+	// 	} else {
+	// 		if (test.currentTime >= test.duration) {
+	// 			this.setState({
+	// 				isEnd: true
+	// 			})
+	// 		}
+	// 	}
+	// 	old_time = test.currentTime
+	// }
+
 	render() {
 		let course = this.state.coursedata;
 		return (
@@ -200,7 +157,7 @@ class CourseDetail extends React.Component {
 						<ul className="am am-avg-sm-3" style={{fontSize: '1.4rem'}}>
 						    {this.state.courseattach.map((item,index)=>{
 						    	return(
-						    		<li key={index} ><a onClick={()=>this.down(item.courseAttrachPath)} data-am-modal="{target: '#load-modal'}">{item.courseAttrachPath}</a></li>
+						    		<li key={index} ><a onClick={()=>tool.downFile(item.courseAttrachPath,this)} data-am-modal="{target: '#load-modal'}">{item.courseAttrachPath}</a></li>
 						    		)
 						    })}
 						</ul>
@@ -215,7 +172,7 @@ class CourseDetail extends React.Component {
 	                           {this.state.percent === 100 || this.state.percent === '100' ?
 	                            <span className="am-modal-btn">确定</span>
 	                            :
-	                            <span onClick={()=>this.cancelDown()} className="am-modal-btn">取消</span>
+	                            <span onClick={()=>tool.cancelDown()} className="am-modal-btn">取消</span>
 	                           }
 	                        </div>
 	                    </div>

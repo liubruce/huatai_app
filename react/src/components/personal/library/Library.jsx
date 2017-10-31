@@ -94,7 +94,7 @@ class Bookshelf extends React.Component {
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
                                      :null}
-									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath)} data-am-modal="{target: '#load-modal'}">
+									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
                                     下载</button>:null}
 							</div>
                             </div>
@@ -355,7 +355,7 @@ class Database extends React.Component {
                                                     Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
                                                     :''
 								       		    }
-												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath)} data-am-modal="{target: '#load-modal'}">
+												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
                                     下载</button>:null}
 											</div>
 											</div>
