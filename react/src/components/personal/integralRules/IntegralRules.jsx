@@ -1,11 +1,11 @@
 import React from 'react'
 import './integralRules.less'
-import $ from 'jquery'
-import {Link} from 'react-router'
+//import $ from 'jquery'
+//import {Link} from 'react-router'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
-var lineIndex=0;
+//var lineIndex=0;
 class StoryLine extends React.Component{
 	constructor(args){
 		super();
@@ -33,8 +33,8 @@ class StoryLine extends React.Component{
      this.levelSet();
    }
 	render(){
-		let sex=this.state.sex;
-		let index=0;
+		//let sex=this.state.sex;
+		//let index=0;
 		return(
 		  <div className="warpper">
 				<Spin spinning={this.state.loading} tip="加载列表中...">

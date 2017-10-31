@@ -3,7 +3,7 @@ import './pointDetail.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
-import $ from 'jquery'
+//import $ from 'jquery'
 import DatePicker from 'react-mobile-datepicker';
 class PointDetail extends React.Component{
 	constructor(args){
@@ -131,7 +131,7 @@ class PointDetail extends React.Component{
 				<div className="warpper">
 					<div className="am-panel user-jf clearFix">
 						<div className="user-tx-name">
-							<img src={require('../../../style/images/test.png')}/>
+							<img src={require('../../../style/images/test.png')} alt="test"/>
 							<p>{dataDetailList.userName}</p>
 						</div>
 						<div className="user-jf-details">

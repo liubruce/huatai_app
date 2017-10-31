@@ -54,7 +54,7 @@ class GrowingUp extends React.Component{
 		super()
 	}
 	render(){
-		let userCard=this.props.userCard;
+		//let userCard=this.props.userCard;
 		return(
         <div className="am-panel">
 				<div className="czjl">
@@ -87,7 +87,7 @@ class HonoraryCert  extends React.Component{
 					<div className="am-slider am-slider-carousel" id="img-slider">
 						<ul className="am-slides">
 							<li style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
-								<img src={require('../../../style/images/zs.png')} />
+								<img src={require('../../../style/images/zs.png')} alt='test'/>
 								<p style={{ textAlign: 'center' }}>荣誉证书名称</p>
 							</li>
 						</ul>

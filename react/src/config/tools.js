@@ -178,7 +178,7 @@ export const info = () => {
 
 			localStorage.setItem("user", JSON.stringify(_user));
 			save_user();
-			alert(JSON.stringify(user))
+			// alert(JSON.stringify(user))
 			api.getMenu().then((data) => {
 				if (data.result === 'RC100') {
 					_resolve();
@@ -466,9 +466,9 @@ export const downFile = (filename) => {
 
 	// let downUrl = encodeURI(getFile(filename));
 	let downUrl = 'https://www.baidu.com/link?url=kthJ-JFI5KEcCsVduU0Ds_hFpJZwScThAtsQwNXAokH_7zFb9gNWqEMAhAVvIpzmi7oagY-onMgg9fwgf1-STYDKB2OZsTNE3mVqedb6-aq&wd=&eqid=9a2210cb00031ccb0000000659f7e06d';
-	getPath(downUrl,filename);
+	getPath(downUrl, filename);
 
-	function getPath(downUrl,filename) {
+	function getPath(downUrl, filename) {
 		window.requestFileSystem(navigator.PERSISTENT, 0, function(fs) {
 			console.log('打开的文件系统: ' + fs.name);
 			var url = downUrl;

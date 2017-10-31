@@ -2,9 +2,9 @@ import React from 'react'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message,Spin} from 'antd'
-import {Link,browserHistory,hashHistory} from 'react-router'
+import {browserHistory,hashHistory} from 'react-router'
 import './pubArticle.less'
-import $ from 'jquery'
+//import $ from 'jquery'
 import Dropzone from 'react-dropzone'
 class PubArticle extends React.Component{
 	constructor(args) {

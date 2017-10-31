@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import PDFViewer from 'mgr-pdf-viewer-react';
 import './myPDF.less';
-import $ from 'jquery'
+//import $ from 'jquery'
 class MyPDF extends Component {
   constructor(args) {
     super();

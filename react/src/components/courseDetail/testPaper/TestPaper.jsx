@@ -186,7 +186,7 @@ class testPaper extends React.Component{
 		api.appSubmTestPaperTitle(formData).then((data) => {
 			if (data.result === 'RC100') {
 				this.setState({
-					point: data.answerScore
+					point: data.answerScores
 				})
 			} else {
 				message.error(data.errMsg, 3);
