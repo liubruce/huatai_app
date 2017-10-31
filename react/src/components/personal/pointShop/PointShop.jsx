@@ -76,7 +76,7 @@ class PointShop extends React.Component{
 							{
 								item.stock>0?
 								<div className="am-panel goods-list">
-								<div className="goods-img"><img src={tool.getFile(item.shopCover)}/></div>
+								<div className="goods-img"><img src={tool.getFile(item.shopCover)} alt="test"/></div>
 								<div className="goods-info">
 									<h3>{item.shopName}</h3>
 									<p><label>兑换积分:</label><span>{item.exchangeIntegral}</span></p>

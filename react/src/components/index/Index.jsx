@@ -6,7 +6,7 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
-import CourseItem from '../course/CourseItem.jsx'
+//import CourseItem from '../course/CourseItem.jsx'
 import {hashHistory} from 'react-router';
  const SampleNextArrow =(props)=> {
   const {onClick} = props
@@ -166,7 +166,7 @@ class Index extends React.Component {
               return(
                <li key={index}>
                           <a>
-                            <img onClick={()=>this.jump(item)} data-am-modal={item.goodCourse ==='1' && item.userCourseOperation.isBuy !== 1?`{target: '#course-confirm'}`:""} src={require('../../style/images/test.png')}/>
+                            <img onClick={()=>this.jump(item)} data-am-modal={item.goodCourse ==='1' && item.userCourseOperation.isBuy !== 1?`{target: '#course-confirm'}`:""} src={require('../../style/images/test.png')} alt='test'/>
                             <p onClick={()=>this.jump(item)} data-am-modal={item.goodCourse ==='1' && item.userCourseOperation.isBuy !== 1?`{target: '#course-confirm'}`:""} className="time">{tool.formatTimestamp(item.createTime)}</p>
                           </a>
                           <div className="cur-list-info">

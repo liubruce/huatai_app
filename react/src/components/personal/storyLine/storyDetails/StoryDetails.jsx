@@ -1,7 +1,7 @@
 import React from 'react'
 import './storyDetails.less'
 import $ from 'jquery'
-import {Link,browserHistory} from 'react-router'
+//import {Link,browserHistory} from 'react-router'
 class storyDetails extends React.Component{
 	constructor(props){
 		super(props);
