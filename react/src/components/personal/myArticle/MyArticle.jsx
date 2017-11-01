@@ -123,7 +123,7 @@ class MyArticle extends React.Component{
 			<Spin spinning={this.state.loading} tip="加载列表中...">
 				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
-					<li className={this.state.tab===''?'am-active':null} onClick={()=>this.changeTab(5)}>
+					<li className={this.state.tab===5?'am-active':null} onClick={()=>this.changeTab(5)}>
 						<a >已发布</a>
 					</li>
 					<li className={this.state.tab===3?'am-active':null} onClick={()=>this.changeTab(3)}>

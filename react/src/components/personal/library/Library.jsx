@@ -53,6 +53,25 @@ class Bookshelf extends React.Component {
 		}
 		hashHistory.push(path);
 	}
+    downFile(filename) {
+        this.setState({percent: 0},()=>{
+            tool.downFile(filename);
+        })
+        navigator.fileTransfer.onprogress = (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
+                this.setState({
+                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+                })
+            } else {
+                console.log('------下载完成')
+                window.jquery('#load-modal').modal('close');
+                this.setState({
+                    percent: 100
+                })
+            }
+        };
+    }
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -94,7 +113,7 @@ class Bookshelf extends React.Component {
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
                                      :null}
-									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
+									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
                                     下载</button>:null}
 							</div>
                             </div>
@@ -319,6 +338,25 @@ class Database extends React.Component {
             tool.reject(res);
         })
     }
+    downFile(filename) {
+        this.setState({percent: 0},()=>{
+            tool.downFile(filename);
+        })
+        navigator.fileTransfer.onprogress = (progressEvent) => {
+            if (progressEvent.lengthComputable) {
+                console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
+                this.setState({
+                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+                })
+            } else {
+                // console.log('------下载完成')
+                // window.jquery('#load-modal').modal('close');
+                this.setState({
+                    percent: 100
+                })
+            }
+        };
+    }
     render() {
         return (
             <Spin spinning={this.state.loading} tip="加载列表中...">
@@ -355,7 +393,7 @@ class Database extends React.Component {
                                                     Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
                                                     :''
 								       		    }
-												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>tool.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
+												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
                                     下载</button>:null}
 											</div>
 											</div>

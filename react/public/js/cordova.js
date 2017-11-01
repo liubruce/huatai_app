@@ -12,7 +12,6 @@
 		console.debug('当前运行环境为' + device + '系统定制WebView,准备加载cordova');
 		var scriptE = document.createElement('script');
 		scriptE.setAttribute('type', 'text/javascript');
-		// scriptE.setAttribute('src', 'js/Android/cordova.js');
 		scriptE.setAttribute('src', 'js/' + device + '/cordova.js');
 		document.body.appendChild(scriptE);
 	}
@@ -66,17 +65,4 @@
 
 	}
 
-	// function findCordovaPath() {
-	// 	var path = null;
-	// 	var scripts = document.getElementsByTagName('script');
-	// 	var term = '/cordova.js';
-	// 	for (var n = scripts.length - 1; n > -1; n--) {
-	// 		var src = scripts[n].src.replace(/\?.*$/, ''); // Strip any query param (CB-6007).
-	// 		if (src.indexOf(term) === (src.length - term.length)) {
-	// 			path = src.substring(0, src.length - term.length);
-	// 			break;
-	// 		}
-	// 	}
-	// 	return path;
-	// }
 })();

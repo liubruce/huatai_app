@@ -464,14 +464,16 @@ export const cancelDown = () => {
 
 export const downFile = (filename, that) => {
 
-	// let downUrl = encodeURI(getFile(filename));
-	let downUrl = 'https://www.baidu.com/link?url=kthJ-JFI5KEcCsVduU0Ds_hFpJZwScThAtsQwNXAokH_7zFb9gNWqEMAhAVvIpzmi7oagY-onMgg9fwgf1-STYDKB2OZsTNE3mVqedb6-aq&wd=&eqid=9a2210cb00031ccb0000000659f7e06d';
+	let downUrl = encodeURI(getFile(filename));
+	if(IsPC()){
+		console.log(downUrl);
+		window.jquery('#load-modal').modal('close');
+		return;
+	}
 	down(downUrl, filename);
-
 	function down(downUrl, filename) {
 		window.requestFileSystem(navigator.PERSISTENT, 0, function(fs) {
-			console.log('----打开的文件系统----: ' + fs.name);
-			fs.root.getFile(filename, {
+			fs.root.getFile('filename', {
 					create: true,
 					exclusive: false
 				},
@@ -484,10 +486,11 @@ export const downFile = (filename, that) => {
 
 	//下载文件
 	function download(fileEntry, uri) {
-		var fileURL = fileEntry.toURL();
+		// var fileURL = fileEntry.toURL();
+		var path = window.cordova.file.externalRootDirectory + filename;
 		navigator.fileTransfer.download(
 			uri,
-			fileURL,
+			path,
 			function(entry) {
 				navigator.notification.alert(
 					JSON.stringify(entry, null, 4),
@@ -513,27 +516,16 @@ export const downFile = (filename, that) => {
 
 	//文件创建失败回调
 	function onErrorCreateFile(error) {
-		alert("文件创建失败！")
+		console.log("文件创建失败！")
 	}
 
 	//FileSystem加载失败回调
 	function onErrorLoadFs(error) {
-		alert("文件系统加载失败！")
+		console.log("文件系统加载失败！")
 	}
 
 
-	navigator.fileTransfer.onprogress = (progressEvent) => {
-		if (progressEvent.lengthComputable) {
-			console.log('----------'+progressEvent.loaded / progressEvent.total * 100);
-			that.setState({
-				percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
-			})
-		} else {
-			that.setState({
-				percent: 100
-			})
-		}
-	};
+
 }
 
 /**

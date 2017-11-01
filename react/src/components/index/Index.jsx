@@ -154,7 +154,7 @@ class Index extends React.Component {
               </li>
                 </ul>
           </div>
-          <div className="index-panel">
+          <div className="am-panel index-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">热播课程</h2>
               <nav className="am-titlebar-nav">

@@ -68,9 +68,11 @@ class CourseDetail extends React.Component {
 		}
 		old_time = state.currentTime
 	}
+
 	play() {
 		this.refs.course_video.play();
 	}
+
 	// onTimeUpdate(e) {
 	// 	let test = document.getElementById('course_id');
 	// 	if (test.currentTime - old_time > 1) {
@@ -88,6 +90,25 @@ class CourseDetail extends React.Component {
 	// 	old_time = test.currentTime
 	// }
 
+	downFile(filename) {
+		this.setState({percent: 0},()=>{
+			tool.downFile(filename);
+		})
+		navigator.fileTransfer.onprogress = (progressEvent) => {
+			if (progressEvent.lengthComputable) {
+				console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
+				this.setState({
+					percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+				})
+			} else {
+				// console.log('------下载完成')
+				// window.jquery('#load-modal').modal('close');
+				this.setState({
+					percent: 100
+				})
+			}
+		};
+	}
 	render() {
 		let course = this.state.coursedata;
 		return (
@@ -157,7 +178,7 @@ class CourseDetail extends React.Component {
 						<ul className="am am-avg-sm-3" style={{fontSize: '1.4rem'}}>
 						    {this.state.courseattach.map((item,index)=>{
 						    	return(
-						    		<li key={index} ><a onClick={()=>tool.downFile(item.courseAttrachPath,this)} data-am-modal="{target: '#load-modal'}">{item.courseAttrachPath}</a></li>
+						    		<li key={index} ><a onClick={()=>this.downFile(item.courseAttrachPath,this)} data-am-modal="{target: '#load-modal'}">{item.courseAttrachPath}</a></li>
 						    		)
 						    })}
 						</ul>
