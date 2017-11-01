@@ -3,7 +3,7 @@ import  './studentTop.less'
 import { message , Spin } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
-import  { Case, Default } from 'react-switch-case';
+import  Switch , { Case, Default } from 'react-switch-case';
 
 class StudentTop extends React.Component{
 	constructor(args) {
@@ -71,12 +71,12 @@ class StudentTop extends React.Component{
 							    	<p>{item.userRealName}    {item.vipGradName}</p>
 							    	<span>{item.branchOffice}</span>
 							    </div>
-							    {/* <Switch condition={index+1}> */}
+							     <Switch condition={index+1}>
 							        <Case value={1}><div className="rank-icon rank-icon-1"></div></Case>
 							        <Case value={2}><div className="rank-icon rank-icon-2"></div></Case>
 							        <Case value={3}><div className="rank-icon rank-icon-3"></div></Case>
 							        <Default><div className="rank-icon">{index+1}</div></Default>
-							    {/* </Switch> */}
+							    </Switch>
 						    </div>
 					   		)
 					   })}

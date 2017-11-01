@@ -487,7 +487,7 @@ export const downFile = (filename, that) => {
 	//下载文件
 	function download(fileEntry, uri) {
 		// var fileURL = fileEntry.toURL();
-		var path = window.cordova.file.externalRootDirectory + filename;
+		var path = window.cordova.file.dataDirectory + filename;
 		navigator.fileTransfer.download(
 			uri,
 			path,
@@ -498,7 +498,7 @@ export const downFile = (filename, that) => {
 						console.log('alert callback')
 					},
 					'下载成功',
-					'Done'
+					'OK'
 				);
 			},
 			function(error) {
@@ -508,7 +508,7 @@ export const downFile = (filename, that) => {
 						console.log('alert callback')
 					},
 					'下载失败',
-					'Done'
+					'OK'
 				);
 			}
 		);

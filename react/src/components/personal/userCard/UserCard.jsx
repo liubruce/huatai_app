@@ -175,14 +175,29 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
-
 		navigator.Wechat.share({
-			text: "华泰分享测试",
-			scene: navigator.Wechat.Scene.TIMELINE // share to Timeline
+			text: "华泰分享-我的名片 姓名: " + this.state.userCard.userRealName,
+			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
-			alert("分享成功");
+			navigator.notification.alert(
+				'分享成功',
+				() => {
+					console.log('alert callback')
+				},
+				'下载成功',
+				'OK'
+			);
+			// alert("分享成功");
 		}, function(reason) {
-			alert("分享失败: " + reason);
+			navigator.notification.alert(
+				"分享失败: " + reason,
+				() => {
+					console.log('alert callback')
+				},
+				'下载成功',
+				'OK'
+			);
+			// alert("分享失败: " + reason);
 		});
 
 		// navigator.Wechat.share({
@@ -200,7 +215,6 @@ class UserCard extends React.Component{
 		// }, function(reason) {
 		// 	alert("分享失败: " + reason);
 		// });
-
 	}
 	componentDidMount() {
 
