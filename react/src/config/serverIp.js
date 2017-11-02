@@ -1,8 +1,7 @@
-export const ip = localStorage.getItem("sever_ip"); //from '/public/config.js'
-// console.log(`${ip}`)
+/******from '/public/config.js'******/
 
-export const api_Ip = `${ip}/api/interworking`;
-export const lesson_api_IP = `${ip}/api/lesson`;
-export const getFile_IP = `${ip}/api/lesson/ceph/ceph/`;
-export const upload_IP = `${ip}/api/zuul/lesson`;
-export const upload_interwork_IP = `${ip}/api/zuul/interworking`;
+export const api_Ip = localStorage.getItem("elearning_api_IP");
+export const lesson_api_IP = localStorage.getItem("elearning_lesson_api_IP");
+export const getFile_IP = localStorage.getItem("elearning_getFile_IP");
+export const upload_IP = localStorage.getItem("elearning_upload_IP");
+export const upload_interwork_IP = localStorage.getItem("elearning_upload_interwork_IP");
