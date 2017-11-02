@@ -227,7 +227,7 @@ class UserCard extends React.Component{
 	          <header className="header">
 	             <a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
 	             <div className="user-name-share">
-	             	<img alt='head' src={tool.getFile(user.headPath)} />{user.userRealName}
+	             	<img alt='head' src={tool.getFile(user.headPath)} onError={(e) => tool.headImageError(e)} />{user.userRealName}
 	             </div>
 		     	<img onClick={()=>this.shareWeiXin()} alt='share' className='share-img' src={require('../../../style/images/share.png')}/>
 		      </header>
