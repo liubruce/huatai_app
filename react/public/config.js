@@ -1,1 +1,1 @@
-localStorage.setItem("sever_ip", 'http://sit-egrowth.life.ehuatai.com');
+localStorage.setItem("sever_ip", 'http://uat-egrowth.life.ehuatai.com');

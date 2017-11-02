@@ -59,7 +59,7 @@ class EditUser extends React.Component{
 		api.userUpdate(formData).then((data) => {
 			if(data.result==='RC100'){
 			  message.success('保存成功', 3);
-			  hashHistory.push("/Personal/App/PersonalCenter")
+			  hashHistory.push("/Personal")
 			}else{
               message.error(data.errMsg, 3);
 			}
