@@ -57,7 +57,7 @@ class StoryLine extends React.Component{
 		let sex=this.state.sex;
 		return(
 		    <div className="story-box">
-          <Link to={`/App/StoryLine/StoryDetail/${lineIndex}`} className="story-link" style={{display: 'none'}}></Link>
+          <Link to={`/App/StoryLine/StoryDetail/${lineIndex}`} className="story-link" style={{display: 'none'}}><h2>《蜂行者》</h2><p></p></Link>
 		    	<div className="island">
           <div className="base base-1">
               <div className="light"></div>
