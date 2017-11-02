@@ -160,7 +160,6 @@ export const execSQL = (sql, value) => {
 export const info = () => {
 	return new Promise((_resolve, _reject) => {
 		localStorage.setItem("device", sino_cordova_checkApp().device);
-		// log("-------------device-------------" + localStorage.getItem('device'))
 		let userCode = getUserCode();
 		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
 		localStorage.setItem("user", JSON.stringify({
@@ -182,31 +181,28 @@ export const info = () => {
 			api.getMenu().then((data) => {
 				if (data.result === 'RC100') {
 					_resolve();
-					message.success('菜单获取成功', 3);
 					_user.menu = data.menu;
 					localStorage.setItem("user", JSON.stringify(_user));
 					save_user();
 					log(JSON.stringify(user))
 				} else {
-					_reject();
 					_user.menu = [];
 					localStorage.setItem("user", JSON.stringify(_user));
 					save_user();
-					message.error(data.errMsg, 3);
-					setTimeout(() => {
-						window.location.href = exit_url;
-					}, 2000)
+					_reject(data.errMsg);
 				}
 			}, (res) => {
-				_reject();
 				_user.menu = [];
 				localStorage.setItem("user", JSON.stringify(_user));
 				save_user();
-				reject(res);
+				if (res.status === 499) {
+					_reject('请求超时,请检查网络');
+				} else {
+					_reject('请求失败,请检查服务器');
+				}
 			})
 		}, (err) => {
-			_reject();
-			log('******sql error**** :' + err)
+			_reject('sql error : ' + err);
 		})
 	});
 }
@@ -465,12 +461,13 @@ export const cancelDown = () => {
 export const downFile = (filename, that) => {
 
 	let downUrl = encodeURI(getFile(filename));
-	if(IsPC()){
+	if (IsPC()) {
 		console.log(downUrl);
 		window.jquery('#load-modal').modal('close');
 		return;
 	}
 	down(downUrl, filename);
+
 	function down(downUrl, filename) {
 		window.requestFileSystem(navigator.PERSISTENT, 0, function(fs) {
 			fs.root.getFile('filename', {
@@ -487,7 +484,7 @@ export const downFile = (filename, that) => {
 	//下载文件
 	function download(fileEntry, uri) {
 		// var fileURL = fileEntry.toURL();
-		var path = window.cordova.file.externalRootDirectory + filename;
+		var path = window.cordova.file.dataDirectory + filename;
 		navigator.fileTransfer.download(
 			uri,
 			path,
@@ -498,7 +495,7 @@ export const downFile = (filename, that) => {
 						console.log('alert callback')
 					},
 					'下载成功',
-					'Done'
+					'OK'
 				);
 			},
 			function(error) {
@@ -508,7 +505,7 @@ export const downFile = (filename, that) => {
 						console.log('alert callback')
 					},
 					'下载失败',
-					'Done'
+					'OK'
 				);
 			}
 		);

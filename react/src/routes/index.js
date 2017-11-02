@@ -37,19 +37,17 @@ const start_render = () => {
 }
 
 if (tool.IsPC()) {
-    // console.log('--------------PC')
     start_render();
 } else {
     if (tool.isPc) {
         document.addEventListener('deviceready', () => {
-            console.log('--------------------LOCAL deviceready')
+            console.log('--------------------OUR APP deviceready')
             start_render();
         }, false);
         start_render();
     } else {
-        console.log('--------------------run on APP')
         document.addEventListener('deviceready', () => {
-            console.log('----------------APP deviceready')
+            console.log('----------------HUATAI APP deviceready')
             if (tool.sino_cordova_checkApp().device === 'IOS') {
                 let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
                 let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
@@ -61,12 +59,20 @@ if (tool.IsPC()) {
             }
             tool.info().then((data) => {
                 start_render();
-            }, () => {
+            }, (message) => {
                 start_render();
+                navigator.notification.alert(
+                    message,
+                    () => {
+                        window.location.href = tool.exit_url;
+                        console.log('alert callback')
+                    },
+                    '获取菜单失败',
+                    '返回首页'
+                );
             })
         }, false);
     }
 }
-
 
 
