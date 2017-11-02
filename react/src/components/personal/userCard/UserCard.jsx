@@ -175,8 +175,26 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
+		let text = '';
+		let user = this.state.userCard;
+		text += `  姓名:   ${user.userRealName}\r`;
+		text += `  手机:   ${user.phone}\r`;
+		text += `  邮箱:   ${user.email}\r`;
+		// text += `工作信息\r`;
+		text += `  入职时间:   ${user.entryTime}\r`;
+		text += `  所在地区:   ${user.region}\r`;
+		text += `  职务:   ${user.jobName}\r`;
+		text += `  分公司:   ${user.branceOffice}\r`;
+		text += `  营业部:   ${user.businessDept}\r`;
+		text += `  营业组:   ${user.businessGroup}\r`;
+
+		if(tool.IsPC()){
+			alert(text);
+			return;
+		}
+		
 		navigator.Wechat.share({
-			text: "华泰分享-我的名片 姓名: " + this.state.userCard.userRealName,
+			text: text,
 			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
 			navigator.notification.alert(
@@ -184,37 +202,19 @@ class UserCard extends React.Component{
 				() => {
 					console.log('alert callback')
 				},
-				'下载成功',
+				'提示',
 				'OK'
 			);
-			// alert("分享成功");
 		}, function(reason) {
 			navigator.notification.alert(
 				"分享失败: " + reason,
 				() => {
 					console.log('alert callback')
 				},
-				'下载成功',
+				'提示',
 				'OK'
 			);
-			// alert("分享失败: " + reason);
 		});
-
-		// navigator.Wechat.share({
-		// 	message: {
-		// 		title: "华泰分享测试",
-		// 		description: "请点击.",
-		// 		media: {
-		// 			type: window.Wechat.Type.WEBPAGE,
-		// 			webpageUrl: "http://www.github.com/"
-		// 		}
-		// 	},
-		// 	scene: window.Wechat.Scene.TIMELINE // 分享到朋友圈(分享类型参数自定，详见文档)
-		// }, function() {
-		// 	alert("分享成功");
-		// }, function(reason) {
-		// 	alert("分享失败: " + reason);
-		// });
 	}
 	componentDidMount() {
 

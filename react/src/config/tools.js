@@ -161,6 +161,7 @@ export const info = () => {
 	return new Promise((_resolve, _reject) => {
 		localStorage.setItem("device", sino_cordova_checkApp().device);
 		let userCode = getUserCode();
+		console.log('------useCode:'+userCode);
 		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
 		localStorage.setItem("user", JSON.stringify({
 			userCode: userCode
@@ -177,7 +178,7 @@ export const info = () => {
 
 			localStorage.setItem("user", JSON.stringify(_user));
 			save_user();
-			// alert(JSON.stringify(user))
+			console.log('------user:'+JSON.stringify(user))
 			api.getMenu().then((data) => {
 				if (data.result === 'RC100') {
 					_resolve();
