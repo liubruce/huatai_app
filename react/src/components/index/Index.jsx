@@ -36,7 +36,6 @@ class Index extends React.Component {
     this.state = {
       courseList: [],
       articleList: [],
-      now_item:0,
       score:0,
       now_item: {
 				studyIntegral:0
