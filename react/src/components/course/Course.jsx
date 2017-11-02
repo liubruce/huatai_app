@@ -33,7 +33,7 @@ class Course extends React.Component {
     let goodCourse = 1;
     switch (tab) {
       case 1:
-        goodCourse = 1;
+        goodCourse = '';
         elecReqCourse = 0;
         break;
       case 2:
@@ -41,7 +41,7 @@ class Course extends React.Component {
         elecReqCourse = 2;
         break;
       case 3:
-        goodCourse = 0;
+        goodCourse = '';
         elecReqCourse = 1;
         break;
       default:
@@ -68,7 +68,7 @@ class Course extends React.Component {
       currentPage: this.state.pageNo,
       courseName: tool.getQueryString('search'),
       elecReqCourse: this.state.elecReqCourse,
-      goodCourse: this.state.goodCourse
+      // goodCourse: this.state.goodCourse
     }
     api.appStudentSelectCoursePager(body).then((data) => {
       if (data.result === 'RC100') {
@@ -149,7 +149,7 @@ class Course extends React.Component {
                   <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
                       <li className={this.state.tab===1?'am-active':null} onClick={()=>this.changeTab(1)} >
-                        <a>精品课程</a>
+                        <a>选修课程</a>
                       </li>
                       <li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
                         <a>热播课程</a>

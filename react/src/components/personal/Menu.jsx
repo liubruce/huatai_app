@@ -9,9 +9,9 @@ class Menu extends React.Component {
 		this.state = {
 			menuItems: [],
       user:{
-        userRealName:'default',
-        vipGradName:'default',
-        seifInformation:'default',
+        userRealName:'...',
+        vipGradName:'...',
+        seifInformation:'...',
         sign:0
       }
 		}
