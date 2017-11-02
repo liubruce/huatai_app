@@ -41,12 +41,12 @@ if (tool.IsPC()) {
 } else {
     if (tool.isPc) {
         document.addEventListener('deviceready', () => {
-            console.log('------OUR APP deviceready')
+            console.log('elearning------OUR APP deviceready')
             start_render();
         }, false);
     } else {
         document.addEventListener('deviceready', () => {
-            console.log('------HUATAI APP deviceready')
+            console.log('elearning------HUATAI APP deviceready')
             if (tool.sino_cordova_checkApp().device === 'IOS') {
                 let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
                 let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
@@ -64,7 +64,7 @@ if (tool.IsPC()) {
                     '获取菜单失败: '+message,
                     () => {
                         // window.location.href = tool.exit_url;
-                        console.log('------获取菜单失败')
+                        console.log('elearning------获取菜单失败')
                     },
                     '提示',
                     'OK'

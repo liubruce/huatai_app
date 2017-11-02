@@ -5,11 +5,11 @@
 (function() {
 
 	var device = sino_cordova_checkApp().device;
-	console.log('cordova加载器检测设备:' + device);
+	// console.log('elearning-cordova加载器检测设备:' + device);
 	//如果不是浏览器版本 需要添加cordova
 
 	if (device !== 'Browser') {
-		console.debug('当前运行环境为' + device + '系统定制WebView,准备加载cordova');
+		console.debug('elearning-当前运行环境为' + device + '系统定制WebView,准备加载cordova');
 		var scriptE = document.createElement('script');
 		scriptE.setAttribute('type', 'text/javascript');
 		scriptE.setAttribute('src', 'js/' + device + '/cordova.js');
@@ -30,7 +30,6 @@
 		// 	reData.device = 'Browser';
 		// 	reData.version = '0'
 		// }
-
 		// return reData;
 
 		var userAgentInfo = navigator.userAgent;
@@ -62,7 +61,6 @@
 				break;
 		}
 		return reData;
-
 	}
 
 })();
