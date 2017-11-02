@@ -131,7 +131,7 @@ class PointDetail extends React.Component{
 				<div className="warpper">
 					<div className="am-panel user-jf clearFix">
 						<div className="user-tx-name">
-							<img src={require('../../../style/images/test.png')} alt="test"/>
+							<img onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(dataDetailList.headPath)}/>
 							<p>{dataDetailList.userName}</p>
 						</div>
 						<div className="user-jf-details">

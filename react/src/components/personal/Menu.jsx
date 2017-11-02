@@ -58,6 +58,20 @@ class Menu extends React.Component {
       menuItems
     });
   }
+  myhome(){
+      api.myhome().then((data) => {
+      if (data.result === 'RC100') {
+        this.setState({
+          user: data.user,
+          sign:data.sign
+        })
+      } else {
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.reject(res);
+    })
+  }
   componentWillMount() {
     if (tool.isPc) {
       this.test();
@@ -76,19 +90,7 @@ class Menu extends React.Component {
         menuItems
       })
     }
-
-    api.myhome().then((data) => {
-      if (data.result === 'RC100') {
-        this.setState({
-          user: data.user
-        })
-      } else {
-        message.error(data.errMsg, 3);
-      }
-    }, (res) => {
-      tool.reject(res);
-    })
-
+    this.myhome();
   }
   sign(){
     api.sign().then((data)=>{
@@ -100,8 +102,10 @@ class Menu extends React.Component {
       }else{
          message.error(data.errMsg, 3);
       }
+      this.myhome();
     }, (res) => {
       tool.reject(res);
+      this.myhome();
     })
   }
 	render(){
@@ -116,7 +120,7 @@ class Menu extends React.Component {
           </div>
           <div onClick={()=>this.sign()} className="sign"><img alt='sign' src={
             this.state.sign===1||this.state.sign==='1'?
-            require('../../style/images/sign.png'):require('../../style/images/noSign.png')
+            require('../../style/images/noSign.png'):require('../../style/images/sign.png')
             } style={{width:'18px',marginTop:'-5px'}} /></div>
           <p>{user.seifInformation}</p>
         </div>

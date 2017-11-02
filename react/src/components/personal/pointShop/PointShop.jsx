@@ -3,7 +3,7 @@ import './pointShop.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import {message} from 'antd'
-import {hashHistory} from 'react-router';
+import {hashHistory,browserHistory} from 'react-router';
 class PointShop extends React.Component{
 	constructor(args){
 		super();
@@ -13,6 +13,7 @@ class PointShop extends React.Component{
 			loading:false,
       totalPage:1,
       pageNo:1,
+			searchValue:''
 		}
 	}
 	componentDidMount() {
@@ -23,7 +24,7 @@ class PointShop extends React.Component{
   }
 	pointShopList(flag){
 		tool.loading(this, true);
-     api.pointShopList({pageno:this.state.pageNo}).then((data) => {
+     api.pointShopList({pageno:this.state.pageNo,shopName:this.state.searchValue}).then((data) => {
       if (data.result === 'RC100') {
         this.setState({
 					pointShopList:flag?this.state.pointShopList.concat(data.IntegralShopList):data.IntegralShopList,
@@ -66,8 +67,32 @@ class PointShop extends React.Component{
       tool.reject(res);
     })
   }
+	submit(e){
+		e.preventDefault();
+		this.setState({
+           pageNo:1,
+		},()=>{
+			this.pointShopList();
+		})
+	}
+	changeValue(e){
+      this.setState({
+		  searchValue:e.target.value
+	  })
+	}
 	render(){
 		return(
+			<div>
+				<form onSubmit={(e)=>this.submit(e)} >
+				{tool.isIOS?<div className='ios-header' ></div>:null}
+				<header className="header">
+					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+                   <div className="search" style={{left: '71px'}}>
+					<i className="fa fa-search" />
+					<input value={this.state.searchValue} onChange={this.changeValue.bind(this)} type="text" placeholder="搜索" />
+					</div>
+        </header>
+				 </form>
 			<div className="warpper">
 				{
 					this.state.pointShopList.map((item,index)=>{
@@ -107,6 +132,7 @@ class PointShop extends React.Component{
 					</div>
 				</div>
 
+			</div>
 			</div>
 		)
 	}
