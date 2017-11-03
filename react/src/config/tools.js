@@ -127,10 +127,11 @@ export const back = () => {
 		reject(res);
 	})
 }
+
 export const getUserCode = () => {
 	let url = document.URL;
 	let index = url.indexOf('userCode=');
-	return url.slice(index + 9, index + 17)
+	return url.slice(index + 9, url.length)
 }
 
 export const execSQL = (sql, value) => {
@@ -161,7 +162,7 @@ export const info = () => {
 	return new Promise((_resolve, _reject) => {
 		localStorage.setItem("device", sino_cordova_checkApp().device);
 		let userCode = getUserCode();
-		console.log('elearning------useCode:'+userCode);
+		console.log('elearning------useCode:' + userCode);
 		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
 		localStorage.setItem("user", JSON.stringify({
 			userCode: userCode
@@ -178,7 +179,7 @@ export const info = () => {
 
 			localStorage.setItem("user", JSON.stringify(_user));
 			save_user();
-			console.log('elearning------user:'+JSON.stringify(user))
+			console.log('elearning------user:' + JSON.stringify(user))
 			api.getMenu().then((data) => {
 				if (data.result === 'RC100') {
 					_resolve();

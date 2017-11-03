@@ -33,12 +33,13 @@
 		// return reData;
 
 		var userAgentInfo = navigator.userAgent;
+		console.log('elearning------userAgentInfo: '+userAgentInfo)
 		var Agents = ["Android", "iPhone",
 			"SymbianOS", "Windows Phone",
 			"iPad", "iPod"
 		];
 		var device = 'Browser';
-		let reData = {};
+		var reData = {};
 		for (var v = 0; v < Agents.length; v++) {
 			if (userAgentInfo.indexOf(Agents[v]) > 0) {
 				device = Agents[v];
