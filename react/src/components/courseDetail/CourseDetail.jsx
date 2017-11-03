@@ -46,8 +46,8 @@ class CourseDetail extends React.Component {
 
 		this.refs.course_video.subscribeToStateChange(this.handleStateChange.bind(this));
 		setTimeout(() => {
-			// this.refs.course_video.play();
-			// this.refs.course_video.pause();
+			this.refs.course_video.play();
+			this.refs.course_video.pause();
 		}, 500)
 	}
 	handleStateChange(state, prevState) {
@@ -134,7 +134,7 @@ class CourseDetail extends React.Component {
                      playsInline={true}
                      width={$(window).width()} 
                      // onError={()=>{message.error('获取视频失败', 1);}}
-                     poster={require('../../style/images/test.png')}
+                     // poster={require('../../style/images/test.png')}
                      height={210}
                      src={tool.getFile(course.coursevideoPath)}
                      >
