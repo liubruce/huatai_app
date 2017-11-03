@@ -20,20 +20,20 @@
 		// 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
 		// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
 		// IOS UA为 SINO_IOS_APP/1.0
-		// var reData = {};
-		// var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
-		// // alert(JSON.stringify(match))
-		// if (match) {
-		// 	reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
-		// 	reData.version = match[2];
-		// } else {
-		// 	reData.device = 'Browser';
-		// 	reData.version = '0'
-		// }
-		// return reData;
+		//		 var reData = {};
+		//		 var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
+		//		 console.log('elearning------userAgentInfo: '+navigator.userAgent)
+		//		 if (match) {
+		//		 	reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
+		//		 	reData.version = match[2];
+		//		 } else {
+		//		 	reData.device = 'Browser';
+		//		 	reData.version = '0'
+		//		 }
+		//		 return reData;
 
 		var userAgentInfo = navigator.userAgent;
-		console.log('elearning------userAgentInfo: '+userAgentInfo)
+		console.log('elearning------userAgentInfo: ' + userAgentInfo)
 		var Agents = ["Android", "iPhone",
 			"SymbianOS", "Windows Phone",
 			"iPad", "iPod"
