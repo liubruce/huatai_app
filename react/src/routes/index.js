@@ -36,42 +36,41 @@ const start_render = () => {
     );
 }
 
-if (tool.IsPC() || tool.isPc) {
+if (tool.isPc) {
     start_render();
 } else {
-    if (tool.isPc) {
-        document.addEventListener('deviceready', () => {
-            console.log('elearning------OUR APP deviceready')
+    
+    // document.addEventListener('deviceready', () => {
+    //     console.log('elearning------OUR APP deviceready')
+    //     start_render();
+    // }, false);
+
+    document.addEventListener('deviceready', () => {
+        console.log('elearning------HUATAI APP deviceready')
+        if (tool.sino_cordova_checkApp().device === 'IOS') {
+            let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
+            let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
+            tool.setUrl(back_url, exit_url);
+        } else {
+            let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
+            let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
+            tool.setUrl(back_url, exit_url);
+        }
+        tool.info().then((data) => {
             start_render();
-        }, false);
-    } else {
-        document.addEventListener('deviceready', () => {
-            console.log('elearning------HUATAI APP deviceready')
-            if (tool.sino_cordova_checkApp().device === 'IOS') {
-                let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
-                let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
-                tool.setUrl(back_url, exit_url);
-            } else {
-                let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
-                let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
-                tool.setUrl(back_url, exit_url);
-            }
-            tool.info().then((data) => {
-                start_render();
-            }, (message) => {
-                start_render();
-                navigator.notification.alert(
-                    '获取菜单失败: '+message,
-                    () => {
-                        // window.location.href = tool.exit_url;
-                        console.log('elearning------获取菜单失败')
-                    },
-                    '提示',
-                    'OK'
-                );
-            })
-        }, false);
-    }
+        }, (message) => {
+            start_render();
+            navigator.notification.alert(
+                '获取菜单失败: ' + message,
+                () => {
+                    // window.location.href = tool.exit_url;
+                    console.log('elearning------获取菜单失败')
+                },
+                '提示',
+                'OK'
+            );
+        })
+    }, false);
 }
 
 

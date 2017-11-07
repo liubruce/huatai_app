@@ -6,8 +6,6 @@ import {
     lesson_api_IP
 } from './serverIp'
 
-import $ from 'jquery'
-
 /*
 refreshldToken
  */
@@ -55,35 +53,6 @@ export const login = (phone, password) => {
         body.userCode = phone;
         body.passWord = password;
         return new Promise((resolve, reject) => {
-
-            // $.ajax({
-            //     url: api_Ip + '/login/dologin?userCode=' + phone + '&passWord=' + password,
-            //     type: 'GET',
-            //     contentType: false,
-            //     processData: false,
-            //     success: function(data) {
-            //         resolve(data)
-            //     },
-            //     error: function(data) {
-            //         reject(data)
-            //     }
-            // });
-
-            // fetch(api_Ip + '/login/dologin?userCode=' + phone + '&passWord=' + password, {
-            //     method: "GET",
-            // }).then(function(res) {
-            //     if (res.ok) {
-            //         resolve(res.json());
-            //     } else {
-            //         reject(res);
-            //     }
-            // }).then(function(data) {
-            //     resolve(data);
-            // }).catch(function(err) {
-            //     reject(err);
-            // });
-            
-
             sfetch.get({
                 url: api_Ip + '/login/dologin',
                 body: body

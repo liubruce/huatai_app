@@ -5,8 +5,8 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message} from 'antd'
 
-import { Player} from 'video-react';
 import $ from 'jquery'
+
 let old_time = 0;
 class CourseDetail extends React.Component {
 	constructor(args) {
@@ -40,16 +40,18 @@ class CourseDetail extends React.Component {
 	}
 
 	componentDidMount() {
-		$('.video-react-big-play-button').css('display', 'none');
-
-		// $('.video-react-control-bar').css('display','none');
-
-		this.refs.course_video.subscribeToStateChange(this.handleStateChange.bind(this));
-		setTimeout(() => {
-			this.refs.course_video.play();
-			this.refs.course_video.pause();
-		}, 500)
+		// var video={};
+		// video.type = "video/mp4";
+		// video.src = "//vjs.zencdn.net/v/oceans.mp4";
+		// video.src = tool.getFile(this.state.coursedata.coursevideoPath);
+		// var course_player = window.videojs(this.refs.course_player, {}).ready(() => {
+		// 	course_player.src(video);
+		// 	course_player.height("210");
+		// 	course_player.width($(window).width());
+		// 	player.play();
+		// });
 	}
+
 	handleStateChange(state, prevState) {
 		if (!state.paused && this.state.showTitle) {
 			this.setState({
@@ -69,26 +71,23 @@ class CourseDetail extends React.Component {
 		old_time = state.currentTime
 	}
 
-	play() {
-		this.refs.course_video.play();
+	onTimeUpdate(e) {
+		let test = document.getElementById('course_id');
+		if (test.currentTime - old_time > 1) {
+			message.error('请勿快进视频', 1);
+			test.currentTime = old_time;
+			this.setState({
+				isQuick: true
+			})
+		} else {
+			if (test.currentTime >= test.duration) {
+				this.setState({
+					isEnd: true
+				})
+			}
+		}
+		old_time = test.currentTime
 	}
-
-	// onTimeUpdate(e) {
-	// 	let test = document.getElementById('course_id');
-	// 	if (test.currentTime - old_time > 1) {
-	// 		test.currentTime = old_time;
-	// 		this.setState({
-	// 			isQuick: true
-	// 		})
-	// 	} else {
-	// 		if (test.currentTime >= test.duration) {
-	// 			this.setState({
-	// 				isEnd: true
-	// 			})
-	// 		}
-	// 	}
-	// 	old_time = test.currentTime
-	// }
 
 	downFile(filename) {
 		this.setState({percent: 0},()=>{
@@ -101,50 +100,38 @@ class CourseDetail extends React.Component {
 					percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
 				})
 			} else {
-				// console.log('------下载完成')
-				// window.jquery('#load-modal').modal('close');
 				this.setState({
 					percent: 100
 				})
 			}
 		};
 	}
+
 	render() {
 		let course = this.state.coursedata;
 		return (
 			<div className="warpper">
 				<div className="video-box">
 
-				    <div className="opacity-black"><a>
+				    <div className="opacity-black">	  
 
-{/*					    <video 
+{/*		                <video
+                          className="video-js"
+                          controls
+                          ref="course_player">
+                        </video>  */}
+
+				        <video 
 					    id="course_id"
-					    // src={tool.getFile('/downfile/'+course.coursevideoPath)}
+					    src={tool.getFile(course.coursevideoPath)}
 					    controls="controls"  width="100%" height="210"
-					    // onEnded={(e)=>this.videoEnd(e)}
 					    onTimeUpdate={(e)=>this.onTimeUpdate(e)}
-					    onWaiting={()=>this.wait()}
-					    preload="auto">
+					    preload="auto"
+					    >
 					    	您的浏览器不支持 video 标签。
-					    </video>*/}
-           
-                   <Player
-                     ref='course_video'
-                     fluid={false} 
-                     playsInline={true}
-                     width={$(window).width()} 
-                     // onError={()=>{message.error('获取视频失败', 1);}}
-                     // poster={require('../../style/images/test.png')}
-                     height={210}
-                     src={tool.getFile(course.coursevideoPath)}
-                     >
-                     {/*<source
-                      autoPlay
-                      src={tool.getFile(course.coursevideoPath)}
-                      />*/}
-                    </Player>
+					    </video>
 
-					</a></div>
+					</div>
 
 					{this.state.showTitle?<div onClick={()=>this.play()} className="play">
 					<i className="fa fa-play"></i>

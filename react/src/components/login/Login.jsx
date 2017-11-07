@@ -37,7 +37,7 @@ class Login extends React.Component {
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" defaultValue='13910014131' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="text" defaultValue='1391000' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
           <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
           <button className="btn-login" type='submit' >登 录</button>
         </div>
