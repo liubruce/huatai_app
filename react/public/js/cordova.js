@@ -22,7 +22,6 @@
 		// 其中安卓UA为 SINO_ANDROID_APP/1.0 1.0为版本号
 		// IOS UA为 SINO_IOS_APP/1.0
 		var reData = {};
-
 		// var match = navigator.userAgent.match(/SINO_([\w]+)_APP\/([\d.]+)/);
 		// if (match) {
 		// 	reData.device = match[1] === 'IOS' ? 'IOS' : 'Android';
@@ -34,10 +33,7 @@
 
 		var userAgentInfo = navigator.userAgent;
 		console.log('elearning------userAgentInfo: ' + userAgentInfo)
-		var Agents = ["Android", "iPhone",
-			"SymbianOS", "Windows Phone",
-			"iPad", "iPod"
-		];
+		var Agents = ["Android","Mac","iPhone","iPad","iPod"];
 		var device = 'Browser';
 		for (var v = 0; v < Agents.length; v++) {
 			if (userAgentInfo.indexOf(Agents[v]) > 0) {
@@ -61,14 +57,10 @@
 			case 'iPod':
 				reData.device = 'IOS';
 				break;
-			case 'Browser':
-				reData.device = 'Browser';
-				break;
 			default:
 				reData.device = 'Browser';
 				break;
 		}
-
 
 		return reData;
 	}
