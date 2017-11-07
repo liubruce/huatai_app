@@ -80,75 +80,79 @@ class PubArticle extends React.Component{
 		let essayPhotos = this.state.essayPhotos;
 		let newEssayPhotos = essayPhotos.splice(index, 1);
 		this.setState({
-			essayPhotos:newEssayPhotos
+			essayPhotos: newEssayPhotos
 		})
 	}
 	delPH(index) {
 		let essayPhotosPH = this.state.essayPhotosPH;
 		let newEssayPhotosPH = essayPhotosPH.splice(index, 1);
 		this.setState({
-			essayPhotosPH:newEssayPhotosPH
+			essayPhotosPH: newEssayPhotosPH
 		})
 	}
 	add() {
-		 tool.loading(this, true);
-		 if(this.state.essayTitle === ''){
-		 	message.error('请输入文章标题', 3);
-		 	tool.loading(this, false);
-		 	return
-		 }
-		 if(this.state.essayNote === ''){
-		 	message.error('请输入文章内容', 3);
-		 	tool.loading(this, false);
-		 	return
-		 }
-		 let formData = new FormData()
-		 formData.append('essayTitle',this.state.essayTitle);
-    	 formData.append('essayNote',this.state.essayNote);
-		 if(this.props.params.id){
-             formData.append('essayId',this.props.params.id);
-		 }
-		 formData.append('checkState','3');
-		 // formData.append('checkState':'4');
-		 let essayPhotos = this.state.essayPhotos,essayPhotosPH=this.state.essayPhotosPH;
-		 for (let x of essayPhotos){
-		 	formData.append('file',x)
-		 }
-		 for (let x of essayPhotosPH){
-			 formData.append('photoPath',x)
-		 }
-		 api.appAddArticle(formData).then((data)=>{
-		 	if (data.result ==='RC100') {
-		 		this.setState({
-		 			essayTitle:'',
-		 			essayNote:'',
-		 			essayPhotos:[]
-		 		},()=>{
-		 			hashHistory.push("/App/PersonalCenter/MyArticle")
-		 		})
-		 		tool.loading(this, false);
-		 	}else{
-		 		tool.loading(this, false);
-		 		message.error(data.errMsg, 3);
-		 	}
-		 })
+
+		if (this.state.essayTitle === '') {
+			message.error('请输入文章标题', 3);
+			return
+		}
+		if (this.state.essayNote === '') {
+			message.error('请输入文章内容', 3);
+			return
+		}
+		let formData = new FormData()
+		formData.append('essayTitle', this.state.essayTitle);
+		formData.append('essayNote', this.state.essayNote);
+		if (this.props.params.id) {
+			formData.append('essayId', this.props.params.id);
+		}
+		formData.append('checkState', '3');
+		// formData.append('checkState':'4');
+		let essayPhotos = this.state.essayPhotos,
+			essayPhotosPH = this.state.essayPhotosPH;
+		for (let x of essayPhotos) {
+			formData.append('file', x)
+		}
+		for (let x of essayPhotosPH) {
+			formData.append('photoPath', x)
+		}
+		tool.loading(this, true);
+		api.appAddArticle(formData).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					essayTitle: '',
+					essayNote: '',
+					essayPhotos: []
+				}, () => {
+					tool.loading(this, false);
+					hashHistory.push("/App/PersonalCenter/MyArticle")
+				})
+			} else {
+				tool.loading(this, false);
+				message.error(data.errMsg, 3);
+			}
+		})
 
 	}
-	inputValue=(event)=>{
-       this.setState({essayTitle: event.target.value});
+	inputValue = (event) => {
+		this.setState({
+			essayTitle: event.target.value
+		});
 	}
-	textareaValue=(event)=>{
-       this.setState({essayNote: event.target.value});
+	textareaValue = (event) => {
+		this.setState({
+			essayNote: event.target.value
+		});
 	}
-	chooseImage(accepted, rejected){
- 		if(accepted.length+this.state.essayPhotos.length>9){
- 			message.error('图片不能超过9张')
- 		}else{
- 			this.setState({
- 				essayPhotos:this.state.essayPhotos.concat(accepted),
- 			})
- 		}
- 	}
+	chooseImage(accepted, rejected) {
+		if (accepted.length + this.state.essayPhotos.length > 9) {
+			message.error('图片不能超过9张')
+		} else {
+			this.setState({
+				essayPhotos: this.state.essayPhotos.concat(accepted),
+			})
+		}
+	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
 		return(

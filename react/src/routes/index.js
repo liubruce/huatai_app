@@ -36,7 +36,7 @@ const start_render = () => {
     );
 }
 
-if (tool.IsPC()) {
+if (tool.IsPC() || tool.isPc) {
     start_render();
 } else {
     if (tool.isPc) {
