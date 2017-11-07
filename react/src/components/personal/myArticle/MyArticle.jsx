@@ -44,7 +44,8 @@ class MyArticle extends React.Component{
 	}
 	click(item){
 		if (item.goodEssay !== '1') {
-			this.action(item.essayId,1);
+			//this.action(item.essayId,1);
+			hashHistory.push(`/App/PersonalCenter/ArticleDetail/${item.essayId}`);
 			return;
 		}
 		this.setState({
@@ -145,7 +146,7 @@ class MyArticle extends React.Component{
 													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
 													:null
 												}
-												<Link onClick={()=>this.click(item)}>
+												<Link onClick={()=>this.click(item)} >
 														<article className="am-article">
 															<div className="am-article-hd">
 																<h1 className="am-article-title">{item.essayTitle}</h1>

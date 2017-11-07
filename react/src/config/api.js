@@ -6,7 +6,7 @@ import {
     lesson_api_IP
 } from './serverIp'
 
-import $ from 'jquery'
+//import $ from 'jquery'
 
 /*
 refreshldToken
@@ -563,7 +563,6 @@ export const appAddArticle = (body) => {
     return new Promise((resolve, reject) => {
         sfetch.post({
             url: url,
-            timeout: 8000,
             body: body,
             dataType: 'formdata'
         }).then((data) => {
