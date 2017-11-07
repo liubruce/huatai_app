@@ -104,7 +104,7 @@ class CourseCol extends React.Component{
             <Spin spinning={this.state.loading} tip="加载列表中...">
                 <div className="am-tabs-bd">
                  <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                  <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
+                  <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix" style={{paddingTop:'10px'}}>
                 {
                     this.state.colCourseList.map((item,index)=>{
                         return(
@@ -227,11 +227,11 @@ class Collector extends React.Component{
                             <a >蜂行圈收藏</a>
                         </li>
 				    </ul>
-                    <div className="am-tabs-bd">
+                    {/*<div className="am-tabs-bd">*/}
                         {
                             this.state.tab===1?<CourseCol/>:<EssayCol/>
                         }
-                    </div>
+                    {/*</div>*/}
 				</div>
 			</div>
 		)

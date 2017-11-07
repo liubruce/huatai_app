@@ -105,6 +105,7 @@ class CourseDy extends React.Component{
         return(
           <div>
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
+                 <Spin spinning={this.state.loading} tip="加载列表中...">
                <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                  {
                    this.state.courseList.map((item,index)=>{
@@ -126,6 +127,7 @@ class CourseDy extends React.Component{
                    })
                  }
                  </ul>
+                 </Spin>
            </div>
 
        <div className="am-modal am-modal-confirm" tabIndex="-1" id={`course-confirm`}>
@@ -140,7 +142,6 @@ class CourseDy extends React.Component{
 						</div>
 						</div>
 				</div>
-
            </div>
         )
     }
@@ -188,6 +189,7 @@ class EssayDy extends React.Component{
     render(){
         return(
           <Spin spinning={this.state.loading} tip="加载列表中...">
+            {/*<div className="am-tabs-bd">*/}
            <div data-tab-panel-1 className="am-tab-panel am-active tab">
              <div className="am-panel">
              {
@@ -200,6 +202,7 @@ class EssayDy extends React.Component{
              }
              </div>
          </div> 
+         {/*</div>*/}
          </Spin>
         )
     }
@@ -228,13 +231,11 @@ class Dynamic extends React.Component{
                             <a>蜂行圈动态</a>
                         </li>
 				   </ul>
-                   <div className="am-tabs-bd">
-					 {
+					           {
                             this.state.tab===1?<CourseDy/>:<EssayDy/>
                      }
                    </div>
                </div>
-			</div>
 		)
 	}
 
