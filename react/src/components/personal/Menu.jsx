@@ -115,7 +115,7 @@ class Menu extends React.Component {
         <div className="user-header">
           <div className="tx-name">
             <Link to={"/App/PersonalCenter/EditUser"}><img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(user.headPath)} /></Link>
-            <p className="name">{user.userRealName}</p>
+            <p className="name">{user.userRealName !== undefined ? user.userRealName :'' }</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>
           <div onClick={()=>this.sign()} className="sign"><img alt='sign' src={
