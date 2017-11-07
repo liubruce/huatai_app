@@ -116,7 +116,7 @@ class MyArticle extends React.Component{
 					<i className="fa fa-search" />
 					<input value={this.state.searchValue} onChange={this.changeValue.bind(this)} type="text" placeholder="搜索" />
 					</div>
-					<div className="header-right"><Link to='/App/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
+					<div className="header-right"><Link to='/App/PersonalCenter/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
                  </header>
 				 </form>
 			<div className="warpper">
