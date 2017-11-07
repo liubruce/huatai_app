@@ -52,7 +52,7 @@
     "react-mobile-datepicker": "^3.0.6",
     "react-switch-case": "^1.0.2",
     "rx-lite-aggregates": "^4.0.8",
-    "sfetch": "^0.3.4",
+    "sfetch": "^1.0.1",
     "style-loader": "0.18.2",
     "svg-sprite-loader": "^0.3.1",
     "sw-precache-webpack-plugin": "0.11.3",
