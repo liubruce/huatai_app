@@ -44,7 +44,8 @@ class MyArticle extends React.Component{
 	}
 	click(item){
 		if (item.goodEssay !== '1') {
-			this.action(item.essayId,1);
+			//this.action(item.essayId,1);
+			hashHistory.push(`/App/PersonalCenter/ArticleDetail/${item.essayId}`);
 			return;
 		}
 		this.setState({
@@ -116,7 +117,7 @@ class MyArticle extends React.Component{
 					<i className="fa fa-search" />
 					<input value={this.state.searchValue} onChange={this.changeValue.bind(this)} type="text" placeholder="搜索" />
 					</div>
-					<div className="header-right"><Link to='/App/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
+					<div className="header-right"><Link to='/App/PersonalCenter/PubArticle' style={{fontSize:'14px',marginRight:'15px'}}>发布</Link></div>
                  </header>
 				 </form>
 			<div className="warpper">
@@ -145,7 +146,7 @@ class MyArticle extends React.Component{
 													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
 													:null
 												}
-												<Link onClick={()=>this.click(item)}>
+												<Link onClick={()=>this.click(item)} >
 														<article className="am-article">
 															<div className="am-article-hd">
 																<h1 className="am-article-title">{item.essayTitle}</h1>

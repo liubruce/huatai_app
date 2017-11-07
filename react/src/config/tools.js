@@ -82,11 +82,6 @@ export let utils = {
 	}
 }
 
-export const log = (text) => {
-	console.log('----------------------' + text);
-	// alert(text);
-}
-
 export let back_url;
 export let exit_url;
 
@@ -127,14 +122,15 @@ export const back = () => {
 		reject(res);
 	})
 }
+
 export const getUserCode = () => {
 	let url = document.URL;
 	let index = url.indexOf('userCode=');
-	return url.slice(index + 9, index + 17)
+	return url.slice(index + 9, url.length)
 }
 
 export const execSQL = (sql, value) => {
-	log(sql);
+	console.log('elearning------sql: ' + sql);
 	return new Promise((resolve, reject) => {
 		let db = window.SQLitePlugin.sqlitePlugin.openDatabase({
 			name: 'HuaTai.db',
@@ -161,6 +157,7 @@ export const info = () => {
 	return new Promise((_resolve, _reject) => {
 		localStorage.setItem("device", sino_cordova_checkApp().device);
 		let userCode = getUserCode();
+		console.log('elearning------useCode: ' + userCode);
 		let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
 		localStorage.setItem("user", JSON.stringify({
 			userCode: userCode
@@ -174,17 +171,15 @@ export const info = () => {
 			_user.phone = item.MOBILE;
 			_user.userCode = userCode;
 			_user.device = sino_cordova_checkApp().device;
-
 			localStorage.setItem("user", JSON.stringify(_user));
 			save_user();
-			// alert(JSON.stringify(user))
+			console.log('elearning------user: ' + JSON.stringify(user))
 			api.getMenu().then((data) => {
 				if (data.result === 'RC100') {
 					_resolve();
 					_user.menu = data.menu;
 					localStorage.setItem("user", JSON.stringify(_user));
 					save_user();
-					log(JSON.stringify(user))
 				} else {
 					_user.menu = [];
 					localStorage.setItem("user", JSON.stringify(_user));
@@ -202,7 +197,7 @@ export const info = () => {
 				}
 			})
 		}, (err) => {
-			_reject('sql error : ' + err);
+			_reject('sql error: ' + err);
 		})
 	});
 }
@@ -218,9 +213,9 @@ export const refreshToken = () => {
 			save_user();
 			let sql = `UPDATE LSUSER  SET DEADTIME='${data.deadTime}',LDTOKEN='${data.ldToken}' WHERE USERCODE='${user.userCode}'`;
 			execSQL(sql).then((result) => {
-				console.log('-----update ok------' + JSON.stringify(result))
+				console.log('elearning-----update ok------' + JSON.stringify(result))
 			}, (reject) => {
-				log('******sql error**** :' + reject);
+				console.log('elearning------sql error :' + reject);
 			})
 		} else {
 			message.error(data.errMsg, 3);

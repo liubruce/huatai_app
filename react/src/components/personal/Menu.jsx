@@ -9,9 +9,9 @@ class Menu extends React.Component {
 		this.state = {
 			menuItems: [],
       user:{
-        userRealName:'default',
-        vipGradName:'default',
-        seifInformation:'default',
+        userRealName:'...',
+        vipGradName:'...',
+        seifInformation:'...',
         sign:0
       }
 		}
@@ -27,7 +27,7 @@ class Menu extends React.Component {
       "nodeClass": "icon icon-my-fxq",
     }, {
       "nodeName": "任务中心",
-      "runscript": "/App/NewsCenter",
+      "runscript": "/App/PersonalCenter/NewsCenter",
       "nodeClass": "icon icon-task",
     }, {
       "nodeName": "动态",
@@ -92,15 +92,15 @@ class Menu extends React.Component {
     }
     this.myhome();
   }
-  sign(){
-    api.sign().then((data)=>{
+  sign() {
+    api.sign().then((data) => {
       if (data.result === 'RC100') {
-        message.success("签到成功",3)
-          this.setState({
-            sign:data.sign
-          })
-      }else{
-         message.error(data.errMsg, 3);
+        message.success("签到成功", 3)
+        this.setState({
+          sign: data.sign
+        })
+      } else {
+        message.error(data.errMsg, 3);
       }
       this.myhome();
     }, (res) => {
@@ -115,7 +115,7 @@ class Menu extends React.Component {
         <div className="user-header">
           <div className="tx-name">
             <Link to={"/App/PersonalCenter/EditUser"}><img className='head_img' onError={(e) => tool.headImageError(e)} alt='img' src={tool.getFile(user.headPath)} /></Link>
-            <p className="name">{user.userRealName}</p>
+            <p className="name">{user.userRealName !== undefined ? user.userRealName :'' }</p>
             <p className="rank-txt">{user.vipGradName}</p>
           </div>
           <div onClick={()=>this.sign()} className="sign"><img alt='sign' src={

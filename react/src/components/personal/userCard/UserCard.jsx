@@ -10,6 +10,7 @@ class Card extends React.Component{
 	}
 	render(){
 		let userCard=this.props.userCard;
+		let jobInfo =this.props.jobInfo;
 		return(
            <div data-tab-panel-0 className="am-tab-panel am-active tab">
 						<div className="am-panel user-info-list">
@@ -28,12 +29,12 @@ class Card extends React.Component{
 								    <h2 className="am-titlebar-title">工作信息</h2>
 								</div>
 								<ul className="am-list am-list-static">
-								  	<li>入职时间<span>{userCard.entryTime}</span></li>
-								  	<li>所在地区<span>{userCard.region}</span></li>
-								  	<li>职务<span>{userCard.jobName}</span></li>
-								  	<li>分公司<span>{userCard.branceOffice}</span></li>
-								  	<li>营业部<span>{userCard.businessDept}</span></li>
-								  	<li>营业组<span>{userCard.businessGroup}</span></li>
+								  	<li>入职时间<span>{jobInfo.enterDate}</span></li>
+								  	<li>所在地区<span>{jobInfo.address}</span></li>
+								  	<li>职务<span>{jobInfo.rankName}</span></li>
+								  	<li>分公司<span>{jobInfo.manageComName}</span></li>
+								  	<li>营业部<span>{jobInfo.departmentName}</span></li>
+								  	<li>营业组<span>{jobInfo.sellComName}</span></li>
 								</ul>
 							</div>
 							<div className="panel-bd">
@@ -41,7 +42,7 @@ class Card extends React.Component{
 								    <h2 className="am-titlebar-title">个人说明</h2>
 								</div>
 								<div className="user-word">
-									{userCard.seifInformation}
+									{userCard.seifInformation !==undefined ? userCard.seifInformation:''}
 								</div>
 							</div>
 						</div>
@@ -122,6 +123,7 @@ class UserCard extends React.Component{
 			userCard:[],
 			Honor2List:[],
 			tab:0,
+			jobInfo:[]
 		}
 	}
 	changeTab(tab) {
@@ -134,7 +136,8 @@ class UserCard extends React.Component{
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 				this.setState({
-					userCard:data.user
+					userCard:data.user,
+					jobInfo:data.obj.data
 				})
 			}else{
 				message.error(data.errMsg, 3);
@@ -175,8 +178,27 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
+		let text = '';
+		let user = this.state.userCard;
+		let info = this.state.jobInfo
+		text += `  姓名:   ${user.userRealName}\r`;
+		text += `  手机:   ${user.phone}\r`;
+		text += `  邮箱:   ${user.email}\r`;
+		// text += `工作信息\r`;
+		text += `  入职时间:   ${info.enterDate}\r`;
+		text += `  所在地区:   ${info.address}\r`;
+		text += `  职务:   ${info.rankName}\r`;
+		text += `  分公司:   ${info.manageComName}\r`;
+		text += `  营业部:   ${info.departmentName}\r`;
+		text += `  营业组:   ${info.sellComName}\r`;
+
+		if(tool.IsPC()){
+			alert(text);
+			return;
+		}
+		
 		navigator.Wechat.share({
-			text: "华泰分享-我的名片 姓名: " + this.state.userCard.userRealName,
+			text: text,
 			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
 			navigator.notification.alert(
@@ -184,37 +206,19 @@ class UserCard extends React.Component{
 				() => {
 					console.log('alert callback')
 				},
-				'下载成功',
+				'提示',
 				'OK'
 			);
-			// alert("分享成功");
 		}, function(reason) {
 			navigator.notification.alert(
 				"分享失败: " + reason,
 				() => {
 					console.log('alert callback')
 				},
-				'下载成功',
+				'提示',
 				'OK'
 			);
-			// alert("分享失败: " + reason);
 		});
-
-		// navigator.Wechat.share({
-		// 	message: {
-		// 		title: "华泰分享测试",
-		// 		description: "请点击.",
-		// 		media: {
-		// 			type: window.Wechat.Type.WEBPAGE,
-		// 			webpageUrl: "http://www.github.com/"
-		// 		}
-		// 	},
-		// 	scene: window.Wechat.Scene.TIMELINE // 分享到朋友圈(分享类型参数自定，详见文档)
-		// }, function() {
-		// 	alert("分享成功");
-		// }, function(reason) {
-		// 	alert("分享失败: " + reason);
-		// });
 	}
 	componentDidMount() {
 
@@ -227,7 +231,7 @@ class UserCard extends React.Component{
 	          <header className="header">
 	             <a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
 	             <div className="user-name-share">
-	             	<img alt='head' src={tool.getFile(user.headPath)} />{user.userRealName}
+	             	<img alt='head' src={tool.getFile(user.headPath)} onError={(e) => tool.headImageError(e)} />{user.userRealName}
 	             </div>
 		     	<img onClick={()=>this.shareWeiXin()} alt='share' className='share-img' src={require('../../../style/images/share.png')}/>
 		      </header>
@@ -247,7 +251,7 @@ class UserCard extends React.Component{
                    <Spin spinning={this.state.loading} tip="加载列表中...">
 					<div className="am-tabs-bd">
 						{
-							this.state.tab===0?<Card userCard={this.state.userCard}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert Honor2List={this.state.Honor2List}/>)
+							this.state.tab===0?<Card userCard={this.state.userCard} jobInfo={this.state.jobInfo}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert Honor2List={this.state.Honor2List}/>)
 						}
 					</div>
 				  </Spin>
