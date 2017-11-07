@@ -27,7 +27,7 @@ class Menu extends React.Component {
       "nodeClass": "icon icon-my-fxq",
     }, {
       "nodeName": "任务中心",
-      "runscript": "/App/NewsCenter",
+      "runscript": "/App/PersonalCenter/NewsCenter",
       "nodeClass": "icon icon-task",
     }, {
       "nodeName": "动态",

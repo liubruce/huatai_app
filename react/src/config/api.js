@@ -532,7 +532,6 @@ export const appAddArticle = (body) => {
     return new Promise((resolve, reject) => {
         sfetch.post({
             url: url,
-            timeout: 8000,
             body: body,
             dataType: 'formdata'
         }).then((data) => {
