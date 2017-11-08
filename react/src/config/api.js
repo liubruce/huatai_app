@@ -887,6 +887,7 @@ export const userUpdate = (formData) => {
                 dataType: 'formdata'
             }).then((data) => {
                 if (data.ok) {
+                    tool.checkLogin(data.json);
                     resolve(data.json)
                 } else {
                     reject(data)
@@ -907,8 +908,12 @@ export const levelSet = (body = {}) => {
             url: `${api_Ip}/integralmall/levelset`,
             body
         }).then((data) => {
-            tool.checkLogin(data.json);
-            resolve(data.json)
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            }else{
+                reject(data)
+            }
         });
     });
 

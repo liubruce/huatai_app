@@ -555,6 +555,9 @@ export const checkLogin = (data) => {
 	}
 	//文章显示
 export const subString = (string, subLength) => {
+	if (typeof(string) !== 'string') {
+		return '';
+	}
 	if (string.length > subLength) {
 		return string.substring(0, subLength) + '...'
 	} else {
