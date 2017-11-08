@@ -5,8 +5,10 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import { message } from 'antd'
 import $ from 'jquery'
+import videojs from 'video.js'
 
 let old_time = 0;
+let myPlayer;
 class CourseDetail extends React.Component {
     constructor(args) {
         super()
@@ -15,37 +17,17 @@ class CourseDetail extends React.Component {
             courseattach: [],
             isEnd: false,
             titleList: [],
-            showTitle: tool.isPc ? '' : navigator.connection.type !== "wifi",
+            showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0
         }
     }
-    componentWillMount() {
-        let body = {
-            courseId: this.props.params.id
-        };
-        api.appLoadCourse(body).then((data) => {
-            if (data.result === 'RC100') {
-                this.setState({
-                    coursedata: data.coursedata,
-                    courseattach: data.courseattach,
-                    titleList: data.titleList
-                })
-            } else {
-                message.error(data.errMsg, 3);
-            }
-        }, (res) => {
-            tool.reject(res);
-        })
-    }
+
 
     onTimeUpdate(e) {
         let test = document.getElementById('course_id');
         if (test.currentTime - old_time > 1) {
             message.error('请勿快进视频', 1);
             test.currentTime = old_time;
-            this.setState({
-                isQuick: true
-            })
         } else {
             if (test.currentTime >= test.duration) {
                 this.setState({
@@ -75,28 +57,45 @@ class CourseDetail extends React.Component {
             }
         };
     }
-
-    componentDidMount() {
-        let video = {};
-        video.type = "video/mp4";
-        video.src = "http://media.w3.org/2010/05/bunny/movie.mp4";
-        // video.src = tool.getFile(this.state.coursedata.coursevideoPath);
-        let myPlayer = window.videojs(this.refs.course_player, {}).ready(() => {
-            myPlayer.src(video);
-            myPlayer.height("210");
-            myPlayer.width($(window).width());
-            myPlayer.play();
+    componentWillMount() {
+        let body = {
+            courseId: this.props.params.id
+        };
+        api.appLoadCourse(body).then((data) => {
+            if (data.result === 'RC100') {
+                this.setState({
+                    coursedata: data.coursedata,
+                    courseattach: data.courseattach,
+                    titleList: data.titleList,
+                    // showTitle:true
+                },()=>{
+                    this.showVideo();
+                })
+            } else {
+                message.error(data.errMsg, 3);
+            }
+        }, (res) => {
+            tool.reject(res);
+        })
+    }
+    showVideo() {
+        const videoJsOptions = {
+            autoplay: true,
+            controls: true,
+            playsinline:false,
+            sources: [{
+                src: tool.getFile(this.state.coursedata.coursevideoPath),
+                type: 'video/mp4'
+            }]
+        }
+        this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
+            myPlayer = this;
             myPlayer.on('timeupdate', () => {
                 let currentTime = myPlayer.currentTime();
                 let duration = myPlayer.duration();
-                // let bufferedPercent = myPlayer.bufferedPercent();
-
                 if (currentTime - old_time > 1) {
                     message.error('请勿快进视频', 1);
                     myPlayer.currentTime(old_time);
-                    this.setState({
-                        isQuick: true
-                    })
                 } else {
                     if (currentTime >= duration) {
                         this.setState({
@@ -105,11 +104,17 @@ class CourseDetail extends React.Component {
                     }
                 }
                 old_time = currentTime
-
             });
-
-            // setTimeout(()=>{video_player.pause();},1000)
+            myPlayer.play();
         });
+    }
+
+    play() {
+        this.setState({
+            showTitle: false
+        }, () => {
+            myPlayer.play();
+        })
     }
     render() {
         let course = this.state.coursedata;
@@ -119,21 +124,31 @@ class CourseDetail extends React.Component {
 
 				    <div className="opacity-black">	  
 
-		                <video
+
+                    <div>
+                      <video
+                       width={$(window).width()}
+                       height="210"
+                       ref="course_player"
+                       className="video-js"
+                        ></video>
+                    </div>
+
+
+		                {/*<video
                            className="video-js"
                            controls
                            ref="course_player">
-                        </video>
+                        </video>*/}
 
-{ /*				        <video 
+{/*				        <video 
 					    id="course_id"
 					    src={tool.getFile(course.coursevideoPath)}
 					    controls="controls"  width="100%" height="210"
 					    onTimeUpdate={(e)=>this.onTimeUpdate(e)}
 					    preload="auto"
 					    >
-					    	您的浏览器不支持 video 标签。
-					    </video>*/ }
+					    </video>*/}
 
 					</div>
 
@@ -141,8 +156,8 @@ class CourseDetail extends React.Component {
 					<i className="fa fa-play"></i>
 					
 					</div> : null}
-					{this.state.showTitle ? <p className='video-title'><a>即将消耗手机流量</a></p>
-                : null}
+					{this.state.showTitle ? <p className='video-title'><a>建议在wifi下观看</a></p>
+                    : null}
 
 
 					{ /*<p className="like"><span><i className="fa fa-heart-o"></i>12331</span>
