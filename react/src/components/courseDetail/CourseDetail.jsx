@@ -88,6 +88,7 @@ class CourseDetail extends React.Component {
                 type: 'video/mp4'
             }]
         }
+        let that = this;
         this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
             myPlayer = this;
             myPlayer.on('timeupdate', () => {
@@ -98,7 +99,7 @@ class CourseDetail extends React.Component {
                     myPlayer.currentTime(old_time);
                 } else {
                     if (currentTime >= duration) {
-                        this.setState({
+                        that.setState({
                             isEnd: true
                         })
                     }
@@ -125,14 +126,12 @@ class CourseDetail extends React.Component {
 				    <div className="opacity-black">	  
 
 
-                    <div>
                       <video
                        width={$(window).width()}
                        height="210"
                        ref="course_player"
                        className="video-js"
                         ></video>
-                    </div>
 
 
 		                {/*<video
