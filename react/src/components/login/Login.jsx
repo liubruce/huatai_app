@@ -31,15 +31,18 @@ class Login extends React.Component {
   }
   
   render() {
+    let username = '';
+    let password = '';
+    // username = '13920002490';password = 'a123456';
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" defaultValue='13920002490' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
-          <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
-          <button className="btn-login" type='submit' >禁用默认账号登录!!!</button>
+          <p><input type="text" defaultValue={username} className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="password" defaultValue={password} className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
+          <button className="btn-login" type='submit' >登 录</button>
         </div>
       </form>
     )
