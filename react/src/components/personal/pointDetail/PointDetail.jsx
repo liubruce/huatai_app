@@ -166,7 +166,7 @@ class PointDetail extends React.Component{
 							dataDetailLists.map((item,index)=>{
 								return(
                   <div key={index} className="am-panel jf-list">
-										<p className="jf-tag">{item.integralChangType}</p>
+										<p className="jf-tag">{item.integralChangType===1||item.integralChangType==='1'?'消费':'获得'}</p>
 					        	<p className="time">{tool.formatTimestamp(item.integralChangTime)}</p>
 					        	<p className="jf-list-cont">{item.integralChangInfo}</p>
 									</div>
