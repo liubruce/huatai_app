@@ -185,7 +185,10 @@ class CourseDetail extends React.Component {
             }}>
 						    {this.state.courseattach.map((item, index) => {
                 return (
-                    <li key={index} ><a onClick={() => this.downFile(item.courseAttrachPath, this)} data-am-modal="{target: '#load-modal'}">{item.courseAttrachPath}</a></li>
+                    <li key={index} ><a 
+                    // onClick={() => this.downFile(item.courseAttrachPath, this)}
+                     // data-am-modal="{target: '#load-modal'}"
+                     >{item.courseAttrachPath}</a></li>
                 )
             })}
 						</ul>

@@ -12,7 +12,7 @@ import {hashHistory} from 'react-router';
   const {onClick} = props
   return (
     <div
-      className={"arr arr-left "}
+      className={"arr arr-right "}
       onClick={onClick}
     >
     </div>
@@ -23,7 +23,7 @@ const SamplePrevArrow =(props)=> {
   const {onClick} = props
   return (
     <div
-      className={"arr arr-right "}
+      className={"arr arr-left "}
       onClick={onClick}
     >
     </div>
@@ -120,12 +120,12 @@ class Index extends React.Component {
   }
 	render() {
     const settings = {
-      // dots: false,
-      infinite: true,
       speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
       autoplay: true,
+      autoplaySpeed: 2000,
+      rtl: false,
+      dots: true,
+      infinite: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
       className:'index-slider'

@@ -480,7 +480,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
-                        // console.log('alert callback')
+                        
                     },
                     '下载成功',
                     'OK'
@@ -489,7 +489,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
-                        // console.log('alert callback')
+                        
                     },
                     '下载失败',
                     'OK'
