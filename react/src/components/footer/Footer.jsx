@@ -38,7 +38,9 @@ class Footer extends React.Component {
     if (pathname.indexOf('/ArticleDetail') !== -1) {
       tab = 3;
     }
-    
+    if (pathname.indexOf('/NewsCenter') !== -1) {
+      tab = 4;
+    }
     this.setState({
       tab
     })
