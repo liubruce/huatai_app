@@ -43,7 +43,7 @@ class MyArticle extends React.Component{
 		})
 	}
 	click(item){
-		if (item.goodEssay !== '1') {
+		if (item.goodEssay !== '1' && Number(item.checkState)!==2) {
 			//this.action(item.essayId,1);
 			hashHistory.push(`/App/PersonalCenter/ArticleDetail/${item.essayId}`);
 			return;
@@ -142,8 +142,8 @@ class MyArticle extends React.Component{
 										<div  key={index} className="am-panel">
 											<div className="am-panel-bd">
 												{
-													item.checkState===2||item.checkState==='2'?
-													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
+													Number(item.checkState)===2?
+													<Link  to={'/App/PersonalCenter/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
 													:null
 												}
 												<Link onClick={()=>this.click(item)} >
@@ -177,17 +177,17 @@ class MyArticle extends React.Component{
 									         </div>
 
                                            <div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
-       <div className="am-modal-dialog">
-         <div className="am-modal-hd">温馨提示</div>
-         <div className="am-modal-bd">
-           兑换将需要{item.exchangeIntegral}积分，您的当前积分为{this.state.score}，是否继续？
-										  </div>
-         <div className="am-modal-footer">
-           <span className="am-modal-btn" data-am-modal-cancel>取消</span>
-           <span className="am-modal-btn" data-am-modal-confirm onClick={()=>this.ok(item.essayId)}>确定</span>
-         </div>
-        </div>
-       </div>
+                                              <div className="am-modal-dialog">
+                                                <div className="am-modal-hd">温馨提示</div>
+                                                <div className="am-modal-bd">
+                                                  兑换将需要{item.exchangeIntegral}积分，您的当前积分为{this.state.score}，是否继续？
+		                                       								  </div>
+                                                <div className="am-modal-footer">
+                                                  <span className="am-modal-btn" data-am-modal-cancel>取消</span>
+                                                  <span className="am-modal-btn" data-am-modal-confirm onClick={()=>this.ok(item.essayId)}>确定</span>
+                                                </div>
+                                               </div>
+                                              </div>
 
 										  </div>
 										)

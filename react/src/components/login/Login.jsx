@@ -29,27 +29,21 @@ class Login extends React.Component {
       tool.reject(res);
     })
   }
+  
   render() {
+    let username = '';
+    let password = '';
+    username = '13920001564';password = 'a123456';
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />
-        {tool.isPc?
         <div className="login-box">
           <h1>华泰蜂行智能学习平台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" defaultValue='1391000' className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
-          <p><input type="password" defaultValue='a123456' className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
+          <p><input type="text" defaultValue={username} className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="password" defaultValue={password} className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
           <button className="btn-login" type='submit' >登 录</button>
         </div>
-        :
-        <div className="login-box">
-          <h1>华泰蜂行智能学习平台</h1>
-          <h6>Huatai Insurance Group</h6>
-          <p><input type="text" className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
-          <p><input type="password" className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
-          <button className="btn-login" type='submit' >登 录</button>
-        </div>
-      }
       </form>
     )
   }

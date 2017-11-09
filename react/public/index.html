@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,53 +17,16 @@
     <meta name="viewport" content="initial-scale=1,maximum-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%logo.ico">
     <link rel="stylesheet" href="css/amazeui.min.css" />
-    <link rel="stylesheet" href="css/video-react.css" />
     <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css" />
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/amazeui.min.js"></script>
+    <link rel="stylesheet" href="css/video-js.css" />
+    <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="lib/amazeui.min.js"></script>
     <script src='config.js' type="text/javascript"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
-    <script src="//vjs.zencdn.net/5.12/video.js"></script>
-    <link rel="stylesheet" href="//vjs.zencdn.net/5.12/video-js.css" />
-    
-    <title>HuaTai_APP</title>
+    <script src='index.js' type="text/javascript"></script>
+    <title>华泰蜂行智能学习平台</title>
 </head>
-<style type="text/css">
-body {
-    background-color: #F7F9FC;
-    font-size: 1.6rem;
-}
-</style>
-
 <body>
     <div id="root"></div>
 </body>
-<script type='application/javascript' src='js/fastclick.js'></script>
 <script src="js/cordova.js"></script>
-<script>
-window.jquery = $;
-document.addEventListener('DOMContentLoaded', function() {
-    FastClick.attach(document.body);
-}, false);
-
-document.addEventListener("deviceready", function() {
-
-    // Wechat.isInstalled(function(installed) {
-    //     alert("WeChat installed: " + (installed ? "Yes" : "No"));
-    // }, function(reason) {
-    //     alert("WeChat Failed: " + reason);
-    // });
-
-    navigator.Wechat = Wechat;
-    navigator.PERSISTENT = LocalFileSystem.PERSISTENT;
-
-    var fileTransfer = new FileTransfer();
-    navigator.fileTransfer = fileTransfer;
-
-
-}, false);
-</script>
-
 </html>
