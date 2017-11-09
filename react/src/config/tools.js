@@ -280,8 +280,10 @@ export const url_format = (url, operationType, behaviorDataType, body = {}) => {
     return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
 export const getFile = (fileName) => {
+    if(fileName === null){
+        return '路径错误';
+    }
     return url_format(getFile_IP + fileName);
-// return getFile_IP + fileName;
 }
 export const getAnswer = (num) => {
     let answer = []
