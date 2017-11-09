@@ -184,7 +184,7 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotosPH.map((item,index)=>{
 								return(
-                                    <li onClick={()=>this.delPH(index)} key={index}><img alt={`img${index}${index.src}`} src={item.src} /></li>
+                                    <li onClick={()=>this.delPH(index)} key={index}><img alt={`img${index}${index.essayPhotoPath}`} src={tool.getFile(item.essayPhotoPath)} /></li>
 								)
 							})
 						}

@@ -143,7 +143,7 @@ class MyArticle extends React.Component{
 											<div className="am-panel-bd">
 												{
 													item.checkState===2||item.checkState==='2'?
-													<Link  to={'/App/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
+													<Link  to={'/App/PersonalCenter/PubArticle/'+item.essayId} className="edit"><i className="fa fa-edit"></i></Link>
 													:null
 												}
 												<Link onClick={()=>this.click(item)} >

@@ -82,7 +82,7 @@ class CourseDetail extends React.Component {
         const videoJsOptions = {
             autoplay: true,
             controls: true,
-            playsinline:false,
+            playsinline:true,
             sources: [{
                 src: tool.getFile(this.state.coursedata.coursevideoPath),
                 type: 'video/mp4'

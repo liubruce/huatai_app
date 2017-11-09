@@ -111,6 +111,13 @@ class Index extends React.Component {
 			now_item: item
 		})
 	}
+  componentDidMount() {
+    let arriveTime = localStorage.getItem("arriveTime");
+    let loadTime = new Date().getTime();
+    console.log(`请求到达时间: ${arriveTime}`)
+    console.log(`页面加载完成时间: ${loadTime}`);
+    console.log(`页面加载完成时间与请求到达时间差: ${loadTime-arriveTime}`);
+  }
 	render() {
     const settings = {
       // dots: false,

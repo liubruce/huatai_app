@@ -1,3 +1,4 @@
+localStorage.setItem("arriveTime", new Date().getTime());
 window.jquery = $;
 document.addEventListener("deviceready", function() {
     navigator.Wechat = Wechat;

@@ -46,7 +46,7 @@ if (tool.isPc) {
     // }, false);
 
     document.addEventListener('deviceready', () => {
-        console.log('elearning------HUATAI APP deviceready')
+        console.log('elearning APP deviceready')
         if (tool.sino_cordova_checkApp().device === 'IOS') {
             let back_url = window.cordova.file.applicationDirectory + 'www/index.html#/index';
             let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
@@ -64,7 +64,7 @@ if (tool.isPc) {
                 '获取菜单失败: ' + message,
                 () => {
                     // window.location.href = tool.exit_url;
-                    console.log('elearning------获取菜单失败')
+                    console.log('elearning 获取菜单失败')
                 },
                 '提示',
                 'OK'

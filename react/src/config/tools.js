@@ -123,7 +123,7 @@ export const getUserCode = () => {
 }
 
 export const execSQL = (sql, value) => {
-    console.log('elearning------sql: ' + sql);
+    console.log('elearning sql: ' + sql);
     return new Promise((resolve, reject) => {
         let db = window.SQLitePlugin.sqlitePlugin.openDatabase({
             name: 'HuaTai.db',
@@ -150,7 +150,7 @@ export const info = () => {
     return new Promise((_resolve, _reject) => {
         localStorage.setItem("device", sino_cordova_checkApp().device);
         let userCode = getUserCode();
-        console.log('elearning------useCode: ' + userCode);
+        console.log('elearning get useCode: ' + userCode);
         let sql = 'SELECT a.USERCODE,a.MOBILE,a.DEADTIME,a.LDTOKEN FROM LSUSER a WHERE a.USERCODE=' + userCode;
         localStorage.setItem("user", JSON.stringify({
             userCode: userCode
@@ -166,7 +166,7 @@ export const info = () => {
             _user.device = sino_cordova_checkApp().device;
             localStorage.setItem("user", JSON.stringify(_user));
             save_user();
-            console.log('elearning------user: ' + JSON.stringify(user))
+            console.log('elearning user information: ' + JSON.stringify(user))
             api.getMenu().then((data) => {
                 if (data.result === 'RC100') {
                     _resolve();
@@ -206,9 +206,9 @@ export const refreshToken = () => {
             save_user();
             let sql = `UPDATE LSUSER  SET DEADTIME='${data.deadTime}',LDTOKEN='${data.ldToken}' WHERE USERCODE='${user.userCode}'`;
             execSQL(sql).then((result) => {
-                console.log('elearning-----update ok------' + JSON.stringify(result))
+                console.log('elearning update ldToken ok: ' + JSON.stringify(result))
             }, (reject) => {
-                console.log('elearning------sql error :' + reject);
+                console.log('elearning sql error:' + reject);
             })
         } else {
             message.error(data.errMsg, 3);
@@ -478,7 +478,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
-                        console.log('alert callback')
+                        // console.log('alert callback')
                     },
                     '下载成功',
                     'OK'
@@ -487,7 +487,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
-                        console.log('alert callback')
+                        // console.log('alert callback')
                     },
                     '下载失败',
                     'OK'
