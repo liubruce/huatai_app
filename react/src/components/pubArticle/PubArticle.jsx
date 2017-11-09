@@ -114,7 +114,7 @@ class PubArticle extends React.Component{
 			formData.append('file', x)
 		}
 		for (let x of essayPhotosPH) {
-			formData.append('photoPath', x)
+			formData.append('photoPath', x.essayPhotoPath)
 		}
 		tool.loading(this, true);
 		api.appAddArticle(formData).then((data) => {
