@@ -110,11 +110,11 @@ class PubArticle extends React.Component{
 		// formData.append('checkState':'4');
 		let essayPhotos = this.state.essayPhotos,
 			essayPhotosPH = this.state.essayPhotosPH;
-		for (let x of essayPhotos) {
-			formData.append('file', x)
+		for (let i in essayPhotos) {
+			formData.append('file', essayPhotos[i])
 		}
-		for (let x of essayPhotosPH) {
-			formData.append('photoPath', x.essayPhotoPath)
+		for (let i in essayPhotosPH) {
+			formData.append('photoPath', essayPhotosPH[i].essayPhotoPath)
 		}
 		tool.loading(this, true);
 		api.appAddArticle(formData).then((data) => {
