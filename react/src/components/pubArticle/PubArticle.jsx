@@ -78,16 +78,26 @@ class PubArticle extends React.Component{
 	}
 	del(index) {
 		let essayPhotos = this.state.essayPhotos;
-		let newEssayPhotos = essayPhotos.splice(index, 1);
+		let newEssayPhotos = [];
+		for(let i in essayPhotos){
+			if(Number(i) !== Number(index)){
+				newEssayPhotos.push(essayPhotos[i])
+			}
+		}
 		this.setState({
-			essayPhotos: newEssayPhotos
+			essayPhotos:newEssayPhotos
 		})
 	}
 	delPH(index) {
 		let essayPhotosPH = this.state.essayPhotosPH;
-		let newEssayPhotosPH = essayPhotosPH.splice(index, 1);
+		let newEssayPhotosPH = [];
+		for(let i in essayPhotosPH){
+			if(Number(i) !== Number(index)){
+				newEssayPhotosPH.push(essayPhotosPH[i])
+			}
+		}
 		this.setState({
-			essayPhotosPH: newEssayPhotosPH
+			essayPhotosPH:newEssayPhotosPH
 		})
 	}
 	add() {
@@ -184,7 +194,8 @@ class PubArticle extends React.Component{
 						{
 							this.state.essayPhotosPH.map((item,index)=>{
 								return(
-                                    <li onClick={()=>this.delPH(index)} key={index}><img alt={`img${index}${index.essayPhotoPath}`} src={tool.getFile(item.essayPhotoPath)} /></li>
+                                    <li onClick={()=>this.delPH(index)} key={index}>
+										<img alt={`img${index}${index.essayPhotoPath}`} src={tool.getFile(item.essayPhotoPath)} /></li>
 								)
 							})
 						}
