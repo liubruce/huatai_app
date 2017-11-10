@@ -254,7 +254,10 @@ class MyLibrary extends React.Component {
 								    }
                                     <p>兑换积分: {item.cashIntegral}</p>
 									 <a onClick={() => this.jump(item)}>
+                                         {item.userBookIsBuy.isBuy?
+                                         <button className="am-btn-primary" style={{background:'#e9e9e9'}}>已兑换</button>:
 									 	<button type="button" className="am-btn-primary" data-am-modal={"{target: '#my-confirms'}"}>兑换</button>
+                                     }
 									 </a>
 									
 								</div>
