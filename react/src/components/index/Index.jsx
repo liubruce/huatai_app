@@ -124,7 +124,7 @@ class Index extends React.Component {
       autoplay: true,
       autoplaySpeed: 2000,
       rtl: false,
-      dots: true,
+      dots: false,
       infinite: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
