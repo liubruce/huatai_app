@@ -280,7 +280,7 @@ export const url_format = (url, operationType, behaviorDataType, body = {}) => {
     return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
 export const getFile = (fileName) => {
-    if(fileName === null){
+    if(fileName === null || fileName === undefined){
         return '路径错误';
     }
     return url_format(getFile_IP + fileName);
@@ -480,7 +480,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
-                        // console.log('alert callback')
+                        
                     },
                     '下载成功',
                     'OK'
@@ -489,7 +489,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
-                        // console.log('alert callback')
+                        
                     },
                     '下载失败',
                     'OK'
