@@ -28,12 +28,13 @@ class testPaper extends React.Component{
 		api.appTestPaperOnlineAnswer(body).then((data) => {
 			if (data.result === 'RC100') {
 				let single = [],
-					multiple = [];
-				for (let x of data.titleList) {
-					if (x.titleType === '1') {
-						single.push(x);
+					multiple = [],
+					titleList=data.titleList;
+				for (let i in titleList) {
+					if (titleList[i].titleType === '1') {
+						single.push(titleList[i]);
 					} else {
-						multiple.push(x);
+						multiple.push(titleList[i]);
 					}
 				}
 				this.setState({
