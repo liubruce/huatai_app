@@ -461,9 +461,7 @@ export const appSubmTestPaperTitle = (body) => {
   我的名片
 */
 
-export const userCard = (userCode) => {
-        let body = {}
-        body.userCode = userCode
+export const userCard = (body = {}) => {
         body = tool.behavior(body, 'getone', 'menu');
         return new Promise((resolve, reject) => {
             sfetch.get({

@@ -178,22 +178,25 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
-		let text = '';
-		let user = this.state.userCard;
-		let info = this.state.jobInfo
-		text += `  姓名:   ${user.userRealName}\r`;
-		text += `  手机:   ${user.phone}\r`;
-		text += `  邮箱:   ${user.email}\r`;
-		// text += `工作信息\r`;
-		text += `  入职时间:   ${info.enterDate}\r`;
-		text += `  所在地区:   ${info.address}\r`;
-		text += `  职务:   ${info.rankName}\r`;
-		text += `  分公司:   ${info.manageComName}\r`;
-		text += `  营业部:   ${info.departmentName}\r`;
-		text += `  营业组:   ${info.sellComName}\r`;
+		let text = 'http://localhost:8888';
+		text += '/AppShare';
+		text = tool.url_format(text, '', '', '');
+
+		// let user = this.state.userCard;
+		// let info = this.state.jobInfo
+		// text += `  姓名:   ${user.userRealName}\r`;
+		// text += `  手机:   ${user.phone}\r`;
+		// text += `  邮箱:   ${user.email}\r`;
+		// // text += `工作信息\r`;
+		// text += `  入职时间:   ${info.enterDate}\r`;
+		// text += `  所在地区:   ${info.address}\r`;
+		// text += `  职务:   ${info.rankName}\r`;
+		// text += `  分公司:   ${info.manageComName}\r`;
+		// text += `  营业部:   ${info.departmentName}\r`;
+		// text += `  营业组:   ${info.sellComName}\r`;
 
 		if(tool.IsPC()){
-			alert(text);
+			window.open(text);
 			return;
 		}
 		
