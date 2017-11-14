@@ -52,7 +52,29 @@ class Card extends React.Component{
 }
 class GrowingUp extends React.Component{
 	constructor(args) {
-		super()
+		super();
+		this.state={
+			agentChangeList:[]
+		}
+	}
+	getAgentchangeApp(){
+		tool.loading(this, true);
+		api.getAgentchangeApp().then((data)=>{
+			if (data.result === 'RC100') {
+				this.setState({
+					agentChangeList:data.agentChangeList?data.agentChangeList:[]
+				})
+			}else{
+				message.error(data.errMsg, 3);
+			}
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
+    })
+	}
+	componentWillMount() {
+		this.getAgentchangeApp();
 	}
 	render(){
 		//let userCard=this.props.userCard;
@@ -60,11 +82,13 @@ class GrowingUp extends React.Component{
         <div className="am-panel">
 				<div className="czjl">
 					<ul>
-						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
-						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
-						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
-						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
-						<li><span className="time">2016/08/06</span><span className="icon-czjl"></span>加入华泰</li>
+						{
+								this.state.agentChangeList.map((item,index)=>{
+								return(
+								<li key={index}><span className="time">{item.changeDate?item.changeDate.substr(0,4)+'-'+item.changeDate.substr(4,2)+'-'+item.changeDate.substr(6,2):''}</span><span className="icon-czjl"></span>{item.gradeName}</li>
+								)
+								})
+						}
 					</ul>
 				</div>
 		</div>
@@ -73,9 +97,35 @@ class GrowingUp extends React.Component{
 }
 class HonoraryCert  extends React.Component{
 	constructor(args) {
-		super()
+		super();
+		this.state={
+			HonorList:[],
+			mdrt:'',
+			star:''
+		}
 	}
-
+    allCertificate(){
+		 tool.loading(this,true);
+		api.allCertificate({}).then((data)=>{
+			if(data.result==='RC100'){
+				this.setState({
+					HonorList:data.mdreList?data.mdreList:[],
+					mdrt:data.mdrt,
+					star:data.star
+				})
+			}else{
+				message.error(data.errMsg, 3);
+			}
+			tool.loading(this,false);
+		}, (res) => {
+			tool.loading(this,false);
+			tool.reject(res);
+		})
+	}
+	componentWillMount() {
+		this.allCertificate();
+		
+	}
 	render(){
 		let Honor2List=this.props.Honor2List;
 		return(
@@ -87,10 +137,29 @@ class HonoraryCert  extends React.Component{
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider">
 						<ul className="am-slides">
-							<li style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
-								<img src={require('../../../style/images/zs.png')} alt='test'/>
-								<p style={{ textAlign: 'center' }}>荣誉证书名称</p>
-							</li>
+							{
+								this.state.mdrt?
+								<li style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
+									<img src={require('../../../style/images/zs.png')} alt='test'/>
+									<p>{this.state.mdrt}</p>
+								</li>:null
+							}
+							{
+								this.state.star?
+								<li style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
+									<img src={require('../../../style/images/zs.png')} alt='test'/>
+									<p>{this.state.star}</p>
+								</li>:null
+							}
+							{this.state.HonorList.map((item,index)=>{
+											
+											return(
+												<li key={index} style={{ width: '100px', marginLeft: "20px", float: "left", display: "block" }}>
+													<img src={require('../../../style/images/zs.png')} alt='test'/>
+													<p>荣誉证书A证书名称</p>
+												</li>
+												)
+							})}
 						</ul>
 					</div>
 				</div>

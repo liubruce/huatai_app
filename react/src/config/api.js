@@ -916,3 +916,44 @@ export const levelSet = (body = {}) => {
     });
 
 }
+
+ /**
+     *appuseranalysis/getagentchangeList成长经历
+     */
+export const getAgentchangeApp = (body = {}) => {
+    body = tool.behavior(body, 'getagentchangeList', 'button')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${api_Ip}/appuseranalysis/getagentchangeList`,
+            body
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            }else{
+                reject(data)
+            }
+        });
+    });
+
+}
+/**
+   *certificate/allcertificate/称号个人名片显示荣誉
+   */
+export const allCertificate = (body = {}) => {
+    body = tool.behavior(body, 'certificate', 'menu')
+    return new Promise((resolve, reject) => {
+      sfetch.get({
+        url: `${api_Ip}/certificate/allcertificate`,
+        body
+      }).then((data) => {
+        if (data.ok) {
+          tool.checkLogin(data.json);
+          resolve(data.json)
+        } else {
+          reject(data)
+        }
+      });
+    });
+
+  }
