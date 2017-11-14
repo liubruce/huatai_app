@@ -106,7 +106,9 @@ class CourseDetail extends React.Component {
                 }
                 old_time = currentTime
             });
-            myPlayer.play();
+            if(!this.state.showTitle){
+                myPlayer.play();
+            }
         });
     }
 
