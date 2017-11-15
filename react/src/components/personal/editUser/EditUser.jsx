@@ -20,7 +20,7 @@ class EditUser extends React.Component{
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 				this.setState({
-					headPath:data.user.headPath,   
+					headPath:data.user.headPath?data.user.headPath:'',   
                     seifInformation:data.user.seifInformation||''
 				})
 			}else{
