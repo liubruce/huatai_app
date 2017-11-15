@@ -17,7 +17,7 @@ class CourseDetail extends React.Component {
             courseattach: [],
             isEnd: false,
             titleList: [],
-            showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
+            showTitle: tool.isPc ? true : navigator.connection.type !== "wifi",
             percent: 0
         }
     }
@@ -80,7 +80,7 @@ class CourseDetail extends React.Component {
     }
     showVideo() {
         const videoJsOptions = {
-            autoplay: true,
+            autoplay: false,
             controls: true,
             playsinline:true,
             sources: [{
@@ -90,6 +90,7 @@ class CourseDetail extends React.Component {
         }
         let that = this;
         this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
+            $('.vjs-big-play-button').css('display','none');
             myPlayer = this;
             myPlayer.on('timeupdate', () => {
                 let currentTime = myPlayer.currentTime();
@@ -106,10 +107,13 @@ class CourseDetail extends React.Component {
                 }
                 old_time = currentTime
             });
-            myPlayer.play();
+            // myPlayer.play();
+            // console.log(that.state.showTitle)
+            if(that.state.showTitle){
+                myPlayer.pause();
+            }
         });
     }
-
     play() {
         this.setState({
             showTitle: false
@@ -152,11 +156,9 @@ class CourseDetail extends React.Component {
 					</div>
 
 					{this.state.showTitle ? <div onClick={() => this.play()} className="play">
-					<i className="fa fa-play"></i>
-					
-					</div> : null}
-					{this.state.showTitle ? <p className='video-title'><a>建议在wifi下观看</a></p>
-                    : null}
+                    <i className="fa fa-play"></i> 即将消耗手机流量</div> : null}
+
+				    {/*	{this.state.showTitle ? <p className='video-title'><a>建议在wifi下观看</a></p>: null}*/}
 
 
 					{ /*<p className="like"><span><i className="fa fa-heart-o"></i>12331</span>
