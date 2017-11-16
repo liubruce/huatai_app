@@ -255,9 +255,16 @@ class UserCard extends React.Component{
 			window.open(text);
 			return;
 		}
-		
 		navigator.Wechat.share({
-			text: text,
+			//text: text,
+			message: {
+                     title: "华泰个人名片分享",
+                     description: "请点击.",
+                     media: {
+                     type: window.Wechat.Type.WEBPAGE,
+                     webpageUrl: text
+					}
+			},
 			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
 			navigator.notification.alert(
