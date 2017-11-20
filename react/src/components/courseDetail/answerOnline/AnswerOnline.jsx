@@ -237,7 +237,10 @@ class AnswerOnline extends React.Component{
 		         	<div className="am-modal-dialog">
 		         		<div className="am-modal-hd">温馨提示</div>
 		         		<div className="am-modal-bd">
-		         			考试得分: {this.state.point}<br/>若答题结果不理想，您可重新学习当前课程后再次答题，系统最终将记录您当前课程的最高答题得分！
+		         			考试得分: {this.state.point}<br/>
+							 {
+                               this.state.point===5||this.state.point==='5'?'恭喜您已经完成本次答题!':'若答题结果不理想，您可重新学习当前课程后再次答题，系统最终将记录您当前课程的最高答题得分!'
+							 }
 		         		</div>
 		         		<div className="am-modal-footer">
 		         			<span className="am-modal-btn" onClick={()=>browserHistory.goBack()} >确定</span>
