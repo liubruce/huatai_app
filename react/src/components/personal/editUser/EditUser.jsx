@@ -12,7 +12,7 @@ class EditUser extends React.Component{
             userCard:{},
             headPath:'',
 			loading:false,
-			cover_image:{},
+			head_image:{},
         }
     }
     show(){
@@ -20,7 +20,7 @@ class EditUser extends React.Component{
 		api.userCard().then((data)=>{
 			if (data.result === 'RC100') {
 				this.setState({
-					headPath:data.user.headPath?data.user.headPath:'',   
+					headPath:data.user.headPath,   
                     seifInformation:data.user.seifInformation||''
 				})
 			}else{
@@ -40,17 +40,40 @@ class EditUser extends React.Component{
 		   seifInformation:event.target.value,
 	   })
 	}
+	getPicture(flag) {
+		window.jquery('#choose-head-haction').modal('close');
+		if (!flag) {
+			tool.imagePicker(1).then((imgs) => {
+				this.addPicture(imgs[0])
+			}, (error) => {
+				alert("Error:" + error)
+			})
+		} else {
+			tool.camera().then((imageData) => {
+				this.addPicture(imageData)
+			}, (error) => {
+				alert("Error:" + error)
+			})
+		}
+	}
+	addPicture(src){
+		let head_image = {
+			preview:"data:image/jpeg;base64," + src
+		}
+		this.setState({
+			head_image
+		})
+	}
 	chooseImage(accepted, rejected){
 		this.setState({
-			cover_image:accepted[0],
+			head_image:accepted[0],
 			headPath:""
 		})
 	}
     onSubmit(){
-	
 	  let formData = new FormData();
-	  if(this.state.headPath===''){
-		formData.append('file',this.state.cover_image);
+	  if(this.state.headPath === ''){
+		formData.append('base',this.state.head_image);
 	  }else{
 		formData.append('file',this.state.headPath);
 	  }
@@ -77,17 +100,19 @@ class EditUser extends React.Component{
                 <div className="am-panel">
 
 					{this.state.headPath||this.state.headPath===null?
-						<img alt='test'  onError={(e) => tool.headImageError(e)} src={tool.getFile(headPath)} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
-						<img alt='test' onError={(e) => tool.headImageError(e)} src={this.state.cover_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
+						<img alt='head'  onError={(e) => tool.headImageError(e)} src={tool.getFile(headPath)} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>:
+						<img alt='head' onError={(e) => tool.headImageError(e)} src={this.state.head_image.preview} style={{display: 'block',width: '100px',height: '100px',borderRadius: '50%',margin: '20px auto 10px'}}/>
 					}
                   
-                    <Dropzone
+{/*                    <Dropzone
 					onDrop={this.chooseImage.bind(this)}					
 					className = 'choose-image'
 					accept="image/*"
-					>
-                    <label style={{display: 'block',width: '100px',padding: '5px 10px',margin: '0 auto',backgroundColor: '#0081d7',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
-					</Dropzone>
+					>*/}
+                    <label
+                    data-am-modal="{target: '#choose-head-action'}"
+                     style={{display: 'block',width: '100px',padding: '5px 10px',margin: '10px auto',backgroundColor: '#0081d7',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
+		{/*			</Dropzone>*/}
 				   
 					
                     <input type="file" name="" id="file" value="" style={{display: 'none'}}/>
@@ -104,6 +129,19 @@ class EditUser extends React.Component{
 
                     <button type="button" onClick={this.onSubmit.bind(this)} className="submit-btn">保&emsp;存</button>
                 </div>
+
+                           <div className="am-modal-actions" id="choose-head-action">
+             <div className="am-modal-actions-group">
+               <ul className="am-list">
+                 <li className="am-modal-actions-header" onClick={()=>this.getPicture(true)} >拍照</li>
+                 <li className="am-modal-actions-header" onClick={()=>this.getPicture(false)} >从相册选择</li>
+               </ul>
+             </div>
+             <div className="am-modal-actions-group">
+               <button className="am-btn am-btn-secondary am-btn-block" data-am-modal-close>取消</button>
+             </div>
+           </div>
+
                 </Spin>
 			</div>
 		)

@@ -4,7 +4,7 @@ import * as api from '../../config/api'
 import {message,Spin} from 'antd'
 import {browserHistory,hashHistory} from 'react-router'
 import './pubArticle.less'
-//import $ from 'jquery'
+import $ from 'jquery'
 import Dropzone from 'react-dropzone'
 class PubArticle extends React.Component{
 	constructor(args) {
@@ -49,11 +49,9 @@ class PubArticle extends React.Component{
 		}
 	}
 	getPicture(flag) {
-		if (!window.cordova) {
-			return;
-		}
+		window.jquery('#choose-action').modal('close');
 		if (!flag) {
-			tool.imagePicker().then((imgs) => {
+			tool.imagePicker(9).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
 					this.addPicture(imgs[i])
 				}
@@ -61,8 +59,8 @@ class PubArticle extends React.Component{
 				alert("Error:" + error)
 			})
 		} else {
-			tool.camera().then((imgSrc) => {
-				this.addPicture(imgSrc)
+			tool.camera().then((imageData) => {
+				this.addPicture(imageData)
 			}, (error) => {
 				alert("Error:" + error)
 			})
@@ -70,7 +68,7 @@ class PubArticle extends React.Component{
 	}
 	addPicture(src) {
 		let img = {
-			src
+			preview:"data:image/jpeg;base64," + src
 		}
 		this.setState({
 			essayPhotos: this.state.essayPhotos.concat(img)
@@ -121,7 +119,7 @@ class PubArticle extends React.Component{
 		let essayPhotos = this.state.essayPhotos,
 			essayPhotosPH = this.state.essayPhotosPH;
 		for (let i in essayPhotos) {
-			formData.append('file', essayPhotos[i])
+			formData.append('base', essayPhotos[i].preview)
 		}
 		for (let i in essayPhotosPH) {
 			formData.append('photoPath', essayPhotosPH[i].essayPhotoPath)
@@ -186,7 +184,7 @@ class PubArticle extends React.Component{
 							this.state.essayPhotos.map((item,index)=>{
 								return(
 									<li onClick={()=>this.del(index)} key={index}>
-	                                   <img type="image" src={item.preview} alt={`img-${item.previe}`} />
+	                                   <img type="image" src={item.preview} alt={`${item.preview}`} />
 	                                </li>
 								)
 							})
@@ -201,20 +199,17 @@ class PubArticle extends React.Component{
 						}
 
  
-                     	<Dropzone
+{/*                     	<Dropzone
  							multiple={true}
  							onDrop={this.chooseImage.bind(this)}
  							className = 'choose-image am-avg-sm-3'
  							accept="image/*"
- 						>												
+ 						>	*/}										
 	 						<li><label
-	 						// data-am-modal="{target: '#choose-action'}"
+	 						 data-am-modal="{target: '#choose-action'}"
 	 						 className="file-img">+</label></li>
- 						</Dropzone>
- 				
- 				 		{/*<li><label data-am-modal="{target: '#choose-action'}" className="file-img">+</label><input type="file" id="file" style={{display:'none'}}/></li>*/}
- 		
- 					 	{/*<li ><img alt='test' src={window.cordova.file.dataDirectory + 'abc.jpg'} /></li>*/}                      
+ 					{/*</Dropzone>*/}
+                    
                     </ul>
                 </div>	
 			</div>
