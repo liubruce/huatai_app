@@ -19,7 +19,7 @@ class CourseDetail extends React.Component {
             titleList: [],
             showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0,
-            examScore:0
+            answerScore:0
         }
     }
 
@@ -69,7 +69,7 @@ class CourseDetail extends React.Component {
                     coursedata: data.coursedata,
                     courseattach: data.courseattach,
                     titleList: data.titleList,
-                    examScore:data.scoreRecords.examScore
+                    answerScore:data.answerScore
                     // showTitle:true
                 },()=>{
                     this.showVideo();
@@ -229,7 +229,7 @@ class CourseDetail extends React.Component {
 				{course.goodCourse !== '1' ?
                 <div>
 
-                {this.state.examScore === 5?
+                {this.state.answerScore === 5?
                     <a className="am-btn am-btn-block btn-border test-btn">您已通过此课程</a>
                     :
 				this.state.isEnd ?

@@ -53,22 +53,24 @@ class PubArticle extends React.Component{
 		if (!flag) {
 			tool.imagePicker(9).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
-					this.addPicture(imgs[i])
+					tool.convertImgToBase64URL(imgs[i], (base64URL) => {
+						this.addPicture(base64URL)
+					});
 				}
 			}, (error) => {
 				alert("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
-				this.addPicture(imageData)
+				this.addPicture("data:image/jpeg;base64," + imageData)
 			}, (error) => {
 				alert("Error:" + error)
 			})
 		}
 	}
-	addPicture(src) {
+	addPicture(preview) {
 		let img = {
-			preview:"data:image/jpeg;base64," + src
+			preview
 		}
 		this.setState({
 			essayPhotos: this.state.essayPhotos.concat(img)

@@ -4,7 +4,7 @@ import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import $ from 'jquery'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 
 class AnswerOnline extends React.Component{
 	constructor(args) {
@@ -243,7 +243,7 @@ class AnswerOnline extends React.Component{
 							 }
 		         		</div>
 		         		<div className="am-modal-footer">
-		         			<span className="am-modal-btn" onClick={()=>browserHistory.goBack()} >确定</span>
+		         			<span className="am-modal-btn" onClick={()=>{hashHistory.push('/Course')}} >确定</span>
 		         		</div>
 		         	</div>
 		         </div>
