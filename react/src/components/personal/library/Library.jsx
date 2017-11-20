@@ -3,7 +3,7 @@ import './library.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import { message,Spin } from 'antd'
-import { hashHistory } from 'react-router';
+import { hashHistory,browserHistory } from 'react-router';
 
 class Bookshelf extends React.Component {
     constructor(args) {
@@ -454,6 +454,11 @@ class Library extends React.Component {
      }
     render() {
         return (
+            <div>
+                <header className="header">
+					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+                    <h1>图书馆</h1>
+                 </header>
             <div className="warpper">
 		           <div data-am-widget="tabs" className="am-tabs am-tabs-default">
                       <ul className="am-tabs-nav am-cf nav">
@@ -474,6 +479,7 @@ class Library extends React.Component {
                         </div> 
                    </div>
 			</div>
+            </div>
         )
     }
 

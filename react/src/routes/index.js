@@ -17,6 +17,7 @@ import Course from '../components/course/Course.jsx'
 import Article from '../components/article/Article.jsx'
 import personalRoutes from './personal'
 import * as tool from '../config/tools'
+import Library from '../components/personal/library/Library.jsx'
 
 const start_render = () => {
     render(
@@ -27,6 +28,7 @@ const start_render = () => {
              <Route path='/Index' component={Index} />
              <Route path='/Course' component={Course} />
              <Route path='/Article' component={Article} />
+             <Route path='/Library' component={Library}/>
          </Route>
          {personalRoutes}
          <Route path='/404' component={NotFoundPage} />

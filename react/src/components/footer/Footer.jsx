@@ -29,17 +29,20 @@ class Footer extends React.Component {
     if (pathname.indexOf('/Article') !== -1) {
       tab = 3;
     }
-    if (pathname.indexOf('/Personal') !== -1) {
+    if (pathname.indexOf('/Library') !== -1) {
       tab = 4;
     }
+    if (pathname.indexOf('/Personal') !== -1) {
+      tab = 5;
+    }
     if (pathname.indexOf('/StoryLine') !== -1) {
-      tab = 4;
+      tab = 5;
     }
     if (pathname.indexOf('/ArticleDetail') !== -1) {
       tab = 3;
     }
     if (pathname.indexOf('/NewsCenter') !== -1) {
-      tab = 4;
+      tab = 5;
     }
     this.setState({
       tab
@@ -60,11 +63,12 @@ class Footer extends React.Component {
 	render() {
 		return(
         <footer className="foot">
-          <ul className="am-avg-sm-4 clearFix">
+          <ul className="am-avg-sm-5 clearFix">
             <li className={this.state.tab === 1?"li-1 active":"li-1"} ><Link onClick={()=>this.changeTab(1)}  to='/Index'> </Link></li>
             <li className={this.state.tab === 2?"li-2 active":"li-2"} ><Link onClick={()=>this.changeTab(2)}  to='/Course' > </Link></li>
             <li className={this.state.tab === 3?"li-3 active":"li-3"} ><Link onClick={()=>this.changeTab(3)}  to='/Article' > </Link></li>
-            <li className={this.state.tab === 4?"li-4 active":"li-4"} ><Link onClick={()=>this.changeTab(4)}  to='/Personal' > </Link></li>
+            <li className={this.state.tab === 4?"li-4 active":"li-4"} ><Link onClick={()=>this.changeTab(4)}  to='/Library'></Link></li>
+            <li className={this.state.tab === 5?"li-5 active":"li-5"} ><Link onClick={()=>this.changeTab(5)}  to='/Personal' > </Link></li>
           </ul>
         </footer>
 			)

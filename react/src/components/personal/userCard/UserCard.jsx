@@ -247,7 +247,8 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
-		let text =localStorage.getItem("elearning_IP");
+		//let text =localStorage.getItem("elearning_IP");
+		let text ='http://localhost:8888';
 		text += '/AppShare';
 		text = tool.url_format(text, '', '', '');
 
@@ -256,15 +257,15 @@ class UserCard extends React.Component{
 			return;
 		}
 		navigator.Wechat.share({
-			//text: text,
-			message: {
-                     title: "华泰个人名片分享",
-                     description: "请点击.",
-                     media: {
-                     type: window.Wechat.Type.WEBPAGE,
-                     webpageUrl: text
-					}
-			},
+			text: text,
+			// message: {
+            //          title: "华泰个人名片分享",
+            //          description: this.state.userCard.userRealName,
+            //          media: {
+            //          type: window.Wechat.Type.WEBPAGE,
+            //          webpageUrl: text
+			// 		}
+			// },
 			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
 			navigator.notification.alert(
