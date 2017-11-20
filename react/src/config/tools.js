@@ -10,8 +10,8 @@ import { getFile_IP } from './serverIp'
 export const camera = () => {
     return new Promise((resolve, reject) => {
         navigator.camera.getPicture((imageData) => {
-                resolve(imageData)
-            },
+            resolve(imageData)
+        },
             (error) => {
                 reject(error);
             }, {
@@ -36,6 +36,22 @@ export const imagePicker = (num) => {
             }
         );
     });
+}
+export const convertImgToBase64URL = (url, callback, outputFormat) => {
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+        var canvas = document.createElement('CANVAS'),
+            ctx = canvas.getContext('2d'),
+            dataURL;
+        canvas.height = this.height;
+        canvas.width = this.width;
+        ctx.drawImage(this, 0, 0);
+        dataURL = canvas.toDataURL(outputFormat);
+        callback(dataURL);
+        canvas = null;
+    };
+    img.src = url;
 }
 export const sino_cordova_checkApp = () => {
     // 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本

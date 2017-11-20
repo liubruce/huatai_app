@@ -41,27 +41,30 @@ class EditUser extends React.Component{
 	   })
 	}
 	getPicture(flag) {
-		window.jquery('#choose-head-haction').modal('close');
+		window.jquery('#choose-head-action').modal('close');
 		if (!flag) {
 			tool.imagePicker(1).then((imgs) => {
-				this.addPicture(imgs[0])
+				tool.convertImgToBase64URL(imgs[0], (base64URL) => {
+					this.addPicture(base64URL)
+				});
 			}, (error) => {
 				alert("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
-				this.addPicture(imageData)
+				this.addPicture("data:image/jpeg;base64," + imageData)
 			}, (error) => {
 				alert("Error:" + error)
 			})
 		}
 	}
-	addPicture(src){
+	addPicture(preview) {
 		let head_image = {
-			preview:"data:image/jpeg;base64," + src
+			preview
 		}
 		this.setState({
-			head_image
+			head_image,
+			headPath: ""
 		})
 	}
 	chooseImage(accepted, rejected){
@@ -73,7 +76,7 @@ class EditUser extends React.Component{
     onSubmit(){
 	  let formData = new FormData();
 	  if(this.state.headPath === ''){
-		formData.append('base',this.state.head_image);
+		formData.append('base',this.state.head_image.preview);
 	  }else{
 		formData.append('file',this.state.headPath);
 	  }
