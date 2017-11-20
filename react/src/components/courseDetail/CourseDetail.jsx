@@ -17,7 +17,7 @@ class CourseDetail extends React.Component {
             courseattach: [],
             isEnd: false,
             titleList: [],
-            showTitle: tool.isPc ? true : navigator.connection.type !== "wifi",
+            showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0
         }
     }
@@ -28,6 +28,7 @@ class CourseDetail extends React.Component {
         if (test.currentTime - old_time > 1) {
             message.error('请勿快进视频', 1);
             test.currentTime = old_time;
+            return;
         } else {
             if (test.currentTime >= test.duration) {
                 this.setState({
@@ -107,7 +108,7 @@ class CourseDetail extends React.Component {
                 }
                 old_time = currentTime
             });
-            // myPlayer.play();
+            myPlayer.play();
             // console.log(that.state.showTitle)
             if(that.state.showTitle){
                 myPlayer.pause();
@@ -130,7 +131,7 @@ class CourseDetail extends React.Component {
 				    <div className="opacity-black">	  
 
 
-                      <video
+                     <video
                        width={$(window).width()}
                        height="210"
                        ref="course_player"
@@ -146,7 +147,7 @@ class CourseDetail extends React.Component {
 
 {/*				        <video 
 					    id="course_id"
-					    src={tool.getFile(course.coursevideoPath)}
+					    src={tool.getFile(this.state.coursedata.coursevideoPath)}
 					    controls="controls"  width="100%" height="210"
 					    onTimeUpdate={(e)=>this.onTimeUpdate(e)}
 					    preload="auto"

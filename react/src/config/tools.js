@@ -9,19 +9,20 @@ import { getFile_IP } from './serverIp'
 
 export const camera = () => {
     return new Promise((resolve, reject) => {
-        navigator.camera.getPicture((imgSrc) => {
-            resolve(imgSrc)
-        },
+        navigator.camera.getPicture((imageData) => {
+                resolve(imageData)
+            },
             (error) => {
                 reject(error);
             }, {
                 quality: 50,
-                sourceType: navigator.camera.PictureSourceType.CAMERA
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                destinationType: navigator.camera.DestinationType.DATA_URL
             }
         );
     });
 }
-export const imagePicker = () => {
+export const imagePicker = (num) => {
     return new Promise((resolve, reject) => {
         window.imagePicker.getPictures(
             (imgs) => {
@@ -30,7 +31,7 @@ export const imagePicker = () => {
             (error) => {
                 reject(error);
             }, {
-                maximumImagesCount: 9,
+                maximumImagesCount: num,
                 width: 800
             }
         );
@@ -280,7 +281,7 @@ export const url_format = (url, operationType, behaviorDataType, body = {}) => {
     return url + url_parameter(behavior(body, operationType, behaviorDataType));
 }
 export const getFile = (fileName) => {
-    if(fileName === null || fileName === undefined){
+    if (fileName === null || fileName === undefined) {
         return '路径错误';
     }
     return url_format(getFile_IP + fileName);
@@ -480,7 +481,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
-                        
+
                     },
                     '下载成功',
                     'OK'
@@ -489,7 +490,7 @@ export const downFile = (filename, that) => {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
-                        
+
                     },
                     '下载失败',
                     'OK'
@@ -547,12 +548,12 @@ export const checkLogin = (data) => {
 }
 //文章显示
 export const subString = (string, subLength) => {
-	if (typeof(string) !== 'string') {
-		return '';
-	}
-	if (string.length > subLength) {
-		return string.substring(0, subLength) + '...'
-	} else {
-		return string
-	}
+    if (typeof (string) !== 'string') {
+        return '';
+    }
+    if (string.length > subLength) {
+        return string.substring(0, subLength) + '...'
+    } else {
+        return string
+    }
 }
