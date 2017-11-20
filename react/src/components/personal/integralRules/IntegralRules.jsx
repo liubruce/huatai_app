@@ -47,7 +47,7 @@ class StoryLine extends React.Component{
 						<div style={{width: '50%',borderRight: '1px solid #D9E7F6'}}>≥</div>
 						<div style={{width: '50%'}}>≤</div>
 					</li>
-					<li>蜂行之力级别</li>
+					{this.state.allLevelSet.length>=1?(this.state.allLevelSet[0].channelId==='4'?<li>星行之力级别</li>:<li>蜂行之力级别</li>):null}
 				</ul>
 				<ul className="table-td">
                 {

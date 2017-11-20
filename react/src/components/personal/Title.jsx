@@ -17,7 +17,7 @@ class Title extends React.Component {
 	checkUrl(pathname) {
 		let title:'标题';
 		if (pathname.indexOf('/StoryLine') !== -1) {
-			title='故事线'
+			title='峰行世界'
 		}
 		if (pathname.indexOf('/PersonalCenter') !== -1) {
 			title='我的名片'
@@ -68,7 +68,7 @@ class Title extends React.Component {
 			title='编辑'
 		}
 		if (pathname.indexOf('/StoryDetails') !== -1) {
-			title='故事线'
+			title='峰行世界'
 		}
 		if (pathname.indexOf('/IntegralRules') !== -1) {
 			title='积分规则'
