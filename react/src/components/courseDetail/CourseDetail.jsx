@@ -69,7 +69,7 @@ class CourseDetail extends React.Component {
                     coursedata: data.coursedata,
                     courseattach: data.courseattach,
                     titleList: data.titleList,
-                    examScore:data.scoreRecords.examScore
+                    examScore:data.scoreRecords?data.scoreRecords.examScore:0
                     // showTitle:true
                 },()=>{
                     this.showVideo();

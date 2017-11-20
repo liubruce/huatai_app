@@ -4,7 +4,7 @@ import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import $ from 'jquery'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 
 class AnswerOnline extends React.Component{
 	constructor(args) {
@@ -240,7 +240,7 @@ class AnswerOnline extends React.Component{
 		         			考试得分: {this.state.point}<br/>若答题结果不理想，您可重新学习当前课程后再次答题，系统最终将记录您当前课程的最高答题得分！
 		         		</div>
 		         		<div className="am-modal-footer">
-		         			<span className="am-modal-btn" onClick={()=>browserHistory.goBack()} >确定</span>
+		         			<span className="am-modal-btn" onClick={()=>{hashHistory.push('/Course')}} >确定</span>
 		         		</div>
 		         	</div>
 		         </div>
