@@ -69,7 +69,6 @@ class PubArticle extends React.Component{
 		}
 	}
 	addPicture(preview) {
-		console.log(preview)
 		let img = {
 			preview
 		}

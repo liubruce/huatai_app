@@ -16,6 +16,7 @@ export const camera = () => {
                 reject(error);
             }, {
                 quality: 50,
+                correctOrientation:false,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 destinationType: navigator.camera.DestinationType.DATA_URL
             }
