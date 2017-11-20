@@ -18,7 +18,8 @@ class CourseDetail extends React.Component {
             isEnd: false,
             titleList: [],
             showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
-            percent: 0
+            percent: 0,
+            examScore:0
         }
     }
 
@@ -68,6 +69,7 @@ class CourseDetail extends React.Component {
                     coursedata: data.coursedata,
                     courseattach: data.courseattach,
                     titleList: data.titleList,
+                    examScore:data.scoreRecords.examScore
                     // showTitle:true
                 },()=>{
                     this.showVideo();
@@ -181,7 +183,7 @@ class CourseDetail extends React.Component {
 				</div>
 				
 				<div className="am-panel">
-					<div className="am-panel-hd">附件{tool.isPc ? '' : navigator.connection.type}</div>
+					<div className="am-panel-hd">附件</div>
 					<div className="am-panel-bd">
 						<ul className="am am-avg-sm-3" style={{
                 fontSize: '1.4rem'
@@ -226,11 +228,17 @@ class CourseDetail extends React.Component {
 				</div>
 				{course.goodCourse !== '1' ?
                 <div>
-				{this.state.isEnd ?
+
+                {this.state.examScore === 5?
+                    <a className="am-btn am-btn-block btn-border test-btn">您已通过此课程</a>
+                    :
+				this.state.isEnd ?
                     <Link to={`App/Course/AnswerOnline/${course.courseId}`} className="am-btn am-btn-block btn-border">在线答题</Link>
                     :
                     <a className="am-btn am-btn-block btn-border test-btn">在线答题</a>
                 }
+
+
 				</div>
                 : null}
 				

@@ -54,8 +54,8 @@ if (tool.isPc) {
             let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
             tool.setUrl(back_url, exit_url);
         } else {
-            let back_url = 'file:////data/data/com.sinosoft.huataipro/files/www/DD/build/index.html#/index';
-            let exit_url = 'file:////data/data/com.sinosoft.huataipro/files/www/DD/build/index.html';
+            let back_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html#/index';
+            let exit_url = 'file:////data/data/com.sinosoft.huatai/files/www/DD/build/index.html';
             tool.setUrl(back_url, exit_url);
         }
         tool.info().then((data) => {
