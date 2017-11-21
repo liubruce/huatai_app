@@ -213,7 +213,8 @@ class PubArticle extends React.Component{
  							accept="image/*"
  						>	*/}										
 	 						<li><label
-	 						 data-am-modal="{target: '#choose-action'}"
+	 						onClick={()=>{window.jquery('#choose-action').modal('open');}}
+	 						 //data-am-modal="{target: '#choose-action'}"
 	 						 className="file-img">+</label></li>
  					{/*</Dropzone>*/}
                     

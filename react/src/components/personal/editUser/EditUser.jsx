@@ -115,7 +115,8 @@ class EditUser extends React.Component{
 					accept="image/*"
 					>*/}
                     <label
-                    data-am-modal="{target: '#choose-head-action'}"
+                    onClick={()=>{window.jquery('#choose-head-action').modal('open');}}
+                    //data-am-modal="{target: '#choose-head-action'}"
                      style={{display: 'block',width: '100px',padding: '5px 10px',margin: '10px auto',backgroundColor: '#0081d7',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
 		{/*			</Dropzone>*/}
 				   
