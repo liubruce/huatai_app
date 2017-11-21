@@ -54,23 +54,26 @@ class Bookshelf extends React.Component {
 		hashHistory.push(path);
 	}
     downFile(filename) {
-        this.setState({percent: 0},()=>{
-            tool.downFile(filename);
-        })
-        navigator.fileTransfer.onprogress = (progressEvent) => {
-            if (progressEvent.lengthComputable) {
-                console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
-                this.setState({
-                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
-                })
-            } else {
-                console.log('------下载完成')
-                window.jquery('#load-modal').modal('close');
-                this.setState({
-                    percent: 100
-                })
-            }
-        };
+
+        // this.setState({
+        //     percent: 0
+        // }, () => {
+        //     tool.downFile(filename);
+        // })
+        // navigator.fileTransfer.onprogress = (progressEvent) => {
+        //     if (progressEvent.lengthComputable) {
+        //         console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
+        //         this.setState({
+        //             percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+        //         })
+        //     } else {
+        //         console.log('------下载完成')
+        //         window.jquery('#load-modal').modal('close');
+        //         this.setState({
+        //             percent: 100
+        //         })
+        //     }
+        // };
     }
     render() {
         return (
@@ -113,8 +116,12 @@ class Bookshelf extends React.Component {
 									{item.bookEntityPath.indexOf('pdf')!==-1?
                                         <button type="button" className="am-btn-primary" onClick={()=>this.showPDF(item.bookEntityPath)}>查看</button>
                                      :null}
-									{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
-                                    下载</button>:null}
+									{item.operationType === '2' ?<button type="button" 
+                                    style={{background:'#e9e9e9',width:'auto'}}
+                                    className="am-btn-primary" onClick={()=>this.downFile(item.bookEntityPath,this)} 
+                                    //data-am-modal="{target: '#load-modal'}"
+                                    >
+                                    请在PC端下载</button>:null}
 							</div>
                             </div>
 		                )
@@ -341,23 +348,22 @@ class Database extends React.Component {
         })
     }
     downFile(filename) {
-        this.setState({percent: 0},()=>{
-            tool.downFile(filename);
-        })
-        navigator.fileTransfer.onprogress = (progressEvent) => {
-            if (progressEvent.lengthComputable) {
-                console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
-                this.setState({
-                    percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
-                })
-            } else {
-                // console.log('------下载完成')
-                // window.jquery('#load-modal').modal('close');
-                this.setState({
-                    percent: 100
-                })
-            }
-        };
+
+        // this.setState({percent: 0},()=>{
+        //     tool.downFile(filename);
+        // })
+        // navigator.fileTransfer.onprogress = (progressEvent) => {
+        //     if (progressEvent.lengthComputable) {
+        //         console.log('----------' + progressEvent.loaded / progressEvent.total * 100);
+        //         this.setState({
+        //             percent: (progressEvent.loaded / progressEvent.total * 100).toFixed(0)
+        //         })
+        //     } else {
+        //         this.setState({
+        //             percent: 100
+        //         })
+        //     }
+        // };
     }
     render() {
         return (
@@ -395,8 +401,12 @@ class Database extends React.Component {
                                                     Number.isInteger(item.pages)?<p>页数: {item.pages}</p>
                                                     :''
 								       		    }
-												{item.operationType === '2' ?<button type="button" className="am-btn-primary" onClick={()=>this.downFile(item.bookEntityPath,this)} data-am-modal="{target: '#load-modal'}">
-                                    下载</button>:null}
+												{item.operationType === '2' ?<button type="button" className="am-btn-primary" 
+                                                style={{background:'#e9e9e9',width:'auto'}}
+                                                onClick={()=>this.downFile(item.bookEntityPath,this)} 
+                                               // data-am-modal="{target: '#load-modal'}"
+                                                >
+                                                请在PC端下载</button>:null}
 											</div>
 											</div>
                 )

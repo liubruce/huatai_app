@@ -465,7 +465,20 @@ export const removeScroll = () => {
 export const cancelDown = () => {
     navigator.fileTransfer.abort();
 }
+export const appAlert = (text) => {
+    if (isPc) {
+        alert(text);
+        return;
+    }
+    navigator.notification.alert(
+        text,
+        () => {
 
+        },
+        '提示',
+        'OK'
+    );
+}
 export const downFile = (filename, that) => {
 
     let downUrl = encodeURI(getFile(filename));

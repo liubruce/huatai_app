@@ -183,7 +183,7 @@ class CourseDetail extends React.Component {
 				</div>
 				
 				<div className="am-panel">
-					<div className="am-panel-hd">附件</div>
+					<div className="am-panel-hd">附件(请在PC端下载)</div>
 					<div className="am-panel-bd">
 						<ul className="am am-avg-sm-3" style={{
                 fontSize: '1.4rem'
