@@ -74,8 +74,8 @@ class Bookshelf extends React.Component {
     }
     render() {
         return (
-            <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
+            <Spin spinning={this.state.loading} >
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{minHeight:'300px'}}>
 				{
 		            this.state.bookList.map((item, index) => {
 		                return (
@@ -216,8 +216,8 @@ class MyLibrary extends React.Component {
     }
     render() {
         return (
-            <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
+            <Spin spinning={this.state.loading} >
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{minHeight:'300px'}}>
 	            {
 		            this.state.myLibrary.map((item, index) => {
 		                return (
@@ -361,8 +361,8 @@ class Database extends React.Component {
     }
     render() {
         return (
-            <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{marginTop: '20px'}}>
+            <Spin spinning={this.state.loading} >
+            <div data-tab-panel-0 className="am-tab-panel am-active tab" style={{minHeight:'300px'}}>
               {
             this.state.dataBase.map((item, index) => {
                 return (

@@ -52,8 +52,8 @@ class Article extends React.Component {
 	render(){
 		return(
      <div className="warpper">
-     <Spin spinning={this.state.loading} tip="加载列表中...">
-        <div className="am-panel">
+     <Spin spinning={this.state.loading} >
+        <div style={{minHeight:'300px'}} >
         {this.state.essayList.map((item,index)=>{
           return(
             <ArticleItem show={this.show.bind(this)} key={index} score={this.state.score} item={item} />

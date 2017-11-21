@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import {Link} from 'react-router'
 import * as tool from '../../config/tools'
 import * as api from '../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
 //import CourseItem from '../course/CourseItem.jsx'
 import {hashHistory} from 'react-router';
@@ -37,6 +37,7 @@ class Index extends React.Component {
       courseList: [],
       articleList: [],
       score:0,
+      loading:false,
       now_item: {
 				studyIntegral:0
 			},
@@ -47,6 +48,7 @@ class Index extends React.Component {
     this.show();
   }
   show() {
+    tool.loading(this, true);
     api.homeIndex().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
@@ -60,7 +62,9 @@ class Index extends React.Component {
       } else {
         message.error(data.errMsg, 3);
       }
+      tool.loading(this, false);
     }, (res) => {
+      tool.loading(this, false);
       tool.reject(res);
     })
   }
@@ -163,6 +167,7 @@ class Index extends React.Component {
               </li>
                 </ul>
           </div>
+           <Spin spinning={this.state.loading}>
           <div className="am-panel index-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">热播课程</h2>
@@ -190,6 +195,7 @@ class Index extends React.Component {
             })}
             </ul>
           </div>
+         
           <div className="am-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
               <h2 className="am-titlebar-title">蜂行圈</h2>
@@ -203,6 +209,7 @@ class Index extends React.Component {
                 )
             })}
           </div>
+          </Spin>
 
           <div className="am-modal am-modal-confirm" tabIndex="-1" id={`course-confirm`}>
 					<div className="am-modal-dialog">
