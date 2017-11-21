@@ -9,42 +9,44 @@ import Dropzone from 'react-dropzone'
 class PubArticle extends React.Component{
 	constructor(args) {
 		super()
-		this.state={
-			 tab:'',
-			 essayDetail:{},
-			 essayPhotos:[],
-			 essayPhotosPH:[],
-			 essayTitle:'',
-			 essayNote:'',
-			 loading:false,
+		this.state = {
+			tab: '',
+			essayDetail: {},
+			essayPhotos: [],
+			essayPhotosPH: [],
+			essayTitle: '',
+			essayNote: '',
+			loading: false,
 		}
 	}
-	selectEssay(){
-       api.selectEssay({essayId:this.props.params.id}).then((data) => {
-		if (data.result === 'RC100') {
-			this.setState({
-				essayDetail:data.essay?data.essay:{},
-				essayPhotosPH:data.essay.essayPhotos?data.essay.essayPhotos:[],
-				essayTitle:data.essay.essayTitle?data.essay.essayTitle:'',
-				essayNote:data.essay.essayNote?data.essay.essayNote:''
-			})
-		} else {
-			message.error(data.errMsg, 3);
-		}
+	selectEssay() {
+		api.selectEssay({
+			essayId: this.props.params.id
+		}).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					essayDetail: data.essay ? data.essay : {},
+					essayPhotosPH: data.essay.essayPhotos ? data.essay.essayPhotos : [],
+					essayTitle: data.essay.essayTitle ? data.essay.essayTitle : '',
+					essayNote: data.essay.essayNote ? data.essay.essayNote : ''
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
 		}, (res) => {
-		tool.reject(res);
+			tool.reject(res);
 		})
 	}
 	componentWillMount() {
-		if(this.props.params.id){
-           this.selectEssay();
-		}else{
+		if (this.props.params.id) {
+			this.selectEssay();
+		} else {
 			this.setState({
-				essayDetail:{},
-				essayPhotos:[],
-				essayPhotosPH:[],
-				essayTitle:'',
-				essayNote:''
+				essayDetail: {},
+				essayPhotos: [],
+				essayPhotosPH: [],
+				essayTitle: '',
+				essayNote: ''
 			})
 		}
 	}
@@ -79,29 +81,28 @@ class PubArticle extends React.Component{
 	del(index) {
 		let essayPhotos = this.state.essayPhotos;
 		let newEssayPhotos = [];
-		for(let i in essayPhotos){
-			if(Number(i) !== Number(index)){
+		for (let i in essayPhotos) {
+			if (Number(i) !== Number(index)) {
 				newEssayPhotos.push(essayPhotos[i])
 			}
 		}
 		this.setState({
-			essayPhotos:newEssayPhotos
+			essayPhotos: newEssayPhotos
 		})
 	}
 	delPH(index) {
 		let essayPhotosPH = this.state.essayPhotosPH;
 		let newEssayPhotosPH = [];
-		for(let i in essayPhotosPH){
-			if(Number(i) !== Number(index)){
+		for (let i in essayPhotosPH) {
+			if (Number(i) !== Number(index)) {
 				newEssayPhotosPH.push(essayPhotosPH[i])
 			}
 		}
 		this.setState({
-			essayPhotosPH:newEssayPhotosPH
+			essayPhotosPH: newEssayPhotosPH
 		})
 	}
 	add() {
-
 		if (this.state.essayTitle === '') {
 			message.error('请输入文章标题', 3);
 			return
@@ -121,7 +122,9 @@ class PubArticle extends React.Component{
 		let essayPhotos = this.state.essayPhotos,
 			essayPhotosPH = this.state.essayPhotosPH;
 		for (let i in essayPhotos) {
-			formData.append('base', essayPhotos[i].preview)
+			let start = essayPhotos[i].preview.indexOf(',') + 1;
+			let end = essayPhotos[i].preview.length;
+			formData.append('base', essayPhotos[i].preview.slice(start, end))
 		}
 		for (let i in essayPhotosPH) {
 			formData.append('photoPath', essayPhotosPH[i].essayPhotoPath)

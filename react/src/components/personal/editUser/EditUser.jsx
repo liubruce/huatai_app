@@ -6,39 +6,39 @@ import * as tool from '../../../config/tools'
 import Dropzone from 'react-dropzone'
 import {hashHistory} from 'react-router';
 class EditUser extends React.Component{
-	constructor(args){
+	constructor(args) {
 		super();
-        this.state={
-            userCard:{},
-            headPath:'',
-			loading:false,
-			head_image:{},
-        }
-    }
-    show(){
+		this.state = {
+			userCard: {},
+			headPath: '',
+			loading: false,
+			head_image: {},
+		}
+	}
+	show() {
 		tool.loading(this, true);
-		api.userCard().then((data)=>{
+		api.userCard().then((data) => {
 			if (data.result === 'RC100') {
 				this.setState({
-					headPath:data.user.headPath,   
-                    seifInformation:data.user.seifInformation||''
+					headPath: data.user.headPath,
+					seifInformation: data.user.seifInformation || ''
 				})
-			}else{
+			} else {
 				message.error(data.errMsg, 3);
 			}
 			tool.loading(this, false);
 		}, (res) => {
 			tool.loading(this, false);
 			tool.reject(res);
-      })
+		})
 	}
-    componentWillMount() {
+	componentWillMount() {
 		this.show()
 	}
-    seifInformation(event){
-       this.setState({
-		   seifInformation:event.target.value,
-	   })
+	seifInformation(event) {
+		this.setState({
+			seifInformation: event.target.value,
+		})
 	}
 	getPicture(flag) {
 		window.jquery('#choose-head-action').modal('close');
@@ -67,32 +67,34 @@ class EditUser extends React.Component{
 			headPath: ""
 		})
 	}
-	chooseImage(accepted, rejected){
+	chooseImage(accepted, rejected) {
 		this.setState({
-			head_image:accepted[0],
-			headPath:""
+			head_image: accepted[0],
+			headPath: ""
 		})
 	}
-    onSubmit(){
-	  let formData = new FormData();
-	  if(this.state.headPath === ''){
-		formData.append('base',this.state.head_image.preview);
-	  }else{
-		formData.append('file',this.state.headPath);
-	  }
-	  formData.append('seifInformation',this.state.seifInformation);
-	     tool.loading(this,true);
+	onSubmit() {
+		let formData = new FormData();
+		if (this.state.headPath === '') {
+			let start = this.state.head_image.preview.indexOf(',') + 1;
+			let end = this.state.head_image.preview.length;
+			formData.append('base', this.state.head_image.preview.slice(start, end));
+		} else {
+			formData.append('file', this.state.headPath);
+		}
+		formData.append('seifInformation', this.state.seifInformation);
+		tool.loading(this, true);
 		api.userUpdate(formData).then((data) => {
-			if(data.result==='RC100'){
-			  message.success('保存成功', 3);
-			  hashHistory.push("/Personal")
-			}else{
-              message.error(data.errMsg, 3);
+			if (data.result === 'RC100') {
+				message.success('保存成功', 3);
+				hashHistory.push("/Personal")
+			} else {
+				message.error(data.errMsg, 3);
 			}
-			tool.loading(this,false);
+			tool.loading(this, false);
 		}, () => {
 			message.error('请求失败', 3);
-			tool.loading(this,false);
+			tool.loading(this, false);
 		})
 	}
 	render(){
