@@ -10,13 +10,13 @@ import { getFile_IP } from './serverIp'
 export const camera = () => {
     return new Promise((resolve, reject) => {
         navigator.camera.getPicture((imageData) => {
-            resolve(imageData)
-        },
+                resolve(imageData)
+            },
             (error) => {
                 reject(error);
             }, {
                 quality: 50,
-                correctOrientation:false,
+                correctOrientation: false,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 destinationType: navigator.camera.DestinationType.DATA_URL
             }

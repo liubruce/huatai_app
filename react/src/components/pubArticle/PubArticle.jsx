@@ -60,13 +60,13 @@ class PubArticle extends React.Component{
 					});
 				}
 			}, (error) => {
-				alert("Error:" + error)
+				console.log("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
 				this.addPicture("data:image/jpeg;base64," + imageData)
 			}, (error) => {
-				alert("Error:" + error)
+				console.log("Error:" + error)
 			})
 		}
 	}

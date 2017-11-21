@@ -48,13 +48,13 @@ class EditUser extends React.Component{
 					this.addPicture(base64URL)
 				});
 			}, (error) => {
-				alert("Error:" + error)
+				console.log("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
 				this.addPicture("data:image/jpeg;base64," + imageData)
 			}, (error) => {
-				alert("Error:" + error)
+				console.log("Error:" + error)
 			})
 		}
 	}
