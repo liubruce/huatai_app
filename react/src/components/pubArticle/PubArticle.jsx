@@ -137,13 +137,15 @@ class PubArticle extends React.Component{
 					essayNote: '',
 					essayPhotos: []
 				}, () => {
-					tool.loading(this, false);
 					hashHistory.push("/App/PersonalCenter/MyArticle")
 				})
 			} else {
-				tool.loading(this, false);
 				message.error(data.errMsg, 3);
 			}
+			tool.loading(this, false);
+		},(res)=>{
+			tool.loading(this, false);
+			tool.reject(res);
 		})
 
 	}

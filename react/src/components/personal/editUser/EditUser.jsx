@@ -92,9 +92,9 @@ class EditUser extends React.Component{
 				message.error(data.errMsg, 3);
 			}
 			tool.loading(this, false);
-		}, () => {
-			message.error('请求失败', 3);
+		}, (res) => {
 			tool.loading(this, false);
+			tool.reject(res);
 		})
 	}
 	render(){
