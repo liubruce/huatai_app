@@ -39,7 +39,8 @@ class Index extends React.Component {
       score:0,
       now_item: {
 				studyIntegral:0
-			}
+			},
+      channelId:'',
     }
   }
   componentWillMount() {
@@ -51,7 +52,10 @@ class Index extends React.Component {
         this.setState({
           courseList: data.goodCourseList,
           articleList: data.goodEssayList,
-          score:data.score
+          score:data.score,
+          channelId:data.channelId,
+        },()=>{
+          localStorage.setItem('channelId',this.state.channelId);
         })
       } else {
         message.error(data.errMsg, 3);
@@ -151,7 +155,7 @@ class Index extends React.Component {
               </li>
               <li className="li-3">
                 <Link to='/App/StoryLine'> </Link>
-                <p style={{color:'#666'}}>蜂行世界</p>
+                <p style={{color:'#666'}}>{this.state.channelId==='4'?'星行世界':'蜂行世界'}</p>
               </li>
               <li className="li-4">
                 <Link to='/App/PersonalCenter' > </Link>

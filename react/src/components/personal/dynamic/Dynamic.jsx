@@ -228,7 +228,7 @@ class Dynamic extends React.Component{
                             <a>课程动态</a>
                         </li>
                         <li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
-                            <a>蜂行圈动态</a>
+                            <a>{localStorage.getItem('channelId')==='4'?'星行圈动态':'蜂行圈动态'}</a>
                         </li>
 				   </ul>
 					           {

@@ -224,7 +224,7 @@ class Collector extends React.Component{
                             <a >课程收藏</a>
                         </li>
                         <li className={this.state.tab===2?'am-active':null} onClick={()=>this.changeTab(2)}>
-                            <a >蜂行圈收藏</a>
+                            <a >{localStorage.getItem('channelId')==='4'?'星行圈收藏':'蜂行圈收藏'}</a>
                         </li>
 				    </ul>
                     {/*<div className="am-tabs-bd">*/}

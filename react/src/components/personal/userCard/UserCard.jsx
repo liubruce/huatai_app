@@ -165,7 +165,7 @@ class HonoraryCert  extends React.Component{
 				</div>
 				<div className="panel-bd">
 					<div data-am-widget="titlebar" className="am-titlebar am-titlebar-default" >
-						<h2 className="am-titlebar-title">蜂行荣誉</h2>
+						<h2 className="am-titlebar-title">{localStorage.getItem('channelId')==='4'?'星行荣誉':'蜂行荣誉'}</h2>
 					</div>
 					<div className="am-slider am-slider-carousel" id="img-slider-1">
 						<ul className="am-slides">
@@ -247,8 +247,8 @@ class UserCard extends React.Component{
 		this.myHonor();
 	}
 	shareWeiXin() {
-		let text =localStorage.getItem("elearning_IP");
-		//let text ='http://localhost:8888';
+		//let text =localStorage.getItem("elearning_IP");
+		let text ='http://localhost:8888';
 		text += '/AppShare';
 		text = tool.url_format(text, '', '', '');
 
@@ -257,15 +257,15 @@ class UserCard extends React.Component{
 			return;
 		}
 		navigator.Wechat.share({
-			//text: text,
-			message: {
-                     title: "华泰个人名片分享",
-                     description: this.state.userCard.userRealName,
-                     media: {
-                     type: window.Wechat.Type.WEBPAGE,
-                     webpageUrl: text
-					}
-			},
+			text: text,
+			// message: {
+            //          title: "华泰个人名片分享",
+            //          description: this.state.userCard.userRealName,
+            //          media: {
+            //          type: window.Wechat.Type.WEBPAGE,
+            //          webpageUrl: text
+			// 		}
+			// },
 			scene: navigator.Wechat.Scene.SESSION
 		}, function() {
 			navigator.notification.alert(

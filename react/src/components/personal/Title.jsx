@@ -1,11 +1,14 @@
 import React from 'react'
 import {browserHistory} from 'react-router'
+import { message} from 'antd';
 // import * as tool from '../../config/tools'
+import * as tool from '../../config/tools'
+import * as api from '../../config/api'
 class Title extends React.Component {
 	constructor(args) {
 		super()
 		this.state = {
-			title:''
+			title:'',
 		}
 	}
 	componentWillReceiveProps(nextProps) {
@@ -15,15 +18,15 @@ class Title extends React.Component {
 		this.checkUrl(this.props.pathname)
 	}
 	checkUrl(pathname) {
-		let title:'标题';
+		let title:'标题',channelId=localStorage.getItem('channelId');
 		if (pathname.indexOf('/StoryLine') !== -1) {
-			title='峰行世界'
+			title=(channelId==='4'?'星行世界':'蜂行世界')
 		}
 		if (pathname.indexOf('/PersonalCenter') !== -1) {
 			title='我的名片'
 		}
 		if (pathname.indexOf('/MyArticle') !== -1) {
-			title='我的蜂行圈'
+			title=(channelId==='4'?'我的星行圈':'我的蜂行圈')
 		}
 		if (pathname.indexOf('/ArticleDetail') !== -1) {
 			title='课程详情'
@@ -68,7 +71,7 @@ class Title extends React.Component {
 			title='编辑'
 		}
 		if (pathname.indexOf('/StoryDetails') !== -1) {
-			title='峰行世界'
+			title=(channelId==='4'?'星行世界':'蜂行世界')
 		}
 		if (pathname.indexOf('/IntegralRules') !== -1) {
 			title='积分规则'

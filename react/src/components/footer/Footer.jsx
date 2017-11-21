@@ -65,7 +65,7 @@ class Footer extends React.Component {
         <footer className="foot">
           <ul className="am-avg-sm-5 clearFix">
             <li className={this.state.tab === 1?"li-1 active":"li-1"} ><Link onClick={()=>this.changeTab(1)}  to='/Index'> </Link></li>
-            <li className={this.state.tab === 2?"li-2 active":"li-2"} ><Link onClick={()=>this.changeTab(2)}  to='/Article' > </Link></li>
+            <li className={this.state.tab === 2?"li-2 active":"li-2"} ><Link className={localStorage.getItem('channelId')==='4'?'xxq':'fxq'} onClick={()=>this.changeTab(2)}  to='/Article' > </Link></li>
             <li className={this.state.tab === 3?"li-3 active":"li-3"} ><Link onClick={()=>this.changeTab(3)}  to='/Course' > </Link></li>
             <li className={this.state.tab === 4?"li-4 active":"li-4"} ><Link onClick={()=>this.changeTab(4)}  to='/Library'></Link></li>
             <li className={this.state.tab === 5?"li-5 active":"li-5"} ><Link onClick={()=>this.changeTab(5)}  to='/Personal' > </Link></li>
