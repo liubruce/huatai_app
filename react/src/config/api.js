@@ -531,7 +531,8 @@ export const appAddArticle = (body) => {
         sfetch.post({
             url: url,
             body: body,
-            dataType: 'formdata'
+            dataType: 'formdata',
+            timeout:12000
         }).then((data) => {
             if (data.ok) {
                 tool.checkLogin(data.json);
