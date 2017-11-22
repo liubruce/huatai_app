@@ -235,7 +235,7 @@ class CourseDetail extends React.Component {
 				this.state.isEnd ?
                     <Link to={`App/Course/AnswerOnline/${course.courseId}`} className="am-btn am-btn-block btn-border">在线答题</Link>
                     :
-                    <a className="am-btn am-btn-block btn-border test-btn">在线答题</a>
+                    <a className="am-btn am-btn-block btn-border test-btn">视频播放完成后答题</a>
                 }
 
 
