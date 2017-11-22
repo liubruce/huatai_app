@@ -161,7 +161,7 @@ class PointDetail extends React.Component{
 						</div>
 						<button type="button" className="btn-query" onClick={this.searchDetail.bind(this)}>查询</button>
 					</div>
-					<Spin spinning={this.state.loading} tip="加载列表中...">
+					<Spin spinning={this.state.loading}>
 						{
 							dataDetailLists.map((item,index)=>{
 								return(

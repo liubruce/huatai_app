@@ -2,83 +2,86 @@ import React from 'react'
 import './pointShop.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message} from 'antd'
+import {message,Spin} from 'antd'
 import {hashHistory,browserHistory} from 'react-router';
 class PointShop extends React.Component{
-	constructor(args){
+	constructor(args) {
 		super();
-		this.state={
-			pointShopList:tool.getObject(0),
-			now_item:0,
-			loading:false,
-      totalPage:1,
-      pageNo:1,
-			searchValue:''
+		this.state = {
+			pointShopList: tool.getObject(0),
+			now_item: 0,
+			loading: false,
+			totalPage: 1,
+			pageNo: 1,
+			searchValue: ''
 		}
 	}
 	componentDidMount() {
-    tool.addScroll(this,this.pointShopList.bind(this));
-  }
+		tool.addScroll(this, this.pointShopList.bind(this));
+	}
 	componentWillUnmount() {
-    tool.removeScroll();
-  }
-	pointShopList(flag){
+		tool.removeScroll();
+	}
+	pointShopList(flag) {
 		tool.loading(this, true);
-     api.pointShopList({pageno:this.state.pageNo,shopName:this.state.searchValue}).then((data) => {
-      if (data.result === 'RC100') {
-        this.setState({
-					pointShopList:flag?this.state.pointShopList.concat(data.IntegralShopList):data.IntegralShopList,
-					score:data.score,
-					totalPage:data.totalPage
-        })
-      } else {
-        message.error(data.errMsg, 3);
-      }
+		api.pointShopList({
+			pageno: this.state.pageNo,
+			shopName: this.state.searchValue
+		}).then((data) => {
+			if (data.result === 'RC100') {
+				this.setState({
+					pointShopList: flag ? this.state.pointShopList.concat(data.IntegralShopList) : data.IntegralShopList,
+					score: data.score,
+					totalPage: data.totalPage
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
 			tool.loading(this, false);
-    }, (res) => {
-      tool.reject(res);
+		}, (res) => {
+			tool.reject(res);
 			tool.loading(this, false);
-    })
+		})
 	}
 	componentWillMount() {
-    this.pointShopList();
-  }
+		this.pointShopList();
+	}
 	componentWillReceiveProps(nextProps) {
-    this.pointShopList();
-  }
-  jump(item){
-  	this.setState({
-      now_item: item
-    })
-  }
-  ok(){
-  	let body = {
-      shopId:this.state.now_item.shopId
-    }
-    api.pointChange(body).then((data)=>{
-      if (data.result === 'RC100') {
-         hashHistory.push(`/App/PersonalCenter/PointShop`);
-      } else {
-        message.error(data.errMsg, 3);
-      }
-      tool.loading(this, false);
-    }, (res) => {
-      tool.loading(this, false);
-      tool.reject(res);
-    })
-  }
-	submit(e){
+		this.pointShopList();
+	}
+	jump(item) {
+		this.setState({
+			now_item: item
+		})
+	}
+	ok() {
+		let body = {
+			shopId: this.state.now_item.shopId
+		}
+		api.pointChange(body).then((data) => {
+			if (data.result === 'RC100') {
+				hashHistory.push(`/App/PersonalCenter/PointShop`);
+			} else {
+				message.error(data.errMsg, 3);
+			}
+			tool.loading(this, false);
+		}, (res) => {
+			tool.loading(this, false);
+			tool.reject(res);
+		})
+	}
+	submit(e) {
 		e.preventDefault();
 		this.setState({
-           pageNo:1,
-		},()=>{
+			pageNo: 1,
+		}, () => {
 			this.pointShopList();
 		})
 	}
-	changeValue(e){
-      this.setState({
-		  searchValue:e.target.value
-	  })
+	changeValue(e) {
+		this.setState({
+			searchValue: e.target.value
+		})
 	}
 	render(){
 		return(
@@ -93,7 +96,8 @@ class PointShop extends React.Component{
 					</div>
         </header>
 				 </form>
-			<div className="warpper">
+			<Spin spinning={this.state.loading} >
+			<div style={{minHeight:'300px'}} className="warpper">
 				{
 					this.state.pointShopList.map((item,index)=>{
 						return(
@@ -133,6 +137,7 @@ class PointShop extends React.Component{
 				</div>
 
 			</div>
+			</Spin>
 			</div>
 		)
 	}

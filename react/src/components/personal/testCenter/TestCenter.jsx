@@ -36,6 +36,7 @@ class TestCenter extends React.Component{
 	readInformationlist() {
 		tool.loading(this, true);
 		api.readInformationlist().then((data) => {
+			tool.loading(this, false)
 			if (data.result === 'RC100') {
 				this.setState({
 					testList: data.informationList ? data.informationList : []
@@ -43,7 +44,6 @@ class TestCenter extends React.Component{
 			} else {
 				message.error(data.errMsg, 3);
 			}
-			tool.loading(this, false)
 		}, (res) => {
 			tool.loading(this, false)
 			tool.reject(res);
@@ -91,8 +91,8 @@ class TestCenter extends React.Component{
 	render(){
 		return(
 			<div className="warpper">
-			 <Spin spinning={this.state.loading} tip="加载列表中...">
-				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
+			 <Spin spinning={this.state.loading}>
+				<div style={{minHeight:'300px'}} data-am-widget="tabs" className="am-tabs am-tabs-default">
 					<ul className="am-tabs-nav am-cf nav">
 					<li className={this.state.tab === 1 ?"am-active":''} onClick={()=>this.changeTab(1)}>
 						<a >新任务</a>

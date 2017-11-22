@@ -28,6 +28,7 @@ class Article extends React.Component {
       search:tool.getQueryString('search')
     }
     api.essaylist(body).then((data)=>{
+      tool.loading(this, false);
       if (data.result === 'RC100') {
         this.setState({
           essayList:flag?this.state.essayList.concat(data.essayList):data.essayList,
@@ -37,7 +38,6 @@ class Article extends React.Component {
       } else {
         message.error(data.errMsg, 3);
       }
-      tool.loading(this, false);
     }, (res) => {
       tool.loading(this, false);
       tool.reject(res);

@@ -315,8 +315,8 @@ class UserCard extends React.Component{
 							<a  onClick={()=>this.changeTab(2)}>荣誉证书</a>
 						</li>
 					</ul>
-                   <Spin spinning={this.state.loading} tip="加载列表中...">
-					<div className="am-tabs-bd">
+                   <Spin spinning={this.state.loading}>
+					<div style={{minHeight:'300px'}} className="am-tabs-bd">
 						{
 							this.state.tab===0?<Card userCard={this.state.userCard} jobInfo={this.state.jobInfo}/>:(this.state.tab===1?<GrowingUp/>:<HonoraryCert Honor2List={this.state.Honor2List}/>)
 						}
