@@ -198,7 +198,7 @@ class Index extends React.Component {
          
           <div className="am-panel">
             <div data-am-widget="titlebar" className="am-titlebar am-titlebar-default">
-              <h2 className="am-titlebar-title">蜂行圈</h2>
+              <h2 className="am-titlebar-title">{this.state.channelId==='4'?'星行圈':'蜂行圈'}</h2>
               <nav className="am-titlebar-nav">
                 <Link to='/Article' className>更多内容</Link>
               </nav>

@@ -31,7 +31,8 @@ class Personal extends Component {
           {tool.isIOS?<div className='ios-header' ></div>:null}
           {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
              {this.props.children}
-          <Footer pathname={this.props.location.pathname} />
+             {(this.props.location.pathname).indexOf('/MydirectDetails')!==-1?null:<Footer pathname={this.props.location.pathname} />}
+          
       </div>
     )
   }
