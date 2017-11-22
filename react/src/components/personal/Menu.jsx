@@ -25,6 +25,10 @@ class Menu extends React.Component {
       "nodeName": "我的蜂行圈",
       "runscript": "/App/PersonalCenter/MyArticle",
       "nodeClass": "icon icon-my-fxq",
+    },{
+      "nodeName": "我的私信",
+      "runscript": "/App/PersonalCenter/Mydirect",
+      "nodeClass": "icon icon-sx",
     }, {
       "nodeName": "任务中心",
       "runscript": "/App/NewsCenter",

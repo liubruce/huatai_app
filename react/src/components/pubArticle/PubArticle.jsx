@@ -174,7 +174,7 @@ class PubArticle extends React.Component{
 			<div> 
 				<header className="header">
 					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-                    <h1>蜂行圈发布</h1>
+                    <h1>{localStorage.getItem('channelId')==='4'?'星行圈发布':'蜂行圈发布'}</h1>
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
 			<Spin spinning={this.state.loading} tip="加载列表中...">

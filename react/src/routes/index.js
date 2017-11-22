@@ -18,6 +18,7 @@ import Article from '../components/article/Article.jsx'
 import personalRoutes from './personal'
 import * as tool from '../config/tools'
 import Library from '../components/personal/library/Library.jsx'
+import MydirectDetails from '../components/mydirectDetails/MydirectDetails.jsx'
 
 const start_render = () => {
     render(
@@ -29,6 +30,7 @@ const start_render = () => {
              <Route path='/Course' component={Course} />
              <Route path='/Article' component={Article} />
              <Route path='/Library' component={Library}/>
+             <Route path='/MydirectDetails' component={MydirectDetails}/>
          </Route>
          {personalRoutes}
          <Route path='/404' component={NotFoundPage} />

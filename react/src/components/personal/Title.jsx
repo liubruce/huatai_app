@@ -79,6 +79,9 @@ class Title extends React.Component {
 		if (pathname.indexOf('/MyPDF') !== -1) {
 			title='在线查看'
 		}
+		if (pathname.indexOf('/Mydirect') !== -1) {
+			title='我的私信'
+		}
 		this.setState({
 			title
 		})
