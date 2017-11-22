@@ -185,14 +185,9 @@ class testPaper extends React.Component{
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
 		api.appSubmTestPaperTitle(formData).then((data) => {
-			if (data.result === 'RC100') {
-				this.setState({
-					point: data.answerScores
-				})
-			} else {
-				message.error(data.errMsg, 3);
-			}
-
+			this.setState({
+				point: data.answerScores
+			})
 		}, (res) => {
 			tool.reject(res);
 		})

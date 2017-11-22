@@ -187,19 +187,15 @@ class AnswerOnline extends React.Component{
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
 		api.appSubmCourseTitle(formData).then((data) => {
-			if (data.result === 'RC100') {
-				this.setState({
-					point: data.answerScore
-				})
-			} else {
-				message.error(data.errMsg, 3);
-			}
-
+			this.setState({
+				point: data.answerScore
+			})
 		}, (res) => {
 			tool.reject(res);
 		})
 	}
 	render(){
+		console.log(this.state.point)
 		return(
 
 			<div className="warpper">

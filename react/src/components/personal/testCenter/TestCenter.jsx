@@ -111,6 +111,7 @@ class TestCenter extends React.Component{
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
+											{item.isExam === 1 || item.isOtherExam === 1?<a>已答题</a>:null}
 											{
 												item.informationType === '1' && item.isExam === 0 ?
 												<a onClick={()=>this.clickMe(item,true)} style={{cursor:"pointer"}}>任务地址</a>:null

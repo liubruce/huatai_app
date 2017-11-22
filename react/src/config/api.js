@@ -571,7 +571,7 @@ export const appAddArticle = (body) => {
             url: url,
             body: body,
             dataType: 'formdata',
-            timeout: 8000
+            timeout: 20000
         }).then((data) => {
             if (data.ok) {
                 tool.checkLogin(data.json);
@@ -920,7 +920,7 @@ export const userUpdate = (formData) => {
     return new Promise((resolve, reject) => {
         sfetch.post({
             url: url,
-            timeout: 8000,
+            timeout: 12000,
             body: formData,
             dataType: 'formdata'
         }).then((data) => {

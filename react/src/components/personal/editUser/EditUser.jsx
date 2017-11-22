@@ -44,15 +44,17 @@ class EditUser extends React.Component{
 		window.jquery('#choose-head-action').modal('close');
 		if (!flag) {
 			tool.imagePicker(1).then((imgs) => {
-				tool.convertImgToBase64URL(imgs[0], (base64URL) => {
-					this.addPicture(base64URL)
-				});
+				tool.convertImgToBase64URL(imgs[0]).then((url)=>{
+					this.addPicture(url)
+				})
 			}, (error) => {
 				console.log("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
-				this.addPicture("data:image/jpeg;base64," + imageData)
+				tool.convertImgToBase64URL(imageData).then((url)=>{
+					this.addPicture(url)
+				})
 			}, (error) => {
 				console.log("Error:" + error)
 			})

@@ -55,16 +55,18 @@ class PubArticle extends React.Component{
 		if (!flag) {
 			tool.imagePicker(9).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
-					tool.convertImgToBase64URL(imgs[i], (base64URL) => {
-						this.addPicture(base64URL)
-					});
+					tool.convertImgToBase64URL(imgs[i]).then((url) => {
+						this.addPicture(url)
+					})
 				}
 			}, (error) => {
 				console.log("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
-				this.addPicture("data:image/jpeg;base64," + imageData)
+				tool.convertImgToBase64URL(imageData).then((url) => {
+					this.addPicture(url)
+				})
 			}, (error) => {
 				console.log("Error:" + error)
 			})
@@ -178,7 +180,7 @@ class PubArticle extends React.Component{
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
 			<Spin spinning={this.state.loading} tip="加载列表中...">
-			<div className="warpper">
+			<div style={{minHeight:'300px'}} className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
                         <input type="text" value={this.state.essayTitle} onChange={this.inputValue.bind()}  placeholder="请输入标题"/>
