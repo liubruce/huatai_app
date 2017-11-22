@@ -15,7 +15,7 @@ class CourseDetail extends React.Component {
         this.state = {
             coursedata: {},
             courseattach: [],
-            isEnd: true,
+            isEnd: false,
             titleList: [],
             showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0,
