@@ -82,6 +82,9 @@ class Title extends React.Component {
 		if (pathname.indexOf('/Mydirect') !== -1) {
 			title='我的私信'
 		}
+		if (pathname.indexOf('/TestPaper') !== -1) {
+			title='在线测试'
+		}
 		this.setState({
 			title
 		})

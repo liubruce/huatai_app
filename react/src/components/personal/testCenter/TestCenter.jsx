@@ -2,12 +2,10 @@ import React from 'react'
 import './testCenter.less'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
-import {message,Spin } from 'antd'
-import {hashHistory} from 'react-router';
-import {
-	Modal
-  } from 'antd';
-  const confirm = Modal.confirm;
+import { message, Spin } from 'antd'
+import { hashHistory } from 'react-router';
+import { Modal } from 'antd';
+const confirm = Modal.confirm;
 class TestCenter extends React.Component{
 	constructor(args){
 		super()
@@ -19,73 +17,71 @@ class TestCenter extends React.Component{
            pageNo:1,
 		}
 	}
-	unreadInformationlist(){
+	unreadInformationlist() {
 		tool.loading(this, true);
 		api.unreadInformationlist().then((data) => {
-		if (data.result === 'RC100') {
-			this.setState({
-				testList:data.informationList?data.informationList:[]
-			})
-		} else {
-			message.error(data.errMsg, 3);
-		}
-		 tool.loading(this, false);		
+			if (data.result === 'RC100') {
+				this.setState({
+					testList: data.informationList ? data.informationList : []
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
+			tool.loading(this, false);
 		}, (res) => {
-			tool.loading(this, false);	
-		tool.reject(res);
+			tool.loading(this, false);
+			tool.reject(res);
 		})
 	}
-	readInformationlist(){
+	readInformationlist() {
 		tool.loading(this, true);
 		api.readInformationlist().then((data) => {
-		if (data.result === 'RC100') {
-			this.setState({
-				testList:data.informationList?data.informationList:[]
-			})
-		} else {
-			message.error(data.errMsg, 3);
-		}
-		tool.loading(this, false)	
+			tool.loading(this, false)
+			if (data.result === 'RC100') {
+				this.setState({
+					testList: data.informationList ? data.informationList : []
+				})
+			} else {
+				message.error(data.errMsg, 3);
+			}
 		}, (res) => {
-		tool.loading(this, false)	
-		tool.reject(res);
+			tool.loading(this, false)
+			tool.reject(res);
 		})
 	}
 	componentWillMount() {
-		if(this.state.tab===1){
-           this.unreadInformationlist();
-		}else{
+		if (this.state.tab === 1) {
+			this.unreadInformationlist();
+		} else {
 			this.readInformationlist();
 		}
-    }
+	}
 	changeTab(tab) {
 		this.setState({
 			tab: tab
-		},()=>{
-		if(tab===1){
-           this.unreadInformationlist();
-		}else{
-			this.readInformationlist();
-		}
+		}, () => {
+			if (tab === 1) {
+				this.unreadInformationlist();
+			} else {
+				this.readInformationlist();
+			}
 		})
 	}
-	clickMe(item){
+	clickMe(item, flag) {
 		confirm({
 			title: '是否测试开始',
 			content: '',
 			onOk() {
 				let index = item.inforURL.indexOf("/TestPaper");
-				let arr = item.inforURL.substring(index);
+				let arr = flag ? item.inforURL.substring(index) : "/RandomPaper" + item.inforURL.substring(index + 10);
 				hashHistory.push('/App/Course' + arr);
 			},
-			onCancel() {
-			},
+			onCancel() {},
 		});
 	}
-	Details(id){
-		api.viewmessage(id).then((data)=>{
-			if(data.result === 'RC100'){
-			}else{
+	Details(id) {
+		api.viewmessage(id).then((data) => {
+			if (data.result === 'RC100') {} else {
 				message.error(data.errMsg, 3);
 			}
 		}, (res) => {
@@ -95,8 +91,8 @@ class TestCenter extends React.Component{
 	render(){
 		return(
 			<div className="warpper">
-			 <Spin spinning={this.state.loading} tip="加载列表中...">
-				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
+			 <Spin spinning={this.state.loading}>
+				<div style={{minHeight:'300px'}} data-am-widget="tabs" className="am-tabs am-tabs-default">
 					<ul className="am-tabs-nav am-cf nav">
 					<li className={this.state.tab === 1 ?"am-active":''} onClick={()=>this.changeTab(1)}>
 						<a >新任务</a>
@@ -115,9 +111,14 @@ class TestCenter extends React.Component{
 										<div className="msg-cont">
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
+											{item.isExam === 1 || item.isOtherExam === 1?<a>已答题</a>:null}
 											{
 												item.informationType === '1' && item.isExam === 0 ?
-												<a onClick={()=>this.clickMe(item,)} style={{cursor:"pointer"}}>任务地址</a>:null
+												<a onClick={()=>this.clickMe(item,true)} style={{cursor:"pointer"}}>任务地址</a>:null
+                                             }
+											{
+												item.informationType === '2' && item.isOtherExam === 0 ?
+												<a onClick={()=>this.clickMe(item,false)} style={{cursor:"pointer"}}>随机答题</a>:null
                                              }
 											<p className="time">{tool.formatTimestamp(item.createTime)}</p>
 										</div>

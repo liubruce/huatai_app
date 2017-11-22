@@ -1,12 +1,11 @@
 import React from 'react'
-import  './AnswerOnline.less'
 import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import $ from 'jquery'
-import {hashHistory} from 'react-router'
+import {browserHistory} from 'react-router'
 
-class AnswerOnline extends React.Component{
+class RandomPaper extends React.Component{
 	constructor(args) {
 		super()
 		this.state = {
@@ -21,10 +20,11 @@ class AnswerOnline extends React.Component{
 	}
 
 	componentWillMount() {
+		//console.log(this.props.params.id)
 		let body = {
-			courseId: this.props.params.id
+			testpaperId: this.props.params.id
 		};
-		api.appOnlineAnswer(body).then((data) => {
+		api.selectRandomTitle(body).then((data) => {
 			if (data.result === 'RC100') {
 				let single = [],
 					multiple = [],
@@ -39,7 +39,7 @@ class AnswerOnline extends React.Component{
 				this.setState({
 					single,
 					multiple,
-					answerTime: data.answerTime ? data.answerTime : 0
+					answerTime: data.testpapers.answerTime ? data.testpapers.answerTime : 0
 				}, () => {
 					this.countdown();
 				});
@@ -55,7 +55,6 @@ class AnswerOnline extends React.Component{
         let h = parseInt(t / 3600,10);
         let m = parseInt((t - h * 3600) / 60,10);
         let s = t - h * 3600 - m * 60;
-
         this.setState({
             counterAuction:t,
             hourAuction: this.getNumber(h),
@@ -144,8 +143,7 @@ class AnswerOnline extends React.Component{
 			})
 			radioTitles.push({
 				radioTitleType:'1',
-				radioAnswer:answer,
-				coursetestId:this.state.single[i].coursetestId
+				radioAnswer:answer
 			})
 			// console.log(this.state.single[i].answer,answer)
 		})
@@ -174,28 +172,26 @@ class AnswerOnline extends React.Component{
 			})
 			checkboxTitles.push({
 				checkboxTitleType:'2',
-				checkboxAnswer:answer,
-				coursetestId:this.state.multiple[i].coursetestId
+				checkboxAnswer:answer
 			})
 		})
 
-		let coursedata = {
-			courseId: this.props.params.id
+		let testpaperdata = {
+			testpaperId: this.props.params.id
 		}
 		let formData = new FormData();
-		formData.append('coursedata', JSON.stringify(coursedata))
+		formData.append('testPapeData', JSON.stringify(testpaperdata))
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
-		api.appSubmCourseTitle(formData).then((data) => {
+		api.submRandomCourseTitle(formData).then((data) => {
 			this.setState({
-				point: data.answerScore
+				point: data.answerScores
 			})
 		}, (res) => {
 			tool.reject(res);
 		})
 	}
 	render(){
-		console.log(this.state.point)
 		return(
 
 			<div className="warpper">
@@ -239,7 +235,7 @@ class AnswerOnline extends React.Component{
 							 }
 		         		</div>
 		         		<div className="am-modal-footer">
-		         			<span className="am-modal-btn" onClick={()=>{hashHistory.push('/Course')}} >确定</span>
+		         			<span className="am-modal-btn" onClick={()=>browserHistory.goBack()} >确定</span>
 		         		</div>
 		         	</div>
 		         </div>
@@ -251,4 +247,4 @@ class AnswerOnline extends React.Component{
 
 
 
-export default AnswerOnline
+export default RandomPaper

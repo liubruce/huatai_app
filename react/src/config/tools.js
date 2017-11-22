@@ -2,9 +2,7 @@ import { is } from 'immutable';
 import * as api from './api'
 import { hashHistory } from 'react-router';
 import { message } from 'antd';
-
 import $ from 'jquery'
-
 import { getFile_IP } from './serverIp'
 
 export const camera = () => {
@@ -16,9 +14,10 @@ export const camera = () => {
                 reject(error);
             }, {
                 quality: 50,
-                correctOrientation:false,
+                correctOrientation: true,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
-                destinationType: navigator.camera.DestinationType.DATA_URL
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                saveToPhotoAlbum: false
             }
         );
     });
@@ -38,21 +37,46 @@ export const imagePicker = (num) => {
         );
     });
 }
-export const convertImgToBase64URL = (url, callback, outputFormat) => {
-    var img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function() {
-        var canvas = document.createElement('CANVAS'),
-            ctx = canvas.getContext('2d'),
-            dataURL;
-        canvas.height = this.height;
-        canvas.width = this.width;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
-        callback(dataURL);
-        canvas = null;
-    };
-    img.src = url;
+export const convertImgToBase64URL = (imgUrl) => {
+
+    // function convertImgToDataURLviaCanvas(url, callback, outputFormat) {
+    //     var img = new Image();
+    //     img.crossOrigin = 'Anonymous';
+    //     img.onload = function() {
+    //         var canvas = document.createElement('CANVAS');
+    //         var ctx = canvas.getContext('2d');
+    //         var dataURL;
+    //         canvas.height = this.height;
+    //         canvas.width = this.width;
+    //         ctx.drawImage(this, 0, 0);
+    //         dataURL = canvas.toDataURL(outputFormat);
+    //         callback(dataURL);
+    //         canvas = null;
+    //     };
+    //     img.src = url;
+    // }
+
+    function convertFileToDataURLviaFileReader(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            var reader = new FileReader();
+            reader.onloadend = function() {
+                callback(reader.result);
+            }
+            reader.readAsDataURL(xhr.response);
+        };
+        xhr.open('GET', url);
+        xhr.responseType = 'blob';
+        xhr.send();
+    }
+    var convertFunction = convertFileToDataURLviaFileReader;
+    // var convertFunction = convertImgToDataURLviaCanvas;
+
+    return new Promise((resolve, reject) => {
+        convertFunction(imgUrl, function(base64Img) {
+            resolve(base64Img)
+        })
+    });
 }
 export const sino_cordova_checkApp = () => {
     // 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
@@ -465,7 +489,20 @@ export const removeScroll = () => {
 export const cancelDown = () => {
     navigator.fileTransfer.abort();
 }
+export const appAlert = (text) => {
+    if (isPc) {
+        alert(text);
+        return;
+    }
+    navigator.notification.alert(
+        text,
+        () => {
 
+        },
+        '提示',
+        'OK'
+    );
+}
 export const downFile = (filename, that) => {
 
     let downUrl = encodeURI(getFile(filename));

@@ -121,8 +121,8 @@ class MyArticle extends React.Component{
                  </header>
 				 </form>
 			<div className="warpper">
-			<Spin spinning={this.state.loading} tip="加载列表中...">
-				<div data-am-widget="tabs" className="am-tabs am-tabs-default">
+			<Spin spinning={this.state.loading} >
+				<div style={{minHeight:'300px'}} data-am-widget="tabs" className="am-tabs am-tabs-default">
                     <ul className="am-tabs-nav am-cf nav">
 					<li className={this.state.tab===5?'am-active':null} onClick={()=>this.changeTab(5)}>
 						<a >已发布</a>

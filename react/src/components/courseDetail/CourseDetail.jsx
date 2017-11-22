@@ -15,7 +15,7 @@ class CourseDetail extends React.Component {
         this.state = {
             coursedata: {},
             courseattach: [],
-            isEnd: false,
+            isEnd: true,
             titleList: [],
             showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0,
@@ -28,7 +28,7 @@ class CourseDetail extends React.Component {
         let test = document.getElementById('course_id');
         if (test.currentTime - old_time > 1) {
             message.error('请勿快进视频', 1);
-            test.currentTime = old_time;
+            // test.currentTime = old_time;
             return;
         } else {
             if (test.currentTime >= test.duration) {
@@ -183,7 +183,7 @@ class CourseDetail extends React.Component {
 				</div>
 				
 				<div className="am-panel">
-					<div className="am-panel-hd">附件</div>
+					<div className="am-panel-hd">附件(请在PC端下载)</div>
 					<div className="am-panel-bd">
 						<ul className="am am-avg-sm-3" style={{
                 fontSize: '1.4rem'

@@ -101,8 +101,8 @@ class CourseCol extends React.Component{
     render(){
         return(
             <div>
-            <Spin spinning={this.state.loading} tip="加载列表中...">
-                <div className="am-tabs-bd">
+            <Spin spinning={this.state.loading}>
+                <div style={{minHeight:'300px'}} className="am-tabs-bd">
                  <div data-tab-panel-0 className="am-tab-panel am-active tab">
                   <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix" style={{paddingTop:'10px'}}>
                 {
@@ -184,8 +184,8 @@ class EssayCol extends React.Component{
     }
     render(){
         return(
-            <Spin spinning={this.state.loading} tip="加载列表中...">
-            <div data-tab-panel-0 className="am-tab-panel am-active tab">
+            <Spin spinning={this.state.loading}>
+            <div style={{minHeight:'300px'}} data-tab-panel-0 className="am-tab-panel am-active tab">
                 <div className="am-panel">
                 {
                     this.state.colCourseList.map((item,index)=>{

@@ -105,8 +105,8 @@ class CourseDy extends React.Component{
         return(
           <div>
                <div data-tab-panel-0 className="am-tab-panel am-active tab">
-                 <Spin spinning={this.state.loading} tip="加载列表中...">
-               <ul className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
+                 <Spin spinning={this.state.loading}>
+               <ul style={{minHeight:'300px'}} className="cur-list am-avg-lg-3 am-avg-md-3 am-avg-sm-2 clearFix">
                  {
                    this.state.courseList.map((item,index)=>{
                      return(
@@ -188,9 +188,9 @@ class EssayDy extends React.Component{
   }
     render(){
         return(
-          <Spin spinning={this.state.loading} tip="加载列表中...">
+          <Spin spinning={this.state.loading}>
             {/*<div className="am-tabs-bd">*/}
-           <div data-tab-panel-1 className="am-tab-panel am-active tab">
+           <div style={{minHeight:'300px'}} data-tab-panel-1 className="am-tab-panel am-active tab">
              <div className="am-panel">
              {
                this.state.EssayList.map((item,index)=>{
