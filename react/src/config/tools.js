@@ -15,10 +15,11 @@ export const camera = () => {
             (error) => {
                 reject(error);
             }, {
-                quality: 50,
-                correctOrientation: false,
+                quality: 100,
+                // correctOrientation: false,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
-                destinationType: navigator.camera.DestinationType.DATA_URL
+                destinationType: navigator.camera.DestinationType.FILE_URI,
+                saveToPhotoAlbum:false
             }
         );
     });

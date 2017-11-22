@@ -28,7 +28,7 @@ class CourseDetail extends React.Component {
         let test = document.getElementById('course_id');
         if (test.currentTime - old_time > 1) {
             message.error('请勿快进视频', 1);
-            test.currentTime = old_time;
+            // test.currentTime = old_time;
             return;
         } else {
             if (test.currentTime >= test.duration) {
