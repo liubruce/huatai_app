@@ -24,7 +24,7 @@ class App extends Component {
 			   <div className='app'>
 
 			            <Header pathname={this.props.location.pathname} />
-			            {this.props.children}\
+			            {this.props.children}
 						{this.props.location.pathname.indexOf('/MydirectDetails')!==-1||this.props.location.pathname.indexOf('/PrivateTheme')!==-1?null:
 						<Footer pathname={this.props.location.pathname} />}
 

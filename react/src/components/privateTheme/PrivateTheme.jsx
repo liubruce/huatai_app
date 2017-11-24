@@ -46,16 +46,16 @@ class PrivateTheme extends React.Component{
 	render(){
 		return(
 			<div> 
-            <header className="header">
-                <a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-                <h1>我的私信</h1>
-		   </header>
-		<div className="warpper" style={{paddingBottom: '100px'}}>
-			<div className="talk-input">
-				<textarea placeholder="请输入文字" required="required" ref='content' id="textarea" value={this.state.textareaValue} onChange={()=>{this.setState({textareaValue:this.refs.content.value})}}></textarea>
-				<button type="button" onClick={()=>this.sendLetterTheme()}>发送</button>
-			</div>
-		</div>
+				<header className="header">
+					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+					<h1>我的私信</h1>
+				</header>
+				<div className="warpper" style={{paddingBottom: '100px'}}>
+					<div className="talk-input">
+						<textarea placeholder="请输入文字" required="required" ref='content' id="textarea" value={this.state.textareaValue} onChange={()=>{this.setState({textareaValue:this.refs.content.value})}}></textarea>
+						<button type="button" onClick={()=>this.sendLetterTheme()}>发送</button>
+					</div>
+				</div>
             </div>
 		)
 	}
