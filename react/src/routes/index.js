@@ -31,7 +31,7 @@ const start_render = () => {
              <Route path='/Article' component={Article} />
              <Route path='/Library' component={Library}/>
              <Route path='/MydirectDetails/:id' component={MydirectDetails}/>
-             <Route path='/PrivateTheme' component={PrivateTheme}/>
+             <Route path='/PrivateTheme/:id' component={PrivateTheme}/>
          </Route>
          {personalRoutes}
          <Route path='/404' component={NotFoundPage} />

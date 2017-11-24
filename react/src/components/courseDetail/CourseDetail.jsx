@@ -228,7 +228,7 @@ class CourseDetail extends React.Component {
 				</div>
 				{course.goodCourse !== '1' ?
                 <div>
-                <Link to="/PrivateTheme" 
+                <Link to={"/PrivateTheme/"+ course.createUser} 
                 style={{position: 'absolute',
                 right: '16px',top: '286px',
                 display: 'block',

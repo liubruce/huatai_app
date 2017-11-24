@@ -14,7 +14,7 @@ class PrivateTheme extends React.Component{
 	}
     componentWillMount(){
 		this.setState({
-			senderName:localStorage.getItem('username')
+			senderName:JSON.parse(localStorage.getItem('user')).userCode
 		})
 	}
 	sendLetterTheme(){
