@@ -53,7 +53,7 @@ class PubArticle extends React.Component{
 	getPicture(flag) {
 		window.jquery('#choose-action').modal('close');
 		if (!flag) {
-			tool.imagePicker(9).then((imgs) => {
+			tool.imagePicker(9 - (this.state.essayPhotosPH.length + this.state.essayPhotos.length)).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
 					tool.convertImgToBase64URL(imgs[i]).then((url) => {
 						this.addPicture(url)
@@ -161,13 +161,20 @@ class PubArticle extends React.Component{
 			essayNote: event.target.value
 		});
 	}
-	chooseImage(accepted, rejected) {
-		if (accepted.length + this.state.essayPhotos.length > 9) {
-			message.error('图片不能超过9张')
+	// chooseImage(accepted, rejected) {
+	// 	if (accepted.length + this.state.essayPhotos.length >= 9) {
+	// 		message.error('最多选择9张图片')
+	// 	} else {
+	// 		this.setState({
+	// 			essayPhotos: this.state.essayPhotos.concat(accepted),
+	// 		})
+	// 	}
+	// }
+	chooseImage() {
+		if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
+			message.error('最多选择9张图片')
 		} else {
-			this.setState({
-				essayPhotos: this.state.essayPhotos.concat(accepted),
-			})
+			window.jquery('#choose-action').modal('open');
 		}
 	}
 	render(){
@@ -179,7 +186,7 @@ class PubArticle extends React.Component{
                     <h1>{localStorage.getItem('channelId')==='4'?'星行圈发布':'蜂行圈发布'}</h1>
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
-			<Spin spinning={this.state.loading} tip="加载列表中...">
+			<Spin spinning={this.state.loading} tip="发布中...">
 			<div style={{minHeight:'300px'}} className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
@@ -215,7 +222,7 @@ class PubArticle extends React.Component{
  							accept="image/*"
  						>	*/}										
 	 						<li><label
-	 						onClick={()=>{window.jquery('#choose-action').modal('open');}}
+	 						onClick={()=>this.chooseImage()}
 	 						 //data-am-modal="{target: '#choose-action'}"
 	 						 className="file-img">+</label></li>
  					{/*</Dropzone>*/}
