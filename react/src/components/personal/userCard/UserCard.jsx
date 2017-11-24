@@ -259,8 +259,8 @@ class UserCard extends React.Component{
 		navigator.Wechat.share({
 			// text: text,
 			message: {
-                     title: "华泰个人名片分享",
-                     description: this.state.userCard.userRealName,
+                     title: this.state.userCard.userRealName,
+                     description: "华泰名片分享",
                      media: {
                      type: window.Wechat.Type.WEBPAGE,
                      webpageUrl: text

@@ -186,7 +186,7 @@ class PubArticle extends React.Component{
                     <h1>{localStorage.getItem('channelId')==='4'?'星行圈发布':'蜂行圈发布'}</h1>
 					<div className="header-right" onClick={()=>this.add()} ><span>发布</span></div>
                  </header>
-			<Spin spinning={this.state.loading} tip="发布中...">
+			<Spin spinning={this.state.loading} tip="发布中">
 			<div style={{minHeight:'300px'}} className="warpper">
                 <div className="am-panel">
                     <div className="fxq-editRela">
