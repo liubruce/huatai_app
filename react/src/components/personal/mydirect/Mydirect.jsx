@@ -82,8 +82,8 @@ class Mydirect extends React.Component{
                     <span className="refresh"  onClick={()=>this.refresh()}></span>
 		        </header>
                 <div className="warpper">
-					<Spin spinning={this.state.loading} tip="加载列表中...">
-					<div className="am-panel talk-lists">
+					<Spin spinning={this.state.loading}>
+					<div style={{minHeight:'300px'}} className="am-panel talk-lists">
 						{this.state.privateLetterRusult.map((item,index)=>{
 								return(
 									<div  key={index}>

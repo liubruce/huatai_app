@@ -114,7 +114,7 @@ class MydirectDetails extends React.Component{
 				    <div className="talk-pepole">
 								<div className="avatar"><img src={tool.getFile(addressNamePath)} onError={(e) => tool.headImageError(e)} alt=""/></div>
 								<div className="name-time-word">
-									<p>{this.props.location.state.infoSuccess === true?'我':this.state.addressRealName    }
+									<p>{this.props.location.state.infoSuccess === true?'我':this.state.senderRealName}
 									<span>{tool.formatTimestamp(letterTheme.createTime)}</span></p>
 									<div className="talk-word">{letterTheme.privateletterNote}</div>
 								</div>
