@@ -19,7 +19,7 @@ import personalRoutes from './personal'
 import * as tool from '../config/tools'
 import Library from '../components/personal/library/Library.jsx'
 import MydirectDetails from '../components/mydirectDetails/MydirectDetails.jsx'
-
+import PrivateTheme from '../components/privateTheme/PrivateTheme.jsx'
 const start_render = () => {
     render(
         <Router history={hashHistory}>
@@ -30,7 +30,8 @@ const start_render = () => {
              <Route path='/Course' component={Course} />
              <Route path='/Article' component={Article} />
              <Route path='/Library' component={Library}/>
-             <Route path='/MydirectDetails' component={MydirectDetails}/>
+             <Route path='/MydirectDetails/:id' component={MydirectDetails}/>
+             <Route path='/PrivateTheme' component={PrivateTheme}/>
          </Route>
          {personalRoutes}
          <Route path='/404' component={NotFoundPage} />

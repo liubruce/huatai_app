@@ -46,7 +46,7 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>
             <Route path='/App/PersonalCenter/EditUser' component={EditUser}/>
             <Route path='/App/PersonalCenter/Mydirect' component={Mydirect}/>
-            <Route path='/App/MydirectDetails' component={MydirectDetails}/>
+            <Route path='/App/MydirectDetails/:id' component={MydirectDetails}/>
             <Route path='/App/StoryLine' component={StoryLine}/>
             <Route path='/App/StoryLine/StoryDetail/:id' component={StoryDetail}/>
             <Route path='/App/IntegralRules' component={IntegralRules}/>

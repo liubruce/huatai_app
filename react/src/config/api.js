@@ -997,3 +997,108 @@ export const allCertificate = (body = {}) => {
     });
 
 }
+/**
+   *appprivateletter/appaddresseeprivateletter/私信主题接口
+   */
+export const addresseePrivateLetter = (body={}) => {
+    body = tool.behavior(body, 'privateletter', 'button')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${api_Ip}/appprivateletter/appaddresseeprivateletter`,
+            body
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+
+}
+/**
+   *appprivateletter/ appdelletter删除私信主题
+   */
+export const delletter = (body = {}) => {
+    body = tool.behavior(body, 'privatelettdeleter', 'button')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${api_Ip}/appprivateletter/ appdelletter`,
+            body
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+
+}
+/**
+   *appprivateletterinfo/appletterinfo查看私信内容详情接口
+   */
+export const appletterInfo = (body = {}) => {
+    body = tool.behavior(body, 'privateletter', 'button')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${api_Ip}/appprivateletterinfo/appletterinfo`,
+            body
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+
+}
+/*
+/ appprivateletterinfo/ appsendletterinfo
+ */
+export const appsendLetterinfo = (body) => {
+    let url = `${api_Ip}/appprivateletterinfo/appsendletterinfo`;
+    url = tool.url_format(url, 'privatelettsenderletter', 'button');
+    return new Promise((resolve, reject) => {
+        sfetch.post({
+            url: url,
+            timeout: 8000,
+            body: body,
+            dataType: 'formdata'
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+
+/*
+*appprivateletter/appsendletter发送主题
+ */
+export const appsendLetter = (body) => {
+    let url = `${api_Ip}/appprivateletter/appsendletter`;
+    url = tool.url_format(url, 'privatelettsenderletter', 'button');
+    return new Promise((resolve, reject) => {
+        sfetch.post({
+            url: url,
+            timeout: 8000,
+            body: body,
+            dataType: 'formdata'
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
