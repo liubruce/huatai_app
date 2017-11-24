@@ -248,7 +248,7 @@ export const refreshToken = () => {
             save_user();
             let sql = `UPDATE LSUSER  SET DEADTIME='${data.deadTime}',LDTOKEN='${data.ldToken}' WHERE USERCODE='${user.userCode}'`;
             execSQL(sql).then((result) => {
-                console.log('elearning update ldToken ok: ' + JSON.stringify(result))
+                console.log(result)
             }, (reject) => {
                 console.log('elearning sql error:' + reject);
             })
