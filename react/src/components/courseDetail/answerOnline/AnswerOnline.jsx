@@ -195,7 +195,6 @@ class AnswerOnline extends React.Component{
 		})
 	}
 	render(){
-		console.log(this.state.point)
 		return(
 
 			<div className="warpper">

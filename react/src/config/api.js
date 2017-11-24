@@ -571,7 +571,7 @@ export const appAddArticle = (body) => {
             url: url,
             body: body,
             dataType: 'formdata',
-            timeout: 20000
+            timeout: 35000
         }).then((data) => {
             if (data.ok) {
                 tool.checkLogin(data.json);
