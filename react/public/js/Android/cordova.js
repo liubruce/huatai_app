@@ -99,18 +99,18 @@ Battery.prototype._status = function (info) {
 
     if (info) {
         if (battery._level !== info.level || battery._isPlugged !== info.isPlugged) {
-
+            
             if(info.level === null && battery._level !== null) {
                 return; // special case where callback is called because we stopped listening to the native side.
             }
-
+            
             // Something changed. Fire batterystatus event
             cordova.fireWindowEvent("batterystatus", info);
 
             if (!info.isPlugged) { // do not fire low/critical if we are charging. issue: CB-4520
-                // note the following are NOT exact checks, as we want to catch a transition from
+                // note the following are NOT exact checks, as we want to catch a transition from 
                 // above the threshold to below. issue: CB-4519
-                if (battery._level > STATUS_CRITICAL && info.level <= STATUS_CRITICAL) {
+                if (battery._level > STATUS_CRITICAL && info.level <= STATUS_CRITICAL) { 
                     // Fire critical battery event
                     cordova.fireWindowEvent("batterycritical", info);
                 }
@@ -194,7 +194,7 @@ module.exports = CameraPopoverHandle;
 
 var Camera = require('cordova-plugin-camera.Camera');
 
-/**
+/** 
  * @namespace navigator
  */
 
@@ -730,7 +730,7 @@ module.exports = ContactField;
  * @constructor
  * @param filter used to match contacts against
  * @param multiple boolean used to determine if more than one contact should be returned
- * @param desiredFields
+ * @param desiredFields 
  * @param hasPhoneNumber boolean used to filter the search and only return contacts that have a phone number informed
  */
 
@@ -1033,7 +1033,7 @@ var contacts = {
             exec(win, errorCB, "Contacts", "search", [fields, options]);
         }
     },
-
+    
     /**
      * This function picks contact from phone using contact picker UI
      * @returns new Contact object
@@ -1106,7 +1106,7 @@ module.exports = {
         if (value !== null) {
             try {
               contact.birthday = new Date(parseFloat(value));
-
+              
               //we might get 'Invalid Date' which does not throw an error
               //and is an instance of Date.
               if (isNaN(contact.birthday.getTime())) {
@@ -3324,7 +3324,7 @@ FileWriter.prototype.write = function(data, isPendingBlobReadResult) {
         // create a plain array, using the keys from the Uint8Array view so that we can serialize it
         data = Array.apply(null, new Uint8Array(data));
     }
-
+    
     // Throw an exception if we are already writing a file
     if (this.readyState === FileWriter.WRITING && !isPendingBlobReadResult) {
         throw new FileError(FileError.INVALID_STATE_ERR);
@@ -3796,7 +3796,7 @@ module.exports = {
             if (!/^\//.test(path)) {
                 path = '/' + path;
             }
-
+            
             var m = /\?.*/.exec(nativeUrl);
             if (m) {
                 path += m[0];
@@ -4270,7 +4270,7 @@ module.exports = {
 /*global cordova,window,console*/
 /**
  * An Image Picker plugin for Cordova
- *
+ * 
  * Developed by Wymsee for Sync OnSet
  */
 
@@ -4282,7 +4282,7 @@ var ImagePicker = function() {
 *	success - success callback
 *	fail - error callback
 *	options
-*		.maximumImagesCount - max images to be selected, defaults to 15. If this is set to 1,
+*		.maximumImagesCount - max images to be selected, defaults to 15. If this is set to 1, 
 *		                      upon selection of a single image, the plugin will return it.
 *		.width - width to resize image to (if one of height/width is 0, will resize to fit the
 *		         other while keeping aspect ratio, if both height and width are 0, the full size
@@ -4294,7 +4294,7 @@ ImagePicker.prototype.getPictures = function(success, fail, options) {
 	if (!options) {
 		options = {};
 	}
-
+	
 	var params = {
 		maximumImagesCount: options.maximumImagesCount ? options.maximumImagesCount : 15,
 		width: options.width ? options.width : 0,
@@ -5289,41 +5289,7 @@ channel.onCordovaReady.subscribe(function() {
 
 module.exports = me;
 
-},{"cordova":"cordova","cordova/channel":"cordova/channel","cordova/exec":"cordova/exec","cordova/utils":"cordova/utils"}],"cordova-plugin-touch-id.TouchID":[function(require,module,exports){
-function TouchID() {
-}
-
-TouchID.prototype.isAvailable = function (successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "TouchID", "isAvailable", []);
-};
-
-TouchID.prototype.didFingerprintDatabaseChange = function (successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "TouchID", "didFingerprintDatabaseChange", []);
-};
-
-TouchID.prototype.verifyFingerprint = function (message, successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "TouchID", "verifyFingerprint", [message]);
-};
-
-TouchID.prototype.verifyFingerprintWithCustomPasswordFallback = function (message, successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "TouchID", "verifyFingerprintWithCustomPasswordFallback", [message]);
-};
-
-TouchID.prototype.verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel = function (message, enterPasswordLabel, successCallback, errorCallback) {
-  cordova.exec(successCallback, errorCallback, "TouchID", "verifyFingerprintWithCustomPasswordFallbackAndEnterPasswordLabel", [message, enterPasswordLabel]);
-};
-
-TouchID.install = function () {
-  if (!window.plugins) {
-    window.plugins = {};
-  }
-
-  window.plugins.touchid = new TouchID();
-  return window.plugins.touchid;
-};
-
-cordova.addConstructor(TouchID.install);
-},{}],"cordova-plugin-wechat.Wechat":[function(require,module,exports){
+},{"cordova":"cordova","cordova/channel":"cordova/channel","cordova/exec":"cordova/exec","cordova/utils":"cordova/utils"}],"cordova-plugin-wechat.Wechat":[function(require,module,exports){
 var exec = require('cordova/exec');
 
 module.exports = {
@@ -5434,7 +5400,7 @@ module.exports = {
      *     info: 'gh_xxxxxxx', // 公众帐号原始ID
      *     type:  'Normal' // 普通号
      * }
-     * or
+     * or 
      * var params = {
      *     info: 'extMsg', // 相关的硬件二维码串
      *     type:  'Device' // 硬件号
@@ -5470,35 +5436,7 @@ module.exports = {
     }
 };
 
-},{"cordova/exec":"cordova/exec"}],"cordova-plugin-zip.Zip":[function(require,module,exports){
-var exec = cordova.require('cordova/exec');
-
-function newProgressEvent(result) {
-    var event = {
-            loaded: result.loaded,
-            total: result.total
-    };
-    return event;
-}
-
-exports.unzip = function(fileName, outputDirectory, callback, progressCallback) {
-    var win = function(result) {
-        if (result && typeof result.loaded != "undefined") {
-            if (progressCallback) {
-                return progressCallback(newProgressEvent(result));
-            }
-        } else if (callback) {
-            callback(0);
-        }
-    };
-    var fail = function(result) {
-        if (callback) {
-            callback(-1);
-        }
-    };
-    exec(win, fail, 'Zip', 'unzip', [fileName, outputDirectory]);
-};
-},{}],"cordova-sqlite-storage.SQLitePlugin":[function(require,module,exports){
+},{"cordova/exec":"cordova/exec"}],"cordova-sqlite-storage.SQLitePlugin":[function(require,module,exports){
 (function() {
   var DB_STATE_INIT, DB_STATE_OPEN, READ_ONLY_REGEX, SQLiteFactory, SQLitePlugin, SQLitePluginTransaction, SelfTest, argsArray, dblocations, iosLocationMap, newSQLError, nextTick, root, txLocks;
 
@@ -8472,24 +8410,6 @@ module.exports = [
     ]
   },
   {
-    "file": "www/TouchID.js",
-    "id": "cordova-plugin-touch-id.TouchID",
-    "name": "TouchID",
-    "pluginId": "cordova-plugin-touch-id",
-    "clobbers": [
-      "window.plugins.touchid"
-    ]
-  },
-  {
-    "file": "zip.js",
-    "id": "cordova-plugin-zip.Zip",
-    "name": "Zip",
-    "pluginId": "cordova-plugin-zip",
-    "clobbers": [
-      "zip"
-    ]
-  },
-  {
     "file": "www/wechat.js",
     "id": "cordova-plugin-wechat.Wechat",
     "name": "Wechat",
@@ -8527,8 +8447,6 @@ module.exports.metadata = {
   "cordova-plugin-console": "1.0.7",
   "cordova-plugin-battery-status": "1.2.4",
   "cordova-sqlite-storage": "2.0.4",
-  "cordova-plugin-touch-id": "3.2.0",
-  "cordova-plugin-zip": "3.1.0",
   "cordova-plugin-wechat": "2.0.0",
   "cordova-plugin-image-picker": "1.1.1"
 };
