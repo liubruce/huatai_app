@@ -1024,7 +1024,7 @@ export const delletter = (body = {}) => {
     body = tool.behavior(body, 'privatelettdeleter', 'button')
     return new Promise((resolve, reject) => {
         sfetch.get({
-            url: `${api_Ip}/appprivateletter/ appdelletter`,
+            url: `${api_Ip}/appprivateletter/appdelletter`,
             body
         }).then((data) => {
             if (data.ok) {

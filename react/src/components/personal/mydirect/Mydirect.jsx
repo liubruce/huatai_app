@@ -36,7 +36,7 @@ class Mydirect extends React.Component{
 	}
 	delletter(Id){
 		tool.loading(this,true);
-		fetch.delletter({privateletterId:Id}).then((data)=>{
+		api.delletter({privateletterId:Id}).then((data)=>{
 			if(data.result === 'RC100'){
 				this.setState({
                     pageNo:1,
@@ -83,29 +83,31 @@ class Mydirect extends React.Component{
 		        </header>
                 <div className="warpper">
 					<Spin spinning={this.state.loading}>
-					<div style={{minHeight:'300px'}} className="am-panel talk-lists">
 						{this.state.privateLetterRusult.map((item,index)=>{
-								return(
-									<div  key={index}>
-									<Link  onClick={()=>{this.routers(item.privateletterId)}}>
-										<div className="talk-pepole">
-											<div className="name-time">
-												<p>和{item.userRealName}对话</p>
-												<span>{tool.formatTimestamp(item.createTime)}</span>
-											</div>
-										</div>
-										<div className="talk-cont"><p>{tool.subString(item.privateletterNote,25)}</p></div>
-										{
-												item.operationState === '1'?
-										        <div className="no-read">未读</div>:<span style={{background:'#fff'}}></span>
-										}
-									</Link>
-									<i className="fa fa-close" style={{position:'absolute',right:'10px',top:'10px'}} onClick={()=>{this.delletter(item.privateletterId)}}></i>
-									</div>
-								)
-						})
+							return(
+								<div className="am-panel talk-lists">
+											
+												<div  key={index}>
+												<Link  onClick={()=>{this.routers(item.privateletterId)}}>
+													<div className="talk-pepole">
+														<div className="name-time">
+															<p>和{item.userRealName}对话</p>
+															<span>{tool.formatTimestamp(item.createTime)}</span>
+														</div>
+													</div>
+													<div className="talk-cont"><p>{tool.subString(item.privateletterNote,25)}</p></div>
+													{
+															item.operationState === '1'?
+															<div className="no-read">未读</div>:<span style={{background:'#fff'}}></span>
+													}
+												</Link>
+												<i className="fa fa-close" style={{position:'absolute',right:'10px',top:'10px'}} onClick={()=>{this.delletter(item.privateletterId)}}></i>
+												</div>
+											
+								</div>
+					         )
+					})
 						}
-					</div>
 					</Spin>
             </div>
             </div>
