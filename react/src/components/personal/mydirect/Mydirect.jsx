@@ -11,7 +11,8 @@ class Mydirect extends React.Component{
 			 loading:false,
              totalPage:1,
              pageNo:1,
-			 privateLetterRusult:[]
+			 privateLetterRusult:[],
+			 privateletterId:''
 		}
 	}
 	componentDidMount() {
@@ -101,7 +102,7 @@ class Mydirect extends React.Component{
 															<div className="no-read">未读</div>:<span style={{background:'#fff'}}></span>
 													}
 												</Link>
-												<i className="fa fa-close" style={{position:'absolute',right:'10px',top:'10px'}} onClick={()=>{this.delletter(item.privateletterId)}}></i>
+												<i className="fa fa-close" style={{position:'absolute',right:'10px',top:'10px'}} data-am-modal="{target: '#my-confirm'}" onClick={()=>{this.setState({privateletterId:item.privateletterId})}}></i>
 												</div>
 											
 								</div>
@@ -109,6 +110,16 @@ class Mydirect extends React.Component{
 					})
 						}
 					</Spin>
+
+					<div className="am-modal am-modal-confirm" tabIndex="-1" id="my-confirm">
+					<div className="am-modal-dialog">
+						<div className="am-modal-hd">是否确定要删除该对话</div>
+						<div className="am-modal-footer">
+							<span className="am-modal-btn" data-am-modal-cancel>取消</span>
+							<span className="am-modal-btn" data-am-modal-confirm onClick={()=>{this.delletter(this.state.privateletterId)}}>确定</span>
+						</div>
+					</div>
+				</div>
             </div>
             </div>
 		)
