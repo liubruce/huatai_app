@@ -1102,3 +1102,45 @@ export const appsendLetter = (body) => {
         });
     });
 }
+/*
+*appELearning/appCourse/appSelectExamDetail查看课程考试详情
+ */
+export const appSelectExamDetail = (body) => {
+    body = tool.behavior(body, 'mainPage', 'menu')
+    let url = `${lesson_api_IP}/appELearning/appCourse/appSelectExamDetail`;
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: url,
+            timeout: 8000,
+            body: body,
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
+/*
+*appELearning/appCourse/appSelectBigTestExamDetail查看综合答题历史信息
+*/
+export const appSelectBigTestExamDetail = (body = {}) => {
+    body = tool.behavior(body, 'mainPage', 'menu')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${lesson_api_IP}/appELearning/appCourse/appSelectBigTestExamDetail`,
+            body,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+
+}

@@ -22,6 +22,7 @@ import CourseDetail from '../components/courseDetail/CourseDetail.jsx'
 import AnswerOnline from '../components/courseDetail/answerOnline/AnswerOnline.jsx'
 import TestPaper from '../components/courseDetail/testPaper/TestPaper.jsx'
 import RandomPaper from '../components/courseDetail/randomPaper/RandomPaper.jsx'
+import Answerhistory from '../components/courseDetail/answerhistory/Answerhistory.jsx'
 import PubArticle from '../components/pubArticle/PubArticle.jsx'
 import StudentTop from '../components/studentTop/StudentTop.jsx'
 import CourseTop from '../components/courseTop/CourseTop.jsx'
@@ -41,6 +42,7 @@ const personalRoutes = (
             <Route path='/App/Course/AnswerOnline/:id' component={AnswerOnline}/>
             <Route path='/App/Course/TestPaper/:id' component={TestPaper}/>
             <Route path='/App/Course/RandomPaper/:id' component={RandomPaper}/>
+            <Route path='/App/Course/Answerhistory/:id(/:code)' component={Answerhistory}/>
             <Route path='/App/PersonalCenter/Library' component={Library}/>
             <Route path='/App/PersonalCenter/PointShop' component={PointShop}/>
             <Route path='/App/PersonalCenter/PointDetail' component={PointDetail}/>

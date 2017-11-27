@@ -39,14 +39,23 @@ class Guide extends React.Component {
         dots: false,
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
-        className:'index-slider'
+        className:'guide-slider',
+        beforeChange: function(currentSlide, nextSlide) {
+            console.log(currentSlide)
+            if(currentSlide===2){
+                 hashHistory.push("/");
+            }
+          },
         };
 		return(
             <div>
               <Slider {...settings}>
-               <img className="theme"/>
-               <img className="cover"/>
-               <img className="guide"/>
+               <img alt='test' src={require('../../style/images/theme@3x.jpg')} />
+               <img alt='test' src={require('../../style/images/cover@3x.jpg')} />
+               <img alt='test' src={require('../../style/images/guide@3x.jpg')} />
+               {/*<div className="theme"/>
+               <div className="cover"/>
+               <div className="guide"/>*/}
              </Slider>
             </div>
 			)

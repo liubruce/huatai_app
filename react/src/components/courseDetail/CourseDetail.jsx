@@ -19,7 +19,7 @@ class CourseDetail extends React.Component {
             titleList: [],
             showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
             percent: 0,
-            answerScore:0
+            answerScore:0,
         }
     }
 
@@ -246,8 +246,9 @@ class CourseDetail extends React.Component {
                     :
                     <a className="am-btn am-btn-block btn-border test-btn">视频播放完成后答题</a>
                 }
-
-
+                {
+                   this.state.answerScore===-1?null:<Link to={`/App/Course/Answerhistory/${course.courseId}/1`} className="am-btn am-btn-block btn-border">查看答题历史</Link>
+                }
 				</div>
                 : null}
 				

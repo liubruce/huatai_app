@@ -19,7 +19,6 @@ class AnswerOnline extends React.Component{
 			point:0
 		}
 	}
-
 	componentWillMount() {
 		let body = {
 			courseId: this.props.params.id
