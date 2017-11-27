@@ -228,13 +228,16 @@ class CourseDetail extends React.Component {
 				</div>
 				{course.goodCourse !== '1' ?
                 <div>
-                <Link to={"/PrivateTheme/"+ course.createUser} 
-                style={{position: 'absolute',
-                right: '16px',top: '286px',
-                display: 'block',
-                border: '1px solid #0084C7',
-                color: '#0084C7',padding: '2px 5px',
-                borderRdius: '5px'}}>私信TA</Link>
+                {
+                    localStorage.getItem('channelId')==='4'?
+                    <Link to={"/PrivateTheme/"+ course.createUser} 
+                        style={{position: 'absolute',
+                        right: '16px',top: '286px',
+                        display: 'block',
+                        border: '1px solid #0084C7',
+                        color: '#0084C7',padding: '2px 5px',
+                        borderRdius: '5px'}}>私信TA</Link>:null
+                }
                 {this.state.answerScore === 5?
                     <a className="am-btn am-btn-block btn-border test-btn">您已通过此课程</a>
                     :

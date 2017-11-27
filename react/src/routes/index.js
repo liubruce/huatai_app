@@ -13,6 +13,7 @@ import App from '../components/App.jsx'
 import NotFoundPage from '../components/notfound/NotFoundPage.jsx'
 import Index from '../components/index/Index.jsx'
 import Login from '../components/login/Login.jsx'
+import Guide from '../components/guide/Guide.jsx'
 import Course from '../components/course/Course.jsx'
 import Article from '../components/article/Article.jsx'
 import personalRoutes from './personal'
@@ -27,6 +28,7 @@ const start_render = () => {
          <Route path='/' component={App}>
              <IndexRoute component={Index} />
              <Route path='/Index' component={Index} />
+             <Route path='/Guide' component={Guide} />
              <Route path='/Course' component={Course} />
              <Route path='/Article' component={Article} />
              <Route path='/Library' component={Library}/>
