@@ -136,7 +136,13 @@ class Index extends React.Component {
       infinite: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
-      className:'index-slider'
+      className: 'index-slider',
+      beforeChange: function(currentSlide, nextSlide) {
+        // console.log('before change', currentSlide);
+      },
+      afterChange: function(currentSlide, nextSlide) {
+        // console.log('after change', currentSlide);
+      },
     };
 		return (
         <div className="warpper">
