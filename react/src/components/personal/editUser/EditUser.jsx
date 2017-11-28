@@ -106,7 +106,7 @@ class EditUser extends React.Component{
         let headPath=this.state.headPath;
 		return(
 			<div className="warpper">
-                <Spin spinning={this.state.loading} tip="加载列表中...">
+                <Spin spinning={this.state.loading}>
                 <div className="am-panel">
 
 					{this.state.headPath||this.state.headPath===null?
