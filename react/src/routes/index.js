@@ -46,12 +46,6 @@ const start_render = () => {
 if (tool.isPc) {
     start_render();
 } else {
-    
-    // document.addEventListener('deviceready', () => {
-    //     console.log('elearning------OUR APP deviceready')
-    //     start_render();
-    // }, false);
-
     document.addEventListener('deviceready', () => {
         console.log('elearning APP deviceready')
         if (tool.sino_cordova_checkApp().device === 'IOS') {
@@ -70,7 +64,6 @@ if (tool.isPc) {
             navigator.notification.alert(
                 '获取菜单失败: ' + message,
                 () => {
-                    // window.location.href = tool.exit_url;
                     console.log('elearning 获取菜单失败')
                 },
                 '提示',

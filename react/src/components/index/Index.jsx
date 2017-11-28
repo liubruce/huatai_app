@@ -36,28 +36,33 @@ class Index extends React.Component {
     this.state = {
       courseList: [],
       articleList: [],
-      score:0,
-      loading:false,
+      score: 0,
+      loading: false,
       now_item: {
-				studyIntegral:0
-			},
-      channelId:'',
+        studyIntegral: 0
+      },
+      channelId: '',
     }
   }
   componentWillMount() {
     this.show();
   }
   show() {
+    let isFrist = localStorage.getItem('isFirst');
+    if (isFrist !== 'true') {
+      hashHistory.push('/Guide');
+      return;
+    }
     tool.loading(this, true);
     api.homeIndex().then((data) => {
       if (data.result === 'RC100') {
         this.setState({
           courseList: data.goodCourseList,
           articleList: data.goodEssayList,
-          score:data.score,
-          channelId:data.channelId,
-        },()=>{
-          localStorage.setItem('channelId',this.state.channelId);
+          score: data.score,
+          channelId: data.channelId,
+        }, () => {
+          localStorage.setItem('channelId', this.state.channelId);
         })
       } else {
         message.error(data.errMsg, 3);
@@ -68,57 +73,57 @@ class Index extends React.Component {
       tool.reject(res);
     })
   }
-   jump(item) {
-		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-			hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
-			return;
-		}
-		this.setState({
-			now_item: item
-		})
-	}
+  jump(item) {
+    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+      hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
+      return;
+    }
+    this.setState({
+      now_item: item
+    })
+  }
   ok() {
-		let body = {
-			courseId: this.state.now_item.courseId
-		}
-		api.cashcourse(body).then((data) => {
-			if (data.result === 'RC100') {
-				hashHistory.push(`/App/Course/courseDetail/${this.state.now_item.courseId}`);
-			} else {
-				message.error(data.errMsg, 1);
-			}
-			tool.loading(this, false);
-		}, (res) => {
-			tool.loading(this, false);
-			tool.reject(res);
-		})
-	}
-  action(courseId,recordType){
-		let body = {
-			courseId,
-			recordType
-		};
-		api.operatecourse(body).then((data) => {
-			if (data.result === 'RC100') {
-				this.show();
-			} else {
-				message.error(data.errMsg, 1);
-			}
-			tool.loading(this, false);
-		}, (res) => {
-			tool.loading(this, false);
-			tool.reject(res);
-		})
-	}
-  click(item){
-		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-			this.action(item.courseId,2);
-			return;
-		}
-		this.setState({
-			now_item: item
-		})
-	}
+    let body = {
+      courseId: this.state.now_item.courseId
+    }
+    api.cashcourse(body).then((data) => {
+      if (data.result === 'RC100') {
+        hashHistory.push(`/App/Course/courseDetail/${this.state.now_item.courseId}`);
+      } else {
+        message.error(data.errMsg, 1);
+      }
+      tool.loading(this, false);
+    }, (res) => {
+      tool.loading(this, false);
+      tool.reject(res);
+    })
+  }
+  action(courseId, recordType) {
+    let body = {
+      courseId,
+      recordType
+    };
+    api.operatecourse(body).then((data) => {
+      if (data.result === 'RC100') {
+        this.show();
+      } else {
+        message.error(data.errMsg, 1);
+      }
+      tool.loading(this, false);
+    }, (res) => {
+      tool.loading(this, false);
+      tool.reject(res);
+    })
+  }
+  click(item) {
+    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+      this.action(item.courseId, 2);
+      return;
+    }
+    this.setState({
+      now_item: item
+    })
+  }
   componentDidMount() {
     let arriveTime = localStorage.getItem("arriveTime");
     let loadTime = new Date().getTime();
@@ -136,13 +141,7 @@ class Index extends React.Component {
       infinite: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
-      className: 'index-slider',
-      beforeChange: function(currentSlide, nextSlide) {
-        // console.log('before change', currentSlide);
-      },
-      afterChange: function(currentSlide, nextSlide) {
-        // console.log('after change', currentSlide);
-      },
+      className: 'index-slider'
     };
 		return (
         <div className="warpper">

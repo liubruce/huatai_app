@@ -8,8 +8,8 @@ import { getFile_IP } from './serverIp'
 export const camera = () => {
     return new Promise((resolve, reject) => {
         navigator.camera.getPicture((imageData) => {
-            resolve(imageData)
-        },
+                resolve(imageData)
+            },
             (error) => {
                 reject(error);
             }, {
@@ -53,25 +53,6 @@ export const dataURItoBlob = (base64Data) => {
     });
 }
 export const convertImgToBase64URL = (imgUrl) => {
-
-    // function convertImgToDataURLviaCanvas(url, callback, outputFormat) {
-    //     var img = new Image();
-    //     img.crossOrigin = 'Anonymous';
-    //     img.onload = function() {
-    //         var canvas = document.createElement('CANVAS');
-    //         var ctx = canvas.getContext('2d');
-    //         var dataURL;
-    //         canvas.height = this.height;
-    //         canvas.width = this.width;
-    //         ctx.drawImage(this, 0, 0);
-    //         dataURL = canvas.toDataURL(outputFormat);
-    //         callback(dataURL);
-    //         canvas = null;
-    //     };
-    //     img.src = url;
-    // }
-    // var convertFunction = convertImgToDataURLviaCanvas;
-
     function convertFileToDataURLviaFileReader(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onload = function() {
@@ -87,12 +68,15 @@ export const convertImgToBase64URL = (imgUrl) => {
     }
     var convertFunction = convertFileToDataURLviaFileReader;
 
-
     return new Promise((resolve, reject) => {
         convertFunction(imgUrl, function(base64Img) {
             resolve(base64Img)
         })
     });
+}
+
+export const orient = () => {
+    return window.orientation === 90;
 }
 export const sino_cordova_checkApp = () => {
     // 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本
@@ -332,7 +316,7 @@ export const url_parameter = (data) => {
     }
     toString = "?" + toString;
     return toString;
-// return toString.replace(/$/, "");
+    // return toString.replace(/$/, "");
 }
 export const url_format = (url, operationType, behaviorDataType, body = {}) => {
     return url + url_parameter(behavior(body, operationType, behaviorDataType));
@@ -346,53 +330,53 @@ export const getFile = (fileName) => {
 export const getAnswer = (num) => {
     let answer = []
     switch (num) {
-    case 1:
-        answer = [0];
-        break;
-    case 2:
-        answer = [1];
-        break;
-    case 4:
-        answer = [2];
-        break;
-    case 8:
-        answer = [3];
-        break;
-    case 3:
-        answer = [0, 1];
-        break;
-    case 5:
-        answer = [0, 2];
-        break;
-    case 9:
-        answer = [0, 3];
-        break;
-    case 6:
-        answer = [1, 2];
-        break;
-    case 10:
-        answer = [1, 3];
-        break;
-    case 12:
-        answer = [2, 3];
-        break;
-    case 7:
-        answer = [0, 1, 2];
-        break;
-    case 11:
-        answer = [0, 1, 3];
-        break;
-    case 13:
-        answer = [0, 2, 3];
-        break;
-    case 14:
-        answer = [1, 2, 3];
-        break;
-    case 15:
-        answer = [0, 1, 2, 3];
-        break;
-    default:
-        break;
+        case 1:
+            answer = [0];
+            break;
+        case 2:
+            answer = [1];
+            break;
+        case 4:
+            answer = [2];
+            break;
+        case 8:
+            answer = [3];
+            break;
+        case 3:
+            answer = [0, 1];
+            break;
+        case 5:
+            answer = [0, 2];
+            break;
+        case 9:
+            answer = [0, 3];
+            break;
+        case 6:
+            answer = [1, 2];
+            break;
+        case 10:
+            answer = [1, 3];
+            break;
+        case 12:
+            answer = [2, 3];
+            break;
+        case 7:
+            answer = [0, 1, 2];
+            break;
+        case 11:
+            answer = [0, 1, 3];
+            break;
+        case 13:
+            answer = [0, 2, 3];
+            break;
+        case 14:
+            answer = [1, 2, 3];
+            break;
+        case 15:
+            answer = [0, 1, 2, 3];
+            break;
+        default:
+            break;
     }
     return answer;
 }
@@ -547,7 +531,8 @@ export const downFile = (filename, that) => {
         var path = window.cordova.file.dataDirectory + filename;
         navigator.fileTransfer.download(
             uri,
-            path, function(entry) {
+            path,
+            function(entry) {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
@@ -556,7 +541,8 @@ export const downFile = (filename, that) => {
                     '下载成功',
                     'OK'
                 );
-            }, function(error) {
+            },
+            function(error) {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
@@ -611,14 +597,13 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 export const checkLogin = (data) => {
     if (data.result === "RC500") {
         if (sino_cordova_checkApp().device === 'Browser') {
-            // this.exit();
-            hashHistory.push('/Login');
+            // hashHistory.push('/Login');
         }
     }
 }
 //文章显示
 export const subString = (string, subLength) => {
-    if (typeof (string) !== 'string') {
+    if (typeof(string) !== 'string') {
         return '';
     }
     if (string.length > subLength) {
