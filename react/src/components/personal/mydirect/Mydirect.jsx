@@ -86,9 +86,9 @@ class Mydirect extends React.Component{
 					<Spin spinning={this.state.loading}>
 						{this.state.privateLetterRusult.map((item,index)=>{
 							return(
-								<div className="am-panel talk-lists">
+								<div  key={index} className="am-panel talk-lists">
 											
-												<div  key={index}>
+												<div>
 												<Link  onClick={()=>{this.routers(item.privateletterId)}}>
 													<div className="talk-pepole">
 														<div className="name-time">
