@@ -22,7 +22,6 @@ class Login extends React.Component {
         localStorage.setItem("user", JSON.stringify(user));
         tool.save_user();
         hashHistory.push("/");
-      // hashHistory.push("/Guide");
       } else {
         message.error(_data.errMsg, 3);
       }
