@@ -103,11 +103,12 @@ class MydirectDetails extends React.Component{
 		let userCode  = tool.user.userCode
 		return(
 			<div> 
-            <header className="header">
-			<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
-			<h1>我的私信</h1>
-			<span className="refresh" onClick={()=>{this.refresh()}}></span>
-		</header>
+				{tool.isIOS?<div className='ios-header' ></div>:null}
+				<header className="header">
+					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+					<h1>我的私信</h1>
+					<span className="refresh" onClick={()=>{this.refresh()}}></span>
+				</header>
 		<div className="warpper" style={{paddingBottom: '100px'}}>
 			<Spin spinning={this.state.loading} tip="加载列表中...">
 				<div className="am-panel talk-lists">
