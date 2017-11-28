@@ -46,8 +46,8 @@ class AnswerOnline extends React.Component{
 						}
 						let answer = tool.getAnswer(single[i].chooseAnswer);
 						$(this).find("input[type='radio']").each((index, el) => {
-							for(let x of answer){
-								if(x === index){
+							for(let i in answer){
+								if(answer[i] === index){
 									el.checked = true;
 								}
 							}
@@ -64,8 +64,8 @@ class AnswerOnline extends React.Component{
 							
 							$(this).find("input[type='checkbox']").each((index, el) => {
 								
-								for(let x of answer){
-									if(x === index){
+								for(let i in answer){
+									if(answer[i] === index){
 										el.checked = true;
 									}
 								}
@@ -109,8 +109,8 @@ class AnswerOnline extends React.Component{
 						}
 						let answer = tool.getAnswer(single[i].chooseAnswer);
 						$(this).find("input[type='radio']").each((index, el) => {
-							for(let x of answer){
-								if(x === index){
+							for(let i in answer){
+								if(answer[i] === index){
 									el.checked = true;
 								}
 							}
@@ -127,8 +127,8 @@ class AnswerOnline extends React.Component{
 							
 							$(this).find("input[type='checkbox']").each((index, el) => {
 								
-								for(let x of answer){
-									if(x === index){
+								for(let i in answer){
+									if(answer[i] === index){
 										el.checked = true;
 									}
 								}

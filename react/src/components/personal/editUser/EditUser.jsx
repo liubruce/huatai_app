@@ -36,9 +36,14 @@ class EditUser extends React.Component{
 		this.show()
 	}
 	seifInformation(event) {
-		this.setState({
+	// if(event.target.value.length>=45){
+	// 	message.error('个人感悟字数不能超过45！请重新输入', 3);
+	// 	return;
+	// }else{
+        this.setState({
 			seifInformation: event.target.value,
 		})
+	//}
 	}
 	getPicture(flag) {
 		window.jquery('#choose-head-action').modal('close');
