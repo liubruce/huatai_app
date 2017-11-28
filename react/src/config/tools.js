@@ -597,7 +597,7 @@ export const shouldComponentUpdate = (nextProps = {}, nextState = {}, thisProps 
 export const checkLogin = (data) => {
     if (data.result === "RC500") {
         if (sino_cordova_checkApp().device === 'Browser') {
-            // hashHistory.push('/Login');
+            hashHistory.push('/Login');
         }
     }
 }
