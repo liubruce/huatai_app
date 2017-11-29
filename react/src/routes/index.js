@@ -21,6 +21,10 @@ import * as tool from '../config/tools'
 import Library from '../components/personal/library/Library.jsx'
 import MydirectDetails from '../components/mydirectDetails/MydirectDetails.jsx'
 import PrivateTheme from '../components/privateTheme/PrivateTheme.jsx'
+import initReactFastclick from 'react-fastclick';
+import registerServiceWorker from './registerServiceWorker'
+
+initReactFastclick();
 const start_render = () => {
     render(
         <Router history={hashHistory}>
@@ -72,5 +76,5 @@ if (tool.isPc) {
         })
     }, false);
 }
-
+registerServiceWorker()
 

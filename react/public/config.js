@@ -1,5 +1,6 @@
 
 //var ip = 'http://uat-egrowth.life.ehuatai.com';
+// var ip = 'http://prod-egrowth.life.ehuatai.com';
 var ip = 'http://sit-egrowth.life.ehuatai.com';
 
 localStorage.setItem("elearning_api_IP", ip + '/api/interworking');
