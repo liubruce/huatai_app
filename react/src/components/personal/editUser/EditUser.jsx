@@ -125,8 +125,8 @@ class EditUser extends React.Component{
 					accept="image/*"
 					>*/}
                     <label
-                    onClick={()=>{window.jquery('#choose-head-action').modal('open');}}
-                    //data-am-modal="{target: '#choose-head-action'}"
+                    //onClick={()=>{window.jquery('#choose-head-action').modal('open');}}
+                    data-am-modal="{target: '#choose-head-action'}"
                      style={{display: 'block',width: '100px',padding: '5px 10px',margin: '10px auto',backgroundColor: '#0081d7',color: '#FFFFFF',textAlign: 'center',borderRadius: '5px'}} >更换头像</label>
 		{/*			</Dropzone>*/}
 				   
@@ -146,7 +146,7 @@ class EditUser extends React.Component{
                     <button type="button" onClick={this.onSubmit.bind(this)} className="submit-btn">保&emsp;存</button>
                 </div>
 
-                           <div className="am-modal-actions" id="choose-head-action">
+          <div className="am-modal-actions" id="choose-head-action">
              <div className="am-modal-actions-group">
                <ul className="am-list">
                  <li className="am-modal-actions-header" onClick={()=>this.getPicture(true)} >拍照</li>

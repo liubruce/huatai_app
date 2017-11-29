@@ -3,6 +3,65 @@ import './guide.less'
 import { hashHistory } from 'react-router';
 import Slider from 'react-slick';
 import * as tool from '../../config/tools'
+import $ from 'jquery'
+class Page1 extends React.Component {
+  constructor(args) {
+    super();
+  }
+
+  render(){
+    return(
+        <div className="guide-container">
+          <div className="guide-word">
+            <p>主题<br/>: 勤学以用,蜂行天下</p>
+            <p>精神<br/>: 勤奋/好学/探索/提高</p>
+          </div>
+          <img alt='guide' src={require('../../style/images/logo@2x.png')} />
+        </div>
+      )
+  }
+}
+class Page2 extends React.Component {
+  constructor(args) {
+    super();
+  }
+
+  render(){
+    return(
+    <div className="guide-container">
+      <div className="guide-word">
+        <p className='title'>蜂行者&not;楔子
+        <span>&not;</span></p>
+        <p>一花一世界,一木一浮生;</p>
+        <p>一草一天堂,一叶一如来;</p>
+        <p>一砂一极乐,一方一净土;</p>
+        <p>一笑一尘缘,一念一清静</p>
+      </div>
+      <img alt='guide' src={require('../../style/images/logo@2x.png')} />
+    </div>
+      )
+  }
+}
+class Page3 extends React.Component {
+  constructor(args) {
+    super();
+  }
+
+  render(){
+    return(
+    <div className="guide-container-blue">
+      <div className="star star-1"><img src={require('../../style/images/avter-1@2x.png')} /></div>
+      <div className="star star-2"><img src={require('../../style/images/avter-2@2x.png')} /></div>
+      <div className="star star-3"><img src={require('../../style/images/avter-3@2x.png')} /></div>
+      <div className="star star-4"><img src={require('../../style/images/avter-4@2x.png')} /></div>
+      <div className="star star-5"><img src={require('../../style/images/avter-5@2x.png')} /></div>
+      <div className="star star-6"><img src={require('../../style/images/avter-6@2x.png')} /></div>
+      <p>学习，感知世界<br/>绽放，美丽人生</p>
+      <img src={require('../../style/images/yellow_xq@2x.png')} alt=""/>
+    </div>
+      )
+  }
+}
 const SampleNextArrow = (props) => {
     const {onClick} = props
     return (
@@ -28,28 +87,16 @@ class Guide extends React.Component {
   constructor(args) {
     super()
     this.state = {
-      imgList: [],
       nowSlide: 0
     }
-  }
-  componentWillMount() {
-    let imgList = [];
-    if (!tool.orient()) {
-      imgList.push({src: require('../../style/images/theme@3x.jpg')})
-      imgList.push({src: require('../../style/images/cover@3x.jpg')})
-      imgList.push({src: require('../../style/images/guide@3x.jpg')})
-    }else{
-      imgList.push({src: require('../../style/images/iPad-1@3x.jpg')})
-      imgList.push({src: require('../../style/images/iPad-2@3x.jpg')})
-      imgList.push({src: require('../../style/images/iPad-3@3x.jpg')})
-    }
-    this.setState({
-      imgList
-    })
   }
   goIndex(){
     localStorage.setItem('isFirst', 'true');//judge first in index.jsx
     hashHistory.push('/');
+  }
+  componentDidMount() {
+    $('.guide-page').width($(window).width());
+    $('.guide-page').height($(window).height());
   }
   render() {
     const settings = {
@@ -69,14 +116,14 @@ class Guide extends React.Component {
     };
     return (
       <div className='guide-div'>
-              <Slider {...settings}>
-               {this.state.imgList.map((item,index)=>{
-                return(
-                  <img key={index} alt='' src={item.src} />
-                  )
-               })}
+             <Slider {...settings}>
+                 <div className='guide-page'><Page1 /></div>
+                 <div className='guide-page'><Page2 /></div>
+                 <div className='guide-page'><Page3 /></div>
              </Slider>
-             <div style={{opacity:this.state.nowSlide===2?1:0}} className="float-button" onClick={()=>this.goIndex()} >进入首页</div>
+             <div style={{opacity:this.state.nowSlide===2?1:0}}
+              className="float-button" 
+              onClick={()=>this.goIndex()} >进入首页</div>
       </div>
     )
   }

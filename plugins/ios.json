@@ -18,10 +18,6 @@
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.huatai.ELearning"
         },
-        "cordova-plugin-image-picker": {
-            "PHOTO_LIBRARY_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "com.huatai.ELearning"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.huatai.ELearning"
         },
@@ -43,6 +39,10 @@
         },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "io.HUATAI.ELearning"
+        },
+        "cordova-plugin-image-picker": {
+            "PHOTO_LIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "com.huatai.eLearning"
         }
     },
     "dependent_plugins": {

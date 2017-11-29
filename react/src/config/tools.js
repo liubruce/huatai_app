@@ -32,26 +32,12 @@ export const imagePicker = (num) => {
                 reject(error);
             }, {
                 maximumImagesCount: num,
-                width: 800
+                outputType:1
             }
         );
     });
 }
-export const dataURItoBlob = (base64Data) => {
-    var byteString;
-    if (base64Data.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(base64Data.split(',')[1]);
-    else
-        byteString = unescape(base64Data.split(',')[1]);
-    var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-    return new Blob([ia], {
-        type: mimeString
-    });
-}
+
 export const convertImgToBase64URL = (imgUrl) => {
     function convertFileToDataURLviaFileReader(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -75,8 +61,43 @@ export const convertImgToBase64URL = (imgUrl) => {
     });
 }
 
+
+export const encodeFile = (filePath, sucess, failure, opts) => {
+    try {
+        var _opts = (opts && typeof opts === "object") ? opts : {}; 
+        // var args = { filePath: filePath };
+        var c = document.createElement('canvas');
+        var ctx = c.getContext("2d");
+        var img = new Image();
+        img.onload = function() {
+            var MAX_WIDTH = _opts.max_width || 800;
+            var MAX_HEIGHT =  _opts.max_height || 600;
+            var width = this.width;
+            var height = this.height;
+            if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+            }
+            if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+            }
+            c.width = width;
+            c.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+            var dataUri = c.toDataURL("image/png");
+            sucess(dataUri);
+        };
+        img.onerror = function(e){
+            failure(e);
+        }
+        img.src = filePath;
+    } catch (e){
+        failure(e);
+    }
+}
 export const orient = () => {
-    return window.orientation === 90;
+    return window.orientation === 90 || window.orientation === -90;
 }
 export const sino_cordova_checkApp = () => {
     // 安卓APP 和 IOS APP中增加了自定义UA 用于识别当前的版本

@@ -52,9 +52,16 @@ class PubArticle extends React.Component{
 	}
 	getPicture(flag) {
 		window.jquery('#choose-action').modal('close');
+		if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
+			message.error('最多选择9张图片');
+			return;
+		}
 		if (!flag) {
 			tool.imagePicker(9 - (this.state.essayPhotosPH.length + this.state.essayPhotos.length)).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
+					// tool.encodeFile(imgs[i], (base64)=> {
+					// 	this.addPicture(base64)
+					// });
 					tool.convertImgToBase64URL(imgs[i]).then((url) => {
 						this.addPicture(url)
 					})
@@ -172,7 +179,7 @@ class PubArticle extends React.Component{
 	// }
 	chooseImage() {
 		if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
-			message.error('最多选择9张图片')
+			// message.error('最多选择9张图片')
 		} else {
 			window.jquery('#choose-action').modal('open');
 		}
@@ -222,8 +229,8 @@ class PubArticle extends React.Component{
  							accept="image/*"
  						>	*/}										
 	 						<li><label
-	 						onClick={()=>this.chooseImage()}
-	 						 //data-am-modal="{target: '#choose-action'}"
+	 						//onClick={()=>this.chooseImage()}
+	 						 data-am-modal="{target: '#choose-action'}"
 	 						 className="file-img">+</label></li>
  					{/*</Dropzone>*/}
                     
