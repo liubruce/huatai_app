@@ -21,3 +21,324 @@
     -webkit-transition: opacity .3s linear;
     -o-transition: opacity .3s linear;
 }
+.guide-page{
+    display: inline-block;
+}
+html,
+body {
+    height: 100%
+}
+
+.guide-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(../../style/images/guide_bg@2x.png) no-repeat center top;
+    background-size: cover
+}
+
+.guide-word {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    span {
+        display: block;
+        transform: rotateX(180deg);
+    }
+    .title {
+        margin-left: 20px;
+    }
+}
+
+.guide-word p {
+    float: right;
+    width: 20px;
+    margin-right: 10px;
+    font-size: 2rem
+}
+
+.guide-container img {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 10rem;
+    transform: translateX(-50%);
+}
+
+@media screen and (orientation: landscape) {
+    .guide-container {
+        background: url(../../style/images/iPad_guide_bg@2x.jpg) no-repeat center top;
+        background-size: cover
+    }
+    .guide-container img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .guide-word p {
+        font-size: 1.4rem
+    }
+}
+
+
+
+
+
+.guide-container-blue {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #004F96;
+}
+
+.guide-container-blue>img {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.guide-container-blue>p {
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.guide-container-blue .star {
+    position: absolute;
+    width: 106px;
+    height: 156px;
+}
+
+.guide-container-blue .star img {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    display: block;
+    width: 50px;
+    height: 50px
+}
+
+.guide-container-blue .star-1 {
+    top: 0;
+    left: 25%;
+    background: url(../../style/images/star-1@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-2 {
+    top: 8%;
+    left: 45%;
+    background: url(../../style/images/star-2@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-3 {
+    top: 13%;
+    left: 65%;
+    background: url(../../style/images/star-3@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-4 {
+    top: 24%;
+    left: 10%;
+    background: url(../../style/images/star-4@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-5 {
+    top: 35%;
+    left: 33%;
+    background: url(../../style/images/star-5@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-6 {
+    top: 35%;
+    left: 57%;
+    background: url(../../style/images/star-6@2x.png) no-repeat center;
+    background-size: cover
+}
+
+@media screen and (orientation: landscape) {
+    .guide-container-blue>img {
+        bottom: -180px
+    }
+    .guide-container-blue .star {
+        width: 159px;
+        height: 234px
+    }
+    .guide-container-blue .star img {
+        width: 80px;
+        height: 80px
+    }
+    .guide-container-blue .star-1 {
+        top: 2%;
+        left: 32%;
+    }
+    .guide-container-blue .star-4 {
+        top: 35%;
+        left: 26%;
+    }
+    .guide-container-blue .star-5 {
+        top: 27%;
+        left: 49%;
+    }
+    .guide-container-blue .star-6 {
+        top: 40%;
+        left: 64%;
+    }
+    .guide-container-blue>p {
+        bottom: 30%
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .guide-container-blue .star {
+        width: 80px;
+        height: 117px
+    }
+    .guide-container-blue .star img {
+        width: 35px;
+        height: 35px
+    }
+    .guide-container-blue .star-4 {
+        left: 19%;
+    }
+}
+
+
+
+
+
+
+.guide-container-blue {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #004F96;
+}
+
+.guide-container-blue>img {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.guide-container-blue>p {
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.guide-container-blue .star {
+    position: absolute;
+    width: 106px;
+    height: 156px;
+}
+
+.guide-container-blue .star img {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    display: block;
+    width: 50px;
+    height: 50px
+}
+
+.guide-container-blue .star-1 {
+    top: 0;
+    left: 25%;
+    background: url(../../style/images/star-1@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-2 {
+    top: 8%;
+    left: 45%;
+    background: url(../../style/images/star-2@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-3 {
+    top: 13%;
+    left: 65%;
+    background: url(../../style/images/star-3@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-4 {
+    top: 24%;
+    left: 10%;
+    background: url(../../style/images/star-4@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-5 {
+    top: 35%;
+    left: 33%;
+    background: url(../../style/images/star-5@2x.png) no-repeat center;
+    background-size: cover
+}
+
+.guide-container-blue .star-6 {
+    top: 35%;
+    left: 57%;
+    background: url(../../style/images/star-6@2x.png) no-repeat center;
+    background-size: cover
+}
+
+@media screen and (orientation: landscape) {
+    .guide-container-blue>img {
+        bottom: -180px
+    }
+    .guide-container-blue .star {
+        width: 159px;
+        height: 234px
+    }
+    .guide-container-blue .star img {
+        width: 80px;
+        height: 80px
+    }
+    .guide-container-blue .star-1 {
+        top: 2%;
+        left: 32%;
+    }
+    .guide-container-blue .star-4 {
+        top: 35%;
+        left: 26%;
+    }
+    .guide-container-blue .star-5 {
+        top: 27%;
+        left: 49%;
+    }
+    .guide-container-blue .star-6 {
+        top: 40%;
+        left: 64%;
+    }
+    .guide-container-blue>p {
+        bottom: 30%
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .guide-container-blue .star {
+        width: 80px;
+        height: 117px
+    }
+    .guide-container-blue .star img {
+        width: 35px;
+        height: 35px
+    }
+    .guide-container-blue .star-4 {
+        left: 19%;
+    }
+}

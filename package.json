@@ -41,9 +41,6 @@
                 "CAMERA_USAGE_DESCRIPTION": " ",
                 "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
             },
-            "cordova-plugin-image-picker": {
-                "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
-            },
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-console": {},
@@ -53,7 +50,10 @@
             "cordova-plugin-wechat": {
                 "WECHATAPPID": "wxc6cfcd46b05ef392"
             },
-            "cordova-plugin-android-permissions": {}
+            "cordova-plugin-android-permissions": {},
+            "cordova-plugin-image-picker": {
+                "PHOTO_LIBRARY_USAGE_DESCRIPTION": " "
+            }
         },
         "platforms": [
             "android",
