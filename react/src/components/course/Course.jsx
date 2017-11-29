@@ -15,18 +15,55 @@ class Course extends React.Component {
       pageNo: 1,
       elecReqCourse: 2,
       goodCourse: '',
-      score:0,
-      totalPage:0,
+      score: 0,
+      totalPage: 0,
       now_item: {
-				studyIntegral:0
-			}
+        studyIntegral: 0
+      }
     }
   }
   componentDidMount() {
-    tool.addScroll(this,this.show.bind(this));
+    tool.addScroll(this, this.show.bind(this));
   }
   componentWillUnmount() {
     tool.removeScroll();
+  }
+  componentWillMount() {
+    this.show();
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.location.query.search)
+    this.show();
+  }
+  show(flag) {
+    tool.loading(this, true);
+    let body = {
+      currentPage: this.state.pageNo,
+      elecReqCourse: this.state.elecReqCourse,
+    }
+    let search = tool.getQueryString('search');
+    if(tool.checkInput(search)){
+      body.courseName = search;
+    }
+    api.appStudentSelectCoursePager(body).then((data) => {
+      if (data.result === 'RC100') {
+        tool.loading(this, false);
+        this.setState({
+          courseList: flag ? this.state.courseList.concat(data.coursePage.pageItems) : data.coursePage.pageItems,
+          score: data.score,
+          totalPage: data.coursePage.totalPage
+        })
+      } else {
+        this.setState({
+          courseList: [],
+          totalPage: 0
+        })
+        message.error(data.errMsg, 3);
+      }
+    }, (res) => {
+      tool.loading(this, false);
+      tool.reject(res);
+    })
   }
   changeTab(tab) {
     let elecReqCourse = 0;
@@ -51,38 +88,29 @@ class Course extends React.Component {
       tab,
       elecReqCourse,
       goodCourse,
-      pageNo:1
+      pageNo: 1
     }, () => {
       this.show();
     })
   }
-  componentWillMount() {
-    this.show();
-  }
-  componentWillReceiveProps(nextProps) {
-    this.show();
-  }
-  show(flag) {
-    tool.loading(this, true);
-    let body = {
-      currentPage: this.state.pageNo,
-      courseName: tool.getQueryString('search'),
-      elecReqCourse: this.state.elecReqCourse,
-      // goodCourse: this.state.goodCourse
+  jump(item) {
+    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+      hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
+      return;
     }
-    api.appStudentSelectCoursePager(body).then((data) => {
+    this.setState({
+      now_item: item
+    })
+  }
+  ok() {
+    let body = {
+      courseId: this.state.now_item.courseId
+    }
+    api.cashcourse(body).then((data) => {
       if (data.result === 'RC100') {
-        this.setState({
-          courseList: flag?this.state.courseList.concat(data.coursePage.pageItems):data.coursePage.pageItems,
-          score:data.score,
-          totalPage:data.coursePage.totalPage
-        })
+        hashHistory.push(`/App/Course/courseDetail/${this.state.now_item.courseId}`);
       } else {
-        this.setState({
-          courseList:[],
-          totalPage:0
-        })
-        message.error(data.errMsg, 3);
+        message.error(data.errMsg, 1);
       }
       tool.loading(this, false);
     }, (res) => {
@@ -90,58 +118,32 @@ class Course extends React.Component {
       tool.reject(res);
     })
   }
-
-  jump(item) {
-		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-			hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
-			return;
-		}
-		this.setState({
-			now_item: item
-		})
-	}
-  ok() {
-		let body = {
-			courseId: this.state.now_item.courseId
-		}
-		api.cashcourse(body).then((data) => {
-			if (data.result === 'RC100') {
-				hashHistory.push(`/App/Course/courseDetail/${this.state.now_item.courseId}`);
-			} else {
-				message.error(data.errMsg, 1);
-			}
-			tool.loading(this, false);
-		}, (res) => {
-			tool.loading(this, false);
-			tool.reject(res);
-		})
-	}
-  action(courseId,recordType){
-		let body = {
-			courseId,
-			recordType
-		};
-		api.operatecourse(body).then((data) => {
-			if (data.result === 'RC100') {
-				this.show();
-			} else {
-				message.error(data.errMsg, 1);
-			}
-			tool.loading(this, false);
-		}, (res) => {
-			tool.loading(this, false);
-			tool.reject(res);
-		})
-	}
-  click(item){
-		if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-			this.action(item.courseId,2);
-			return;
-		}
-		this.setState({
-			now_item: item
-		})
-	}
+  action(courseId, recordType) {
+    let body = {
+      courseId,
+      recordType
+    };
+    api.operatecourse(body).then((data) => {
+      if (data.result === 'RC100') {
+        this.show();
+      } else {
+        message.error(data.errMsg, 1);
+      }
+      tool.loading(this, false);
+    }, (res) => {
+      tool.loading(this, false);
+      tool.reject(res);
+    })
+  }
+  click(item) {
+    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+      this.action(item.courseId, 2);
+      return;
+    }
+    this.setState({
+      now_item: item
+    })
+  }
 	render(){
 		return(
              <div className="warpper">

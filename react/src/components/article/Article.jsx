@@ -21,11 +21,20 @@ class Article extends React.Component {
   componentWillUnmount() {
     tool.removeScroll();
   }
+  componentWillMount() {
+    this.show();
+  }
+  componentWillReceiveProps(nextProps) {
+    this.show();
+  }
   show(flag){
     tool.loading(this, true);
     let body = {
-      pageno:this.state.pageNo,
-      search:tool.getQueryString('search')
+      pageno:this.state.pageNo
+    }
+    let search = tool.getQueryString('search');
+    if(tool.checkInput(search)){
+      body.search = search;
     }
     api.essaylist(body).then((data)=>{
       tool.loading(this, false);
@@ -42,12 +51,6 @@ class Article extends React.Component {
       tool.loading(this, false);
       tool.reject(res);
     })
-  }
-  componentWillMount() {
-    this.show();
-  }
-  componentWillReceiveProps(nextProps) {
-    this.show();
   }
 	render(){
 		return(

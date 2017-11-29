@@ -11,12 +11,13 @@ class Header extends React.Component {
     }
 	}
   componentWillMount() {
-    this.checkUrl(this.props.pathname);
+    this.checkUrl();
   }
   componentWillReceiveProps(nextProps) {
-    this.checkUrl(nextProps.pathname);
+    this.checkUrl();
   }
-  checkUrl(pathname) {
+  checkUrl() {
+    let pathname = this.props.pathname;
     let placeholder = '';
     if (pathname.indexOf('/') !== -1) {
       placeholder = '课程名称';
@@ -38,10 +39,24 @@ class Header extends React.Component {
   submit(e) {
     e.preventDefault();
     let pathname = this.props.pathname;
-    if (pathname.indexOf('/Article') !== -1) {
-      hashHistory.push(`/Article?search=${this.state.inputValue}`);
+    let inputValue = this.state.inputValue;
+    if (tool.checkInput(inputValue)) {
+      if (pathname.indexOf('/Article') !== -1) {
+        hashHistory.push(`/Article?search=${inputValue}`);
+      } else {
+        hashHistory.push(`/Course?search=${inputValue}`);
+      }
     }else{
-      hashHistory.push(`/Course?search=${this.state.inputValue}`);
+      if (pathname.indexOf('/Article') !== -1) {
+        hashHistory.push(`/Article`);
+      } else {
+        hashHistory.push(`/Course`);
+      }
+    }
+  }
+  handleKeyDown(e) {
+    if (e.keyCode === 13) {
+      // this.submit(e);
     }
   }
 	render(){
@@ -53,11 +68,12 @@ class Header extends React.Component {
             <header className="header">
               <a className="logo"> </a>
               <div className="search">
-                <i className="fa fa-search" />
+                <button type='submit' ><i  className="fa fa-search" /></button>
                 <input 
                 value={this.state.inputValue}
+                onKeyDown={(e)=>this.handleKeyDown(e)}
                 onChange={(e)=>{this.setState({inputValue:e.target.value})}}
-                type="text" placeholder={`${this.state.placeholder}`} />
+                type="text" placeholder={this.state.placeholder} />
               </div>
             </header>
           }

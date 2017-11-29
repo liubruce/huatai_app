@@ -284,6 +284,9 @@ export const behavior = (body, operationType, behaviorDataType) => {
         operationLocation: '',
     })
 }
+export const checkInput = (value) => {
+    return value !== undefined && value != '' && value != null;
+}
 export const getQueryString = (name) => {
     let url = window.location.hash.slice(window.location.hash.indexOf('?'), window.location.hash.length);
     let qs = url.substr(1), // 获取url中"?"符后的字串   
