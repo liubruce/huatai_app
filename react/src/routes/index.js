@@ -1,14 +1,6 @@
 import React from 'react';
-import {
-    render
-} from 'react-dom'
-import {
-    Router,
-    Route,
-    IndexRoute,
-    hashHistory,
-    Redirect
-} from 'react-router'
+import { render } from 'react-dom'
+import { Router, Route, IndexRoute, hashHistory, Redirect } from 'react-router'
 import App from '../components/App.jsx'
 import NotFoundPage from '../components/notfound/NotFoundPage.jsx'
 import Index from '../components/index/Index.jsx'

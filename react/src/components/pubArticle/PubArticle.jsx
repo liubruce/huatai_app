@@ -51,7 +51,7 @@ class PubArticle extends React.Component{
 		}
 	}
 	getPicture(flag) {
-		window.jquery('#choose-action').modal('close');
+		window.jquery('#choose-image-action').modal('close');
 		if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
 			message.error('最多选择9张图片');
 			return;
@@ -59,9 +59,7 @@ class PubArticle extends React.Component{
 		if (!flag) {
 			tool.imagePicker(9 - (this.state.essayPhotosPH.length + this.state.essayPhotos.length)).then((imgs) => {
 				for (let i = 0; i < imgs.length; i++) {
-					// tool.encodeFile(imgs[i], (base64)=> {
-					// 	this.addPicture(base64)
-					// });
+					// this.addPicture("data:image/jpeg;base64,"+imgs[i])
 					tool.convertImgToBase64URL(imgs[i]).then((url) => {
 						this.addPicture(url)
 					})
@@ -178,11 +176,12 @@ class PubArticle extends React.Component{
 	// 	}
 	// }
 	chooseImage() {
-		if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
-			// message.error('最多选择9张图片')
-		} else {
-			window.jquery('#choose-action').modal('open');
-		}
+		window.jquery('#choose-image-action').modal('open');
+		// if (this.state.essayPhotosPH.length + this.state.essayPhotos.length >= 9) {
+		// 	message.error('最多选择9张图片')
+		// } else {
+		// 	window.jquery('#choose-image-action').modal('open');
+		// }
 	}
 	render(){
 		// let essayDetail=this.state.essayDetail;
@@ -228,9 +227,10 @@ class PubArticle extends React.Component{
  							className = 'choose-image am-avg-sm-3'
  							accept="image/*"
  						>	*/}										
-	 						<li><label
+	 						<li
 	 						//onClick={()=>this.chooseImage()}
-	 						 data-am-modal="{target: '#choose-action'}"
+	 						><label
+	 						 data-am-modal="{target: '#choose-image-action'}"
 	 						 className="file-img">+</label></li>
  					{/*</Dropzone>*/}
                     
@@ -238,7 +238,7 @@ class PubArticle extends React.Component{
                 </div>	
 			</div>
 
-           <div className="am-modal-actions" id="choose-action">
+           <div className="am-modal-actions" id="choose-image-action">
              <div className="am-modal-actions-group">
                <ul className="am-list">
                  <li className="am-modal-actions-header" onClick={()=>this.getPicture(true)} >拍照</li>

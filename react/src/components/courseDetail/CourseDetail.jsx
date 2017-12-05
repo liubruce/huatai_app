@@ -87,7 +87,8 @@ class CourseDetail extends React.Component {
             controls: true,
             playsinline:true,
             sources: [{
-                src: tool.getFile(this.state.coursedata.coursevideoPath),
+                src : 'https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1_1.mp4',
+                // src: tool.getFile(this.state.coursedata.coursevideoPath),
                 type: 'video/mp4'
             }]
         }
