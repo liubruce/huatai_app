@@ -2,7 +2,6 @@ import React from 'react'
 import './guide.less'
 import { hashHistory } from 'react-router';
 import Slider from 'react-slick';
-import * as tool from '../../config/tools'
 import $ from 'jquery'
 class Page1 extends React.Component {
   constructor(args) {

@@ -10,9 +10,6 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
@@ -36,6 +33,9 @@
             "PACKAGE_NAME": "io.HUATAI.ELearning"
         },
         "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "com.huatai.eLearning"
+        },
+        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.huatai.eLearning"
         },
         "cordova-plugin-image-picker": {

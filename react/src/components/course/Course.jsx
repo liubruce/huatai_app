@@ -32,7 +32,6 @@ class Course extends React.Component {
     this.show();
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.location.query.search)
     this.show();
   }
   show(flag) {

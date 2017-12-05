@@ -33,7 +33,7 @@ class Login extends React.Component {
   render() {
     let username = '';
     let password = '';
-    username = '13910009562';password = 'a123456';
+    username = '13910005521';password = 'a123456';
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />

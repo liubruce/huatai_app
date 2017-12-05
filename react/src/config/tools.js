@@ -22,7 +22,9 @@ export const camera = () => {
         );
     });
 }
+
 export const imagePicker = (num) => {
+    // console.log(window.imagePicker.OutputType.BASE64_STRING)
     return new Promise((resolve, reject) => {
         window.imagePicker.getPictures(
             (imgs) => {
@@ -32,7 +34,8 @@ export const imagePicker = (num) => {
                 reject(error);
             }, {
                 maximumImagesCount: num,
-                outputType:1
+                quality:100,
+                // outputType: 1,
             }
         );
     });
@@ -61,41 +64,6 @@ export const convertImgToBase64URL = (imgUrl) => {
     });
 }
 
-
-export const encodeFile = (filePath, sucess, failure, opts) => {
-    try {
-        var _opts = (opts && typeof opts === "object") ? opts : {}; 
-        // var args = { filePath: filePath };
-        var c = document.createElement('canvas');
-        var ctx = c.getContext("2d");
-        var img = new Image();
-        img.onload = function() {
-            var MAX_WIDTH = _opts.max_width || 800;
-            var MAX_HEIGHT =  _opts.max_height || 600;
-            var width = this.width;
-            var height = this.height;
-            if (width > MAX_WIDTH) {
-                height *= MAX_WIDTH / width;
-                width = MAX_WIDTH;
-            }
-            if (height > MAX_HEIGHT) {
-                width *= MAX_HEIGHT / height;
-                height = MAX_HEIGHT;
-            }
-            c.width = width;
-            c.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
-            var dataUri = c.toDataURL("image/png");
-            sucess(dataUri);
-        };
-        img.onerror = function(e){
-            failure(e);
-        }
-        img.src = filePath;
-    } catch (e){
-        failure(e);
-    }
-}
 export const orient = () => {
     return window.orientation === 90 || window.orientation === -90;
 }
