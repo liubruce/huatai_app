@@ -34,8 +34,8 @@ export const imagePicker = (num) => {
                 reject(error);
             }, {
                 maximumImagesCount: num,
-                quality:100,
-                // outputType: 1,
+                quality:50,
+                outputType: 1,
             }
         );
     });

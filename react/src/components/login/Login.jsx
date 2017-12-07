@@ -6,12 +6,16 @@ import {hashHistory} from 'react-router';
 import * as tool from '../../config/tools'
 class Login extends React.Component {
   constructor(args) {
-    super()
+    super();
+    this.state = {
+      username: '',
+      password: ''
+    }
   }
   login(e) {
     e.preventDefault();
-    let username = this.refs.username.value;
-    let password = this.refs.password.value;
+    let username = this.state.username;
+    let password = this.state.password;
     api.login(username, password).then((_data) => {
       if (_data.result === 'RC100') {
         let user = {};
@@ -29,19 +33,21 @@ class Login extends React.Component {
       tool.reject(res);
     })
   }
-  
+  default () {
+    this.setState({
+      username: '13958510206',
+      password: 'a123456'
+    })
+  }
   render() {
-    let username = '';
-    let password = '';
-    username = '13910005521';password = 'a123456';
     return (
      <form className="container" onSubmit={(e)=>this.login(e)} >
         <div className="login-bg" />
         <div className="login-box">
-          <h1>华泰蜂行智能学习平台</h1>
+          <h1>华泰蜂行智能学习<h1 style={{display:'inline'}} onClick={()=>this.default()} >平</h1>台</h1>
           <h6>Huatai Insurance Group</h6>
-          <p><input type="text" defaultValue={username} className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
-          <p><input type="password" defaultValue={password} className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
+          <p><input type="text" onChange={(e)=>this.setState({username:e.target.value})} value={this.state.username} className="am-form-field am-radius" required="required" ref='username' placeholder="工号/手机号" /></p>
+          <p><input type="password" onChange={(e)=>this.setState({password:e.target.value})} value={this.state.password} className="am-form-field am-radius" required="required" ref='password' placeholder="密码" /></p>
           <button className="btn-login" type='submit' >登 录</button>
         </div>
       </form>
