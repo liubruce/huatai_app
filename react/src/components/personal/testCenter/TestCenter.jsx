@@ -17,6 +17,13 @@ class TestCenter extends React.Component{
            pageNo:1,
 		}
 	}
+	componentDidMount() {
+		if (this.state.tab === 1) {
+			tool.addScroll(this,this.unreadInformationlist.bind(this));
+		} else {
+			tool.addScroll(this,this.readInformationlist.bind(this));
+		}
+   }
 	unreadInformationlist() {
 		tool.loading(this, true);
 		api.unreadInformationlist().then((data) => {
@@ -68,16 +75,20 @@ class TestCenter extends React.Component{
 		})
 	}
 	clickMe(item, flag) {
-		confirm({
-			title: '是否测试开始',
-			content: '',
-			onOk() {
-				let index = item.inforURL.indexOf("/TestPaper");
-				let arr = flag ? item.inforURL.substring(index) : "/RandomPaper" + item.inforURL.substring(index + 10);
-				hashHistory.push('/App/Course' + arr);
-			},
-			onCancel() {},
-		});
+		if(item.isOutOfDate===0){
+              confirm({
+				title: '是否测试开始',
+				content: '',
+				onOk() {
+					let index = item.inforURL.indexOf("/TestPaper");
+					let arr = flag ? item.inforURL.substring(index) : "/RandomPaper" + item.inforURL.substring(index + 10);
+					hashHistory.push('/App/Course' + arr);
+				},
+				onCancel() {},
+		     });
+		}else{
+			message.warning('该消息已下架', 3);
+		}
 	}
 	Details(id) {
 		api.viewmessage(id).then((data) => {
@@ -88,6 +99,9 @@ class TestCenter extends React.Component{
 			tool.reject(res);
 		})
 	}
+	componentWillUnmount() {
+       tool.removeScroll();
+    }
 	render(){
 		return(
 			<div className="warpper">

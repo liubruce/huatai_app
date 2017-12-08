@@ -93,13 +93,17 @@ class Course extends React.Component {
     })
   }
   jump(item) {
-    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-      hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
-      return;
+    if(item.ClickRat<=200){
+        if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+          hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
+          return;
+        }
+        this.setState({
+          now_item: item
+        })
+    }else{
+      message.warning('该课程在加载中...', 3);
     }
-    this.setState({
-      now_item: item
-    })
   }
   ok() {
     let body = {
