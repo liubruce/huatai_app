@@ -70,9 +70,8 @@ class CourseDetail extends React.Component {
                     courseattach: data.courseattach,
                     titleList: data.titleList,
                     answerScore:data.answerScore
-                    // showTitle:true
                 },()=>{
-                    this.showVideo();
+                    // this.showVideo();
                 })
             } else {
                 message.error(data.errMsg, 3);
@@ -81,14 +80,58 @@ class CourseDetail extends React.Component {
             tool.reject(res);
         })
     }
-    showVideo() {
+    chooseVideo(num){
+        switch(num){
+            case 1:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1.mp4');break;
+            case 2:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/2.mp4');break;
+            case 3:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/3.mp4');break;
+            case 4:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/4.mp4');break;
+            default:break;
+        }
+    }
+    testVideo(src) {
         const videoJsOptions = {
             autoplay: false,
             controls: true,
             playsinline:true,
             sources: [{
-                src : 'https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1_1.mp4',
-                // src: tool.getFile(this.state.coursedata.coursevideoPath),
+                src,
+                type: 'video/mp4'
+            }]
+        }
+        let that = this;
+        this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
+            $('.vjs-big-play-button').css('display','none');
+            myPlayer = this;
+            myPlayer.on('timeupdate', () => {
+                let currentTime = myPlayer.currentTime();
+                let duration = myPlayer.duration();
+                if (currentTime - old_time > 1) {
+                    message.error('请勿快进视频', 1);
+                    myPlayer.currentTime(old_time);
+                } else {
+                    if (currentTime >= duration) {
+                        that.setState({
+                            isEnd: true
+                        })
+                    }
+                }
+                old_time = currentTime
+            });
+            myPlayer.play();
+            if(that.state.showTitle){
+                myPlayer.pause();
+            }
+        });
+    }
+    showVideo() {
+        let src = tool.getFile(this.state.coursedata.coursevideoPath);
+        const videoJsOptions = {
+            autoplay: false,
+            controls: true,
+            playsinline:true,
+            sources: [{
+                src,
                 type: 'video/mp4'
             }]
         }
@@ -227,6 +270,12 @@ class CourseDetail extends React.Component {
 						</div>
 					</div>
 				</div>
+
+                <a onClick={()=>this.chooseVideo(1)} className="am-btn am-btn-block btn-border">video1</a>
+                <a onClick={()=>this.chooseVideo(2)} className="am-btn am-btn-block btn-border">video2</a>
+                <a onClick={()=>this.chooseVideo(3)} className="am-btn am-btn-block btn-border">video3</a>
+                <a onClick={()=>this.chooseVideo(4)} className="am-btn am-btn-block btn-border">video4</a>
+
 				{course.goodCourse !== '1' ?
                 <div>
                 {

@@ -3,8 +3,9 @@ import './editUser.less'
 import * as api from '../../../config/api'
 import {message,Spin} from 'antd'
 import * as tool from '../../../config/tools'
-import Dropzone from 'react-dropzone'
+// import Dropzone from 'react-dropzone'
 import {hashHistory} from 'react-router';
+import lrz from 'lrz';
 class EditUser extends React.Component{
 	constructor(args) {
 		super();
@@ -47,27 +48,45 @@ class EditUser extends React.Component{
 	}
 	getPicture(flag) {
 		window.jquery('#choose-head-action').modal('close');
+		let that = this;
 		if (!flag) {
 			tool.imagePicker(1).then((imgs) => {
-				tool.convertImgToBase64URL(imgs[0]).then((url)=>{
-					this.addPicture(url)
-				})
+				lrz(imgs[0])
+					.then(function(rst) {
+						that.addPicture(rst.base64)
+					})
+					.catch(function(err) {
+						console.log(err)
+					})
+					.always(function() {
+
+					});
 			}, (error) => {
 				console.log("Error:" + error)
 			})
 		} else {
 			tool.camera().then((imageData) => {
-				tool.convertImgToBase64URL(imageData).then((url)=>{
-					this.addPicture(url)
-				})
+				lrz(imageData)
+					.then(function(rst) {
+						that.addPicture(rst.base64)
+					})
+					.catch(function(err) {
+						console.log(err)
+					})
+					.always(function() {
+
+					});
 			}, (error) => {
 				console.log("Error:" + error)
 			})
 		}
 	}
 	addPicture(preview) {
+		let file;
+		file = tool.dataURItoBlob(preview);
 		let head_image = {
-			preview
+			preview,
+			file
 		}
 		this.setState({
 			head_image,
@@ -88,7 +107,7 @@ class EditUser extends React.Component{
 			let file = this.state.head_image.preview.slice(start, end);
 			// let file = tool.blobToFile(new Blob([this.state.head_image.preview],{type:"text/plain"}),'test.png');
 			// console.log(file)
-			formData.append('base', file);
+			formData.append('file', file);
 		} else {
 			formData.append('file', this.state.headPath);
 		}

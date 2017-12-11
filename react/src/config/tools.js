@@ -4,12 +4,13 @@ import { hashHistory } from 'react-router';
 import { message } from 'antd';
 import $ from 'jquery'
 import { getFile_IP } from './serverIp'
+var BlobFormDataShim = require('./Blob.FormData.shim');
 
 export const camera = () => {
     return new Promise((resolve, reject) => {
         navigator.camera.getPicture((imageData) => {
-                resolve(imageData)
-            },
+            resolve(imageData)
+        },
             (error) => {
                 reject(error);
             }, {
@@ -24,7 +25,6 @@ export const camera = () => {
 }
 
 export const imagePicker = (num) => {
-    // console.log(window.imagePicker.OutputType.BASE64_STRING)
     return new Promise((resolve, reject) => {
         window.imagePicker.getPictures(
             (imgs) => {
@@ -34,12 +34,44 @@ export const imagePicker = (num) => {
                 reject(error);
             }, {
                 maximumImagesCount: num,
-                quality:50,
-                outputType: 1,
+                quality: 100,
             }
         );
     });
 }
+
+
+export const dataURItoBlob =(dataURI)=> {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+        byteString = atob(dataURI.split(',')[1]);
+    else
+        byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new BlobFormDataShim.Blob([ia.buffer], {type: mimeString});
+}
+
+
+// function getBase64(file) {
+//    var reader = new FileReader();
+//    reader.readAsDataURL(file);
+//    reader.onload = function () {
+//      console.log(reader.result);
+//    };
+//    reader.onerror = function (error) {
+//      console.log('Error: ', error);
+//    };
+// }
 
 export const convertImgToBase64URL = (imgUrl) => {
     function convertFileToDataURLviaFileReader(url, callback) {
@@ -146,6 +178,8 @@ export const back = () => {
         reject(res);
     })
 }
+
+
 
 export const getUserCode = () => {
     let url = document.URL;
@@ -257,7 +291,7 @@ export const checkldToken = () => {
 }
 
 export const behavior = (body, operationType, behaviorDataType) => {
-    if (user === null) {
+    if (sino_cordova_checkApp().device === 'Browser' && user === null) {
         hashHistory.push('/Login');
         return;
     }
@@ -308,7 +342,7 @@ export const url_parameter = (data) => {
     }
     toString = "?" + toString;
     return toString;
-    // return toString.replace(/$/, "");
+// return toString.replace(/$/, "");
 }
 export const url_format = (url, operationType, behaviorDataType, body = {}) => {
     return url + url_parameter(behavior(body, operationType, behaviorDataType));
@@ -322,53 +356,53 @@ export const getFile = (fileName) => {
 export const getAnswer = (num) => {
     let answer = []
     switch (num) {
-        case 1:
-            answer = [0];
-            break;
-        case 2:
-            answer = [1];
-            break;
-        case 4:
-            answer = [2];
-            break;
-        case 8:
-            answer = [3];
-            break;
-        case 3:
-            answer = [0, 1];
-            break;
-        case 5:
-            answer = [0, 2];
-            break;
-        case 9:
-            answer = [0, 3];
-            break;
-        case 6:
-            answer = [1, 2];
-            break;
-        case 10:
-            answer = [1, 3];
-            break;
-        case 12:
-            answer = [2, 3];
-            break;
-        case 7:
-            answer = [0, 1, 2];
-            break;
-        case 11:
-            answer = [0, 1, 3];
-            break;
-        case 13:
-            answer = [0, 2, 3];
-            break;
-        case 14:
-            answer = [1, 2, 3];
-            break;
-        case 15:
-            answer = [0, 1, 2, 3];
-            break;
-        default:
-            break;
+    case 1:
+        answer = [0];
+        break;
+    case 2:
+        answer = [1];
+        break;
+    case 4:
+        answer = [2];
+        break;
+    case 8:
+        answer = [3];
+        break;
+    case 3:
+        answer = [0, 1];
+        break;
+    case 5:
+        answer = [0, 2];
+        break;
+    case 9:
+        answer = [0, 3];
+        break;
+    case 6:
+        answer = [1, 2];
+        break;
+    case 10:
+        answer = [1, 3];
+        break;
+    case 12:
+        answer = [2, 3];
+        break;
+    case 7:
+        answer = [0, 1, 2];
+        break;
+    case 11:
+        answer = [0, 1, 3];
+        break;
+    case 13:
+        answer = [0, 2, 3];
+        break;
+    case 14:
+        answer = [1, 2, 3];
+        break;
+    case 15:
+        answer = [0, 1, 2, 3];
+        break;
+    default:
+        break;
     }
     return answer;
 }
@@ -523,8 +557,7 @@ export const downFile = (filename, that) => {
         var path = window.cordova.file.dataDirectory + filename;
         navigator.fileTransfer.download(
             uri,
-            path,
-            function(entry) {
+            path, function(entry) {
                 navigator.notification.alert(
                     JSON.stringify(entry, null, 4),
                     () => {
@@ -533,8 +566,7 @@ export const downFile = (filename, that) => {
                     '下载成功',
                     'OK'
                 );
-            },
-            function(error) {
+            }, function(error) {
                 navigator.notification.alert(
                     JSON.stringify(error, null, 4),
                     () => {
@@ -595,7 +627,7 @@ export const checkLogin = (data) => {
 }
 //文章显示
 export const subString = (string, subLength) => {
-    if (typeof(string) !== 'string') {
+    if (typeof (string) !== 'string') {
         return '';
     }
     if (string.length > subLength) {

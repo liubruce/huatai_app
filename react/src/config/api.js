@@ -2,7 +2,7 @@
 import sfetch from 'sfetch'
 import * as tool from './tools';
 import { api_Ip, lesson_api_IP } from './serverIp'
-
+import $ from 'jquery'
 /*
 refreshldToken
  */
@@ -563,26 +563,49 @@ export const myEssayList = (bM = {}) => {
 /*
   /appessaycenter/insertOrUpdate我的蜂行圈文章发布
 */
-export const appAddArticle = (body) => {
+export const appAddArticle = (body, onprogress) => {
     let url = `${api_Ip}/appessaycenter/insertOrUpdate`;
     url = tool.url_format(url, 'essayOperation', 'button');
     return new Promise((resolve, reject) => {
-        sfetch.post({
+        $.ajax({
             url: url,
-            body: body,
-            dataType: 'formdata',
-            timeout: 35000
-        }).then((data) => {
-            if (data.ok) {
-                tool.checkLogin(data.json);
-                resolve(data.json)
-            } else {
+            data: body,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                resolve(data)
+            },
+            error: function(data) {
+                console.log(data)
                 reject(data)
-            }
+            },
+            xhr: function() {    
+                let xhr = $.ajaxSettings.xhr();    
+                if (onprogress && xhr.upload) {     
+                    xhr.upload.addEventListener("progress", onprogress, false);     
+                    return xhr;    
+                }   
+            },
         });
+
+        // sfetch.post({
+        //     url: url,
+        //     body: body,
+        //     dataType: 'formdata',
+        //     timeout: 35000
+        // }).then((data) => {
+        //     if (data.ok) {
+        //         tool.checkLogin(data.json);
+        //         resolve(data.json)
+        //     } else {
+        //         reject(data)
+        //     }
+        // });
+
+
     });
 }
-
 /**
  * /appcoursemanagement/moreclick课程动态
  */
@@ -1000,7 +1023,7 @@ export const allCertificate = (body = {}) => {
 /**
    *appprivateletter/appaddresseeprivateletter/私信主题接口
    */
-export const addresseePrivateLetter = (body={}) => {
+export const addresseePrivateLetter = (body = {}) => {
     body = tool.behavior(body, 'privateletter', 'button')
     return new Promise((resolve, reject) => {
         sfetch.get({
