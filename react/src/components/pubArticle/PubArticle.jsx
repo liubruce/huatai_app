@@ -7,7 +7,6 @@ import './pubArticle.less'
 // import $ from 'jquery'
 // import Dropzone from 'react-dropzone'
 import lrz from 'lrz'
-import BlobFormDataShim from '../../config/Blob.FormData.shim.js'
 class PubArticle extends React.Component {
 	constructor(args) {
 		super()
@@ -114,9 +113,12 @@ class PubArticle extends React.Component {
 				newEssayPhotos.push(essayPhotos[i])
 			}
 		}
-		this.setState({
-			essayPhotos: newEssayPhotos
-		})
+		setTimeout(() => {
+			this.setState({
+				essayPhotos: newEssayPhotos
+			})
+		}, 500)
+
 	}
 	delPH(index) {
 		let essayPhotosPH = this.state.essayPhotosPH;
@@ -126,9 +128,11 @@ class PubArticle extends React.Component {
 				newEssayPhotosPH.push(essayPhotosPH[i])
 			}
 		}
-		this.setState({
-			essayPhotosPH: newEssayPhotosPH
-		})
+		setTimeout(() => {
+			this.setState({
+				essayPhotosPH: newEssayPhotosPH
+			})
+		}, 500)
 	}
 	changePer(per){
 		this.setState({
@@ -139,7 +143,7 @@ class PubArticle extends React.Component {
 		let loaded = evt.loaded;     //已经上传大小情况 
 		let tot = evt.total;      //附件总大小 
 		let per = Math.floor(100 * loaded / tot);  //已经上传的百分比 
-		console.log(`---article upload: ${per}%---`);
+		// console.log(`---article upload: ${per}%---`);
 		this.changePer(per);
 	}
 	add() {
@@ -251,7 +255,8 @@ class PubArticle extends React.Component {
             this.state.essayPhotosPH.map((item, index) => {
                 return (
                     <li onClick={() => this.delPH(index)} key={index}>
-										<img alt={`img${index}${index.essayPhotoPath}`} src={tool.getFile(item.essayPhotoPath)} /></li>
+										<img alt={`img${index}${index.essayPhotoPath}`} src={tool.getFile(item.essayPhotoPath)} />
+										</li>
                 )
             })
             }
@@ -264,7 +269,7 @@ class PubArticle extends React.Component {
  							accept="image/*"
  						>	*/ }										
 	 						<li
-            //onClick={()=>this.chooseImage()}
+           // onClick={()=>this.chooseImage()}
             ><label
             data-am-modal="{target: '#choose-image-action'}"
             className="file-img">+</label></li>
