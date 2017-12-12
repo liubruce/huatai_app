@@ -80,7 +80,7 @@ class PubArticle extends React.Component {
 			tool.camera().then((imageData) => {
 				lrz(imageData)
 					.then(function(rst) {
-						that.addPicture(rst.base64)
+						that.addPicture(rst.base64,rst.formData)
 					})
 					.catch(function(err) {
 						console.log(err)
@@ -117,7 +117,7 @@ class PubArticle extends React.Component {
 			this.setState({
 				essayPhotos: newEssayPhotos
 			})
-		}, 500)
+		}, 300)
 
 	}
 	delPH(index) {
@@ -132,7 +132,7 @@ class PubArticle extends React.Component {
 			this.setState({
 				essayPhotosPH: newEssayPhotosPH
 			})
-		}, 500)
+		}, 300)
 	}
 	changePer(per){
 		this.setState({

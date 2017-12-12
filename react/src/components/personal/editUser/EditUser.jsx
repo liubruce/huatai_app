@@ -102,12 +102,7 @@ class EditUser extends React.Component{
 	onSubmit() {
 		let formData = new FormData();
 		if (this.state.headPath === '') {
-			let start = this.state.head_image.preview.indexOf(',') + 1;
-			let end = this.state.head_image.preview.length;
-			let file = this.state.head_image.preview.slice(start, end);
-			// let file = tool.blobToFile(new Blob([this.state.head_image.preview],{type:"text/plain"}),'test.png');
-			// console.log(file)
-			formData.append('file', file);
+			formData.append('file', this.state.head_image.file, Date.parse(new Date()) + '.jpg');
 		} else {
 			formData.append('file', this.state.headPath);
 		}
