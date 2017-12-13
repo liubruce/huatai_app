@@ -74,6 +74,7 @@ class CourseDetail extends React.Component {
                     titleList: data.titleList,
                     answerScore:data.answerScore
                 },()=>{
+                    this.chooseVideo(0);
                     // this.showVideo();
                 })
             } else {
@@ -119,10 +120,10 @@ class CourseDetail extends React.Component {
                 showTitle: true
             })
         } else {
-            this.setState({
-                showTitle: true
-            })
-            // chimee.play();
+            // this.setState({
+            //     showTitle: true
+            // })
+            chimee.play();
         }
     }
     showVideo() {
@@ -270,11 +271,11 @@ class CourseDetail extends React.Component {
 					</div>
 				</div>
 
-                <a onClick={()=>this.chooseVideo(0)} className="am-btn am-btn-block btn-border">课程视频</a>
+{/*                <a onClick={()=>this.chooseVideo(0)} className="am-btn am-btn-block btn-border">课程视频</a>
                 <a onClick={()=>this.chooseVideo(1)} className="am-btn am-btn-block btn-border">测试视频1</a>
                 <a onClick={()=>this.chooseVideo(2)} className="am-btn am-btn-block btn-border">测试视频2</a>
                 <a onClick={()=>this.chooseVideo(3)} className="am-btn am-btn-block btn-border">测试视频3</a>
-                <a onClick={()=>this.chooseVideo(4)} className="am-btn am-btn-block btn-border">测试视频4</a>
+                <a onClick={()=>this.chooseVideo(4)} className="am-btn am-btn-block btn-border">测试视频4</a>*/}
                 
 
 				{course.goodCourse !== '1' ?
