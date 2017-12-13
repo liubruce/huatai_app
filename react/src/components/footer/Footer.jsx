@@ -7,7 +7,8 @@ class Footer extends React.Component {
 	constructor(args) {
 		super();
     this.state = {
-      tab:1
+      tab:1,
+      showFooter:false
     }
 	}
   changeTab(tab){
@@ -22,6 +23,26 @@ class Footer extends React.Component {
     this.checkUrl(nextProps.pathname);
   }
   checkUrl(pathname) {
+    let showFooter = false
+    if(pathname === '/Index'){
+      showFooter = true;
+    }
+    if(pathname === '/Article'){
+      showFooter = true;
+    }
+    if(pathname === '/Course'){
+      showFooter = true;
+    }
+    if(pathname === '/Library'){
+      showFooter = true;
+    }
+    if(pathname === '/Personal'){
+      showFooter = true;
+    }
+    if(pathname === '/'){
+      showFooter = true;
+    }
+
     let tab = 1;
     if (pathname.indexOf('/Course') !== -1) {
       tab = 3;
@@ -48,7 +69,8 @@ class Footer extends React.Component {
       tab = 0;
     }
     this.setState({
-      tab
+      tab,
+      showFooter
     })
   }
   ios() {
@@ -65,7 +87,7 @@ class Footer extends React.Component {
   }
 	render() {
 		return(
-        <footer className="foot">
+        <div>{this.state.showFooter?<footer className="foot">
           <ul className="am-avg-sm-5 clearFix">
             <li className={this.state.tab === 1?"li-1 active":"li-1"} ><Link onClick={()=>this.changeTab(1)}  to='/Index'> </Link></li>
             <li className={this.state.tab === 2?"li-2 active":"li-2"} ><Link className={localStorage.getItem('channelId')==='4'?'xxq':'fxq'} onClick={()=>this.changeTab(2)}  to='/Article' > </Link></li>
@@ -73,7 +95,7 @@ class Footer extends React.Component {
             <li className={this.state.tab === 4?"li-4 active":"li-4"} ><Link onClick={()=>this.changeTab(4)}  to='/Library'></Link></li>
             <li className={this.state.tab === 5?"li-5 active":"li-5"} ><Link onClick={()=>this.changeTab(5)}  to='/Personal' > </Link></li>
           </ul>
-        </footer>
+        </footer>:null}</div>
 			)
 	}
 }

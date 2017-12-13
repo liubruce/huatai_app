@@ -5,10 +5,13 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import { message } from 'antd'
 import $ from 'jquery'
-import videojs from 'video.js'
+// import videojs from 'video.js'
+
+import ChimeeMobilePlayer from 'chimee-mobile-player'
 
 let old_time = 0;
 let myPlayer;
+let chimee;
 class CourseDetail extends React.Component {
     constructor(args) {
         super()
@@ -17,9 +20,9 @@ class CourseDetail extends React.Component {
             courseattach: [],
             isEnd: false,
             titleList: [],
-            showTitle: tool.isPc ? false : navigator.connection.type !== "wifi",
+            showTitle: false,
             percent: 0,
-            answerScore:0,
+            answerScore: 0,
         }
     }
 
@@ -82,6 +85,7 @@ class CourseDetail extends React.Component {
     }
     chooseVideo(num){
         switch(num){
+            case 0:this.testVideo(tool.getFile(this.state.coursedata.coursevideoPath));break;
             case 1:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1.mp4');break;
             case 2:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/2.mp4');break;
             case 3:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/3.mp4');break;
@@ -90,82 +94,80 @@ class CourseDetail extends React.Component {
         }
     }
     testVideo(src) {
-        const videoJsOptions = {
+        chimee = new ChimeeMobilePlayer({
+            wrapper: '#video_div',
+            src: src,
+            controls: false,
             autoplay: false,
-            controls: true,
-            playsinline:true,
-            sources: [{
-                src,
-                type: 'video/mp4'
-            }]
-        }
-        let that = this;
-        this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
-            $('.vjs-big-play-button').css('display','none');
-            myPlayer = this;
-            myPlayer.on('timeupdate', () => {
-                let currentTime = myPlayer.currentTime();
-                let duration = myPlayer.duration();
-                if (currentTime - old_time > 1) {
-                    message.error('请勿快进视频', 1);
-                    myPlayer.currentTime(old_time);
-                } else {
-                    if (currentTime >= duration) {
-                        that.setState({
-                            isEnd: true
-                        })
-                    }
-                }
-                old_time = currentTime
-            });
-            myPlayer.play();
-            if(that.state.showTitle){
-                myPlayer.pause();
-            }
+            isLive: false,
         });
+
+        chimee.on('play', evt => {
+            chimee.controls = true;
+            this.setState({
+                showTitle: false
+            })
+        });
+        chimee.on('ended', evt => {
+            this.setState({
+                isEnd: true
+            })
+        });
+        $('chimee-state-play').css('display','none');
+        if (!tool.isPc && navigator.connection.type !== "wifi") {
+            this.setState({
+                showTitle: true
+            })
+        } else {
+            this.setState({
+                showTitle: true
+            })
+            // chimee.play();
+        }
     }
     showVideo() {
-        let src = tool.getFile(this.state.coursedata.coursevideoPath);
-        const videoJsOptions = {
-            autoplay: false,
-            controls: true,
-            playsinline:true,
-            sources: [{
-                src,
-                type: 'video/mp4'
-            }]
-        }
-        let that = this;
-        this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
-            $('.vjs-big-play-button').css('display','none');
-            myPlayer = this;
-            myPlayer.on('timeupdate', () => {
-                let currentTime = myPlayer.currentTime();
-                let duration = myPlayer.duration();
-                if (currentTime - old_time > 1) {
-                    message.error('请勿快进视频', 1);
-                    myPlayer.currentTime(old_time);
-                } else {
-                    if (currentTime >= duration) {
-                        that.setState({
-                            isEnd: true
-                        })
-                    }
-                }
-                old_time = currentTime
-            });
-            myPlayer.play();
-            // console.log(that.state.showTitle)
-            if(that.state.showTitle){
-                myPlayer.pause();
-            }
-        });
+        // let src = tool.getFile(this.state.coursedata.coursevideoPath);
+        // const videoJsOptions = {
+        //     autoplay: false,
+        //     controls: true,
+        //     playsinline:true,
+        //     sources: [{
+        //         src,
+        //         type: 'video/mp4'
+        //     }]
+        // }
+        // let that = this;
+        // this.player = videojs(this.refs.course_player, videoJsOptions, function onPlayerReady() {
+        //     $('.vjs-big-play-button').css('display','none');
+        //     myPlayer = this;
+        //     myPlayer.on('timeupdate', () => {
+        //         let currentTime = myPlayer.currentTime();
+        //         let duration = myPlayer.duration();
+        //         if (currentTime - old_time > 1) {
+        //             message.error('请勿快进视频', 1);
+        //             myPlayer.currentTime(old_time);
+        //         } else {
+        //             if (currentTime >= duration) {
+        //                 that.setState({
+        //                     isEnd: true
+        //                 })
+        //             }
+        //         }
+        //         old_time = currentTime
+        //     });
+        //     myPlayer.play();
+        //     // console.log(that.state.showTitle)
+        //     if(that.state.showTitle){
+        //         myPlayer.pause();
+        //     }
+        // });
     }
     play() {
         this.setState({
             showTitle: false
         }, () => {
-            myPlayer.play();
+            chimee.play(); 
+            // myPlayer.play();
         })
     }
     render() {
@@ -176,20 +178,17 @@ class CourseDetail extends React.Component {
 
 				    <div className="opacity-black">	  
 
+                     <div
+                     id="video_div"
+                     ></div>
 
-                     <video
+{/*                     <video
                        width={$(window).width()}
                        height="210"
                        ref="course_player"
                        className="video-js"
-                        ></video>
+                        ></video>*/}
 
-
-		                {/*<video
-                           className="video-js"
-                           controls
-                           ref="course_player">
-                        </video>*/}
 
 {/*				        <video 
 					    id="course_id"
@@ -202,7 +201,7 @@ class CourseDetail extends React.Component {
 
 					</div>
 
-					{this.state.showTitle ? <div onClick={() => this.play()} className="play">
+					{this.state.showTitle ? <div onClick={() => this.play()} className="tip-play">
                     <i className="fa fa-play"></i> 即将消耗手机流量</div> : null}
 
 				    {/*	{this.state.showTitle ? <p className='video-title'><a>建议在wifi下观看</a></p>: null}*/}
@@ -271,10 +270,12 @@ class CourseDetail extends React.Component {
 					</div>
 				</div>
 
-                <a onClick={()=>this.chooseVideo(1)} className="am-btn am-btn-block btn-border">video1</a>
-                <a onClick={()=>this.chooseVideo(2)} className="am-btn am-btn-block btn-border">video2</a>
-                <a onClick={()=>this.chooseVideo(3)} className="am-btn am-btn-block btn-border">video3</a>
-                <a onClick={()=>this.chooseVideo(4)} className="am-btn am-btn-block btn-border">video4</a>
+                <a onClick={()=>this.chooseVideo(0)} className="am-btn am-btn-block btn-border">课程视频</a>
+                <a onClick={()=>this.chooseVideo(1)} className="am-btn am-btn-block btn-border">测试视频1</a>
+                <a onClick={()=>this.chooseVideo(2)} className="am-btn am-btn-block btn-border">测试视频2</a>
+                <a onClick={()=>this.chooseVideo(3)} className="am-btn am-btn-block btn-border">测试视频3</a>
+                <a onClick={()=>this.chooseVideo(4)} className="am-btn am-btn-block btn-border">测试视频4</a>
+                
 
 				{course.goodCourse !== '1' ?
                 <div>
@@ -294,7 +295,7 @@ class CourseDetail extends React.Component {
 				this.state.isEnd ?
                     <Link to={`App/Course/AnswerOnline/${course.courseId}`} className="am-btn am-btn-block btn-border">在线答题</Link>
                     :
-                    <a className="am-btn am-btn-block btn-border test-btn">视频播放完成后答题</a>
+                    <a style={{color:"#ccc"}} className="am-btn am-btn-block btn-border test-btn">视频播放完成后答题</a>
                 }
                 {
                    course.courseId===undefined || this.state.answerScore===-1?null:<Link to={`/App/Course/Answerhistory/${course.courseId}/1`} className="am-btn am-btn-block btn-border">查看答题历史</Link>

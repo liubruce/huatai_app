@@ -93,7 +93,7 @@ class Course extends React.Component {
     })
   }
   jump(item) {
-    if(item.ClickRat<=200){
+    if(item.clickRat<=200){
         if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
           hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
           return;
