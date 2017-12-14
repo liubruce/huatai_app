@@ -85,6 +85,9 @@ class Title extends React.Component {
 		if (pathname.indexOf('/TestPaper') !== -1) {
 			title='在线测试'
 		}
+		if (pathname.indexOf('/RandomPaper') !== -1) {
+			title='随机考试'
+		}
 		this.setState({
 			title
 		})

@@ -129,7 +129,8 @@ class TestCenter extends React.Component{
 											<p className="msg-title">{item.informationTitle}</p>
 											<p className="msg-info">{item.informationNote}</p>
 											{/*{item.isExam === 1 || item.isOtherExam === 1?<a>已答题</a>:null}*/}
-											{item.isExam === 1 &&item.informationType === '1'?<Link to={`/App/Course/Answerhistory/${item.inforURL.substr(item.inforURL.indexOf('TestPaper/')+10)}/2`} style={{marginLeft:'14px'}}>查看答题历史</Link>:null}
+											{(item.isExam === 1 &&item.informationType === '1')?<Link to={`/App/Course/Answerhistory/${item.inforURL.substr(item.inforURL.indexOf('TestPaper/')+10)}/2`} >查看综合答题历史</Link>:null}
+											{(item.isOtherExam === 1 &&item.informationType === '2')?<Link to={`/App/Course/Answerhistory/${item.inforURL.substr(item.inforURL.indexOf('TestPaper/')+10)}/3`} >查看随机答题历史</Link>:null}
 											{
 												item.informationType === '1' && item.isExam === 0 ?
 												<a onClick={()=>this.clickMe(item,true)} style={{cursor:"pointer"}}>任务地址</a>:null

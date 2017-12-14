@@ -22,7 +22,7 @@ class RandomPaper extends React.Component{
 	componentWillMount() {
 		//console.log(this.props.params.id)
 		let body = {
-			testpaperId: this.props.params.id
+			randomPaperId: this.props.params.id
 		};
 		api.selectRandomTitle(body).then((data) => {
 			if (data.result === 'RC100') {
@@ -39,7 +39,7 @@ class RandomPaper extends React.Component{
 				this.setState({
 					single,
 					multiple,
-					answerTime: data.testpapers.answerTime ? data.testpapers.answerTime : 0
+					answerTime: data.answerTime
 				}, () => {
 					this.countdown();
 				});
@@ -143,7 +143,8 @@ class RandomPaper extends React.Component{
 			})
 			radioTitles.push({
 				radioTitleType:'1',
-				radioAnswer:answer
+				radioAnswer:answer,
+				randomtestId:this.state.single[i].randomtestId
 			})
 			// console.log(this.state.single[i].answer,answer)
 		})
@@ -172,24 +173,28 @@ class RandomPaper extends React.Component{
 			})
 			checkboxTitles.push({
 				checkboxTitleType:'2',
-				checkboxAnswer:answer
+				checkboxAnswer:answer,
+				randomtestId:this.state.multiple[i].randomtestId
 			})
 		})
 
 		let testpaperdata = {
-			testpaperId: this.props.params.id
+			randomPaperId: this.props.params.id
 		}
 		let formData = new FormData();
-		formData.append('testPapeData', JSON.stringify(testpaperdata))
+		formData.append('randomExamPaperData', JSON.stringify(testpaperdata))
 		formData.append('radioTitles', JSON.stringify(radioTitles));
 		formData.append('checkboxTitles', JSON.stringify(checkboxTitles));
 		api.submRandomCourseTitle(formData).then((data) => {
 			this.setState({
-				point: data.answerScores
+				point: data.answerScore
 			})
 		}, (res) => {
 			tool.reject(res);
 		})
+	}
+	componentWillUnmount() {
+		clearInterval(this.timerAuctionHandler);
 	}
 	render(){
 		return(

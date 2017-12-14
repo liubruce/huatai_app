@@ -5,7 +5,7 @@ import { message } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
 import $ from 'jquery'
-import {hashHistory,browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 
 class AnswerOnline extends React.Component{
 	constructor(args) {
@@ -17,11 +17,7 @@ class AnswerOnline extends React.Component{
             examRecords:{}
 		}
 	}
-    appSelectExamDetail(){
-        let body = {
-			courseId: this.props.params.id
-		};
-		api.appSelectExamDetail(body).then((data) => {
+	show(data){
 			if (data.result === 'RC100') {
 				let single = [],
 					multiple = [],
@@ -76,86 +72,51 @@ class AnswerOnline extends React.Component{
         })} else {
 				message.error(data.errMsg, 3);
 			}
+	}
+    appSelectExamDetail(){
+        let body = {
+			courseId: this.props.params.id
+		};
+		api.appSelectExamDetail(body).then((data) => {
+			this.show(data);
 		}, (res) => {
 			tool.reject(res);
 		})
     }
     appSelectBigTestExamDetail(){
-         let body = {
+        let body = {
 			testpaperId: this.props.params.id
 		};
 		api.appSelectBigTestExamDetail(body).then((data) => {
-			if (data.result === 'RC100') {
-				let single = [],
-					multiple = [],
-					titleList=data.titleList;
-				for (let i in titleList) {
-					if (titleList[i].titleType === '1') {
-						single.push(titleList[i]);
-					} else {
-						multiple.push(titleList[i]);
-					}
-				}
-				this.setState({
-					single,
-					multiple,
-					examRecords:data.examRecords?data.examRecords:{}
-				},()=>{
-                    $('.SingleQuestion').each(function(i) {
-						if(single[i].isTrue === 1 ){
-							$(this).find('.answers').addClass('imgRight');
-						}else{
-							$(this).find('.answers').addClass('imgWrong')
-						}
-						let answer = tool.getAnswer(single[i].chooseAnswer);
-						$(this).find("input[type='radio']").each((index, el) => {
-							for(let i in answer){
-								if(answer[i] === index){
-									el.checked = true;
-								}
-							}
-						})
-                });
-                 $('.MultipleQuestion').each(function(i) {
-						if(multiple[i] !== undefined){
-							if(multiple[i].isTrue === 1 ){
-							$(this).find('.answers').addClass('imgRight');
-						}else{
-							$(this).find('.answers').addClass('imgWrong')
-						}
-							let answer = tool.getAnswer(multiple[i].chooseAnswer);
-							
-							$(this).find("input[type='checkbox']").each((index, el) => {
-								
-								for(let i in answer){
-									if(answer[i] === index){
-										el.checked = true;
-									}
-								}
-							})
-						}
-                });
-			});
-        } else {
-				message.error(data.errMsg, 3);
-			}
+			this.show(data);
+		}, (res) => {
+			tool.reject(res);
+		})
+    }
+    selectRandomTestExamDetail(){
+    	let body = {
+			randomPaperId: this.props.params.id
+		};
+		api.selectRandomTestExamDetail(body).then((data) => {
+			this.show(data);
 		}, (res) => {
 			tool.reject(res);
 		})
     }
 	componentWillMount() {
-		if(this.props.params.code==='1'){
-             this.appSelectExamDetail();
-        }else{
-            this.appSelectBigTestExamDetail();
-        }
+		switch(this.props.params.code){
+			case '1':this.appSelectExamDetail();break;
+			case '2':this.appSelectBigTestExamDetail();break;
+			case '3':this.selectRandomTestExamDetail();break;
+			default:break;
+		}
 	}
 	render(){
         let examRecords=this.state.examRecords
 		return(
            <div>
             <header className="header">
-				<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+				<a onClick={()=>hashHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
 				<h1>答题历史</h1>
 			</header>
 			<div className="warpper">

@@ -193,6 +193,9 @@ class AnswerOnline extends React.Component{
 			tool.reject(res);
 		})
 	}
+	componentWillUnmount() {
+		clearInterval(this.timerAuctionHandler);
+	}
 	render(){
 		return(
 

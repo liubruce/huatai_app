@@ -1166,7 +1166,26 @@ export const appSelectBigTestExamDetail = (body = {}) => {
         });
     });
 }
-
+/*
+eLearning/randomTitle/selectRandomTestExamDetail
+ */
+export const selectRandomTestExamDetail = (body = {}) => {
+    body = tool.behavior(body, 'mainPage', 'menu')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${lesson_api_IP}/eLearning/randomTitle/selectRandomTestExamDetail`,
+            body,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
+}
 /*
 appELearning/appCourse/appSaveVideoTimes
  */
