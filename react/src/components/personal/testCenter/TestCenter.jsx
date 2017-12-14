@@ -26,10 +26,11 @@ class TestCenter extends React.Component{
    }
 	unreadInformationlist() {
 		tool.loading(this, true);
-		api.unreadInformationlist().then((data) => {
+		api.unreadInformationlist({pageno:this.state.pageNo}).then((data) => {
 			if (data.result === 'RC100') {
 				this.setState({
-					testList: data.informationList ? data.informationList : []
+					testList: this.state.testList.concat(data.informationList),
+					totalPage:data.total
 				})
 			} else {
 				message.error(data.errMsg, 3);
@@ -42,11 +43,12 @@ class TestCenter extends React.Component{
 	}
 	readInformationlist() {
 		tool.loading(this, true);
-		api.readInformationlist().then((data) => {
+		api.readInformationlist({pageno:this.state.pageNo}).then((data) => {
 			tool.loading(this, false)
 			if (data.result === 'RC100') {
 				this.setState({
-					testList: data.informationList ? data.informationList : []
+					testList: this.state.testList.concat(data.informationList),
+					totalPage:data.total
 				})
 			} else {
 				message.error(data.errMsg, 3);
@@ -65,7 +67,8 @@ class TestCenter extends React.Component{
 	}
 	changeTab(tab) {
 		this.setState({
-			tab: tab
+			tab: tab,
+			testList:[]
 		}, () => {
 			if (tab === 1) {
 				this.unreadInformationlist();
