@@ -580,12 +580,12 @@ export const appAddArticle = (body, onprogress) => {
                 console.log(data)
                 reject(data)
             },
-            xhr: function() {    
-                let xhr = $.ajaxSettings.xhr();    
-                if (onprogress && xhr.upload) {     
-                    xhr.upload.addEventListener("progress", onprogress, false);     
-                    return xhr;    
-                }   
+            xhr: function() {
+                let xhr = $.ajaxSettings.xhr();
+                if (onprogress && xhr.upload) {
+                    xhr.upload.addEventListener("progress", onprogress, false);
+                    return xhr;
+                }
             },
         });
 
@@ -1165,5 +1165,25 @@ export const appSelectBigTestExamDetail = (body = {}) => {
             }
         });
     });
+}
 
+/*
+appELearning/appCourse/appSaveVideoTimes
+ */
+export const appSaveVideoTimes = (body = {}) => {
+    body = tool.behavior(body, 'mainPage', 'menu')
+    return new Promise((resolve, reject) => {
+        sfetch.get({
+            url: `${lesson_api_IP}/appELearning/appCourse/appSaveVideoTimes`,
+            body,
+            timeout: 8000,
+        }).then((data) => {
+            if (data.ok) {
+                tool.checkLogin(data.json);
+                resolve(data.json)
+            } else {
+                reject(data)
+            }
+        });
+    });
 }

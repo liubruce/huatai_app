@@ -6,7 +6,6 @@ import * as api from '../../config/api'
 import { message } from 'antd'
 import $ from 'jquery'
 // import videojs from 'video.js'
-
 import ChimeeMobilePlayer from 'chimee-mobile-player'
 
 let old_time = 0;
@@ -23,6 +22,7 @@ class CourseDetail extends React.Component {
             showTitle: false,
             percent: 0,
             answerScore: 0,
+            videoPalyId:''
         }
     }
 
@@ -72,7 +72,8 @@ class CourseDetail extends React.Component {
                     coursedata: data.coursedata,
                     courseattach: data.courseattach,
                     titleList: data.titleList,
-                    answerScore:data.answerScore
+                    answerScore:data.answerScore,
+                    videoPalyId:data.vpt.videoPalyId
                 },()=>{
                     this.chooseVideo(0);
                     // this.showVideo();
@@ -94,6 +95,17 @@ class CourseDetail extends React.Component {
             default:break;
         }
     }
+    saveVideo(){
+        let body = {};
+        body.videoPalyId = this.state.videoPalyId;
+        body.palyInterWay = navigator.connection.type || 'wifi';
+        body.palyShowWay = 'APP'
+        api.appSaveVideoTimes(body).then(data=>{
+
+        }, (res) => {
+            tool.reject(res);
+        })
+    }
     testVideo(src) {
         chimee = new ChimeeMobilePlayer({
             wrapper: '#video_div',
@@ -113,6 +125,7 @@ class CourseDetail extends React.Component {
             this.setState({
                 isEnd: true
             })
+            this.saveVideo()
         });
         $('chimee-state-play').css('display','none');
         if (!tool.isPc && navigator.connection.type !== "wifi") {
