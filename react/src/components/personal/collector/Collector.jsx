@@ -47,6 +47,9 @@ class CourseCol extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.couCollection();
     }
+    componentWillUnmount() {
+        tool.removeScroll();
+    }
     jump(item) {
         if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
             hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
@@ -168,7 +171,7 @@ class EssayCol extends React.Component {
             if (data.result === 'RC100') {
                 this.setState({
                     colCourseList: flag ? this.state.colCourseList.concat(data.myEssayColList) : data.myEssayColList,
-                    totalPage: data.total,
+                    totalPage: data.totalPage,
                     score: data.score
                 })
             } else {
@@ -185,6 +188,9 @@ class EssayCol extends React.Component {
     }
     componentWillReceiveProps(nextProps) {
         this.morecolEssay();
+    }
+    componentWillUnmount() {
+        tool.removeScroll();
     }
     render() {
         return (
@@ -212,9 +218,6 @@ class Collector extends React.Component {
         this.state = {
             tab: 1
         }
-    }
-    componentWillUnmount() {
-        tool.removeScroll();
     }
     changeTab(tab) {
         this.setState({
