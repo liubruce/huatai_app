@@ -49,7 +49,8 @@ class Index extends React.Component {
   }
   show() {
     let isFrist = localStorage.getItem('isFirst');
-    if (isFrist !== 'true') {
+    let notShowGuide = localStorage.getItem('notShowGuide');
+    if (isFrist !== 'true' && notShowGuide !== 'true') {
       hashHistory.push('/Guide');
       return;
     }
