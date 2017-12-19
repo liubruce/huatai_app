@@ -114,7 +114,6 @@ class CourseDetail extends React.Component {
             wrapper: '#video_div',
             src: src,
             isLive: false,
-            //box:'native',
             autoplay: false,
            
         });
@@ -131,7 +130,6 @@ class CourseDetail extends React.Component {
             })
             this.saveVideo()
         });
-        //$('chimee-state-play').css('display','none');
         if (!tool.isPc && navigator.connection.type !== "wifi") {
             this.setState({
                 showTitle: true
