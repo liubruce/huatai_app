@@ -6,10 +6,10 @@ import * as api from '../../config/api'
 import { message } from 'antd'
 import $ from 'jquery'
 
-//import ChimeeMobilePlayer from 'chimee-mobile-player'
+import ChimeeMobilePlayer from 'chimee-mobile-player'
 
-import ChimeePlayer from 'chimee-player'
-import chimeePluginControlbar from 'chimee-plugin-controlbar';
+// import ChimeePlayer from 'chimee-player'
+// import chimeePluginControlbar from 'chimee-plugin-controlbar';
 
 let old_time = 0;
 let myPlayer;
@@ -25,7 +25,7 @@ class CourseDetail extends React.Component {
             showTitle: false,
             percent: 0,
             answerScore: 0,
-            videoPalyId: ''
+            videoPalyId:''
         }
     }
 
@@ -75,9 +75,9 @@ class CourseDetail extends React.Component {
                     coursedata: data.coursedata,
                     courseattach: data.courseattach,
                     titleList: data.titleList,
-                    answerScore: data.answerScore,
-                    videoPalyId: data.vpt.videoPalyId
-                }, () => {
+                    answerScore:data.answerScore,
+                    videoPalyId:data.vpt.videoPalyId
+                },()=>{
                     this.chooseVideo(0);
                     // this.showVideo();
                 })
@@ -88,70 +88,35 @@ class CourseDetail extends React.Component {
             tool.reject(res);
         })
     }
-    chooseVideo(num) {
-        switch (num) {
-            case 0:
-                this.testVideo(tool.getFile(this.state.coursedata.coursevideoPath));
-                break;
-            case 1:
-                this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1.mp4');
-                break;
-            case 2:
-                this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/2.mp4');
-                break;
-            case 3:
-                this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/3.mp4');
-                break;
-            case 4:
-                this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/4.mp4');
-                break;
-            default:
-                break;
+    chooseVideo(num){
+        switch(num){
+            case 0:this.testVideo(tool.getFile(this.state.coursedata.coursevideoPath));break;
+            case 1:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/1.mp4');break;
+            case 2:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/2.mp4');break;
+            case 3:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/3.mp4');break;
+            case 4:this.testVideo('https://estatic.oss-cn-szfinance.aliyuncs.com/kyh/video/4.mp4');break;
+            default:break;
         }
     }
-    saveVideo() {
+    saveVideo(){
         let body = {};
         body.videoPalyId = this.state.videoPalyId;
         body.palyInterWay = navigator.connection.type || 'wifi';
         body.palyShowWay = 'APP'
-        api.appSaveVideoTimes(body).then(data => {
+        api.appSaveVideoTimes(body).then(data=>{
 
         }, (res) => {
             tool.reject(res);
         })
     }
     testVideo(src) {
-        chimee = new ChimeePlayer({
+        chimee = new ChimeeMobilePlayer({
             wrapper: '#video_div',
             src: src,
             isLive: false,
             //box:'native',
             autoplay: false,
-            plugin: [{
-                name: chimeePluginControlbar.name,
-                children: {
-                    play: true,
-                    progressTime: true,
-                    progressBar: {
-                        layout: 'one-line'
-                    },
-                    volume: {
-                        icon: {
-                            low: ``,
-                            mute: ``,
-                            high: ``
-                        },
-                        layout: 'vertical',
-                    },
-                    screen: {
-                        icon: {
-                            small: '',
-                            full: ''
-                        }
-                    }
-                }
-            }]
-
+           
         });
 
         chimee.on('play', evt => {
@@ -219,7 +184,7 @@ class CourseDetail extends React.Component {
         this.setState({
             showTitle: false
         }, () => {
-            chimee.play();
+            chimee.play(); 
             // myPlayer.play();
         })
     }

@@ -15,4 +15,4 @@ UAT:com.sinosoft.huatai
 SIT:com.sinosoft.huataisit     
 PRO:com.sinosoft.huataipro
  */
-localStorage.setItem("android_package_name", 'com.sinosoft.huataipro');
+localStorage.setItem("android_package_name", 'com.sinosoft.huataisit');
