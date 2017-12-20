@@ -3,6 +3,7 @@ import './guide.less'
 import { hashHistory } from 'react-router';
 import Slider from 'react-slick';
 import $ from 'jquery'
+import { Checkbox } from 'antd';
 class Page1 extends React.Component {
   constructor(args) {
     super();
@@ -49,12 +50,12 @@ class Page3 extends React.Component {
   render(){
     return(
     <div className="guide-container-blue">
-      <div className="star star-1"><img src={require('../../style/images/avter-1@2x.png')} /></div>
-      <div className="star star-2"><img src={require('../../style/images/avter-2@2x.png')} /></div>
-      <div className="star star-3"><img src={require('../../style/images/avter-3@2x.png')} /></div>
-      <div className="star star-4"><img src={require('../../style/images/avter-4@2x.png')} /></div>
-      <div className="star star-5"><img src={require('../../style/images/avter-5@2x.png')} /></div>
-      <div className="star star-6"><img src={require('../../style/images/avter-6@2x.png')} /></div>
+      <div className="star star-1"><img alt='guide' src={require('../../style/images/avter-1@2x.png')} /></div>
+      <div className="star star-2"><img alt='guide' src={require('../../style/images/avter-2@2x.png')} /></div>
+      <div className="star star-3"><img alt='guide' src={require('../../style/images/avter-3@2x.png')} /></div>
+      <div className="star star-4"><img alt='guide' src={require('../../style/images/avter-4@2x.png')} /></div>
+      <div className="star star-5"><img alt='guide' src={require('../../style/images/avter-5@2x.png')} /></div>
+      <div className="star star-6"><img alt='guide' src={require('../../style/images/avter-6@2x.png')} /></div>
       <p>学习，感知世界<br/>绽放，美丽人生</p>
       <img src={require('../../style/images/yellow_xq@2x.png')} alt=""/>
     </div>
@@ -86,11 +87,13 @@ class Guide extends React.Component {
   constructor(args) {
     super()
     this.state = {
-      nowSlide: 0
+      nowSlide: 0,
+      notShowGuide:true
     }
   }
-  goIndex(){
-    localStorage.setItem('isFirst', 'true');//judge first in index.jsx
+  goIndex() {
+    localStorage.setItem('notShowGuide', this.state.notShowGuide ? 'true' : 'false');
+    localStorage.setItem('isFirst', 'true'); //judge first in index.jsx
     hashHistory.push('/');
   }
   componentDidMount() {
@@ -120,6 +123,7 @@ class Guide extends React.Component {
                  <div className='guide-page'><Page2 /></div>
                  <div className='guide-page'><Page3 /></div>
              </Slider>
+             {this.state.nowSlide===2?<Checkbox checked={this.state.notShowGuide} onChange={(e)=>{this.setState({notShowGuide:e.target.checked})}}>不再显示</Checkbox>:null}
              <div style={{opacity:this.state.nowSlide===2?1:0}}
               className="float-button" 
               onClick={()=>this.goIndex()} >进入首页</div>

@@ -38,7 +38,8 @@ const start_render = () => {
         document.getElementById('root')
     );
 }
-
+localStorage.setItem('isFirst', 'false');
+let android_package_name = localStorage.getItem("android_package_name");
 if (tool.isPc) {
     start_render();
 } else {
@@ -49,8 +50,8 @@ if (tool.isPc) {
             let exit_url = window.cordova.file.applicationDirectory + 'www/index.html';
             tool.setUrl(back_url, exit_url);
         } else {
-            let back_url = 'file:////data/data/com.sinosoft.huataipro/files/www/DD/build/index.html#/index';
-            let exit_url = 'file:////data/data/com.sinosoft.huataipro/files/www/DD/build/index.html';
+            let back_url = `file:////data/data/${android_package_name}/files/www/DD/build/index.html#/index`;
+            let exit_url = `file:////data/data/${android_package_name}/files/www/DD/build/index.html`;
             tool.setUrl(back_url, exit_url);
         }
         tool.info().then((data) => {

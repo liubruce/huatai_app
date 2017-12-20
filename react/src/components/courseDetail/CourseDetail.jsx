@@ -6,10 +6,10 @@ import * as api from '../../config/api'
 import { message } from 'antd'
 import $ from 'jquery'
 
-//import ChimeeMobilePlayer from 'chimee-mobile-player'
+import ChimeeMobilePlayer from 'chimee-mobile-player'
 
-import ChimeePlayer from 'chimee-player'
-import chimeePluginControlbar from 'chimee-plugin-controlbar';
+// import ChimeePlayer from 'chimee-player'
+// import chimeePluginControlbar from 'chimee-plugin-controlbar';
 
 let old_time = 0;
 let myPlayer;
@@ -110,36 +110,11 @@ class CourseDetail extends React.Component {
         })
     }
     testVideo(src) {
-        chimee = new ChimeePlayer({
+        chimee = new ChimeeMobilePlayer({
             wrapper: '#video_div',
             src: src,
             isLive: false,
-            //box:'native',
             autoplay: false,
-              plugin: [{
-                name: chimeePluginControlbar.name,
-                children: {
-                    play: true,
-                    progressTime: true,
-                    progressBar: {
-                        layout: 'one-line'
-                    },
-                volume: {
-                    icon: {
-                        low: ``,
-                        mute: ``,
-                        high: ``
-                    },
-                    layout: 'vertical',
-                },
-                screen: {
-                          icon: {
-                            small: '',
-                            full: ''
-                        }
-                 }
-        }
-      }]
            
         });
 
@@ -155,7 +130,6 @@ class CourseDetail extends React.Component {
             })
             this.saveVideo()
         });
-        //$('chimee-state-play').css('display','none');
         if (!tool.isPc && navigator.connection.type !== "wifi") {
             this.setState({
                 showTitle: true
