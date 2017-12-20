@@ -148,7 +148,7 @@ class Index extends React.Component {
 
              <Slider {...settings}>
                <img alt='test' src={require('../../style/images/banner-1.png')} />
-               <img alt='test' src={require('../../style/images/banner-2.png')} />
+               <img alt='test' src={require('../../style/images/banner-2.jpg')} />
                <img alt='test' src={require('../../style/images/banner-3.png')} />
              </Slider>
 
