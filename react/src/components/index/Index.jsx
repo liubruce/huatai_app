@@ -75,13 +75,23 @@ class Index extends React.Component {
     })
   }
   jump(item) {
-    if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
-      hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
-      return;
+    if(item.courseConvert===1){
+            message.warning('视频转码中，请稍后再试...', 1);
+		}else if(item.courseConvert===2){
+            message.warning('转码失败，请联系管理员...', 1);
+		}else{
+      //  if(item.clickRat<=200){
+            if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
+              hashHistory.push(`/App/Course/courseDetail/${item.courseId}`);
+              return;
+            }
+            this.setState({
+              now_item: item
+            })
+          // }else{
+          //   message.warning('该课程在加载中...', 3);
+          // }
     }
-    this.setState({
-      now_item: item
-    })
   }
   ok() {
     let body = {

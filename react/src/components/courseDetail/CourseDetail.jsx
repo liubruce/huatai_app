@@ -80,6 +80,13 @@ class CourseDetail extends React.Component {
                 },()=>{
                     this.chooseVideo(0);
                     // this.showVideo();
+                    if(this.state.coursedata){
+                        if(this.state.coursedata.courseConvert===1){
+                             message.warning('视频转码中，请稍后再试...', 1);
+                        }else if(this.state.coursedata.courseConvert===2){
+                            message.warning('转码失败，请联系管理员...', 1);
+                        }
+                    }
                 })
             } else {
                 message.error(data.errMsg, 3);
