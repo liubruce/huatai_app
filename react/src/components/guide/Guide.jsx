@@ -85,6 +85,7 @@ const SamplePrevArrow = (props) => {
 }
 class Guide extends React.Component {
   constructor(args) {
+
     super()
     this.state = {
       nowSlide: 0,
@@ -92,6 +93,7 @@ class Guide extends React.Component {
     }
   }
   goIndex() {
+   
     localStorage.setItem('notShowGuide', this.state.notShowGuide ? 'true' : 'false');
     localStorage.setItem('isFirst', 'true'); //judge first in index.jsx
     hashHistory.push('/');

@@ -39,6 +39,7 @@ const start_render = () => {
     );
 }
 localStorage.setItem('isFirst', 'false');
+
 let android_package_name = localStorage.getItem("android_package_name");
 if (tool.isPc) {
     start_render();
