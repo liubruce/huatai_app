@@ -55,8 +55,18 @@ class CourseDy extends React.Component {
     jump(item) {
         if(item.courseConvert===1){
             message.warning('视频转码中，请稍后再试...', 1);
+            this.setState({
+                pageno: 1
+            },()=>{
+                this.courseClick();   
+            })
 		}else if(item.courseConvert===2){
             message.warning('转码失败，请联系管理员...', 1);
+            this.setState({
+                pageno: 1
+            },()=>{
+                this.courseClick();   
+            })
 		}else{
            // if(item.clickRat<=200){
                 if (item.goodCourse !== '1' || item.userCourseOperation.isBuy === 1) {
