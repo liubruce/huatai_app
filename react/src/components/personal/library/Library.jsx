@@ -466,7 +466,7 @@ class Library extends React.Component {
         return (
             <div>
                 <header className="header">
-					<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>
+                    {this.props.params.code==='1'?null:<a onClick={()=>browserHistory.goBack()} className="header-left"><i className="fa fa-angle-left fa-2x"></i></a>}
                     <h1>图书馆</h1>
                  </header>
             <div className="warpper">

@@ -27,7 +27,7 @@ const start_render = () => {
              <Route path='/Guide' component={Guide} />
              <Route path='/Course' component={Course} />
              <Route path='/Article' component={Article} />
-             <Route path='/Library' component={Library}/>
+             <Route path='/Library(/:code)' component={Library}/>
              <Route path='/MydirectDetails/:id' component={MydirectDetails}/>
              <Route path='/PrivateTheme/:id' component={PrivateTheme}/>
          </Route>
