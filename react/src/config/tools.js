@@ -113,6 +113,7 @@ export const sino_cordova_checkApp = () => {
         reData.version = '0'
     }
     return reData;
+   // console.log(reData);
 }
 export const IsPC = () => {
     var userAgentInfo = navigator.userAgent;

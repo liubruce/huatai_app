@@ -143,6 +143,7 @@ class Index extends React.Component {
     console.log(`请求到达时间: ${arriveTime}`)
     console.log(`页面加载完成时间: ${loadTime}`);
     console.log(`页面加载完成时间与请求到达时间差: ${loadTime-arriveTime}`);
+    //console.log(tool.sino_cordova_checkApp())
   }
 	render() {
     const settings = {
@@ -160,9 +161,9 @@ class Index extends React.Component {
         <div className="warpper">
 
              <Slider {...settings}>
-               <img alt='test' src={require('../../style/images/banner-1.png')} />
+               <img alt='test' src={require('../../style/images/banner-1.jpg')} />
                <img alt='test' src={require('../../style/images/banner-2.jpg')} />
-               <img alt='test' src={require('../../style/images/banner-3.png')} />
+               <img alt='test' src={require('../../style/images/banner-3.jpg')} />
              </Slider>
 
           <div className="am-panel panel-in">
