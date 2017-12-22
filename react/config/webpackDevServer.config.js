@@ -72,13 +72,6 @@ module.exports = function(proxy, allowedHost) {
     https: protocol === 'https',
     host: host,
     overlay: false,
-    // historyApiFallback: {
-    //   disableDotRule: true,
-    //   // 指明哪些路径映射到哪个html
-    //   rewrites: [
-    //     { from: /^\/admin.html/, to: '/build/admin.html' },
-    //   ]
-    // },
     public: allowedHost,
     proxy,
     setup(app) {
