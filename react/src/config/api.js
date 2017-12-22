@@ -76,6 +76,7 @@ export const getMenu = () => {
             timeout: 12000
         }).then((data) => {
             if (data.ok) {
+                //console.log(data);
                 tool.checkLogin(data.json);
                 resolve(data.json)
             } else {
