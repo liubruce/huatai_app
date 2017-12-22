@@ -102,20 +102,29 @@ class PointShop extends React.Component{
 					this.state.pointShopList.map((item,index)=>{
 						return(
 						<div  key={index}>
-							{
-								item.stock>0?
 								<div className="am-panel goods-list">
-								<div className="goods-img"><img src={tool.getFile(item.shopCover)} alt="test"/></div>
+								<div className="goods-img">
+									{
+								       item.redeemCode?
+											<div className="code-hide">
+											{
+												item.userShopIsBuy.isBuy===1?
+												<span>{item.redeemCode}</span>:
+												<span>密</span>
+											}
+											</div>:<img src={tool.getFile(item.shopCover)} alt="test"/>
+									}
+
+							 </div>
 								<div className="goods-info">
 									<h3>{item.shopName}</h3>
 									<p><label>兑换积分:</label><span>{item.exchangeIntegral}</span></p>
-									<p><label>库存:</label><font>{item.stock}</font></p>
+									{item.redeemCode?null:<p><label>库存:</label><font>{item.stock}</font></p>}
 									 <a onClick={()=>this.jump(item)}>
 										<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
 									</a>
 								</div>
-							</div>:null
-							}
+							</div>
 						</div>
 						)
 					})
