@@ -2,7 +2,7 @@ import React from 'react'
 import './header.less'
 import {hashHistory} from 'react-router';
 import * as tool from '../../config/tools';
-import $ from "jquery";
+//import $ from "jquery";
 class Header extends React.Component {
 	constructor(args) {
 		super();
@@ -65,16 +65,16 @@ class Header extends React.Component {
  
   // }
 	render(){
-    var h=$(window).height();
-    $(window).resize(function() {
+    // var h=$(window).height();
+    // $(window).resize(function() {
      
-        if($(window).height()<h){
-            $('.foot').hide();
-        }
-        if($(window).height()>=h){
-            $('.foot').show();
-        }
-    });
+    //     if($(window).height()<h){
+    //         $('.foot').hide();
+    //     }
+    //     if($(window).height()>=h){
+    //         $('.foot').show();
+    //     }
+    // });
 		return(
         <form onSubmit={(e)=>this.submit(e)} >
           {tool.isIOS?<div className='ios-header' ></div>:null}
