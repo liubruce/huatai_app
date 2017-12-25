@@ -29,7 +29,7 @@ class Card extends React.Component{
 								    <h2 className="am-titlebar-title">工作信息</h2>
 								</div>
 								<ul className="am-list am-list-static">
-								  	<li>入职时间<span>{jobInfo.enterDate}</span></li>
+								  	<li>入职时间<span>{tool.formatTimestamp(userCard.entryTime,'y-m-d')}</span></li>
 								  	<li>所在地区<span>{jobInfo.address}</span></li>
 								  	<li>职务<span>{jobInfo.rankName}</span></li>
 								  	<li>分公司<span>{jobInfo.manageComName}</span></li>
