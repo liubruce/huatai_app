@@ -121,7 +121,11 @@ class PointShop extends React.Component{
 									<p><label>兑换积分:</label><span>{item.exchangeIntegral}</span></p>
 									{item.redeemCode?null:<p><label>库存:</label><font>{item.stock}</font></p>}
 									 <a onClick={()=>this.jump(item)}>
-										<button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
+									 {
+										 item.redeemCode?
+										 <button type="button" className="am-btn-default">已兑换</button>:
+                                         <button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
+									 }
 									</a>
 								</div>
 							</div>
