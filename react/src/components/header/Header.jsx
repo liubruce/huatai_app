@@ -1,7 +1,14 @@
 import React from 'react'
 import './header.less'
 import {hashHistory} from 'react-router';
-import * as tool from '../../config/tools'
+import * as tool from '../../config/tools';
+//import $ from "jquery";
+/*
+  Andorid设备下因为输入法带来的bug解决策略。
+  在打包发布时：
+    1.cordova platform add android
+    2.修改AndroidMainifest.xml文件里面的Active 属性WindowSoftInputMode="adjustPan"
+ */
 class Header extends React.Component {
 	constructor(args) {
 		super();
@@ -9,6 +16,7 @@ class Header extends React.Component {
       inputValue:'',
       placeholder:''
     }
+    //this.handleClick = this.handleClick.bind(this);
 	}
   componentWillMount() {
     this.checkUrl();
@@ -59,7 +67,20 @@ class Header extends React.Component {
       // this.submit(e);
     }
   }
+  // handleClick(){
+ 
+  // }
 	render(){
+    // var h=$(window).height();
+    // $(window).resize(function() {
+     
+    //     if($(window).height()<h){
+    //         $('.foot').hide();
+    //     }
+    //     if($(window).height()>=h){
+    //         $('.foot').show();
+    //     }
+    // });
 		return(
         <form onSubmit={(e)=>this.submit(e)} >
           {tool.isIOS?<div className='ios-header' ></div>:null}
