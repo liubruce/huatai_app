@@ -122,7 +122,7 @@ class PointShop extends React.Component{
 									{item.redeemCode?null:<p><label>库存:</label><font>{item.stock}</font></p>}
 									 <a onClick={()=>this.jump(item)}>
 									 {
-										 item.redeemCode?
+										 item.userShopIsBuy.isBuy===1?
 										 <button type="button" className="am-btn-default">已兑换</button>:
                                          <button type="button" className="am-btn-primary" data-am-modal="{target: '#my-confirm'}">兑换</button>
 									 }
