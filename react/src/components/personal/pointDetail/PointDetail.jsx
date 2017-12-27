@@ -135,9 +135,9 @@ class PointDetail extends React.Component{
 							<p>{dataDetailList.userName}</p>
 						</div>
 						<div className="user-jf-details">
-							<p>{dataDetailList.vipUserIntgralAvailable}分</p>
+							<p>{dataDetailList.vipUserIntgralAvailable===undefined?0:dataDetailList.differencePercentage}分</p>
 							<div className="progress">
-								<div className="progress-bar" style={{width:dataDetailList.differencePercentage}}></div>
+								<div className="progress-bar" style={{width:(dataDetailList.differencePercentage===undefined?0:dataDetailList.differencePercentage)}}></div>
 							</div>
 							<ul className="am-avg-sm-4 am-text-center">
 								<li>25%</li>
