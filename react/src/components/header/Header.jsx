@@ -84,7 +84,7 @@ class Header extends React.Component {
     // });
 		return(
         <form onSubmit={(e)=>this.submit(e)} >
-          {tool.isIOS?<div className='ios-header' ></div>:null}
+{/*          {tool.isIOS?<div className='ios-header' ></div>:null}*/}
           {
              (this.props.pathname.indexOf('/Guide') !== -1)?null:
             <header className="header">
