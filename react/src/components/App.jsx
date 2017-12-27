@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import Header from './header/Header.jsx'
 import Footer from './footer/Footer.jsx'
 import * as tool from '../config/tools'
+import { browserHistory } from 'react-router'
+import $  from 'jquery'
 // import {hashHistory} from 'react-router'
 import './app.less'
 class App extends Component {
@@ -17,10 +19,13 @@ class App extends Component {
 			// hashHistory.push('/Login');
 			return;
 		}
+
 	}
+ 
 	render() {
+	
 		return (
-			
+				
 			   <div className='app'>
 
 			            <Header pathname={this.props.location.pathname} location={this.props.location} />

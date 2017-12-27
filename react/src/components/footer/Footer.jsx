@@ -15,6 +15,13 @@ class Footer extends React.Component {
     this.setState({
       tab
     })
+     //console.log(tab)
+    if(tab=="2"||tab=="3"||tab=="4"){
+        $(".header").removeClass("opacity")
+        
+    }
+   
+  
   }
   componentWillMount() {
     this.checkUrl(this.props.pathname);
@@ -29,9 +36,11 @@ class Footer extends React.Component {
     }
     if(pathname === '/Article'){
       showFooter = true;
+      
     }
     if(pathname === '/Course'){
       showFooter = true;
+       
     }
     if(pathname === '/Library/1'){
       showFooter = true;
@@ -41,6 +50,7 @@ class Footer extends React.Component {
     }
     if(pathname === '/'){
       showFooter = true;
+
     }
 
     let tab = 1;
@@ -85,6 +95,7 @@ class Footer extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     this.ios();
   }
+
 	render() {
 		return(
         <div>{this.state.showFooter?<footer className="foot">

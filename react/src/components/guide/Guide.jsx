@@ -94,7 +94,7 @@ class Guide extends React.Component {
   }
   goIndex() {
    
-    localStorage.setItem('notShowGuide', this.state.notShowGuide ? 'false' : 'true');
+    localStorage.setItem('notShowGuide', this.state.notShowGuide ? 'true' : 'false');
     localStorage.setItem('isFirst', 'true'); //judge first in index.jsx
     hashHistory.push('/');
   }
@@ -125,7 +125,7 @@ class Guide extends React.Component {
                  <div className='guide-page'><Page2 /></div>
                  <div className='guide-page'><Page3 /></div>
              </Slider>
-             {/* {this.state.nowSlide===2?<Checkbox checked={this.state.notShowGuide} onChange={(e)=>{this.setState({notShowGuide:e.target.checked})}}>不再显示</Checkbox>:null} */}
+            {this.state.nowSlide===2?<Checkbox checked={this.state.notShowGuide} onChange={(e)=>{this.setState({notShowGuide:e.target.checked})}}>不再显示</Checkbox>:null}
              <div style={{opacity:this.state.nowSlide===2?1:0}}
               className="float-button" 
               onClick={()=>this.goIndex()} >进入首页</div>

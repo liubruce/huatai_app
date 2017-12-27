@@ -2,7 +2,7 @@ import React from 'react'
 import './header.less'
 import {hashHistory} from 'react-router';
 import * as tool from '../../config/tools';
-//import $ from "jquery";
+import $ from "jquery";
 /*
   Andorid设备下因为输入法带来的bug解决策略。
   在打包发布时：
@@ -29,6 +29,7 @@ class Header extends React.Component {
     let placeholder = '';
     if (pathname.indexOf('/') !== -1) {
       placeholder = '课程名称';
+         
     }
     if (pathname.indexOf('/Index') !== -1) {
       placeholder = '课程名称';

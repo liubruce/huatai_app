@@ -17,6 +17,7 @@ import initReactFastclick from 'react-fastclick';
 import registerServiceWorker from './registerServiceWorker'
 
 initReactFastclick();
+
 const start_render = () => {
     render(
         <Router history={hashHistory}>
