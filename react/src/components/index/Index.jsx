@@ -6,6 +6,7 @@ import * as tool from '../../config/tools'
 import * as api from '../../config/api'
 import {message,Spin} from 'antd'
 import ArticleItem from '../article/ArticleItem.jsx'
+import $ from 'jquery';
 //import CourseItem from '../course/CourseItem.jsx'
 import {hashHistory} from 'react-router';
  const SampleNextArrow =(props)=> {
@@ -47,6 +48,10 @@ class Index extends React.Component {
   componentWillMount() {
     this.show();
   }
+  // componentDidMount(){
+  //   console.log(this.props.pathname);
+   
+  // }
   show() {
     let isFrist = localStorage.getItem('isFirst');
     let notShowGuide = localStorage.getItem('notShowGuide');
@@ -143,7 +148,22 @@ class Index extends React.Component {
     console.log(`请求到达时间: ${arriveTime}`)
     console.log(`页面加载完成时间: ${loadTime}`);
     console.log(`页面加载完成时间与请求到达时间差: ${loadTime-arriveTime}`);
-    //console.log(tool.sino_cordova_checkApp())
+    console.log(this.props.location.pathname);
+   if(this.props.location.pathname=="/Index"||this.props.location.pathname=="/"){
+          $('.warpper').css("paddingTop",0);
+          $(".header").addClass("opacity")
+              //alert($('.warpper').css("paddingTop"));
+              $(window).scroll(function() {
+                if($(window).scrollTop()>140){
+                  $(".header").removeClass("opacity")
+                }else{
+                  $(".header").addClass("opacity")
+                }
+            })
+         
+      }
+   
+
   }
 	render() {
     const settings = {
@@ -158,7 +178,7 @@ class Index extends React.Component {
       className: 'index-slider'
     };
 		return (
-        <div className="warpper">
+        <div className="warpper" >
 
              <Slider {...settings}>
                <img alt='test' src={require('../../style/images/banner-1.jpg')} />

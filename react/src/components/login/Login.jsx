@@ -17,6 +17,9 @@ class Login extends React.Component {
     let username = this.state.username;
     let password = this.state.password;
     api.login(username, password).then((_data) => {
+
+      //console.log(_data);
+           //debugger;
       if (_data.result === 'RC100') {
         let user = {};
         user.ldToken = _data.ldToken;

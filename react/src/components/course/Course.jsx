@@ -4,6 +4,7 @@ import { message , Spin } from 'antd';
 import * as api from '../../config/api';
 import * as tool from '../../config/tools';
 //import CourseItem from './CourseItem.jsx';
+import $ from 'jquery';
 import {hashHistory} from 'react-router';
 class Course extends React.Component {
   constructor(args) {
@@ -24,6 +25,7 @@ class Course extends React.Component {
   }
   componentDidMount() {
     tool.addScroll(this, this.show.bind(this));
+ 
   }
   componentWillUnmount() {
     tool.removeScroll();

@@ -1,50 +1,50 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-image-picker": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
     },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.huatai.ELearning"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "com.huatai.ELearning"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "io.HUATAI.ELearning"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "io.HUATAI.ELearning"
-        },
-        "cordova-plugin-wechat": {
-            "WECHATAPPID": "wxc6cfcd46b05ef392",
-            "PACKAGE_NAME": "io.HUATAI.ELearning"
-        },
-        "cordova-plugin-android-permissions": {
-            "PACKAGE_NAME": "com.huatai.eLearning"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.huatai.eLearning"
-        },
-        "cordova-plugin-image-picker": {
-            "PACKAGE_NAME": "com.huatai.eLearning"
-        }
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        }
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    },
+    "cordova-plugin-wechat": {
+      "WECHATAPPID": "wxc6cfcd46b05ef392",
+      "PACKAGE_NAME": "com.huatai.eLearning"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.huatai.eLearning"
+    }
+  }
 }

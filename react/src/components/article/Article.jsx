@@ -1,7 +1,7 @@
 import React from 'react'
 import './article.less'
 import { message,Spin } from 'antd';
-// import $ from 'jquery'
+ import $ from 'jquery'
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
 import ArticleItem from './ArticleItem.jsx'
@@ -17,6 +17,11 @@ class Article extends React.Component {
 	}
   componentDidMount() {
     tool.addScroll(this,this.show.bind(this));
+     $(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+              
+              
+            })
   }
   componentWillUnmount() {
     tool.removeScroll();

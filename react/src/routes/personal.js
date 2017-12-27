@@ -34,7 +34,7 @@ const personalRoutes = (
             <Route path='/App/PersonalCenter' component={UserCard}/>
             <Route path='/App/PersonalCenter/MyArticle' component={MyArticle}/>
             <Route path='/App/PersonalCenter/PubArticle(/:id)' component={PubArticle}/>
-            <Route path='/App/PersonalCenter/ArticleDetail/:id' component={ArticleDetail}/>
+            <Route path='/App/ArticleDetail/:id' component={ArticleDetail}/>
             <Route path='/App/NewsCenter' component={TestCenter}/>
             <Route path='/App/PersonalCenter/Collector' component={Collector}/>
             <Route path='/App/PersonalCenter/Dynamic' component={Dynamic}/>
