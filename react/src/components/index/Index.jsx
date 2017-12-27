@@ -181,8 +181,8 @@ class Index extends React.Component {
         <div className="warpper" >
 
              <Slider {...settings}>
-               <img alt='test' src={require('../../style/images/banner-1.jpg')} />
                <img alt='test' src={require('../../style/images/banner-2.jpg')} />
+               <img alt='test' src={require('../../style/images/banner-1.jpg')} />
                <img alt='test' src={require('../../style/images/banner-3.jpg')} />
              </Slider>
 
