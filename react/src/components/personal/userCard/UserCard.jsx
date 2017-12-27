@@ -249,10 +249,10 @@ class UserCard extends React.Component{
 	shareWeiXin() {
 		let text =localStorage.getItem("elearning_IP");
 		// let text ='http://localhost:8888';
-		text += '/AppShare';
-		text = tool.url_format(text, '', '', '');
-
-		if(tool.IsPC()){
+		text += '?page=wechat';
+		text = tool.url_format(text, '', '', '').replace(/\?/g,"&");
+		text = text.replace("&","?");
+		if(tool.isPc){
 			window.open(text);
 			return;
 		}
