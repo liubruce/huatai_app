@@ -95,6 +95,15 @@ class CourseDetail extends React.Component {
             tool.reject(res);
         })
     }
+   componentDidMount() {
+  
+    $(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+              
+              
+            })
+ 
+  }
     chooseVideo(num){
         switch(num){
             case 0:this.testVideo(tool.getFile(this.state.coursedata.coursevideoPath));break;

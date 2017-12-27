@@ -25,6 +25,11 @@ class Course extends React.Component {
   }
   componentDidMount() {
     tool.addScroll(this, this.show.bind(this));
+    $(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+              
+              
+            })
  
   }
   componentWillUnmount() {
