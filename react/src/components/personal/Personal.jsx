@@ -3,6 +3,7 @@ import Title from './Title.jsx'
 import './personal.less'
 import Footer from '../footer/Footer.jsx'
 import * as tool from '../../config/tools'
+import $ from 'jquery'
 class Personal extends Component {
   constructor(args) {
     super()
@@ -25,6 +26,7 @@ class Personal extends Component {
   componentWillReceiveProps(nextProps) {
     this.checkUrl(nextProps.location.pathname);
   }
+
   render() {
     return (
       <div className='app'>

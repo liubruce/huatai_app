@@ -16,7 +16,7 @@ class Footer extends React.Component {
       tab
     })
      //console.log(tab)
-    if(tab=="2"||tab=="3"||tab=="4"){
+    if(tab=="2"||tab=="3"||tab=="4"||tab=="5"){
         $(".header").removeClass("opacity")
         
     }

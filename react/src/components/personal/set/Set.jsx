@@ -1,6 +1,7 @@
 import React from 'react'
 import * as tool from '../../../config/tools'
 // import * as api from '../../../config/api'
+import $ from 'jquery'
 import {
   Modal,Switch
 } from 'antd';
@@ -36,6 +37,15 @@ class Set extends React.Component {
       },
     });
   }
+   componentDidMount() {
+  
+    $(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+              
+              
+            })
+ 
+  }
 	render() {
    
 		return (
@@ -43,13 +53,13 @@ class Set extends React.Component {
 	   <div className="warpper set">
         <ul className="am-list am-list-border list-in">
           <li>
-          <a ><i className="icon icon-set-up" />是否开启引导页<Switch className="fa  floatR" defaultChecked={!JSON.parse(localStorage.getItem("notShowGuide"))}  onChange={this.directSwitch} /></a>
+          <a ><i className="icon icon-guide" />是否开启引导页<Switch className="fa  floatR" defaultChecked={!JSON.parse(localStorage.getItem("notShowGuide"))}  onChange={this.directSwitch} /></a>
           </li>
           <li>
-            <a onClick={()=>this.back()} ><i className="icon icon-set-up" />返回首页<i className="fa fa-angle-right floatR" /></a>
+            <a onClick={()=>this.back()} ><i className="icon icon-back" />返回首页<i className="fa fa-angle-right floatR" /></a>
           </li>
           <li>
-            <a onClick={()=>this.exit()} ><i className="icon icon-set-up" />退出登录<i className="fa fa-angle-right floatR" /></a>
+            <a onClick={()=>this.exit()} ><i className="icon icon-out" />退出登录<i className="fa fa-angle-right floatR" /></a>
           </li>
         </ul>
       </div>
