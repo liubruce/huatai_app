@@ -130,9 +130,28 @@ export const IsPC = () => {
     }
     return flag;
 }
+
 export const isPc = sino_cordova_checkApp().device === 'Browser';
 export const isIOS = sino_cordova_checkApp().device === 'IOS';
-
+export const isIOS11 = () => {
+    /**
+     * 由于ios10 和 ios11 版本之间的差异，所以先判断ios系统版本之后再做处理
+     */
+    let str = navigator.userAgent.toLowerCase();
+    let ver = str.match(/cpu iphone os (.*?) like mac os/)[1].replace(/_/g, ".");
+    let oc = ver.split('.')[0];
+    console.log(`---IOS${oc}---`)
+    return oc > 10;
+    // if (oc > 10) {
+    //     // ios11 不做处理
+    //     return true;
+    // } else {
+    //     this.timer = setInterval(function() {
+    //         console.log('输入框获取到焦点');
+    //         document.body.scrollTop = document.body.scrollHeight;
+    //     }, 200);
+    // }
+}
 export let utils = {
     test() {
         console.log('test ok')

@@ -2,7 +2,6 @@ import React from 'react'
 import './header.less'
 import {hashHistory} from 'react-router';
 import * as tool from '../../config/tools';
-import $ from "jquery";
 /*
   Andorid设备下因为输入法带来的bug解决策略。
   在打包发布时：
@@ -68,23 +67,10 @@ class Header extends React.Component {
       // this.submit(e);
     }
   }
-  // handleClick(){
- 
-  // }
 	render(){
-    // var h=$(window).height();
-    // $(window).resize(function() {
-     
-    //     if($(window).height()<h){
-    //         $('.foot').hide();
-    //     }
-    //     if($(window).height()>=h){
-    //         $('.foot').show();
-    //     }
-    // });
 		return(
         <form onSubmit={(e)=>this.submit(e)} >
-{/*          {tool.isIOS?<div className='ios-header' ></div>:null}*/}
+          {tool.isIOS && !tool.isIOS11()?<div className='ios-header' ></div>:null}
           {
              (this.props.pathname.indexOf('/Guide') !== -1)?null:
             <header className="header">
