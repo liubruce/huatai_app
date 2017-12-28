@@ -1,6 +1,6 @@
 import React from 'react'
 import './integralRules.less'
-//import $ from 'jquery'
+import $ from 'jquery'
 //import {Link} from 'react-router'
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
@@ -31,6 +31,13 @@ class StoryLine extends React.Component{
   }
 	componentWillMount() {
      this.levelSet();
+   }
+   componentDidMount(){
+   	$(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+              
+              
+            })
    }
 	render(){
 		//let sex=this.state.sex;

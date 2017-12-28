@@ -3,10 +3,16 @@ import  './UserCard.less'
 import { message,Spin } from 'antd';
 import * as tool from '../../../config/tools'
 import * as api from '../../../config/api'
+import $ from 'jquery'
 import {browserHistory} from 'react-router'
 class Card extends React.Component{
 	constructor(args) {
 		super()
+	}
+	componentDidMount(){
+			$(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+            })
 	}
 	render(){
 		let userCard=this.props.userCard;

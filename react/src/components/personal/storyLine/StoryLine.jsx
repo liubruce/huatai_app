@@ -17,6 +17,11 @@ class StoryLine extends React.Component{
 	componentWillMount() {
     	this.show()
   	}
+  	componentDidMount(){
+			$(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+            })
+	}
   	show(){
   		api.selectuserDetail().then((data) => {
 	      if (data.result === 'RC100') {

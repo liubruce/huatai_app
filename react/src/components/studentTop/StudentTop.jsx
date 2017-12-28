@@ -4,7 +4,7 @@ import { message , Spin } from 'antd';
 import * as api from '../../config/api'
 import * as tool from '../../config/tools'
 import  Switch , { Case, Default } from 'react-switch-case';
-
+import $ from 'jquery'
 class StudentTop extends React.Component{
 	constructor(args) {
 		super()
@@ -17,6 +17,11 @@ class StudentTop extends React.Component{
 	}
 	componentWillMount() {
 		this.show();
+	}
+	componentDidMount(){
+			$(window).scroll(function() {
+                  $(".header").removeClass("opacity")
+            })
 	}
 	show() {
 		tool.loading(this, true);
