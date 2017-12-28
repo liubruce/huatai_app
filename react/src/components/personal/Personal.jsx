@@ -30,7 +30,7 @@ class Personal extends Component {
   render() {
     return (
       <div className='app'>
-          {tool.isIOS?<div className='ios-header' ></div>:null}
+          {tool.isIOS && !tool.isIOS11()?<div className='ios-header' ></div>:null}
           {this.state.showTitle?<Title pathname={this.props.location.pathname} />:null}
              {this.props.children}
              {(this.props.location.pathname).indexOf('/MydirectDetails')!==-1?null:<Footer pathname={this.props.location.pathname} />}

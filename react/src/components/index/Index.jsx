@@ -148,7 +148,6 @@ class Index extends React.Component {
     console.log(`请求到达时间: ${arriveTime}`)
     console.log(`页面加载完成时间: ${loadTime}`);
     console.log(`页面加载完成时间与请求到达时间差: ${loadTime-arriveTime}`);
-    console.log(this.props.location.pathname);
    if(this.props.location.pathname=="/Index"||this.props.location.pathname=="/"){
           $('.warpper').css("paddingTop",0);
           $(".header").addClass("opacity")
